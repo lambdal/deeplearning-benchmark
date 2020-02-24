@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# PyTorch_SSD
+# PyTorch_SSD & MaskRCNN
 pushd .
 
 cd examples/ssd

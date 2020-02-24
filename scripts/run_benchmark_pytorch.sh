@@ -11,11 +11,11 @@ echo ${NUM_GPU}
 declare -A TASKS=(
     # [PyTorch_SSD_FP32]=benchmark_pytorch_ssd
     # [PyTorch_SSD_AMP]=benchmark_pytorch_ssd
-    # [PyTorch_resnet50_FP32]=benchmark_pytorch_resnet50
-    # [PyTorch_resnet50_FP16]=benchmark_pytorch_resnet50
-    # [PyTorch_resnet50_AMP]=benchmark_pytorch_resnet50
+    [PyTorch_resnet50_FP32]=benchmark_pytorch_resnet50
+    [PyTorch_resnet50_FP16]=benchmark_pytorch_resnet50
+    [PyTorch_resnet50_AMP]=benchmark_pytorch_resnet50
     # [PyTorch_maskrcnn_FP32]=benchmark_pytorch_maskrcnn
-    [PyTorch_maskrcnn_FP16]=benchmark_pytorch_maskrcnn
+    # [PyTorch_maskrcnn_FP16]=benchmark_pytorch_maskrcnn
 )
 
 
@@ -66,11 +66,11 @@ benchmark_pytorch_resnet50() {
     for i in $(seq 1 $NUM_EXP); do
         RESULTS_FILE=${RESULTS_PATH}$(date +%d-%m-%Y_%H-%M-%S)".txt"
         echo $RESULTS_FILE
-
-        # python -m torch.distributed.launch --nproc_per_node=${NUM_GPU} main.py \
-        # --mode benchmark-training ${!TASK_PARAMS} |& tee $RESULTS_FILE
         
-        # chmod a+rwx $RESULTS_FILE
+        python ./multiproc.py --nproc_per_node ${NUM_GPU} ./main.py \
+        ${!TASK_PARAMS} |& tee $RESULTS_FILE
+        
+        chmod a+rwx $RESULTS_FILE
 
         sleep 2
     done

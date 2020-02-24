@@ -10,7 +10,6 @@ PyTorch_SSD_FP32_PARAMS=(
              --benchmark-iterations   "200"
            )
 
-
 PyTorch_SSD_AMP_PARAMS=(   
              --data                   "/data/object_detection"
              --batch-size             "32"
@@ -19,14 +18,41 @@ PyTorch_SSD_AMP_PARAMS=(
              --amp
            )
 
-
-PyTorch_resnet50_FP32_PARAMS=(   
+PyTorch_resnet50_FP32_PARAMS=(
+                                      "/data/imagenet"
+             --arch                   "resnet50"
+             --epochs                 "1" 
+             --prof                   "100" 
+             --batch-size             "64"
+             --raport-file            "benchmark.json"
+             --print-freq             "1"
+             --training-only
            )
 
-PyTorch_resnet50_FP16_PARAMS=(   
+PyTorch_resnet50_FP16_PARAMS=(
+                                      "/data/imagenet"
+             --arch                   "resnet50"
+             --fp16
+             --static-loss-scale      "256"
+             --epochs                 "1" 
+             --prof                   "100" 
+             --batch-size             "128"
+             --raport-file            "benchmark.json"
+             --print-freq             "1"
+             --training-only  
            )
 
-PyTorch_resnet50_AMP_PARAMS=(   
+PyTorch_resnet50_AMP_PARAMS=(
+                                      "/data/imagenet"
+             --arch                   "resnet50"
+             --amp
+             --static-loss-scale      "256"
+             --epochs                 "1" 
+             --prof                   "100" 
+             --batch-size             "128"
+             --raport-file            "benchmark.json"
+             --print-freq             "1"
+             --training-only   
            )
 
 PyTorch_maskrcnn_FP32_PARAMS=(
