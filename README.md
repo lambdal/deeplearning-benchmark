@@ -19,7 +19,7 @@ docker pull nvcr.io/nvidia/pytorch:20.01-py3
 docker run --gpus all --rm \
 -v ~/data:/data -v $(pwd)"/scripts":/scripts \
 nvcr.io/nvidia/pytorch:20.01-py3 \
-/bin/bash -c "cp /scripts/* /workspace; ./prepare_data.sh"
+/bin/bash -c "cp -r /scripts/* /workspace; ./prepare_data.sh"
 ```
 
 #### Run 
@@ -38,7 +38,7 @@ nvcr.io/nvidia/pytorch:20.01-py3 \
 #### 2020-02-24
 
 - [x] Refactorize code
-- [ ] PyTorch + ResNet
+- [ ] PyTorch + MaskRCNN
 
 #### 2020-02-22
 

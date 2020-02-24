@@ -9,11 +9,13 @@ echo ${NUM_GPU}
 
 
 declare -A TASKS=(
-    [PyTorch_SSD_FP32]=benchmark_pytorch_ssd
-    [PyTorch_SSD_AMP]=benchmark_pytorch_ssd
-    [PyTorch_resnet50_FP32]=benchmark_pytorch_resnet50
-    [PyTorch_resnet50_FP16]=benchmark_pytorch_resnet50
-    [PyTorch_resnet50_AMP]=benchmark_pytorch_resnet50
+    # [PyTorch_SSD_FP32]=benchmark_pytorch_ssd
+    # [PyTorch_SSD_AMP]=benchmark_pytorch_ssd
+    # [PyTorch_resnet50_FP32]=benchmark_pytorch_resnet50
+    # [PyTorch_resnet50_FP16]=benchmark_pytorch_resnet50
+    # [PyTorch_resnet50_AMP]=benchmark_pytorch_resnet50
+    # [PyTorch_maskrcnn_FP32]=benchmark_pytorch_maskrcnn
+    [PyTorch_maskrcnn_FP16]=benchmark_pytorch_maskrcnn
 )
 
 
@@ -78,6 +80,41 @@ benchmark_pytorch_resnet50() {
 
 }
 
+
+benchmark_pytorch_maskrcnn() {
+    local task="$1"
+
+    echo "${task} started: "
+    pushd .
+    RESULTS_PATH=/results/${SYSTEM}/${task}/
+    TASK_PARAMS=${task}_PARAMS[@]
+
+    mkdir -p $RESULTS_PATH
+    chmod -R a+rwx $RESULTS_PATH
+
+    cd examples/maskrcnn/pytorch
+    for i in $(seq 1 $NUM_EXP); do
+        RESULTS_FILE=${RESULTS_PATH}$(date +%d-%m-%Y_%H-%M-%S)".txt"
+        echo $RESULTS_FILE
+
+        python -m torch.distributed.launch --nproc_per_node=${NUM_GPU} tools/train_net.py \
+        --skip-test \
+        ${!TASK_PARAMS} \
+        | tee LOGFILE "/results/joblog.log"
+        
+        time=`cat $LOGFILE | grep -F 'maskrcnn_benchmark.trainer INFO: Total training time' | tail -n 1 | awk -F'(' '{print $2}' | awk -F' s ' '{print $1}' | egrep -o [0-9.]+`
+        statement=`cat $LOGFILE | grep -F 'maskrcnn_benchmark.trainer INFO: Total training time' | tail -n 1`
+        calc=$(echo $time 1.0 $GLOBAL_BATCH | awk '{ printf "%f", $2 * $3 / $1 }')
+        echo "Training perf is: "$calc" FPS"
+
+        sleep 2
+    done
+
+
+    echo ${!TASK_PARAMS}
+    echo "${TASK_NAME} ended."
+    popd      
+}
 
 main() {
     for task in "${!TASKS[@]}"; do
