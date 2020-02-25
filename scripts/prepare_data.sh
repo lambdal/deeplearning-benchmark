@@ -40,10 +40,14 @@
 
 
 ## -------------------------
-## PyTorch transformer
+## PyTorch transformer XL
 ## -------------------------
 
 pushd .
-cd examples/transformer
-bash run_preprocessing.sh
+mkdir -p /data/transformer-xl
+
+cd examples/transformer-xl
+bash getdata.sh
+
+chmod -R a+rwx /data/transformer-xl
 popd

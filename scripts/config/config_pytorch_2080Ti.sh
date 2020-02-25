@@ -100,3 +100,100 @@ PyTorch_ncf_FP16_PARAMS=(
             --epochs                  "1"
             --opt_level               "O2"
            )
+
+PyTorch_transformerxlbase_FP32_PARAMS=(
+            --data                    "/data/transformer-xl/wikitext-103"
+            --max_step                "500"
+            --batch_size              "1"
+            --dataset                 "wt103" 
+            --n_layer                 "16"
+            --d_model                 "512"
+            --n_head                  "8"
+            --d_head                  "64"
+            --d_inner                 "2048"
+            --dropout                 "0.1"
+            --dropatt                 "0.0"
+            --optim                   "jitlamb"
+            --lr                      "0.01"
+            --eta_min                 "0.001"
+            --warmup_step             "1000"
+            --tgt_len                 "192"
+            --mem_len                 "192"
+            --eval_tgt_len            "192"
+            --log_interval            "10"
+            --eval_interval           "5000"
+            --roll
+            --cuda
+           )
+
+PyTorch_transformerxlbase_FP16_PARAMS=(
+            --data                    "/data/transformer-xl/wikitext-103"
+            --max_step                "500"
+            --batch_size              "1"
+            --dataset                 "wt103" 
+            --n_layer                 "16"
+            --d_model                 "512"
+            --n_head                  "8"
+            --d_head                  "64"
+            --d_inner                 "2048"
+            --dropout                 "0.1"
+            --dropatt                 "0.0"
+            --optim                   "jitlamb"
+            --lr                      "0.01"
+            --eta_min                 "0.001"
+            --warmup_step             "1000"
+            --tgt_len                 "192"
+            --mem_len                 "192"
+            --eval_tgt_len            "192"
+            --log_interval            "10"
+            --eval_interval           "5000"
+            --roll
+            --cuda
+            --fp16
+           )
+
+PyTorch_transformerxllarge_FP32_PARAMS=(
+            --data                    "/data/transformer-xl/wikitext-103"
+            --max_step                "500"
+            --batch_size              "1"
+            --dataset                 "wt103" 
+            --n_layer                 "18"
+            --d_model                 "1024"
+            --n_head                  "16"
+            --d_head                  "64"
+            --d_inner                 "4096"
+            --dropout                 "0.2"
+            --dropatt                 "0.2"
+            --optim                   "adam"
+            --lr                      "0.00025"
+            --warmup_step             "16000"
+            --tgt_len                 "256"
+            --mem_len                 "256"
+            --eval_tgt_len            "128"
+            --eval_interval           "5000"
+            --roll
+            --cuda
+           )
+
+PyTorch_transformerxllarge_FP16_PARAMS=(
+            --data                    "/data/transformer-xl/wikitext-103"
+            --max_step                "500"
+            --batch_size              "1"
+            --dataset                 "wt103" 
+            --n_layer                 "18"
+            --d_model                 "1024"
+            --n_head                  "16"
+            --d_head                  "64"
+            --d_inner                 "4096"
+            --dropout                 "0.2"
+            --dropatt                 "0.2"
+            --optim                   "adam"
+            --lr                      "0.00025"
+            --warmup_step             "16000"
+            --tgt_len                 "256"
+            --mem_len                 "256"
+            --eval_tgt_len            "128"
+            --eval_interval           "5000"
+            --cuda
+            --fp16
+           )
