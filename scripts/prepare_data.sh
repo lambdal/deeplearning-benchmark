@@ -30,10 +30,20 @@
 ## PyTorch NCF
 ## -------------------------
 
-pushd .
-cd examples/ncf
-mkdir -p /data/ncf
-./prepare_dataset.sh ml-20m /data/ncf
-chmod -R a+rwx /data/ncf
+# pushd .
+# cd examples/ncf
+# mkdir -p /data/ncf
+# ./prepare_dataset.sh ml-20m /data/ncf
+# chmod -R a+rwx /data/ncf
 
+# popd
+
+
+## -------------------------
+## PyTorch transformer
+## -------------------------
+
+pushd .
+cd examples/transformer
+bash run_preprocessing.sh
 popd
