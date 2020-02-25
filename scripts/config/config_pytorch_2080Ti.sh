@@ -72,3 +72,19 @@ PyTorch_maskrcnn_FP16_PARAMS=(
              OUTPUT_DIR               "/results"
              PATHS_CATALOG            "/workspace/config/paths_catalog_ci.py"
            )
+
+PyTorch_gnmt_FP32_PARAMS=(
+            --dataset-dir             "/data/gnmt/wmt16_de_en"
+            --train-batch-size        "96"
+            --math                    "fp32"
+            --epochs                  "1"
+            --seed                    "2"
+           )
+
+PyTorch_gnmt_FP16_PARAMS=(
+            --dataset-dir             "/data/gnmt/wmt16_de_en"
+            --train-batch-size        "192"
+            --math                    "fp16"
+            --epochs                  "1"
+            --seed                    "2"
+           )

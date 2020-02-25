@@ -32,7 +32,7 @@ cd ..
 
 
 # PyTorch Others
-docker run --gpus all --rm -v ~/data:/data -v $(pwd)"/scripts":/scripts nvcr.io/nvidia/pytorch:20.01-py3 /bin/bash -c "cp -r /scripts/* /workspace; ./prepare_data.sh"
+docker run --gpus all --rm -v ~/data:/data -v $(pwd)"/scripts":/scripts nvcr.io/nvidia/pytorch:20.01-py3 /bin/bash -c "cp -r /scripts/* /workspace; cp /scripts/config/wmt16_en_de.sh examples/gnmt/scripts; ./prepare_data.sh"
 ```
 
 #### Run 
@@ -48,6 +48,11 @@ docker run --gpus all --rm --shm-size=16g -v ~/data:/data -v $(pwd)"/scripts":/s
 #### 2020-02-24
 
 - [x] PyTorch + ResNet50
+- [x] PyTorch + gnmt
+- [ ] PyTorch + NCF
+- [ ] PyTorch + transformer
+- [ ] PyTorch + Tacotron 2
+- [ ] PyTorch + WaveGlow
 
 #### 2020-02-23
 

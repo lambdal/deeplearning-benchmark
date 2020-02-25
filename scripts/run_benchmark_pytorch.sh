@@ -11,11 +11,14 @@ echo ${NUM_GPU}
 declare -A TASKS=(
     # [PyTorch_SSD_FP32]=benchmark_pytorch_ssd
     # [PyTorch_SSD_AMP]=benchmark_pytorch_ssd
-    [PyTorch_resnet50_FP32]=benchmark_pytorch_resnet50
-    [PyTorch_resnet50_FP16]=benchmark_pytorch_resnet50
-    [PyTorch_resnet50_AMP]=benchmark_pytorch_resnet50
+    # [PyTorch_resnet50_FP32]=benchmark_pytorch_resnet50
+    # [PyTorch_resnet50_FP16]=benchmark_pytorch_resnet50
+    # [PyTorch_resnet50_AMP]=benchmark_pytorch_resnet50
     # [PyTorch_maskrcnn_FP32]=benchmark_pytorch_maskrcnn
     # [PyTorch_maskrcnn_FP16]=benchmark_pytorch_maskrcnn
+    [PyTorch_gnmt_FP32]=benchmark_pytorch_gnmt
+    [PyTorch_gnmt_FP16]=benchmark_pytorch_gnmt
+
 )
 
 
@@ -44,7 +47,7 @@ benchmark_pytorch_ssd() {
         sleep 2
     done
     echo ${!TASK_PARAMS}
-    echo "${TASK_NAME} ended."
+    echo "${task} ended."
     popd    
 
 }
@@ -75,7 +78,7 @@ benchmark_pytorch_resnet50() {
         sleep 2
     done
     echo ${!TASK_PARAMS}
-    echo "${TASK_NAME} ended."
+    echo "${task} ended."
     popd    
 
 }
@@ -112,9 +115,39 @@ benchmark_pytorch_maskrcnn() {
 
 
     echo ${!TASK_PARAMS}
-    echo "${TASK_NAME} ended."
+    echo "${task} ended."
     popd      
 }
+
+
+benchmark_pytorch_gnmt() {
+    local task="$1"
+
+    echo "${task} started: "
+    pushd .
+    RESULTS_PATH=/results/${SYSTEM}/${task}/
+    TASK_PARAMS=${task}_PARAMS[@]
+
+    mkdir -p $RESULTS_PATH
+    chmod -R a+rwx $RESULTS_PATH
+
+    
+    cd examples/gnmt
+    for i in $(seq 1 $NUM_EXP); do
+        RESULTS_FILE=${RESULTS_PATH}$(date +%d-%m-%Y_%H-%M-%S)".txt"
+        echo $RESULTS_FILE
+
+        python3 -m launch --nproc_per_node=${NUM_GPU} train.py ${!TASK_PARAMS} |& tee $RESULTS_FILE
+
+        sleep 2
+    done
+
+
+    echo ${!TASK_PARAMS}
+    echo "${task} ended."
+    popd 
+}
+
 
 main() {
     for task in "${!TASKS[@]}"; do
