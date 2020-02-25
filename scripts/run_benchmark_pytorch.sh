@@ -16,9 +16,10 @@ declare -A TASKS=(
     # [PyTorch_resnet50_AMP]=benchmark_pytorch_resnet50
     # [PyTorch_maskrcnn_FP32]=benchmark_pytorch_maskrcnn
     # [PyTorch_maskrcnn_FP16]=benchmark_pytorch_maskrcnn
-    [PyTorch_gnmt_FP32]=benchmark_pytorch_gnmt
-    [PyTorch_gnmt_FP16]=benchmark_pytorch_gnmt
-
+    # [PyTorch_gnmt_FP32]=benchmark_pytorch_gnmt
+    # [PyTorch_gnmt_FP16]=benchmark_pytorch_gnmt
+    [PyTorch_ncf_FP32]=benchmark_pytorch_ncf
+    [PyTorch_ncf_FP16]=benchmark_pytorch_ncf
 )
 
 
@@ -131,7 +132,7 @@ benchmark_pytorch_gnmt() {
     mkdir -p $RESULTS_PATH
     chmod -R a+rwx $RESULTS_PATH
 
-    
+
     cd examples/gnmt
     for i in $(seq 1 $NUM_EXP); do
         RESULTS_FILE=${RESULTS_PATH}$(date +%d-%m-%Y_%H-%M-%S)".txt"
@@ -148,6 +149,32 @@ benchmark_pytorch_gnmt() {
     popd 
 }
 
+
+benchmark_pytorch_ncf() {
+    local task="$1"
+
+    echo "${task} started: "
+    pushd .
+    RESULTS_PATH=/results/${SYSTEM}/${task}/
+    TASK_PARAMS=${task}_PARAMS[@]
+
+    mkdir -p $RESULTS_PATH
+    chmod -R a+rwx $RESULTS_PATH
+
+    cd examples/ncf
+    for i in $(seq 1 $NUM_EXP); do
+        RESULTS_FILE=${RESULTS_PATH}$(date +%d-%m-%Y_%H-%M-%S)".txt"
+        echo $RESULTS_FILE
+
+        python -m torch.distributed.launch --nproc_per_node=${NUM_GPU} --use_env ncf.py ${!TASK_PARAMS} |& tee $RESULTS_FILE
+
+        sleep 2
+    done
+
+    echo ${!TASK_PARAMS}
+    echo "${task} ended."
+    popd         
+}
 
 main() {
     for task in "${!TASKS[@]}"; do

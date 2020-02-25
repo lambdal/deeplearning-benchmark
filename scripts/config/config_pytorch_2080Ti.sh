@@ -88,3 +88,15 @@ PyTorch_gnmt_FP16_PARAMS=(
             --epochs                  "1"
             --seed                    "2"
            )
+
+PyTorch_ncf_FP32_PARAMS=(
+            --data                    "/data/ncf/cache/ml-20m"
+            --epochs                  "1"
+            --opt_level               "O0"
+           )
+
+PyTorch_ncf_FP16_PARAMS=(
+            --data                    "/data/ncf/cache/ml-20m"
+            --epochs                  "1"
+            --opt_level               "O2"
+           )

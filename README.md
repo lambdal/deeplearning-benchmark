@@ -49,7 +49,7 @@ docker run --gpus all --rm --shm-size=16g -v ~/data:/data -v $(pwd)"/scripts":/s
 
 - [x] PyTorch + ResNet50
 - [x] PyTorch + gnmt
-- [ ] PyTorch + NCF
+- [x] PyTorch + NCF
 - [ ] PyTorch + transformer
 - [ ] PyTorch + Tacotron 2
 - [ ] PyTorch + WaveGlow

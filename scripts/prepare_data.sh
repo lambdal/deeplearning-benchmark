@@ -1,6 +1,9 @@
 #!/bin/bash
 
-# PyTorch_SSD & MaskRCNN
+## -------------------------
+## PyTorch_SSD & MaskRCNN
+## -------------------------
+
 # pushd .
 
 # cd examples/ssd
@@ -10,13 +13,27 @@
 
 # popd
 
-# PyTorch gnmt
-pushd .
+## -------------------------
+## PyTorch gnmt
+## -------------------------
 
-cd examples/gnmt
-mkdir -p /data/gnmt/wmt16_de_en
-bash scripts/wmt16_en_de.sh /data/gnmt/wmt16_de_en
-chmod -R a+rwx /data/gnmt/
+# pushd .
+
+# cd examples/gnmt
+# mkdir -p /data/gnmt/wmt16_de_en
+# bash scripts/wmt16_en_de.sh /data/gnmt/wmt16_de_en
+# chmod -R a+rwx /data/gnmt/
+
+# popd
+
+## -------------------------
+## PyTorch NCF
+## -------------------------
+
+pushd .
+cd examples/ncf
+mkdir -p /data/ncf
+./prepare_dataset.sh ml-20m /data/ncf
+chmod -R a+rwx /data/ncf
 
 popd
-
