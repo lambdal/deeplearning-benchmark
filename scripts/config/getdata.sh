@@ -31,7 +31,6 @@
 echo "=== Acquiring datasets ==="
 echo "---"
 
-
 cd /data/transformer-xl
 
 #if [[ ! -d 'wikitext-2' ]]; then
@@ -53,6 +52,7 @@ if [[ ! -d 'wikitext-103' ]]; then
     mv wiki.train.tokens train.txt
     mv wiki.valid.tokens valid.txt
     mv wiki.test.tokens test.txt
+    cd ..
     rm wikitext-103-v1.zip
     cd ..
 fi

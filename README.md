@@ -39,7 +39,7 @@ docker run --gpus all --rm --shm-size=16g -v ~/data:/data -v $(pwd)"/scripts":/s
 
 ```
 # PyTorch
-docker run --gpus all --rm --shm-size=16g -v ~/data:/data -v $(pwd)"/scripts":/scripts -v $(pwd)"/results":/results nvcr.io/nvidia/pytorch:20.01-py3 /bin/bash -c "cp -r /scripts/* /workspace; pip install 'git+https://github.com/NVIDIA/dllogger'; ./run_benchmark_pytorch.sh 2080Ti"
+docker run --gpus all --rm --shm-size=16g -v ~/data:/data -v $(pwd)"/scripts":/scripts -v $(pwd)"/results":/results nvcr.io/nvidia/pytorch:20.01-py3 /bin/bash -c "cp -r /scripts/* /workspace; pip install 'git+https://github.com/NVIDIA/dllogger'; ./run_benchmark_pytorch.sh TitanRTX"
 ```
 
 
