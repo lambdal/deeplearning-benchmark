@@ -197,3 +197,32 @@ PyTorch_transformerxllarge_FP16_PARAMS=(
             --cuda
             --fp16
            )
+
+PyTorch_tacotron2_FP32_PARAMS=(
+            --model-name              "Tacotron2"
+            --output_directory        "./" 
+            --learning-rate           "1e-3" 
+            --epochs                  "1" 
+            --batch-size              "4" 
+            --weight-decay            "1e-6" 
+            --grad-clip-thresh        "1.0"
+            --log-file                "nvlog.json"
+            --training-files          "filelists/ljs_audio_text_train_subset_625_filelist.txt"
+            --dataset-path            "/data/tacotron2/LJSpeech-1.1"
+            --cudnn-enabled
+           )
+
+PyTorch_tacotron2_FP16_PARAMS=(
+            --model-name              "Tacotron2"
+            --output_directory        "./" 
+            --learning-rate           "1e-3" 
+            --epochs                  "1" 
+            --batch-size              "4" 
+            --weight-decay            "1e-6" 
+            --grad-clip-thresh        "1.0"
+            --log-file                "nvlog.json"
+            --training-files          "filelists/ljs_audio_text_train_subset_625_filelist.txt"
+            --dataset-path            "/data/tacotron2/LJSpeech-1.1"
+            --cudnn-enabled
+            --amp-run
+           )

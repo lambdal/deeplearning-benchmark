@@ -23,7 +23,9 @@ declare -A TASKS=(
     # [PyTorch_transformerxlbase_FP32]=benchmark_pytorch_transformerxl
     # [PyTorch_transformerxlbase_FP16]=benchmark_pytorch_transformerxl
     # [PyTorch_transformerxllarge_FP32]=benchmark_pytorch_transformerxl
-    # [PyTorch_transformerxllarge_FP16]=benchmark_pytorch_transformerxl    
+    # [PyTorch_transformerxllarge_FP16]=benchmark_pytorch_transformerxl
+    [PyTorch_tacotron2_FP32]=benchmark_pytorch_tacotron2
+    [PyTorch_tacotron2_FP16]=benchmark_pytorch_tacotron2
 )
 
 
@@ -214,6 +216,36 @@ benchmark_pytorch_transformerxl() {
     popd    
 }
 
+
+benchmark_pytorch_tacotron2() {
+    local task="$1"
+
+    echo "${task} started: "
+    pushd .
+    RESULTS_PATH=/results/${SYSTEM}/${task}/
+    TASK_PARAMS=${task}_PARAMS[@]
+
+    mkdir -p $RESULTS_PATH
+
+    cd examples/tacotron2
+    for i in $(seq 1 $NUM_EXP); do
+        RESULTS_FILE=${RESULTS_PATH}$(date +%d-%m-%Y_%H-%M-%S)".txt"
+        echo $RESULTS_FILE
+
+        WORLD_SIZE=${NUM_GPU} python -m multiproc train.py \
+        ${!TASK_PARAMS} |& tee $RESULTS_FILE
+
+        # python train.py ${!TASK_PARAMS} |& tee $RESULTS_FILE
+
+        sleep 2
+    done
+
+    chmod -R a+rwx $RESULTS_PATH
+    echo ${!TASK_PARAMS}
+    echo "${task} ended."
+    popd 
+
+}
 
 main() {
     for task in "${!TASKS[@]}"; do
