@@ -57,18 +57,18 @@ PyTorch_resnet50_AMP_PARAMS=(
 
 PyTorch_maskrcnn_FP32_PARAMS=(
              --config-file            "/workspace/config/e2e_mask_rcnn_R_50_FPN_1x.yaml"
-             SOLVER.IMS_PER_BATCH     "1"
+             SOLVER.IMS_PER_BATCH     "2"
              DTYPE                    "float32"
-             SOLVER.MAX_ITER          "3665"
+             SOLVER.MAX_ITER          "500"
              OUTPUT_DIR               "/results"
              PATHS_CATALOG            "/workspace/config/paths_catalog_ci.py"
            )
 
 PyTorch_maskrcnn_FP16_PARAMS=(
              --config-file            "/workspace/config/e2e_mask_rcnn_R_50_FPN_1x.yaml"
-             SOLVER.IMS_PER_BATCH     "1"
+             SOLVER.IMS_PER_BATCH     "4"
              DTYPE                    "float16"
-             SOLVER.MAX_ITER          "3665"
+             SOLVER.MAX_ITER          "500"
              OUTPUT_DIR               "/results"
              PATHS_CATALOG            "/workspace/config/paths_catalog_ci.py"
            )
