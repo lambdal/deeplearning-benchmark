@@ -1,61 +1,61 @@
 #!/bin/bash
 
-# ## -------------------------
-# ## PyTorch_SSD & MaskRCNN
-# ## -------------------------
+## -------------------------
+## PyTorch_SSD & MaskRCNN
+## -------------------------
 
-# pushd .
+pushd .
 
-# cd examples/ssd
+cd examples/ssd
 
-# ./download_dataset.sh /data/object_detection
-# chmod -R a+rwx /data/object_detection
+./download_dataset.sh /data/object_detection
+chmod -R a+rwx /data/object_detection
 
-# popd
+popd
 
-# ## -------------------------
-# ## PyTorch gnmt
-# ## -------------------------
+## -------------------------
+## PyTorch gnmt
+## -------------------------
 
-# pushd .
+pushd .
 
-# cd examples/gnmt
-# mkdir -p /data/gnmt/wmt16_de_en
-# bash scripts/wmt16_en_de.sh /data/gnmt/wmt16_de_en
-# chmod -R a+rwx /data/gnmt/
+cd examples/gnmt
+mkdir -p /data/gnmt/wmt16_de_en
+bash scripts/wmt16_en_de.sh /data/gnmt/wmt16_de_en
+chmod -R a+rwx /data/gnmt/
 
-# popd
+popd
 
-# ## -------------------------
-# ## PyTorch NCF
-# ## -------------------------
+## -------------------------
+## PyTorch NCF
+## -------------------------
 
-# pushd .
+pushd .
 
-# cd examples/ncf
-# mkdir -p /data/ncf
-# ./prepare_dataset.sh ml-20m /data/ncf
-# chmod -R a+rwx /data/ncf
+cd examples/ncf
+mkdir -p /data/ncf
+./prepare_dataset.sh ml-20m /data/ncf
+chmod -R a+rwx /data/ncf
 
-# popd
+popd
 
 
-# ## -------------------------
-# ## PyTorch transformer XL
-# ## -------------------------
+## -------------------------
+## PyTorch transformer XL
+## -------------------------
 
-# pushd .
-# mkdir -p /data/transformer-xl
+pushd .
+mkdir -p /data/transformer-xl
 
-# cd examples/transformer-xl
-# bash getdata.sh
+cd examples/transformer-xl
+bash getdata.sh
 
-# chmod -R a+rwx /data/transformer-xl
-# popd
+chmod -R a+rwx /data/transformer-xl
+popd
 
-# ## -------------------------
-# ## PyTorch tacotron2
-# ## -------------------------
+## -------------------------
+## PyTorch tacotron2
+## -------------------------
 pushd .
 
 mkdir -p /data/tacotron2/LJSpeech-1.1
