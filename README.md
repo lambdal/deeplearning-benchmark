@@ -32,23 +32,29 @@ cd ..
 
 
 # PyTorch Others
-docker run --gpus all --rm --shm-size=16g -v ~/data:/data -v $(pwd)"/scripts":/scripts nvcr.io/nvidia/pytorch:20.01-py3 /bin/bash -c "cp -r /scripts/* /workspace; cp /scripts/config/wmt16_en_de.sh examples/gnmt/scripts; cp /scripts/config/getdata.sh examples/transformer-xl; cp /scripts/config/prepare_dataset.sh examples/tacotron2/scripts; ./prepare_data.sh"
+docker run --gpus all --rm --shm-size=16g -v ~/data:/data -v $(pwd)"/scripts":/scripts nvcr.io/nvidia/pytorch:20.01-py3 /bin/bash -c "cp -r /scripts/* /workspace; cp /scripts/config/wmt16_en_de.sh examples/gnmt/scripts; cp /scripts/config/getdata.sh examples/transformer-xl; cp /scripts/config/prepare_dataset.sh examples/tacotron2/scripts; cp /scripts/config/squad_download.sh examples/bert/data/squad; ./prepare_data.sh"
 ```
 
 #### Run 
 
 ```
 # PyTorch
-docker run --gpus all --rm --shm-size=16g -v ~/data:/data -v $(pwd)"/scripts":/scripts -v $(pwd)"/results":/results nvcr.io/nvidia/pytorch:20.01-py3 /bin/bash -c "cp -r /scripts/* /workspace; pip install 'git+https://github.com/NVIDIA/dllogger'; ./run_benchmark_pytorch.sh TitanRTX"
+docker run --gpus all --rm --shm-size=16g -v ~/data:/data -v $(pwd)"/scripts":/scripts -v $(pwd)"/results":/results nvcr.io/nvidia/pytorch:20.01-py3 /bin/bash -c "cp -r /scripts/* /workspace; pip install 'git+https://github.com/NVIDIA/dllogger'; cp /scripts/config/run_squad.py examples/bert; ./run_benchmark_pytorch.sh TitanRTX"
 ```
 
 
 ### Log
 
+#### 2020-02-28
+
+- [x] PyTorch + BERT base finetune on SQUAD
+- [x] PyTorch + BERT lager finetune on SQUAD
+
+
 #### 2020-02-25
 
-- [ ] PyTorch + Tacotron 2
-- [ ] PyTorch + WaveGlow
+- [x] PyTorch + Tacotron 2
+- [x] PyTorch + WaveGlow
 
 #### 2020-02-24
 

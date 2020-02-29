@@ -9,25 +9,29 @@ echo ${NUM_GPU}
 
 
 declare -A TASKS=(
-    [PyTorch_SSD_FP32]=benchmark_pytorch_ssd
-    [PyTorch_SSD_AMP]=benchmark_pytorch_ssd
-    [PyTorch_resnet50_FP32]=benchmark_pytorch_resnet50
-    [PyTorch_resnet50_FP16]=benchmark_pytorch_resnet50
-    [PyTorch_resnet50_AMP]=benchmark_pytorch_resnet50
-    [PyTorch_maskrcnn_FP32]=benchmark_pytorch_maskrcnn
-    [PyTorch_maskrcnn_FP16]=benchmark_pytorch_maskrcnn
-    [PyTorch_gnmt_FP32]=benchmark_pytorch_gnmt
-    [PyTorch_gnmt_FP16]=benchmark_pytorch_gnmt
-    [PyTorch_ncf_FP32]=benchmark_pytorch_ncf
-    [PyTorch_ncf_FP16]=benchmark_pytorch_ncf
-    [PyTorch_transformerxlbase_FP32]=benchmark_pytorch_transformerxl
-    [PyTorch_transformerxlbase_FP16]=benchmark_pytorch_transformerxl
-    [PyTorch_transformerxllarge_FP32]=benchmark_pytorch_transformerxl
-    [PyTorch_transformerxllarge_FP16]=benchmark_pytorch_transformerxl
-    [PyTorch_tacotron2_FP32]=benchmark_pytorch_tacotron2
-    [PyTorch_tacotron2_FP16]=benchmark_pytorch_tacotron2
-    [PyTorch_waveglow_FP32]=benchmark_pytorch_tacotron2
-    [PyTorch_waveglow_FP16]=benchmark_pytorch_tacotron2    
+    # [PyTorch_SSD_FP32]=benchmark_pytorch_ssd
+    # [PyTorch_SSD_AMP]=benchmark_pytorch_ssd
+    # [PyTorch_resnet50_FP32]=benchmark_pytorch_resnet50
+    # [PyTorch_resnet50_FP16]=benchmark_pytorch_resnet50
+    # [PyTorch_resnet50_AMP]=benchmark_pytorch_resnet50
+    # [PyTorch_maskrcnn_FP32]=benchmark_pytorch_maskrcnn
+    # [PyTorch_maskrcnn_FP16]=benchmark_pytorch_maskrcnn
+    # [PyTorch_gnmt_FP32]=benchmark_pytorch_gnmt
+    # [PyTorch_gnmt_FP16]=benchmark_pytorch_gnmt
+    # [PyTorch_ncf_FP32]=benchmark_pytorch_ncf
+    # [PyTorch_ncf_FP16]=benchmark_pytorch_ncf
+    # [PyTorch_transformerxlbase_FP32]=benchmark_pytorch_transformerxl
+    # [PyTorch_transformerxlbase_FP16]=benchmark_pytorch_transformerxl
+    # [PyTorch_transformerxllarge_FP32]=benchmark_pytorch_transformerxl
+    # [PyTorch_transformerxllarge_FP16]=benchmark_pytorch_transformerxl
+    # [PyTorch_tacotron2_FP32]=benchmark_pytorch_tacotron2
+    # [PyTorch_tacotron2_FP16]=benchmark_pytorch_tacotron2
+    # [PyTorch_waveglow_FP32]=benchmark_pytorch_tacotron2
+    # [PyTorch_waveglow_FP16]=benchmark_pytorch_tacotron2
+    [PyTorch_bert_large_squad_FP32]=benchmark_pytorch_bert_squad
+    [PyTorch_bert_large_squad_FP16]=benchmark_pytorch_bert_squad
+    [PyTorch_bert_base_squad_FP32]=benchmark_pytorch_bert_squad
+    [PyTorch_bert_base_squad_FP16]=benchmark_pytorch_bert_squad    
 )
 
 benchmark_pytorch_ssd() {
@@ -236,7 +240,34 @@ benchmark_pytorch_tacotron2() {
         WORLD_SIZE=${NUM_GPU} python -m multiproc train.py \
         ${!TASK_PARAMS} |& tee $RESULTS_FILE
 
-        # python train.py ${!TASK_PARAMS} |& tee $RESULTS_FILE
+        sleep 2
+    done
+
+    chmod -R a+rwx $RESULTS_PATH
+    echo ${!TASK_PARAMS}
+    echo "${task} ended."
+    popd 
+
+}
+
+
+benchmark_pytorch_bert_squad() {
+
+    local task="$1"
+
+    echo "${task} started: "
+    pushd .
+    RESULTS_PATH=/results/${SYSTEM}/${task}/
+    TASK_PARAMS=${task}_PARAMS[@]
+
+    mkdir -p $RESULTS_PATH
+
+    cd examples/bert
+    for i in $(seq 1 $NUM_EXP); do
+        RESULTS_FILE=${RESULTS_PATH}$(date +%d-%m-%Y_%H-%M-%S)".txt"
+        echo $RESULTS_FILE
+
+        bash scripts/run_squad.sh ${!TASK_PARAMS} |& tee $RESULTS_FILE
 
         sleep 2
     done
@@ -245,6 +276,7 @@ benchmark_pytorch_tacotron2() {
     echo ${!TASK_PARAMS}
     echo "${task} ended."
     popd 
+
 
 }
 

@@ -260,3 +260,67 @@ PyTorch_waveglow_FP16_PARAMS=(
             --cudnn-benchmark
             --amp-run            
            )
+
+PyTorch_bert_base_squad_FP32_PARAMS=(
+            "/data/bert_base/bert_base_uncased.pt"
+            "1.0"
+            "4"
+            "3e-5"
+            "fp32"
+            "1"
+            "1"
+            "/data/squad/v1.1"
+            "/data/bert_base/bert-base-uncased-vocab.txt"
+            "."
+            "train"
+            "/data/bert_base/bert_config.json"
+            "1000"
+)
+
+PyTorch_bert_base_squad_FP16_PARAMS=(
+            "/data/bert_base/bert_base_uncased.pt"
+            "1.0"
+            "4"
+            "3e-5"
+            "fp16"
+            "1"
+            "1"
+            "/data/squad/v1.1"
+            "/data/bert_base/bert-base-uncased-vocab.txt"
+            "."
+            "train"
+            "/data/bert_base/bert_config.json"
+            "1000"
+)
+
+PyTorch_bert_large_squad_FP32_PARAMS=(
+            "/data/bert_large/bert_large_uncased.pt"
+            "1.0"
+            "4"
+            "3e-5"
+            "fp32"
+            "1"
+            "1"
+            "/data/squad/v1.1"
+            "/data/bert_large/bert-large-uncased-vocab.txt"
+            "."
+            "train"
+            "/data/bert_large/bert_config.json"
+            "1000"
+)
+
+PyTorch_bert_large_squad_FP16_PARAMS=(
+            "/data/bert_large/bert_large_uncased.pt"
+            "1.0"
+            "4"
+            "3e-5"
+            "fp16"
+            "1"
+            "1"
+            "/data/squad/v1.1"
+            "/data/bert_large/bert-large-uncased-vocab.txt"
+            "."
+            "train"
+            "/data/bert_large/bert_config.json"
+            "1000"
+)
