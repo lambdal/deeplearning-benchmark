@@ -44,6 +44,13 @@ docker run --gpus all --rm --shm-size=16g -v ~/data:/data -v $(pwd)"/scripts":/s
 
 ### Log
 
+#### 2020-03-01
+
+- [x] Code Refactoring
+- [x] Gather System Info
+- [ ] Gather PyTorch Benchmark Statistics
+
+
 #### 2020-02-28
 
 - [x] PyTorch + BERT base finetune on SQUAD
