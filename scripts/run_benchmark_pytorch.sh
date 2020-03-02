@@ -130,8 +130,8 @@ benchmark_pytorch_tacotron2() {
     TASK_PARAMS=${task}_PARAMS[@]
     local command_para=$(sed 's/.*args //' <<<${!TASK_PARAMS})
 
-    WORLD_SIZE=${NUM_GPU} python -m multiproc train.py \
-    ${command_para} |& tee ${result}
+    python -m multiproc ${NUM_GPU} train.py \
+    ${command_para}  |& tee ${result}
 }
 
 

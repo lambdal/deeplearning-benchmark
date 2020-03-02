@@ -41,6 +41,11 @@ docker run --gpus all --rm --shm-size=16g -v ~/data:/data -v $(pwd)"/scripts":/s
 docker run --gpus all --rm --shm-size=16g -v ~/data:/data -v $(pwd)"/scripts":/scripts -v $(pwd)"/results":/results nvcr.io/nvidia/pytorch:20.01-py3 /bin/bash -c "cp -r /scripts/* /workspace; ./run_benchmark.sh TitanRTX"
 ```
 
+#### Gather Results
+
+```
+python scripts/compile_results_pytorch.py
+```
 
 ### Log
 
