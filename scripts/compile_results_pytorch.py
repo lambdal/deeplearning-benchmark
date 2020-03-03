@@ -5,7 +5,7 @@ import pandas as pd
 
 path_result = 'results'
 
-list_system = ['TitanRTX'] 
+list_system = ['1080Ti'] 
 
 list_test = {
              'PyTorch_SSD_FP32': ('PyTorch_SSD_FP32 (images/sec)', "^.*Median images/sec:.*$", -1),
@@ -40,18 +40,34 @@ def gather(name, system, df):
     pattern = re.compile(key)
 
     path = path_result + '/' + system + '/' + name
-    count = 0.0
+    count = 0.000001
     total_throughput = 0.0
 
     for filename in os.listdir(path):
         if filename.endswith(".txt"):
+            flag = False
             for i, line in enumerate(open(os.path.join(path, filename))):
-                for match in re.finditer(pattern, line):
-                    count += 1
-                    total_throughput += float(match.group().split(' ')[pos])
-    throughput = total_throughput / count
 
-    df.at[system, column_name] = throughput
+                for match in re.finditer(pattern, line):
+
+                    try:
+                        throughput = float(match.group().split(' ')[pos])
+                        
+                        if throughput > 0:
+                            count += 1
+                            total_throughput += throughput
+                            flag = True
+                        else:
+                            pass
+
+                    except:
+                        pass
+
+            if not flag:
+                print(name + " " + filename + ": something wrong")
+                    
+
+    df.at[system, column_name] = total_throughput / count
 
 
 def main():
@@ -68,7 +84,6 @@ def main():
         for test_name, value in sorted(list_test.iteritems()):
             gather(test_name, system, df)
 
-    print(df)
 
     df.to_csv('pytorch.csv')
 
