@@ -16,7 +16,7 @@ PyTorch_SSD_AMP_PARAMS=(
              "examples/ssd"
              args
              --data                   "/data/object_detection"
-             --batch-size             "70"
+             --batch-size             "56"
              --benchmark-warmup       "50"
              --benchmark-iterations   "100"
              --amp
@@ -44,7 +44,7 @@ PyTorch_resnet50_FP16_PARAMS=(
              --static-loss-scale      "256"
              --epochs                 "1" 
              --prof                   "100" 
-             --batch-size             "192"
+             --batch-size             "184"
              --raport-file            "benchmark.json"
              --print-freq             "1"
              --training-only  
@@ -59,7 +59,7 @@ PyTorch_resnet50_AMP_PARAMS=(
              --static-loss-scale      "256"
              --epochs                 "1" 
              --prof                   "100" 
-             --batch-size             "184"
+             --batch-size             "160"
              --raport-file            "benchmark.json"
              --print-freq             "1"
              --training-only   

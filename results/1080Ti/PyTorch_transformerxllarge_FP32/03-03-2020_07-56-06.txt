@@ -1,0 +1,107 @@
+Experiment dir : LM-TFM
+Namespace(adaptive=False, append_dataset=False, append_time=False, attn_type=0, batch_chunk=1, batch_size=1, clamp_len=-1, clip=0.25, clip_nonemb=False, cuda=True, d_embed=1024, d_head=64, d_inner=4096, d_model=1024, data='/data/transformer-xl/wikitext-103', dataset='wt103', debug=False, decay_rate=0.5, div_val=1, dropatt=0.2, dropout=0.2, emb_init='normal', emb_init_range=0.01, eta_min=0.001, eval_batch_size=16, eval_interval=5000, eval_max_steps=-1, eval_tgt_len=128, ext_len=0, fp16=False, gpu0_bsz=-1, init='normal', init_range=0.1, init_std=0.02, local_rank=0, log_all_ranks=False, log_interval=10, lr=0.0, lr_min=0.0, max_step=200, max_step_scheduler=None, mem_len=256, mom=0.0, multi_gpu=None, n_head=16, n_layer=18, not_tied=False, optim='adam', patience=0, pre_lnorm=False, proj_init_std=0.01, restart='', roll=True, same_length=False, sample_softmax=-1, save_all=False, scheduler='cosine', seed=1111, target_perplexity=None, target_throughput=None, tgt_len=256, tied=True, varlen=False, vocab='word', warmup_step=16000, weight_decay=0.0, work_dir='LM-TFM')
+Loading cached dataset...
+====================================================================================================
+    - work_dir : LM-TFM
+    - append_dataset : False
+    - append_time : False
+    - cuda : True
+    - fp16 : False
+    - restart : 
+    - debug : False
+    - log_all_ranks : False
+    - save_all : False
+    - log_interval : 10
+    - target_throughput : None
+    - target_perplexity : None
+    - data : /data/transformer-xl/wikitext-103
+    - dataset : wt103
+    - vocab : word
+    - n_layer : 18
+    - n_head : 16
+    - d_head : 64
+    - d_embed : 1024
+    - d_model : 1024
+    - d_inner : 4096
+    - dropout : 0.2
+    - dropatt : 0.2
+    - pre_lnorm : False
+    - attn_type : 0
+    - not_tied : False
+    - clamp_len : -1
+    - adaptive : False
+    - div_val : 1
+    - sample_softmax : -1
+    - init : normal
+    - emb_init : normal
+    - init_range : 0.1
+    - emb_init_range : 0.01
+    - init_std : 0.02
+    - proj_init_std : 0.01
+    - optim : adam
+    - lr : 0.0
+    - mom : 0.0
+    - scheduler : cosine
+    - max_step_scheduler : None
+    - warmup_step : 16000
+    - decay_rate : 0.5
+    - lr_min : 0.0
+    - clip : 0.25
+    - weight_decay : 0.0
+    - clip_nonemb : False
+    - patience : 0
+    - eta_min : 0.001
+    - max_step : 200
+    - batch_size : 1
+    - batch_chunk : 1
+    - roll : True
+    - tgt_len : 256
+    - ext_len : 0
+    - mem_len : 256
+    - seed : 1111
+    - multi_gpu : None
+    - gpu0_bsz : -1
+    - same_length : False
+    - varlen : False
+    - eval_tgt_len : 128
+    - eval_batch_size : 16
+    - eval_max_steps : -1
+    - eval_interval : 5000
+    - local_rank : 0
+    - tied : True
+    - n_token : 267735
+    - n_all_param : 519963095
+    - n_nonemb_param : 245532672
+====================================================================================================
+#params = 519963095
+#non emb params = 245532672
+Traceback (most recent call last):
+  File "train.py", line 810, in <module>
+    main()
+  File "train.py", line 756, in main
+    train_step, best_val_loss, meters, args
+  File "train.py", line 379, in train
+    ret = para_model(data_i, target_i, mems[i])
+  File "/opt/conda/lib/python3.6/site-packages/torch/nn/modules/module.py", line 532, in __call__
+    result = self.forward(*input, **kwargs)
+  File "/workspace/examples/transformer-xl/pytorch/mem_transformer.py", line 783, in forward
+    loss = self.crit(pred_hid.view(-1, pred_hid.size(-1)), target.view(-1))
+  File "/opt/conda/lib/python3.6/site-packages/torch/nn/modules/module.py", line 532, in __call__
+    result = self.forward(*input, **kwargs)
+  File "/workspace/examples/transformer-xl/pytorch/utils/proj_adaptive_softmax.py", line 89, in forward
+    self.out_layers[0].bias, self.out_projs[0])
+  File "/workspace/examples/transformer-xl/pytorch/utils/proj_adaptive_softmax.py", line 70, in _compute_logit
+    logit = F.linear(hidden, weight, bias=bias)
+  File "/opt/conda/lib/python3.6/site-packages/torch/nn/functional.py", line 1370, in linear
+    ret = torch.addmm(bias, input, weight.t())
+RuntimeError: CUDA out of memory. Tried to allocate 262.00 MiB (GPU 0; 10.91 GiB total capacity; 9.49 GiB already allocated; 174.75 MiB free; 9.54 GiB reserved in total by PyTorch)
+Traceback (most recent call last):
+  File "/opt/conda/lib/python3.6/runpy.py", line 193, in _run_module_as_main
+    "__main__", mod_spec)
+  File "/opt/conda/lib/python3.6/runpy.py", line 85, in _run_code
+    exec(code, run_globals)
+  File "/opt/conda/lib/python3.6/site-packages/torch/distributed/launch.py", line 253, in <module>
+    main()
+  File "/opt/conda/lib/python3.6/site-packages/torch/distributed/launch.py", line 249, in main
+    cmd=cmd)
+subprocess.CalledProcessError: Command '['/opt/conda/bin/python', '-u', 'train.py', '--data', '/data/transformer-xl/wikitext-103', '--max_step', '200', '--batch_size', '1', '--dataset', 'wt103', '--n_layer', '18', '--d_model', '1024', '--n_head', '16', '--d_head', '64', '--d_inner', '4096', '--dropout', '0.2', '--dropatt', '0.2', '--optim', 'adam', '--lr', '0.0', '--warmup_step', '16000', '--tgt_len', '256', '--mem_len', '256', '--eval_tgt_len', '128', '--eval_interval', '5000', '--roll', '--cuda']' returned non-zero exit status 1.

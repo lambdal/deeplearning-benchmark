@@ -5,7 +5,7 @@ import pandas as pd
 
 path_result = 'results'
 
-list_system = ['1080Ti'] 
+list_system = ['TitanRTX', '2080Ti', '1080Ti'] 
 
 list_test = {
              'PyTorch_SSD_FP32': ('PyTorch_SSD_FP32 (images/sec)', "^.*Median images/sec:.*$", -1),
@@ -64,10 +64,10 @@ def gather(name, system, df):
                         pass
 
             if not flag:
-                print(name + " " + filename + ": something wrong")
+                print(system + "/" + name + " " + filename + ": something wrong")
                     
 
-    df.at[system, column_name] = total_throughput / count
+    df.at[system, column_name] = round(total_throughput / count, 2)
 
 
 def main():
