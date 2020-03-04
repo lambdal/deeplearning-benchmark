@@ -117,7 +117,7 @@ PyTorch_ncf_FP32_PARAMS=(
             args
             --data                    "/data/ncf/cache/ml-20m"
             --epochs                  "1"
-	    --batch_size              "720000"
+	      --batch_size              "720000"
             --opt_level               "O0"
            )
 
@@ -126,7 +126,7 @@ PyTorch_ncf_FP16_PARAMS=(
             args
             --data                    "/data/ncf/cache/ml-20m"
             --epochs                  "1"
-	    --batch_size              "1440000"
+	      --batch_size              "1440000"
             --opt_level               "O2"
            )
 
