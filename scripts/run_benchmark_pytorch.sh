@@ -70,21 +70,19 @@ benchmark_pytorch_maskrcnn() {
     TASK_PARAMS=${task}_PARAMS[@]
     local command_para=$(sed 's/.*args //' <<<${!TASK_PARAMS})
 
-    LOGFILE="/results/joblog.log"
     GLOBAL_BATCH=`echo ${!TASK_PARAMS} | grep -oP '(?<=SOLVER.IMS_PER_BATCH )\w+'`
 
     python -m torch.distributed.launch --nproc_per_node=${NUM_GPU} tools/train_net.py \
     --skip-test \
     ${command_para} \
-    | tee $LOGFILE
+    | tee $result
     
-    time=`cat $LOGFILE | grep -F 'maskrcnn_benchmark.trainer INFO: Total training time' | tail -n 1 | awk -F'(' '{print $2}' | awk -F' s ' '{print $1}' | egrep -o [0-9.]+`
-    statement=`cat $LOGFILE | grep -F 'maskrcnn_benchmark.trainer INFO: Total training time' | tail -n 1`
+    time=`cat $result | grep -F 'maskrcnn_benchmark.trainer INFO: Total training time' | tail -n 1 | awk -F'(' '{print $2}' | awk -F' s ' '{print $1}' | egrep -o [0-9.]+`
+    statement=`cat $result | grep -F 'maskrcnn_benchmark.trainer INFO: Total training time' | tail -n 1`
     calc=$(echo $time 1.0 $GLOBAL_BATCH | awk '{ printf "%f", $2 * $3 / $1 }')
     
-    echo "Training perf is: "$calc" FPS" |& tee ${result}
+    echo "Training perf is: "$calc" FPS" >> ${result}
     echo "DONE!" >> ${result}
-    rm $LOGFILE
     rm /results/*.txt
     rm /results/*.pth
     rm /results/*checkpoint* 

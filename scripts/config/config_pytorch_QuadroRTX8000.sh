@@ -7,7 +7,7 @@ PyTorch_SSD_FP32_PARAMS=(
              "examples/ssd"
              args
              --data                   "/data/object_detection"
-             --batch-size             "144"
+             --batch-size             "158"
              --benchmark-warmup       "50"
              --benchmark-iterations   "100"
            )
@@ -29,7 +29,7 @@ PyTorch_resnet50_FP32_PARAMS=(
              --arch                   "resnet50"
              --epochs                 "1" 
              --prof                   "100" 
-             --batch-size             "472"
+             --batch-size             "512"
              --raport-file            "benchmark.json"
              --print-freq             "1"
              --training-only
@@ -70,7 +70,7 @@ PyTorch_maskrcnn_FP32_PARAMS=(
              args
 
              --config-file            "/workspace/patch/e2e_mask_rcnn_R_50_FPN_1x.yaml"
-             SOLVER.IMS_PER_BATCH     "20"
+             SOLVER.IMS_PER_BATCH     "32"
              DTYPE                    "float32"
              SOLVER.MAX_ITER          "200"
              OUTPUT_DIR               "/results"
@@ -117,7 +117,7 @@ PyTorch_ncf_FP32_PARAMS=(
             args
             --data                    "/data/ncf/cache/ml-20m"
             --epochs                  "1"
-	      --batch_size              "5498776"
+	    --batch_size              "5898776"
             --opt_level               "O0"
            )
 
@@ -126,7 +126,7 @@ PyTorch_ncf_FP16_PARAMS=(
             args
             --data                    "/data/ncf/cache/ml-20m"
             --epochs                  "1"
-	      --batch_size              "9954552"
+	    --batch_size              "10854552"
             --opt_level               "O2"
            )
 
@@ -162,7 +162,7 @@ PyTorch_transformerxlbase_FP16_PARAMS=(
             args
             --data                    "/data/transformer-xl/wikitext-103"
             --max_step                "200"
-            --batch_size              "62"
+            --batch_size              "72"
             --dataset                 "wt103" 
             --n_layer                 "16"
             --d_model                 "512"
