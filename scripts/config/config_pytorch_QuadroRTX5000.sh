@@ -7,7 +7,7 @@ PyTorch_SSD_FP32_PARAMS=(
              "examples/ssd"
              args
              --data                   "/data/object_detection"
-             --batch-size             "32"
+             --batch-size             "48"
              --benchmark-warmup       "50"
              --benchmark-iterations   "100"
            )
@@ -16,7 +16,7 @@ PyTorch_SSD_AMP_PARAMS=(
              "examples/ssd"
              args
              --data                   "/data/object_detection"
-             --batch-size             "56"
+             --batch-size             "88"
              --benchmark-warmup       "50"
              --benchmark-iterations   "100"
              --amp
@@ -29,7 +29,7 @@ PyTorch_resnet50_FP32_PARAMS=(
              --arch                   "resnet50"
              --epochs                 "1" 
              --prof                   "100" 
-             --batch-size             "100"
+             --batch-size             "152"
              --raport-file            "benchmark.json"
              --print-freq             "1"
              --training-only
@@ -44,7 +44,7 @@ PyTorch_resnet50_FP16_PARAMS=(
              --static-loss-scale      "256"
              --epochs                 "1" 
              --prof                   "100" 
-             --batch-size             "184"
+             --batch-size             "300"
              --raport-file            "benchmark.json"
              --print-freq             "1"
              --training-only  
@@ -59,7 +59,7 @@ PyTorch_resnet50_AMP_PARAMS=(
              --static-loss-scale      "256"
              --epochs                 "1" 
              --prof                   "100" 
-             --batch-size             "160"
+             --batch-size             "288"
              --raport-file            "benchmark.json"
              --print-freq             "1"
              --training-only   
@@ -68,11 +68,10 @@ PyTorch_resnet50_AMP_PARAMS=(
 PyTorch_maskrcnn_FP32_PARAMS=(
              "examples/maskrcnn/pytorch"
              args
-
              --config-file            "/workspace/patch/e2e_mask_rcnn_R_50_FPN_1x.yaml"
-             SOLVER.IMS_PER_BATCH     "6"
+             SOLVER.IMS_PER_BATCH     "9"
              DTYPE                    "float32"
-             SOLVER.MAX_ITER          "60"
+             SOLVER.MAX_ITER          "200"
              OUTPUT_DIR               "/results"
              PATHS_CATALOG            "/workspace/patch/paths_catalog_ci.py"
            )
@@ -81,9 +80,9 @@ PyTorch_maskrcnn_FP16_PARAMS=(
              "examples/maskrcnn/pytorch"
              args      
              --config-file            "/workspace/patch/e2e_mask_rcnn_R_50_FPN_1x.yaml"
-             SOLVER.IMS_PER_BATCH     "6"
+             SOLVER.IMS_PER_BATCH     "10"
              DTYPE                    "float16"
-             SOLVER.MAX_ITER          "60"
+             SOLVER.MAX_ITER          "200"
              OUTPUT_DIR               "/results"
              PATHS_CATALOG            "/workspace/patch/paths_catalog_ci.py"
            )
@@ -92,7 +91,7 @@ PyTorch_gnmt_FP32_PARAMS=(
             "examples/gnmt"
             args
             --dataset-dir             "/data/gnmt/wmt16_de_en"
-            --train-batch-size        "108"
+            --train-batch-size        "184"
 	    --val-batch-size          "32"
 	    --test-batch-size         "32"
             --math                    "fp32"
@@ -104,7 +103,7 @@ PyTorch_gnmt_FP16_PARAMS=(
             "examples/gnmt"
             args
             --dataset-dir             "/data/gnmt/wmt16_de_en"
-            --train-batch-size        "160"
+            --train-batch-size        "260"
 	    --val-batch-size          "32"
 	    --test-batch-size         "32"
             --math                    "fp16"
@@ -117,7 +116,7 @@ PyTorch_ncf_FP32_PARAMS=(
             args
             --data                    "/data/ncf/cache/ml-20m"
             --epochs                  "1"
-	    --batch_size              "720000"
+	    --batch_size              "1400000"
             --opt_level               "O0"
            )
 
@@ -126,7 +125,7 @@ PyTorch_ncf_FP16_PARAMS=(
             args
             --data                    "/data/ncf/cache/ml-20m"
             --epochs                  "1"
-	    --batch_size              "1440000"
+	    --batch_size              "2800000"
             --opt_level               "O2"
            )
 
@@ -135,7 +134,7 @@ PyTorch_transformerxlbase_FP32_PARAMS=(
             args
             --data                    "/data/transformer-xl/wikitext-103"
             --max_step                "200"
-            --batch_size              "4"
+            --batch_size              "8"
             --dataset                 "wt103" 
             --n_layer                 "16"
             --d_model                 "512"
@@ -162,7 +161,7 @@ PyTorch_transformerxlbase_FP16_PARAMS=(
             args
             --data                    "/data/transformer-xl/wikitext-103"
             --max_step                "200"
-            --batch_size              "5"
+            --batch_size              "14"
             --dataset                 "wt103" 
             --n_layer                 "16"
             --d_model                 "512"
@@ -190,7 +189,7 @@ PyTorch_transformerxllarge_FP32_PARAMS=(
             args
             --data                    "/data/transformer-xl/wikitext-103"
             --max_step                "200"
-            --batch_size              "1"
+            --batch_size              "2"
             --dataset                 "wt103" 
             --n_layer                 "18"
             --d_model                 "1024"
@@ -215,7 +214,7 @@ PyTorch_transformerxllarge_FP16_PARAMS=(
             args
             --data                    "/data/transformer-xl/wikitext-103"
             --max_step                "200"
-            --batch_size              "1"
+            --batch_size              "2"
             --dataset                 "wt103" 
             --n_layer                 "18"
             --d_model                 "1024"
@@ -242,7 +241,7 @@ PyTorch_tacotron2_FP32_PARAMS=(
             --output_directory        "./" 
             --learning-rate           "0.0" 
             --epochs                  "1" 
-            --batch-size              "36" 
+            --batch-size              "52" 
             --weight-decay            "1e-6" 
             --grad-clip-thresh        "1.0"
             --log-file                "nvlog.json"
@@ -258,7 +257,7 @@ PyTorch_tacotron2_FP16_PARAMS=(
             --output_directory        "./" 
             --learning-rate           "0.0" 
             --epochs                  "1" 
-            --batch-size              "72" 
+            --batch-size              "100" 
             --weight-decay            "1e-6" 
             --grad-clip-thresh        "1.0"
             --log-file                "nvlog.json"
@@ -277,7 +276,7 @@ PyTorch_waveglow_FP32_PARAMS=(
             --learning-rate           "0.0" 
             --epochs                  "1" 
             --segment-length          "8000"
-            --batch-size              "2" 
+            --batch-size              "5" 
             --weight-decay            "0" 
             --grad-clip-thresh        "65504"
             --log-file                "nvlog.json"
@@ -295,7 +294,7 @@ PyTorch_waveglow_FP16_PARAMS=(
             --learning-rate           "0.0" 
             --epochs                  "1" 
             --segment-length          "8000"
-            --batch-size              "4" 
+            --batch-size              "10" 
             --weight-decay            "0" 
             --grad-clip-thresh        "65504"
             --log-file                "nvlog.json"
@@ -311,14 +310,14 @@ PyTorch_bert_base_squad_FP32_PARAMS=(
             args
             "/data/bert_base/bert_base_uncased.pt"
             "1.0"
-            "10"
+            "16"
             "0.0"
             "fp32"
             "1"
             "1"
             "/data/squad/v1.1"
             "/data/bert_base/bert-base-uncased-vocab.txt"
-            "."
+            "/results"
             "train"
             "/data/bert_base/bert_config.json"
             "1000"
@@ -329,7 +328,7 @@ PyTorch_bert_base_squad_FP16_PARAMS=(
             args      
             "/data/bert_base/bert_base_uncased.pt"
             "1.0"
-            "20"
+            "32"
             "0.0"
             "fp16"
             "1"
@@ -347,7 +346,7 @@ PyTorch_bert_large_squad_FP32_PARAMS=(
             args      
             "/data/bert_large/bert_large_uncased.pt"
             "1.0"
-            "2"
+            "4"
             "0.0"
             "fp32"
             "1"
@@ -365,7 +364,7 @@ PyTorch_bert_large_squad_FP16_PARAMS=(
             args      
             "/data/bert_large/bert_large_uncased.pt"
             "1.0"
-            "4"
+            "10"
             "0.0"
             "fp16"
             "1"
