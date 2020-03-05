@@ -29,7 +29,7 @@ PyTorch_resnet50_FP32_PARAMS=(
              --arch                   "resnet50"
              --epochs                 "1" 
              --prof                   "100" 
-             --batch-size             "512"
+             --batch-size             "496"
              --raport-file            "benchmark.json"
              --print-freq             "1"
              --training-only
@@ -347,7 +347,7 @@ PyTorch_bert_large_squad_FP32_PARAMS=(
             args      
             "/data/bert_large/bert_large_uncased.pt"
             "1.0"
-            "20"
+            "18"
             "0.0"
             "fp32"
             "1"

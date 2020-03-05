@@ -71,7 +71,7 @@ PyTorch_maskrcnn_FP32_PARAMS=(
              --config-file            "/workspace/patch/e2e_mask_rcnn_R_50_FPN_1x.yaml"
              SOLVER.IMS_PER_BATCH     "9"
              DTYPE                    "float32"
-             SOLVER.MAX_ITER          "200"
+             SOLVER.MAX_ITER          "100"
              OUTPUT_DIR               "/results"
              PATHS_CATALOG            "/workspace/patch/paths_catalog_ci.py"
            )
@@ -82,7 +82,7 @@ PyTorch_maskrcnn_FP16_PARAMS=(
              --config-file            "/workspace/patch/e2e_mask_rcnn_R_50_FPN_1x.yaml"
              SOLVER.IMS_PER_BATCH     "10"
              DTYPE                    "float16"
-             SOLVER.MAX_ITER          "200"
+             SOLVER.MAX_ITER          "100"
              OUTPUT_DIR               "/results"
              PATHS_CATALOG            "/workspace/patch/paths_catalog_ci.py"
            )
@@ -364,7 +364,7 @@ PyTorch_bert_large_squad_FP16_PARAMS=(
             args      
             "/data/bert_large/bert_large_uncased.pt"
             "1.0"
-            "10"
+            "8"
             "0.0"
             "fp16"
             "1"
