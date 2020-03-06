@@ -6,7 +6,7 @@ import pandas as pd
 path_result = 'results'
 
 #list_system = ['QuadroRTX5000', 'TitanRTX', '2080Ti', '1080Ti'] 
-list_system = ['QuadroRTX8000', 'QuadroRTX5000', 'TitanRTX', '2080Ti', '1080Ti'] 
+list_system = ['QuadroRTX8000', 'QuadroRTX6000', 'QuadroRTX5000', 'TitanRTX', '2080Ti', '1080Ti'] 
 
 list_test = {
              'PyTorch_SSD_FP32': ('PyTorch_SSD_FP32 (images/sec)', "^.*Median images/sec:.*$", -1),
