@@ -13,18 +13,18 @@
 
 # popd
 
-# ## -------------------------
-# ## PyTorch gnmt
-# ## -------------------------
+## -------------------------
+## PyTorch gnmt
+## -------------------------
 
-# pushd .
+pushd .
 
-# cd examples/gnmt
-# mkdir -p /data/gnmt/wmt16_de_en
-# bash scripts/wmt16_en_de.sh /data/gnmt/wmt16_de_en
-# chmod -R a+rwx /data/gnmt/
+cd examples/gnmt
+mkdir -p /data/gnmt/wmt16_de_en
+bash scripts/wmt16_en_de.sh /data/gnmt/wmt16_de_en
+chmod -R a+rwx /data/gnmt/
 
-# popd
+popd
 
 # ## -------------------------
 # ## PyTorch NCF
@@ -53,19 +53,19 @@
 # chmod -R a+rwx /data/transformer-xl
 # popd
 
-## -------------------------
-## PyTorch tacotron2
-## -------------------------
-pushd .
-
-mkdir -p /data/tacotron2/LJSpeech-1.1
-cd examples/tacotron2/scripts
-./prepare_dataset.sh
-chmod -R a+rwx /data/tacotron2/LJSpeech-1.1
-
-popd
-
-
+# ## -------------------------
+# ## PyTorch tacotron2
+# ## -------------------------
+# pushd .
+# 
+# mkdir -p /data/tacotron2/LJSpeech-1.1
+# cd examples/tacotron2/scripts
+# ./prepare_dataset.sh
+# chmod -R a+rwx /data/tacotron2/LJSpeech-1.1
+# 
+# popd
+# 
+# 
 # ## ------------------------
 # ## PyTorch BERT Squad
 # ## ------------------------
