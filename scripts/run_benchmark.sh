@@ -11,7 +11,7 @@ cp /scripts/patch/box_encoder_cuda.cu examples/ssd/csrc
 
 pushd .
 cd examples/ssd
-pip install .
+#pip install .
 popd
 
 ./run_system_pytorch.sh $SYSTEM
