@@ -35,7 +35,7 @@ list_test = {
              }
 
 
-def gather(name, system, df):
+def gather_avg(name, system, df):
     
     column_name, key, pos = list_test[name]
     pattern = re.compile(key)
@@ -71,6 +71,39 @@ def gather(name, system, df):
     df.at[system, column_name] = round(total_throughput / count, 2)
 
 
+def gather_last(name, system, df):
+    
+    column_name, key, pos = list_test[name]
+    pattern = re.compile(key)
+
+    path = path_result + '/' + system + '/' + name
+    count = 0.000001
+    total_throughput = 0.0
+
+    for filename in os.listdir(path):
+        if filename.endswith(".txt"):
+            flag = False
+            throughput = 0
+            # Sift through all lines and only keep the last occurrence
+            for i, line in enumerate(open(os.path.join(path, filename))):
+
+                for match in re.finditer(pattern, line):
+
+                    try:
+                        throughput = float(match.group().split(' ')[pos])
+                    except:
+                        pass
+
+            if throughput > 0:
+                count += 1
+                total_throughput += throughput
+                flag = True
+
+            if not flag:
+                print(system + "/" + name + " " + filename + ": something wrong")
+                    
+
+    df.at[system, column_name] = round(total_throughput / count, 2)
 def main():
 
     columns = []
@@ -83,7 +116,7 @@ def main():
 
     for system in list_system:
         for test_name, value in sorted(list_test.iteritems()):
-            gather(test_name, system, df)
+            gather_last(test_name, system, df)
 
 
     df.to_csv('pytorch.csv')
