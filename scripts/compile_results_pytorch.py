@@ -5,12 +5,12 @@ import pandas as pd
 
 path_result = 'results'
 
-#list_system = ['V100'] 
-list_system = ['V100', 'QuadroRTX8000', 'QuadroRTX6000', 'QuadroRTX5000', 'TitanRTX', '2080Ti', '1080Ti'] 
+#list_system = ['2xV100'] 
+list_system = ['2xV100', 'V100', 'QuadroRTX8000', 'QuadroRTX6000', 'QuadroRTX5000', 'TitanRTX', '2080Ti', '1080Ti'] 
 
 list_test = {
-             'PyTorch_SSD_FP32': ('PyTorch_SSD_FP32 (images/sec)', "^.*Median images/sec:.*$", -1),
-             'PyTorch_SSD_AMP': ('PyTorch_SSD_AMP (images/sec)', "^.*Median images/sec:.*$", -1),
+             'PyTorch_SSD_FP32': ('PyTorch_SSD_FP32 (images/sec)', "^.*Training performance =.*$", -2),
+             'PyTorch_SSD_AMP': ('PyTorch_SSD_AMP (images/sec)', "^.*Training performance =.*$", -2),
              'PyTorch_resnet50_FP32': ('PyTorch_resnet50_FP32 (images/sec)', "^.*Summary: train.loss.*$", -2),
              'PyTorch_resnet50_FP16': ('PyTorch_resnet50_FP16 (images/sec)', "^.*Summary: train.loss.*$", -2),
              'PyTorch_resnet50_AMP': ('PyTorch_resnet50_AMP (images/sec)', "^.*Summary: train.loss.*$", -2),
