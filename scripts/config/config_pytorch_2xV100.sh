@@ -186,7 +186,7 @@ PyTorch_transformerxllarge_FP32_PARAMS=(
             args
             --data                    "/data/transformer-xl/wikitext-103"
             --max_step                "400"
-            --batch_size              "8"
+            --batch_size              "16"
             --dataset                 "wt103" 
             --n_layer                 "18"
             --d_model                 "1024"
