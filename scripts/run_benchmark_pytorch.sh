@@ -110,7 +110,7 @@ benchmark_pytorch_ncf() {
     TASK_PARAMS=${task}_PARAMS[@]
     local command_para=$(sed 's/.*args //' <<<${!TASK_PARAMS})
 
-    python -m torch.distributed.launch --nproc_per_node=${NUM_GPU} --use_env ncf.py ${command_para} |& tee ${result}
+    python -m torch.distributed.launch --nproc_per_node=${NUM_GPU} ncf.py ${command_para} |& tee ${result}
     echo "DONE!" >> ${result}
 }
 
@@ -123,7 +123,7 @@ benchmark_pytorch_transformerxl() {
     TASK_PARAMS=${task}_PARAMS[@]
     local command_para=$(sed 's/.*args //' <<<${!TASK_PARAMS})
 
-    python -m torch.distributed.launch --nproc_per_node=${NUM_GPU} --use_env train.py ${command_para} |& tee ${result}
+    python -m torch.distributed.launch --nproc_per_node=${NUM_GPU} train.py ${command_para} |& tee ${result}
     echo "DONE!" >> ${result}
 }
 
