@@ -9,7 +9,7 @@ PyTorch_SSD_FP32_PARAMS=(
              --data                   "/data/object_detection"
              --batch-size             "108"
              --benchmark-warmup       "50"
-             --benchmark-iterations   "100"
+             --benchmark-iterations   "400"
            )
 
 PyTorch_SSD_AMP_PARAMS=(
@@ -18,7 +18,7 @@ PyTorch_SSD_AMP_PARAMS=(
              --data                   "/data/object_detection"
              --batch-size             "192"
              --benchmark-warmup       "50"
-             --benchmark-iterations   "100"
+             --benchmark-iterations   "400"
              --amp
            )
 
