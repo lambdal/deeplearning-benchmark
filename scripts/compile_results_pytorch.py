@@ -5,8 +5,8 @@ import pandas as pd
 
 path_result = 'results'
 
-#list_system = ['2xV100'] 
-list_system = ['2xV100', 'V100', 'QuadroRTX8000', 'QuadroRTX6000', 'QuadroRTX5000', 'TitanRTX', '2080Ti', '1080Ti'] 
+#list_system = ['4xV100'] 
+list_system = ['4xV100', '2xV100', 'V100', 'QuadroRTX8000', 'QuadroRTX6000', 'QuadroRTX5000', 'TitanRTX', '2080Ti', '1080Ti'] 
 
 list_test = {
              'PyTorch_SSD_FP32': ('PyTorch_SSD_FP32 (images/sec)', "^.*Training performance =.*$", -2),
@@ -88,7 +88,6 @@ def gather_last(name, system, df):
             for i, line in enumerate(open(os.path.join(path, filename))):
 
                 for match in re.finditer(pattern, line):
-
                     try:
                         throughput = float(match.group().split(' ')[pos])
                     except:
@@ -101,9 +100,9 @@ def gather_last(name, system, df):
 
             if not flag:
                 print(system + "/" + name + " " + filename + ": something wrong")
-                    
-
     df.at[system, column_name] = round(total_throughput / count, 2)
+
+
 def main():
 
     columns = []

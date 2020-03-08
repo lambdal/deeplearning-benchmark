@@ -14,4 +14,5 @@ if [ ! -f "${DATADIR}/${BZ2ARCHIVE}" ]; then
     wget "$ENDPOINT"
 fi
 
-tar jxvf "${DATADIR}/${BZ2ARCHIVE}"
+tar jxvf "${DATADIR}/${BZ2ARCHIVE}" --no-same-owner
+
