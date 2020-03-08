@@ -942,6 +942,7 @@ def main():
             input_file=args.train_file, is_training=True, version_2_with_negative=args.version_2_with_negative)
         num_train_optimization_steps = int(
             len(train_examples) / args.train_batch_size / args.gradient_accumulation_steps) * args.num_train_epochs
+
         if args.local_rank != -1:
             num_train_optimization_steps = num_train_optimization_steps // torch.distributed.get_world_size()
 
@@ -1017,21 +1018,17 @@ def main():
             list(filter(None, args.bert_model.split('/'))).pop(), str(args.max_seq_length), str(args.doc_stride),
             str(args.max_query_length))
         train_features = None
-        try:
-            with open(cached_train_features_file, "rb") as reader:
-                train_features = pickle.load(reader)
-        except:
-            train_features = convert_examples_to_features(
-                examples=train_examples,
-                tokenizer=tokenizer,
-                max_seq_length=args.max_seq_length,
-                doc_stride=args.doc_stride,
-                max_query_length=args.max_query_length,
-                is_training=True,
-                max_steps=args.max_steps)
-            if args.local_rank == -1 or torch.distributed.get_rank() == 0:
-                logger.info("  Saving train features into cached file %s", cached_train_features_file)
-                with open(cached_train_features_file, "wb") as writer:
+        train_features = convert_examples_to_features(
+            examples=train_examples,
+            tokenizer=tokenizer,
+            max_seq_length=args.max_seq_length,
+            doc_stride=args.doc_stride,
+            max_query_length=args.max_query_length,
+            is_training=True,
+            max_steps=args.max_steps)
+        if args.local_rank == -1 or torch.distributed.get_rank() == 0:
+            logger.info("  Saving train features into cached file %s", cached_train_features_file)
+            with open(cached_train_features_file, "wb") as writer:
                     pickle.dump(train_features, writer)
         logger.info("***** Running training *****")
         logger.info("  Num orig examples = %d", len(train_examples))
