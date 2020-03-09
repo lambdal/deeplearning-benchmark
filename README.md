@@ -47,13 +47,35 @@ docker run --gpus '"device=list-of-gpus"' --rm --shm-size=16g -v ~/data:/data -v
 python scripts/compile_results_pytorch.py
 ```
 
+
+### Notes
+
+| Model | Batch | 
+|---|---|
+| PyTorch SSD  | Per GPU. `benchmark-iterations` needs to be reduced for more GPUs or larger batch size  |
+| PyTorch ResNet  | Per GPU.  |
+| PyTorch MaskRCNN  | Global. Need to be scaled by `num_gpu` |
+| PyTorch GNMT | Per GPU. |
+| PyTorch NCF | Global. Need to be scaled by `num_gpu`|
+| PyTorch TransformerXL | Global. Need to be scaled by `num_gpu` |
+| PyTorch Tactron | Per GPU. |
+| Bert | Per GPU. |
+
+
+
 ### Log
+
+#### 2020-03-08
+
+- [x] Tune Performance on different cards
+- [x] Fixed bugs related to data pipeline
+- [x] Refresh results for V100s, QuadroRTX6000 and 2080Ti
 
 #### 2020-03-01
 
 - [x] Code Refactoring
 - [x] Gather System Info
-- [ ] Gather PyTorch Benchmark Statistics
+- [x] Gather PyTorch Benchmark Statistics
 
 
 #### 2020-02-28
