@@ -93,8 +93,8 @@ PyTorch_gnmt_FP32_PARAMS=(
             args
             --dataset-dir             "/data/gnmt/wmt16_de_en"
             --train-batch-size        "108"
-	    --val-batch-size          "32"
-	    --test-batch-size         "32"
+          --val-batch-size          "32"
+          --test-batch-size         "32"
             --math                    "fp32"
             --epochs                  "2"
             --seed                    "2"
@@ -105,8 +105,8 @@ PyTorch_gnmt_FP16_PARAMS=(
             args
             --dataset-dir             "/data/gnmt/wmt16_de_en"
             --train-batch-size        "160"
-	    --val-batch-size          "32"
-	    --test-batch-size         "32"
+          --val-batch-size          "32"
+          --test-batch-size         "32"
             --math                    "fp16"
             --epochs                  "2"
             --seed                    "2"
@@ -117,7 +117,7 @@ PyTorch_ncf_FP32_PARAMS=(
             args
             --data                    "/data/ncf/cache/ml-20m"
             --epochs                  "2"
-	    --batch_size              "720000"
+            --batch_size              "720000"
             --opt_level               "O0"
            )
 
@@ -126,7 +126,7 @@ PyTorch_ncf_FP16_PARAMS=(
             args
             --data                    "/data/ncf/cache/ml-20m"
             --epochs                  "2"
-	    --batch_size              "1440000"
+            --batch_size              "1440000"
             --opt_level               "O2"
            )
 

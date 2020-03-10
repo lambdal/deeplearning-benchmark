@@ -10,7 +10,7 @@ PyTorch_SSD_FP32_PARAMS=(
              --batch-size             "108"
              --benchmark-warmup       "50"
              --benchmark-iterations   "200"
-	     --learning-rate          "0"
+             --learning-rate          "0"
            )
 
 PyTorch_SSD_AMP_PARAMS=(
@@ -21,7 +21,7 @@ PyTorch_SSD_AMP_PARAMS=(
              --benchmark-warmup       "50"
              --benchmark-iterations   "100"
              --amp
-	     --learning-rate          "0"
+             --learning-rate          "0"
            )
 
 PyTorch_resnet50_FP32_PARAMS=(
@@ -115,7 +115,7 @@ PyTorch_ncf_FP32_PARAMS=(
             args
             --data                    "/data/ncf/cache/ml-20m"
             --epochs                  "2"
-	    --batch_size              "14216582"
+            --batch_size              "14216582"
             --opt_level               "O0"
            )
 
@@ -124,7 +124,7 @@ PyTorch_ncf_FP16_PARAMS=(
             args
             --data                    "/data/ncf/cache/ml-20m"
             --epochs                  "2"
-	    --batch_size              "22278184"
+            --batch_size              "22278184"
             --opt_level               "O2"
            )
 

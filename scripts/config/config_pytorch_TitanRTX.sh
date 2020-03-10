@@ -68,7 +68,6 @@ PyTorch_resnet50_AMP_PARAMS=(
 PyTorch_maskrcnn_FP32_PARAMS=(
              "examples/maskrcnn/pytorch"
              args
-
              --config-file            "/workspace/patch/e2e_mask_rcnn_R_50_FPN_1x.yaml"
              SOLVER.IMS_PER_BATCH     "12"
              DTYPE                    "float32"
@@ -113,7 +112,7 @@ PyTorch_ncf_FP32_PARAMS=(
             args
             --data                    "/data/ncf/cache/ml-20m"
             --epochs                  "2"
-	    --batch_size              "2516582"
+            --batch_size              "2516582"
             --opt_level               "O0"
            )
 
@@ -122,7 +121,7 @@ PyTorch_ncf_FP16_PARAMS=(
             args
             --data                    "/data/ncf/cache/ml-20m"
             --epochs                  "2"
-	    --batch_size              "4278184"
+            --batch_size              "4278184"
             --opt_level               "O2"
            )
 
