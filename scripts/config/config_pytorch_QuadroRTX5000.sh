@@ -44,7 +44,7 @@ PyTorch_resnet50_FP16_PARAMS=(
              --static-loss-scale      "256"
              --epochs                 "2" 
              --prof                   "100" 
-             --batch-size             "300"
+             --batch-size             "288"
              --raport-file            "benchmark.json"
              --print-freq             "1"
              --training-only  
@@ -161,7 +161,7 @@ PyTorch_transformerxlbase_FP16_PARAMS=(
             args
             --data                    "/data/transformer-xl/wikitext-103"
             --max_step                "400"
-            --batch_size              "14"
+            --batch_size              "12"
             --dataset                 "wt103" 
             --n_layer                 "16"
             --d_model                 "512"
@@ -214,7 +214,7 @@ PyTorch_transformerxllarge_FP16_PARAMS=(
             args
             --data                    "/data/transformer-xl/wikitext-103"
             --max_step                "400"
-            --batch_size              "2"
+            --batch_size              "1"
             --dataset                 "wt103" 
             --n_layer                 "18"
             --d_model                 "1024"
