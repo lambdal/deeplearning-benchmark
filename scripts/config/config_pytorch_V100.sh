@@ -68,7 +68,6 @@ PyTorch_resnet50_AMP_PARAMS=(
 PyTorch_maskrcnn_FP32_PARAMS=(
              "examples/maskrcnn/pytorch"
              args
-
              --config-file            "/workspace/patch/e2e_mask_rcnn_R_50_FPN_1x.yaml"
              SOLVER.IMS_PER_BATCH     "15"
              DTYPE                    "float32"

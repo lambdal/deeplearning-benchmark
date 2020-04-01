@@ -1,0 +1,79 @@
+import os
+import re
+import pandas as pd
+
+
+path_config = 'scripts/config'
+
+list_system = [('8xV100', 8), 
+               ('4xV100', 4),
+               ('2xV100', 2),
+               ('V100', 1), 
+               ('QuadroRTX8000', 1),
+               ('QuadroRTX6000', 1),
+               ('QuadroRTX5000', 1),
+               ('TitanRTX', 1),
+               ('2080Ti', 1),
+               ('1080Ti', 1)] 
+
+# skip lines, offset at the end, need to be multiply by #gpu
+list_test = {
+             'PyTorch_SSD_FP32': (4, -1, 1),
+             'PyTorch_SSD_AMP': (4, -1, 1),
+             'PyTorch_resnet50_FP32': (7, -1, 1),
+             'PyTorch_resnet50_FP16': (9, -1, 1),
+             'PyTorch_resnet50_AMP': (9, -1, 1),
+             'PyTorch_maskrcnn_FP32': (4, -1, 0),
+             'PyTorch_maskrcnn_FP16': (4, -1, 0),
+             'PyTorch_gnmt_FP32': (4, -1, 1),
+             'PyTorch_gnmt_FP16': (4, -1, 1),
+             'PyTorch_ncf_FP32': (5, -1, 0),
+             'PyTorch_ncf_FP16': (5, -1, 0),
+             'PyTorch_transformerxlbase_FP32': (5, -1, 0),
+             'PyTorch_transformerxlbase_FP16': (5, -1, 0),
+             'PyTorch_transformerxllarge_FP32': (5, -1, 0),
+             'PyTorch_transformerxllarge_FP16': (5, -1, 0),
+             'PyTorch_tacotron2_FP32': (7, -1, 1),
+             'PyTorch_tacotron2_FP16': (7, -1, 1),
+             'PyTorch_waveglow_FP32': (8, -1, 1),
+             'PyTorch_waveglow_FP16': (8, -1, 1),
+             'PyTorch_bert_large_squad_FP32': (5, -1, 1),
+             'PyTorch_bert_large_squad_FP16': (5, -1, 1),
+             'PyTorch_bert_base_squad_FP32': (5, -1, 1),
+             'PyTorch_bert_base_squad_FP16': (5, -1, 1),
+             }
+
+
+def gather(system, num_gpu, df):
+    
+    f_name = os.path.join(path_config, 'config_pytorch_' + system + '.sh')
+
+    with open(f_name, 'r') as f:
+        lines = f.readlines()
+
+        for test_name, value in sorted(list_test.iteritems()):
+            idx = lines.index(test_name + "_PARAMS=(\n")
+            line = lines[idx + value[0]].rstrip().split(" ")
+            line = list(filter(lambda a: a != "", line))
+            bs = int(line[value[1]][1:-1]) * (num_gpu if value[2] else 1)
+            print(system)
+            print(test_name)
+            print(bs)
+            df.at[system, test_name] = bs
+
+
+def main():
+    columns = []
+    for test_name, value in sorted(list_test.iteritems()):
+        columns.append(test_name)
+
+    df = pd.DataFrame(index=[i[0] for i in list_system], columns=columns)
+    df = df.fillna(-1.0)
+
+    for (system, num_gpu) in list_system:
+        gather(system, num_gpu, df)
+
+    df.to_csv('pytorch_benchmark_bs.csv')
+
+if __name__ == "__main__":
+    main()
