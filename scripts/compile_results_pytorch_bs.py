@@ -72,6 +72,7 @@ def main():
 
     for (system, num_gpu) in list_system:
         gather(system, num_gpu, df)
+    df.index.name = 'name_gpu'
 
     df.to_csv('pytorch_benchmark_bs.csv')
 

@@ -117,8 +117,9 @@ def main():
         for test_name, value in sorted(list_test.iteritems()):
             gather_last(test_name, system, df)
 
+    df.index.name = 'name_gpu'
 
-    df.to_csv('pytorch.csv')
+    df.to_csv('pytorch_benchmark_throughput.csv')
 
 if __name__ == "__main__":
     main()
