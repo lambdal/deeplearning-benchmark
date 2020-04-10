@@ -1,13 +1,13 @@
 #!/bin/bash
 
-NUM_GPU=1
+NUM_GPU=8
 NUM_EXP=1
 
 PyTorch_SSD_FP32_PARAMS=(
              "examples/ssd"
              args
              --data                   "/data/object_detection"
-             --batch-size             "48"
+             --batch-size             "42"
              --benchmark-warmup       "50"
              --benchmark-iterations   "100"
              --learning-rate          "0"
@@ -17,7 +17,7 @@ PyTorch_SSD_AMP_PARAMS=(
              "examples/ssd"
              args
              --data                   "/data/object_detection"
-             --batch-size             "88"
+             --batch-size             "80"
              --benchmark-warmup       "50"
              --benchmark-iterations   "40"
              --amp
@@ -71,7 +71,7 @@ PyTorch_maskrcnn_FP32_PARAMS=(
              "examples/maskrcnn/pytorch"
              args
              --config-file            "/workspace/patch/e2e_mask_rcnn_R_50_FPN_1x.yaml"
-             SOLVER.IMS_PER_BATCH     "64"
+             SOLVER.IMS_PER_BATCH     "56"
              DTYPE                    "float32"
              SOLVER.MAX_ITER          "400"
              OUTPUT_DIR               "/results"
@@ -82,7 +82,7 @@ PyTorch_maskrcnn_FP16_PARAMS=(
              "examples/maskrcnn/pytorch"
              args      
              --config-file            "/workspace/patch/e2e_mask_rcnn_R_50_FPN_1x.yaml"
-             SOLVER.IMS_PER_BATCH     "80"
+             SOLVER.IMS_PER_BATCH     "72"
              DTYPE                    "float16"
              SOLVER.MAX_ITER          "400"
              OUTPUT_DIR               "/results"
@@ -93,7 +93,7 @@ PyTorch_gnmt_FP32_PARAMS=(
             "examples/gnmt"
             args
             --dataset-dir             "/data/gnmt/wmt16_de_en"
-            --train-batch-size        "184"
+            --train-batch-size        "160"
             --val-batch-size          "32"
             --test-batch-size         "32"
             --math                    "fp32"
@@ -105,7 +105,7 @@ PyTorch_gnmt_FP16_PARAMS=(
             "examples/gnmt"
             args
             --dataset-dir             "/data/gnmt/wmt16_de_en"
-            --train-batch-size        "260"
+            --train-batch-size        "240"
             --val-batch-size          "32"
             --test-batch-size         "32"
             --math                    "fp16"
@@ -118,7 +118,7 @@ PyTorch_ncf_FP32_PARAMS=(
             args
             --data                    "/data/ncf/cache/ml-20m"
             --epochs                  "2"
-            --batch_size              "12000000"
+            --batch_size              "10000000"
             --opt_level               "O0"
            )
 
@@ -127,7 +127,7 @@ PyTorch_ncf_FP16_PARAMS=(
             args
             --data                    "/data/ncf/cache/ml-20m"
             --epochs                  "2"
-            --batch_size              "20000000"
+            --batch_size              "18000000"
             --opt_level               "O2"
            )
 
@@ -136,7 +136,7 @@ PyTorch_transformerxlbase_FP32_PARAMS=(
             args
             --data                    "/data/transformer-xl/wikitext-103"
             --max_step                "400"
-            --batch_size              "64"
+            --batch_size              "56"
             --dataset                 "wt103" 
             --n_layer                 "16"
             --d_model                 "512"
@@ -163,7 +163,7 @@ PyTorch_transformerxlbase_FP16_PARAMS=(
             args
             --data                    "/data/transformer-xl/wikitext-103"
             --max_step                "400"
-            --batch_size              "128"
+            --batch_size              "112"
             --dataset                 "wt103" 
             --n_layer                 "16"
             --d_model                 "512"
@@ -191,7 +191,7 @@ PyTorch_transformerxllarge_FP32_PARAMS=(
             args
             --data                    "/data/transformer-xl/wikitext-103"
             --max_step                "400"
-            --batch_size              "24"
+            --batch_size              "16"
             --dataset                 "wt103" 
             --n_layer                 "18"
             --d_model                 "1024"
@@ -216,7 +216,7 @@ PyTorch_transformerxllarge_FP16_PARAMS=(
             args
             --data                    "/data/transformer-xl/wikitext-103"
             --max_step                "400"
-            --batch_size              "48"
+            --batch_size              "40"
             --dataset                 "wt103" 
             --n_layer                 "18"
             --d_model                 "1024"
