@@ -1,0 +1,51 @@
+=> creating model '('resnet50', 'classic')'
+Version: {'net': <class 'image_classification.resnet.ResNet'>, 'block': <class 'image_classification.resnet.Bottleneck'>, 'layers': [3, 4, 6, 3], 'widths': [64, 128, 256, 512], 'expansion': 4, 'num_classes': 1000}
+Config: {'conv': <class 'torch.nn.modules.conv.Conv2d'>, 'conv_init': 'fan_out', 'nonlinearity': 'relu', 'last_bn_0_init': False, 'activation': <function <lambda> at 0x7fd29a773840>}
+Traceback (most recent call last):
+  File "./main.py", line 475, in <module>
+    main(args)
+  File "./main.py", line 377, in main
+    fp16=args.fp16)
+  File "/workspace/examples/resnet50v1.5/image_classification/dataloaders.py", line 196, in gdtl
+    pipe.build()
+  File "/opt/conda/lib/python3.6/site-packages/nvidia/dali/pipeline.py", line 308, in build
+    self._pipe.Build(self._names_and_devices)
+RuntimeError: [/opt/dali/dali/operators/reader/loader/file_loader.cc:59] Assert on "dir != nullptr" failed: Directory /data/imagenet/train could not be opened.
+Stacktrace (34 entries):
+[frame 0]: /opt/conda/lib/python3.6/site-packages/nvidia/dali/libdali_operators.so(+0x158e6e) [0x7fd2a4f7ee6e]
+[frame 1]: /opt/conda/lib/python3.6/site-packages/nvidia/dali/libdali_operators.so(+0x49a0bd) [0x7fd2a52c00bd]
+[frame 2]: /opt/conda/lib/python3.6/site-packages/nvidia/dali/libdali_operators.so(+0x49d7fb) [0x7fd2a52c37fb]
+[frame 3]: /opt/conda/lib/python3.6/site-packages/nvidia/dali/libdali_operators.so(+0x4d40af) [0x7fd2a52fa0af]
+[frame 4]: /opt/conda/lib/python3.6/site-packages/nvidia/dali/libdali_operators.so(std::_Function_handler<std::unique_ptr<dali::OperatorBase, std::default_delete<dali::OperatorBase> > (dali::OpSpec const&), std::unique_ptr<dali::OperatorBase, std::default_delete<dali::OperatorBase> > (*)(dali::OpSpec const&)>::_M_invoke(std::_Any_data const&, dali::OpSpec const&)+0xc) [0x7fd2a4f79a4c]
+[frame 5]: /opt/conda/lib/python3.6/site-packages/nvidia/dali/libdali.so(+0x130324) [0x7fd2a3bd1324]
+[frame 6]: /opt/conda/lib/python3.6/site-packages/nvidia/dali/libdali.so(dali::InstantiateOperator(dali::OpSpec const&)+0x34e) [0x7fd2a3bd086e]
+[frame 7]: /opt/conda/lib/python3.6/site-packages/nvidia/dali/libdali.so(dali::OpGraph::InstantiateOperators()+0xa7) [0x7fd2a3b889f7]
+[frame 8]: /opt/conda/lib/python3.6/site-packages/nvidia/dali/libdali.so(dali::Pipeline::Build(std::vector<std::pair<std::string, std::string>, std::allocator<std::pair<std::string, std::string> > >)+0xad8) [0x7fd2a3bef938]
+[frame 9]: /opt/conda/lib/python3.6/site-packages/nvidia/dali/backend_impl.cpython-36m-x86_64-linux-gnu.so(+0x44f9f) [0x7fd2abca5f9f]
+[frame 10]: /opt/conda/lib/python3.6/site-packages/nvidia/dali/backend_impl.cpython-36m-x86_64-linux-gnu.so(+0x2c343) [0x7fd2abc8d343]
+[frame 11]: /opt/conda/bin/python(_PyCFunction_FastCallDict+0x154) [0x557bf408ac54]
+[frame 12]: /opt/conda/bin/python(+0x199c0e) [0x557bf4112c0e]
+[frame 13]: /opt/conda/bin/python(_PyEval_EvalFrameDefault+0x30a) [0x557bf413575a]
+[frame 14]: /opt/conda/bin/python(+0x193c5b) [0x557bf410cc5b]
+[frame 15]: /opt/conda/bin/python(+0x199b95) [0x557bf4112b95]
+[frame 16]: /opt/conda/bin/python(_PyEval_EvalFrameDefault+0x30a) [0x557bf413575a]
+[frame 17]: /opt/conda/bin/python(+0x193136) [0x557bf410c136]
+[frame 18]: /opt/conda/bin/python(+0x193ed6) [0x557bf410ced6]
+[frame 19]: /opt/conda/bin/python(+0x199b95) [0x557bf4112b95]
+[frame 20]: /opt/conda/bin/python(_PyEval_EvalFrameDefault+0x10cc) [0x557bf413651c]
+[frame 21]: /opt/conda/bin/python(+0x19329e) [0x557bf410c29e]
+[frame 22]: /opt/conda/bin/python(+0x193ed6) [0x557bf410ced6]
+[frame 23]: /opt/conda/bin/python(+0x199b95) [0x557bf4112b95]
+[frame 24]: /opt/conda/bin/python(_PyEval_EvalFrameDefault+0x30a) [0x557bf413575a]
+[frame 25]: /opt/conda/bin/python(PyEval_EvalCodeEx+0x329) [0x557bf410d9b9]
+[frame 26]: /opt/conda/bin/python(PyEval_EvalCode+0x1c) [0x557bf410e75c]
+[frame 27]: /opt/conda/bin/python(+0x215744) [0x557bf418e744]
+[frame 28]: /opt/conda/bin/python(PyRun_FileExFlags+0xa1) [0x557bf418eb41]
+[frame 29]: /opt/conda/bin/python(PyRun_SimpleFileExFlags+0x1c3) [0x557bf418ed43]
+[frame 30]: /opt/conda/bin/python(Py_Main+0x613) [0x557bf4192833]
+[frame 31]: /opt/conda/bin/python(main+0xee) [0x557bf405c88e]
+[frame 32]: /lib/x86_64-linux-gnu/libc.so.6(__libc_start_main+0xe7) [0x7fd35e15fb97]
+[frame 33]: /opt/conda/bin/python(+0x1c3160) [0x557bf413c160]
+
+['/opt/conda/bin/python', '-u', './main.py', '/data/imagenet', '--arch', 'resnet50', '--epochs', '2', '--prof', '100', '--batch-size', '152', '--raport-file', 'benchmark.json', '--print-freq', '1', '--training-only']
+DONE!
