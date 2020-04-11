@@ -53,7 +53,7 @@ def gather(system, num_gpu, df):
     with open(f_name, 'r') as f:
         lines = f.readlines()
 
-        for test_name, value in sorted(list_test.iteritems()):
+        for test_name, value in sorted(list_test.items()):
             idx = lines.index(test_name + "_PARAMS=(\n")
             line = lines[idx + value[0]].rstrip().split(" ")
             line = list(filter(lambda a: a != "", line))
@@ -65,7 +65,7 @@ def gather(system, num_gpu, df):
 
 def main():
     columns = []
-    for test_name, value in sorted(list_test.iteritems()):
+    for test_name, value in sorted(list_test.items()):
         columns.append(value[3])
     print(columns)
 

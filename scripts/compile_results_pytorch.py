@@ -5,7 +5,7 @@ import pandas as pd
 
 path_result = 'results'
 
-#list_system = ['LambdaCloud_4x1080Ti'] 
+#list_system = ['p3.8xlarge'] 
 #list_test = {
 #             'PyTorch_SSD_FP32': ('SSD_FP32', "^.*Training performance =.*$", -2),
 #             'PyTorch_SSD_AMP': ('SSD_AMP', "^.*Training performance =.*$", -2),
@@ -28,6 +28,7 @@ path_result = 'results'
 #             'PyTorch_bert_base_squad_FP32': ('bert_base_squad_FP32', "^.*training throughput:.*$", -1),
 #             'PyTorch_bert_base_squad_FP16': ('bert_base_squad_FP16', "^.*training throughput:.*$", -1),
 #             }
+
 list_system = ['LambdaCloud_4x1080Ti', '8xV100', '4xV100', '2xV100', 'V100', 'QuadroRTX8000', 'QuadroRTX6000', 'QuadroRTX5000', 'TitanRTX', '2080Ti', '1080Ti'] 
 
 list_test = {
@@ -92,7 +93,7 @@ def gather_avg(name, system, df):
 
         df.at[system, column_name] = round(total_throughput / count, 2)
     else:
-	df.at[system, column_name] = 0.0
+        df.at[system, column_name] = 0.0
 
 
 def gather_last(name, system, df):
@@ -127,12 +128,12 @@ def gather_last(name, system, df):
                     print(system + "/" + name + " " + filename + ": something wrong")
         df.at[system, column_name] = round(total_throughput / count, 2)
     else:
-	df.at[system, column_name] = 0.0
+        df.at[system, column_name] = 0.0
 
 def main():
 
     columns = []
-    for test_name, value in sorted(list_test.iteritems()):
+    for test_name, value in sorted(list_test.items()):
         columns.append(list_test[test_name][0])
 
 
@@ -140,7 +141,7 @@ def main():
     df = df.fillna(-1.0)
 
     for system in list_system:
-        for test_name, value in sorted(list_test.iteritems()):
+        for test_name, value in sorted(list_test.items()):
             gather_last(test_name, system, df)
 
     df.index.name = 'name_gpu'
