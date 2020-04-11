@@ -4,8 +4,11 @@ import pandas as pd
 
 
 path_config = 'scripts/config'
+#list_system = [('LambdaCloud_4x1080Ti', 4)] 
 
-list_system = [('8xV100', 8), 
+
+list_system = [('LambdaCloud_4x1080Ti', 4),
+	       ('8xV100', 8), 
                ('4xV100', 4),
                ('2xV100', 2),
                ('V100', 1), 
@@ -47,7 +50,6 @@ list_test = {
 def gather(system, num_gpu, df):
     
     f_name = os.path.join(path_config, 'config_pytorch_' + system + '.sh')
-
     with open(f_name, 'r') as f:
         lines = f.readlines()
 
@@ -56,17 +58,21 @@ def gather(system, num_gpu, df):
             line = lines[idx + value[0]].rstrip().split(" ")
             line = list(filter(lambda a: a != "", line))
             bs = int(line[value[1]][1:-1]) * (num_gpu if value[2] else 1)
-            df.at[system, test_name] = bs
+            #print(system)
+	    #print(test_name)
+            df.at[system, test_name[8:]] = bs
 
 
 def main():
     columns = []
     for test_name, value in sorted(list_test.iteritems()):
         columns.append(value[3])
+    print(columns)
+
 
     df = pd.DataFrame(index=[i[0] for i in list_system], columns=columns)
-    df = df.fillna(-1.0)
-
+    # df = df.fillna(-1.0)
+    #print(df)
     for (system, num_gpu) in list_system:
         gather(system, num_gpu, df)
     df.index.name = 'name_gpu'

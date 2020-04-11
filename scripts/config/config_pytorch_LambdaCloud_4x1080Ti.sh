@@ -116,7 +116,7 @@ PyTorch_ncf_FP32_PARAMS=(
             args
             --data                    "/data/ncf/cache/ml-20m"
             --epochs                  "2"
-            --batch_size              "2880000"
+            --batch_size              "2800000"
             --opt_level               "O0"
            )
 
@@ -125,7 +125,7 @@ PyTorch_ncf_FP16_PARAMS=(
             args
             --data                    "/data/ncf/cache/ml-20m"
             --epochs                  "2"
-            --batch_size              "5760000"
+            --batch_size              "5600000"
             --opt_level               "O2"
            )
 
@@ -313,7 +313,7 @@ PyTorch_bert_base_squad_FP32_PARAMS=(
             "10"
             "0.0"
             "fp32"
-            "1"
+            "${NUM_GPU}"
             "1"
             "/data/squad/v1.1"
             "/data/bert_base/bert-base-uncased-vocab.txt"
@@ -331,7 +331,7 @@ PyTorch_bert_base_squad_FP16_PARAMS=(
             "20"
             "0.0"
             "fp16"
-            "1"
+            "${NUM_GPU}"
             "1"
             "/data/squad/v1.1"
             "/data/bert_base/bert-base-uncased-vocab.txt"
@@ -349,7 +349,7 @@ PyTorch_bert_large_squad_FP32_PARAMS=(
             "2"
             "0.0"
             "fp32"
-            "1"
+            "${NUM_GPU}"
             "1"
             "/data/squad/v1.1"
             "/data/bert_large/bert-large-uncased-vocab.txt"
@@ -367,7 +367,7 @@ PyTorch_bert_large_squad_FP16_PARAMS=(
             "4"
             "0.0"
             "fp16"
-            "1"
+            "${NUM_GPU}"
             "1"
             "/data/squad/v1.1"
             "/data/bert_large/bert-large-uncased-vocab.txt"
