@@ -5,7 +5,7 @@ import pandas as pd
 
 path_result = 'results'
 
-#list_system = ['p3.8xlarge'] 
+#list_system = ['p3.16xlarge'] 
 #list_test = {
 #             'PyTorch_SSD_FP32': ('SSD_FP32', "^.*Training performance =.*$", -2),
 #             'PyTorch_SSD_AMP': ('SSD_AMP', "^.*Training performance =.*$", -2),
@@ -29,7 +29,7 @@ path_result = 'results'
 #             'PyTorch_bert_base_squad_FP16': ('bert_base_squad_FP16', "^.*training throughput:.*$", -1),
 #             }
 
-list_system = ['p3.8xlarge', 'LambdaCloud_4x1080Ti', '8xV100', '4xV100', '2xV100', 'V100', 'QuadroRTX8000', 'QuadroRTX6000', 'QuadroRTX5000', 'TitanRTX', '2080Ti', '1080Ti'] 
+list_system = ['p3.16xlarge', 'p3.8xlarge', 'LambdaCloud_4x1080Ti', '8xV100', '4xV100', '2xV100', 'V100', 'QuadroRTX8000', 'QuadroRTX6000', 'QuadroRTX5000', 'TitanRTX', '2080Ti', '1080Ti'] 
 
 
 list_test = {
