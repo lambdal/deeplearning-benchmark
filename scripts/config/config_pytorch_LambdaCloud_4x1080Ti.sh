@@ -320,7 +320,7 @@ PyTorch_bert_base_squad_FP32_PARAMS=(
             "."
             "train"
             "/data/bert_base/bert_config.json"
-            "1000"
+            "5000"
 )
 
 PyTorch_bert_base_squad_FP16_PARAMS=(
@@ -338,7 +338,7 @@ PyTorch_bert_base_squad_FP16_PARAMS=(
             "."
             "train"
             "/data/bert_base/bert_config.json"
-            "1000"
+            "5000"
 )
 
 PyTorch_bert_large_squad_FP32_PARAMS=(
@@ -356,7 +356,7 @@ PyTorch_bert_large_squad_FP32_PARAMS=(
             "."
             "train"
             "/data/bert_large/bert_config.json"
-            "1000"
+            "5000"
 )
 
 PyTorch_bert_large_squad_FP16_PARAMS=(
@@ -374,5 +374,5 @@ PyTorch_bert_large_squad_FP16_PARAMS=(
             "."
             "train"
             "/data/bert_large/bert_config.json"
-            "1000"
+            "5000"
 )
