@@ -9,6 +9,7 @@ path_config = 'scripts/config'
 
 list_system = [('p3.16xlarge', 8),
                ('p3.8xlarge', 4),
+               ('LambdaCloud_8xV10016G', 8),
                ('LambdaCloud_4x1080Ti', 4),
 	       ('8xV100', 8), 
                ('4xV100', 4),
