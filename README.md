@@ -37,8 +37,14 @@ docker run --gpus all --rm --shm-size=16g -v ~/data:/data -v $(pwd)"/scripts":/s
 #### Run 
 
 ```
-# TitanRTX
-docker run --gpus '"device=list-of-gpus"' --rm --shm-size=16g -v ~/data:/data -v $(pwd)"/scripts":/scripts -v $(pwd)"/results":/results nvcr.io/nvidia/pytorch:20.01-py3 /bin/bash -c "cp -r /scripts/* /workspace; ./run_benchmark.sh TitanRTX"
+# TitanRTX on all tasks
+docker run --gpus '"device=list-of-gpus"' --rm --shm-size=16g -v ~/data:/data -v $(pwd)"/scripts":/scripts -v $(pwd)"/results":/results nvcr.io/nvidia/pytorch:20.01-py3 /bin/bash -c "cp -r /scripts/* /workspace; ./run_benchmark.sh TitanRTX all"
+
+# TitanRTX on all resnet tasks
+docker run --gpus '"device=list-of-gpus"' --rm --shm-size=16g -v ~/data:/data -v $(pwd)"/scripts":/scripts -v $(pwd)"/results":/results nvcr.io/nvidia/pytorch:20.01-py3 /bin/bash -c "cp -r /scripts/* /workspace; ./run_benchmark.sh TitanRTX resnet"
+
+# TitanRTX on renset fp32
+docker run --gpus '"device=list-of-gpus"' --rm --shm-size=16g -v ~/data:/data -v $(pwd)"/scripts":/scripts -v $(pwd)"/results":/results nvcr.io/nvidia/pytorch:20.01-py3 /bin/bash -c "cp -r /scripts/* /workspace; ./run_benchmark.sh TitanRTX resnet_fp32"
 ```
 
 #### Gather Results
