@@ -206,9 +206,7 @@ benchmark_pytorch() {
 
 main() {
     for task in "${!TASKS[@]}"; do
-	if [[ "${task,,}" == *"$TASK_NAME"* ]]; then
-		#echo $task
-		#echo $TASK_NAME
+	if [[ "${task,,}" == *"$TASK_NAME"* ]] || [ "$TASK_NAME" == "all" ]; then
 		benchmark_pytorch $task 
 	fi	
     done
