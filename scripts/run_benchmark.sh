@@ -11,7 +11,7 @@ cp /scripts/patch/run_squad.sh examples/bert/scripts
 cp /scripts/patch/box_encoder_cuda.cu examples/ssd/csrc
 
 
-if [[ "${TASK_NAME}" == *"ssd"* ]] || [ $TASK_NAME = "all" ] ; then
+if [[ "${TASK_NAME}" == *"ssd"* ]] || [ $TASK_NAME = "all" ] || [[ "${TASK_NAME}" == *"maskrcnn"* ]]; then
 	pushd .
 	cd examples/ssd
 	pip install .

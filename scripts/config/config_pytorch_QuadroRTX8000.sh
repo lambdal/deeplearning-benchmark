@@ -18,7 +18,7 @@ PyTorch_SSD_AMP_PARAMS=(
              --data                   "/data/object_detection"
              --batch-size             "288"
              --benchmark-warmup       "50"
-             --benchmark-iterations   "400"
+             --benchmark-iterations   "200"
              --amp
            )
 
@@ -82,7 +82,7 @@ PyTorch_maskrcnn_FP16_PARAMS=(
              --config-file            "/workspace/patch/e2e_mask_rcnn_R_50_FPN_1x.yaml"
              SOLVER.IMS_PER_BATCH     "36"
              DTYPE                    "float16"
-             SOLVER.MAX_ITER          "400"
+             SOLVER.MAX_ITER          "200"
              OUTPUT_DIR               "/results"
              PATHS_CATALOG            "/workspace/patch/paths_catalog_ci.py"
            )
@@ -116,7 +116,7 @@ PyTorch_ncf_FP32_PARAMS=(
             args
             --data                    "/data/ncf/cache/ml-20m"
             --epochs                  "2"
-            --batch_size              "5898776"
+            --batch_size              "5120000"
             --opt_level               "O0"
            )
 
