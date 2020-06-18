@@ -58,7 +58,7 @@ python scripts/compile_results_pytorch.py
 
 | Model | Batch | 
 |---|---|
-| PyTorch SSD  | Per GPU. `benchmark-iterations` needs to be reduced for more GPUs or larger batch size  |
+| PyTorch SSD  | Per GPU. `benchmark-iterations` needs to be reduced for more GPUs or larger batch size (otherwise GPU hang at 100%)  |
 | PyTorch ResNet  | Per GPU.  |
 | PyTorch MaskRCNN  | Global. Need to be scaled by `num_gpu` |
 | PyTorch GNMT | Per GPU. |
