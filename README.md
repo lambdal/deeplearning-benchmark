@@ -64,7 +64,7 @@ python scripts/compile_results_pytorch.py
 | PyTorch GNMT | Per GPU. |
 | PyTorch NCF | Global. Need to be scaled by `num_gpu`|
 | PyTorch TransformerXL | Global. Need to be scaled by `num_gpu` |
-| PyTorch Tactron | Per GPU. Use "subset_1250" for FP16, "subset_625" for FP32|
+| PyTorch Tactron | Per GPU. Choose "subset_2500", "subset_1250", and "subset_625" based on number of GPUs|
 | Bert | Per GPU. |
 
 
