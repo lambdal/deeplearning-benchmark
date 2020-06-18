@@ -10,6 +10,7 @@ PyTorch_SSD_FP32_PARAMS=(
              --batch-size             "32"
              --benchmark-warmup       "50"
              --benchmark-iterations   "400"
+	     --learning-rate          "0"
            )
 
 PyTorch_SSD_AMP_PARAMS=(
@@ -20,6 +21,7 @@ PyTorch_SSD_AMP_PARAMS=(
              --benchmark-warmup       "50"
              --benchmark-iterations   "100"
              --amp
+	     --learning-rate          "0"
            )
 
 PyTorch_resnet50_FP32_PARAMS=(
