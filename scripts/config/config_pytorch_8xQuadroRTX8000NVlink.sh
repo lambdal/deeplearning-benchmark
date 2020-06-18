@@ -243,11 +243,11 @@ PyTorch_tacotron2_FP32_PARAMS=(
             --output_directory        "./" 
             --learning-rate           "0.0" 
             --epochs                  "2" 
-            --batch-size              "168" 
+            --batch-size              "136" 
             --weight-decay            "1e-6" 
             --grad-clip-thresh        "1.0"
             --log-file                "nvlog.json"
-            --training-files          "filelists/ljs_audio_text_train_subset_625_filelist.txt"
+            --training-files          "filelists/ljs_audio_text_train_subset_1250_filelist.txt"
             --dataset-path            "/data/tacotron2/LJSpeech-1.1"
             --cudnn-enabled
            )
@@ -259,11 +259,11 @@ PyTorch_tacotron2_FP16_PARAMS=(
             --output_directory        "./" 
             --learning-rate           "0.0" 
             --epochs                  "2" 
-            --batch-size              "336" 
+            --batch-size              "296" 
             --weight-decay            "1e-6" 
             --grad-clip-thresh        "1.0"
             --log-file                "nvlog.json"
-            --training-files          "filelists/ljs_audio_text_train_subset_625_filelist.txt"
+            --training-files          "filelists/ljs_audio_text_train_subset_2500_filelist.txt"
             --dataset-path            "/data/tacotron2/LJSpeech-1.1"
             --cudnn-enabled
             --amp-run

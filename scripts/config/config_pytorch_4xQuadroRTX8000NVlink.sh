@@ -46,7 +46,7 @@ PyTorch_resnet50_FP16_PARAMS=(
              --static-loss-scale      "256"
              --epochs                 "2" 
              --prof                   "100" 
-             --batch-size             "928"
+             --batch-size             "864"
              --raport-file            "benchmark.json"
              --print-freq             "1"
              --training-only  
@@ -243,7 +243,7 @@ PyTorch_tacotron2_FP32_PARAMS=(
             --output_directory        "./" 
             --learning-rate           "0.0" 
             --epochs                  "2" 
-            --batch-size              "168" 
+            --batch-size              "136" 
             --weight-decay            "1e-6" 
             --grad-clip-thresh        "1.0"
             --log-file                "nvlog.json"
@@ -258,12 +258,12 @@ PyTorch_tacotron2_FP16_PARAMS=(
             --model-name              "Tacotron2"
             --output_directory        "./" 
             --learning-rate           "0.0" 
-            --epochs                  "2" 
-            --batch-size              "336" 
+            --epochs                  "3" 
+            --batch-size              "296" 
             --weight-decay            "1e-6" 
             --grad-clip-thresh        "1.0"
             --log-file                "nvlog.json"
-            --training-files          "filelists/ljs_audio_text_train_subset_625_filelist.txt"
+            --training-files          "filelists/ljs_audio_text_train_subset_1250_filelist.txt"
             --dataset-path            "/data/tacotron2/LJSpeech-1.1"
             --cudnn-enabled
             --amp-run
