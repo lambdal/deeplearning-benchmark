@@ -109,7 +109,7 @@ time $CMD |& tee $LOGFILE
 #fi
 
 if [ "$mode" != "eval" ]; then
-time_epoch=`cat $LOGFILE | grep -E 'Iteration.*[0-9.]+(s/it)' | egrep -o '[0-9.]+(s/it|it/s)' | tail -1 | egrep -o '[0-9.]+'`
+time_epoch=`cat $LOGFILE | grep -E 'Epoch.*[0-9.]+(s/it)' | egrep -o '[0-9.]+(s/it|it/s)' | tail -1 | egrep -o '[0-9.]+'`
 #num_iter=`cat $LOGFILE | grep -E 'Iteration.*[0-9.]+(s/it|it/s)' | sed -E 's/^.*1+\/([0-9]+).*/\1/g' | head -1 | egrep -o '[0-9.]+'`
 (( num_iter=(${max_steps}+${batch_size}*${num_gpu}-1)/(${batch_size}*${num_gpu}) ))
 train_perf=$(awk 'BEGIN {print ('$num_iter' * '$num_gpu' * '$batch_size' / '$time_epoch')}')

@@ -4,23 +4,29 @@ import pandas as pd
 
 
 path_config = 'scripts/config'
-#list_system = [('LambdaCloud_4x1080Ti', 4)] 
+list_system = [('QuadroRTX8000', 1),
+               ('2xQuadroRTX8000', 2),
+               ('2xQuadroRTX8000NVlink', 2),
+               ('4xQuadroRTX8000', 4),
+               ('4xQuadroRTX8000NVlink', 4),
+               ('8xQuadroRTX8000', 8),
+               ('8xQuadroRTX8000NVlink', 8)] 
 
 
-list_system = [('p3.16xlarge', 8),
-               ('p3.8xlarge', 4),
-               ('LambdaCloud_8xV10016G', 8),
-               ('LambdaCloud_4x1080Ti', 4),
-	       ('8xV100', 8), 
-               ('4xV100', 4),
-               ('2xV100', 2),
-               ('V100', 1), 
-               ('QuadroRTX8000', 1),
-               ('QuadroRTX6000', 1),
-               ('QuadroRTX5000', 1),
-               ('TitanRTX', 1),
-               ('2080Ti', 1),
-               ('1080Ti', 1)] 
+# list_system = [('p3.16xlarge', 8),
+#                ('p3.8xlarge', 4),
+#                ('LambdaCloud_8xV10016G', 8),
+#                ('LambdaCloud_4x1080Ti', 4),
+# 	             ('8xV100', 8), 
+#                ('4xV100', 4),
+#                ('2xV100', 2),
+#                ('V100', 1), 
+#                ('QuadroRTX8000', 1),
+#                ('QuadroRTX6000', 1),
+#                ('QuadroRTX5000', 1),
+#                ('TitanRTX', 1),
+#                ('2080Ti', 1),
+#                ('1080Ti', 1)] 
 
 # skip lines, offset at the end, need to be multiply by #gpu
 list_test = {
