@@ -1,0 +1,58 @@
+Container nvidia build =  9332039
+out dir is .
+python   run_squad.py --init_checkpoint=/data/bert_large/bert_large_uncased.pt --do_train --train_file=/data/squad/v1.1/train-v1.1.json --train_batch_size=4  --do_lower_case  --bert_model=bert-large-uncased  --learning_rate=0.0  --seed=1  --num_train_epochs=2.0  --max_seq_length=384  --doc_stride=128  --output_dir=.  --vocab_file=/data/bert_large/bert-large-uncased-vocab.txt  --config_file=/data/bert_large/bert_config.json  --max_steps=1000   |& tee ./logfile.txt
+06/23/2020 04:49:29 - INFO - __main__ -   device: cuda n_gpu: 1, distributed training: False, 16-bits training: False
+06/23/2020 04:49:48 - INFO - __main__ -     Saving train features into cached file /data/squad/v1.1/train-v1.1.json_bert-large-uncased_384_128_64
+06/23/2020 04:49:48 - INFO - __main__ -   ***** Running training *****
+06/23/2020 04:49:48 - INFO - __main__ -     Num orig examples = 87599
+06/23/2020 04:49:48 - INFO - __main__ -     Num split examples = 1033
+06/23/2020 04:49:48 - INFO - __main__ -     Batch size = 4
+06/23/2020 04:49:48 - INFO - __main__ -     Num steps = 43798
+Epoch:   0%|          | 0/2 [00:00<?, ?it/s]
+Iteration:   0%|          | 0/259 [00:00<?, ?it/s][A06/23/2020 04:49:49 - INFO - __main__ -   Step 1: Loss 6.176572322845459, LR 0.0 
+
+Iteration:   0%|          | 1/259 [00:01<06:19,  1.47s/it][A
+WARNING: Output directory . already exists and is not empty. ['bert_config.json', 'run_glue.py', '.git', 'images', 'configurations.yml', 'tokenization.py', 'results', 'run_pretraining_inference.py', 'extract_features.py', 'run_swag.py', 'checkpoints', 'utils.py', 'LICENSE', 'create_pretraining_data.py', '.gitlab-ci.yml', 'README.md', '.gitignore', 'run_pretraining.py', 'modeling.py', 'Dockerfile', 'file_utils.py', 'data', 'schedulers.py', 'optimization.py', 'NOTICE', 'bind_pyt.py', 'requirements.txt', '.dockerignore', 'run.sub', 'run_squad.py', 'scripts', 'logfile.txt', '__pycache__', 'pytorch_model.bin']
+LOADING CHECKPOINT
+LOADED CHECKPOINT
+Traceback (most recent call last):
+  File "run_squad.py", line 1170, in <module>
+    main()
+  File "run_squad.py", line 1063, in main
+    loss = model(input_ids, segment_ids, input_mask, start_positions, end_positions)
+  File "/opt/conda/lib/python3.6/site-packages/torch/nn/modules/module.py", line 532, in __call__
+    result = self.forward(*input, **kwargs)
+  File "/workspace/examples/bert/modeling.py", line 1291, in forward
+    sequence_output, _ = self.bert(input_ids, token_type_ids, attention_mask, output_all_encoded_layers=False)
+  File "/opt/conda/lib/python3.6/site-packages/torch/nn/modules/module.py", line 532, in __call__
+    result = self.forward(*input, **kwargs)
+  File "/workspace/examples/bert/modeling.py", line 824, in forward
+    output_all_encoded_layers=output_all_encoded_layers, checkpoint_activations=checkpoint_activations)
+  File "/opt/conda/lib/python3.6/site-packages/torch/nn/modules/module.py", line 532, in __call__
+    result = self.forward(*input, **kwargs)
+  File "/workspace/examples/bert/modeling.py", line 493, in forward
+    hidden_states = layer_module(hidden_states, attention_mask)
+  File "/opt/conda/lib/python3.6/site-packages/torch/nn/modules/module.py", line 532, in __call__
+    result = self.forward(*input, **kwargs)
+  File "/workspace/examples/bert/modeling.py", line 452, in forward
+    attention_output = self.attention(hidden_states, attention_mask)
+  File "/opt/conda/lib/python3.6/site-packages/torch/nn/modules/module.py", line 532, in __call__
+    result = self.forward(*input, **kwargs)
+  File "/workspace/examples/bert/modeling.py", line 415, in forward
+    self_output = self.self(input_tensor, attention_mask)
+  File "/opt/conda/lib/python3.6/site-packages/torch/nn/modules/module.py", line 532, in __call__
+    result = self.forward(*input, **kwargs)
+  File "/workspace/examples/bert/modeling.py", line 376, in forward
+    attention_scores = attention_scores / math.sqrt(self.attention_head_size)
+RuntimeError: CUDA out of memory. Tried to allocate 36.00 MiB (GPU 0; 10.76 GiB total capacity; 10.05 GiB already allocated; 21.12 MiB free; 10.13 GiB reserved in total by PyTorch)
+
+real	0m22.437s
+user	0m24.466s
+sys	0m12.356s
+ training throughput: 680.272
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+250
+1
+4
+1.47
+DONE!
