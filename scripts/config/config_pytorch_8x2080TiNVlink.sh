@@ -7,7 +7,7 @@ PyTorch_SSD_FP32_PARAMS=(
              "examples/ssd"
              args
              --data                   "/data/object_detection"
-             --batch-size             "32"
+             --batch-size             "28"
              --benchmark-warmup       "50"
              --benchmark-iterations   "100"
 	     --learning-rate          "0"
@@ -263,7 +263,7 @@ PyTorch_tacotron2_FP16_PARAMS=(
             --weight-decay            "1e-6" 
             --grad-clip-thresh        "1.0"
             --log-file                "nvlog.json"
-            --training-files          "filelists/ljs_audio_text_train_subset_2500_filelist.txt"
+            --training-files          "filelists/ljs_audio_text_train_subset_1250_filelist.txt"
             --dataset-path            "/data/tacotron2/LJSpeech-1.1"
             --cudnn-enabled
             --amp-run
@@ -366,7 +366,7 @@ PyTorch_bert_large_squad_FP16_PARAMS=(
             args      
             "/data/bert_large/bert_large_uncased.pt"
             "2.0"
-            "4"
+            "2"
             "0.0"
             "${NUM_GPU}"
             "1"

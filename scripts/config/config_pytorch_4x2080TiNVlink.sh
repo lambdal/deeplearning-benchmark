@@ -1,6 +1,6 @@
 #!/bin/bash
 
-NUM_GPU=8
+NUM_GPU=4
 NUM_EXP=1
 
 PyTorch_SSD_FP32_PARAMS=(
@@ -71,7 +71,7 @@ PyTorch_maskrcnn_FP32_PARAMS=(
              "examples/maskrcnn/pytorch"
              args
              --config-file            "/workspace/patch/e2e_mask_rcnn_R_50_FPN_1x.yaml"
-             SOLVER.IMS_PER_BATCH     "48"
+             SOLVER.IMS_PER_BATCH     "24"
              DTYPE                    "float32"
              SOLVER.MAX_ITER          "200"
              OUTPUT_DIR               "/results"
@@ -82,7 +82,7 @@ PyTorch_maskrcnn_FP16_PARAMS=(
              "examples/maskrcnn/pytorch"
              args      
              --config-file            "/workspace/patch/e2e_mask_rcnn_R_50_FPN_1x.yaml"
-             SOLVER.IMS_PER_BATCH     "48"
+             SOLVER.IMS_PER_BATCH     "24"
              DTYPE                    "float16"
              SOLVER.MAX_ITER          "200"
              OUTPUT_DIR               "/results"
@@ -94,8 +94,8 @@ PyTorch_gnmt_FP32_PARAMS=(
             args
             --dataset-dir             "/data/gnmt/wmt16_de_en"
             --train-batch-size        "108"
-          --val-batch-size          "32"
-          --test-batch-size         "32"
+            --val-batch-size          "32"
+            --test-batch-size         "32"
             --math                    "fp32"
             --epochs                  "2"
             --seed                    "2"
@@ -118,7 +118,7 @@ PyTorch_ncf_FP32_PARAMS=(
             args
             --data                    "/data/ncf/cache/ml-20m"
             --epochs                  "2"
-            --batch_size              "5600000"
+            --batch_size              "2800000"
             --opt_level               "O0"
            )
 
@@ -127,7 +127,7 @@ PyTorch_ncf_FP16_PARAMS=(
             args
             --data                    "/data/ncf/cache/ml-20m"
             --epochs                  "2"
-            --batch_size              "11200000"
+            --batch_size              "5600000"
             --opt_level               "O2"
            )
 
@@ -136,7 +136,7 @@ PyTorch_transformerxlbase_FP32_PARAMS=(
             args
             --data                    "/data/transformer-xl/wikitext-103"
             --max_step                "400"
-            --batch_size              "32"
+            --batch_size              "16"
             --dataset                 "wt103" 
             --n_layer                 "16"
             --d_model                 "512"
@@ -163,7 +163,7 @@ PyTorch_transformerxlbase_FP16_PARAMS=(
             args
             --data                    "/data/transformer-xl/wikitext-103"
             --max_step                "400"
-            --batch_size              "40"
+            --batch_size              "20"
             --dataset                 "wt103" 
             --n_layer                 "16"
             --d_model                 "512"
@@ -191,7 +191,7 @@ PyTorch_transformerxllarge_FP32_PARAMS=(
             args
             --data                    "/data/transformer-xl/wikitext-103"
             --max_step                "400"
-            --batch_size              "8"
+            --batch_size              "4"
             --dataset                 "wt103" 
             --n_layer                 "18"
             --d_model                 "1024"
@@ -216,7 +216,7 @@ PyTorch_transformerxllarge_FP16_PARAMS=(
             args
             --data                    "/data/transformer-xl/wikitext-103"
             --max_step                "400"
-            --batch_size              "8"
+            --batch_size              "4"
             --dataset                 "wt103" 
             --n_layer                 "18"
             --d_model                 "1024"
@@ -247,7 +247,7 @@ PyTorch_tacotron2_FP32_PARAMS=(
             --weight-decay            "1e-6" 
             --grad-clip-thresh        "1.0"
             --log-file                "nvlog.json"
-            --training-files          "filelists/ljs_audio_text_train_subset_1250_filelist.txt"
+            --training-files          "filelists/ljs_audio_text_train_subset_625_filelist.txt"
             --dataset-path            "/data/tacotron2/LJSpeech-1.1"
             --cudnn-enabled
            )
