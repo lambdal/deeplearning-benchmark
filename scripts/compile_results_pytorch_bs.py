@@ -4,13 +4,18 @@ import pandas as pd
 
 
 path_config = 'scripts/config'
-list_system = [('QuadroRTX8000', 1),
-               ('2xQuadroRTX8000', 2),
-               ('2xQuadroRTX8000NVlink', 2),
-               ('4xQuadroRTX8000', 4),
-               ('4xQuadroRTX8000NVlink', 4),
-               ('8xQuadroRTX8000', 8),
-               ('8xQuadroRTX8000NVlink', 8)] 
+list_system = [('2080Ti', 1),
+               ('2x2080Ti', 2),
+               ('4x2080Ti', 4),
+               ('8x2080Ti', 8)] 
+
+# list_system = [('QuadroRTX8000', 1),
+#                ('2xQuadroRTX8000', 2),
+#                ('2xQuadroRTX8000NVlink', 2),
+#                ('4xQuadroRTX8000', 4),
+#                ('4xQuadroRTX8000NVlink', 4),
+#                ('8xQuadroRTX8000', 8),
+#                ('8xQuadroRTX8000NVlink', 8)] 
 
 
 # list_system = [('p3.16xlarge', 8),
