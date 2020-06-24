@@ -366,7 +366,7 @@ PyTorch_bert_large_squad_FP16_PARAMS=(
             args      
             "/data/bert_large/bert_large_uncased.pt"
             "2.0"
-            "4"
+            "2"
             "0.0"
             "${NUM_GPU}"
             "1"
