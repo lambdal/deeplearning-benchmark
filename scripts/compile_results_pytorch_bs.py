@@ -5,9 +5,9 @@ import pandas as pd
 
 path_config = 'scripts/config'
 list_system = [('2080Ti', 1),
-               ('2x2080Ti', 2),
-               ('4x2080Ti', 4),
-               ('8x2080Ti', 8)] 
+               ('2x2080TiNVlink', 2),
+               ('4x2080TiNVlink', 4),
+               ('8x2080TiNVlink', 8)] 
 
 # list_system = [('QuadroRTX8000', 1),
 #                ('2xQuadroRTX8000', 2),
