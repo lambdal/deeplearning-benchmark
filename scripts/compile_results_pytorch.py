@@ -5,7 +5,7 @@ import pandas as pd
 
 path_result = 'results'
 
-list_system = ['2xQuadroRTX8000_trt', '4xQuadroRTX8000_trt', '8xQuadroRTX8000_trt'] 
+list_system = ['2x2080TiNVlink_trt', '4x2080TiNVlink_trt', '8x2080TiNVlink_trt'] 
 list_test = {
             'PyTorch_SSD_FP32': ('SSD_FP32', "^.*Training performance =.*$", -2),
             'PyTorch_SSD_AMP': ('SSD_AMP', "^.*Training performance =.*$", -2),
