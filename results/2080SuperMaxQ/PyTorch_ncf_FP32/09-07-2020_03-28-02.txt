@@ -1,0 +1,70 @@
+:::NVLOGv0.1.0 ncf 1594265283.686285496 (ncf.py:171) cpu_info: {"num": 16, "name": "Intel(R) Core(TM) i7-10875H CPU @ 2.30GHz"}
+:::NVLOGv0.1.0 ncf 1594265283.691793919 (ncf.py:171) mem_info: {"ram": "62G"}
+:::NVLOGv0.1.0 ncf 1594265283.769431353 (ncf.py:171) gpu_info: {"driver_version": "440.100", "num": 1, "name": ["GeForce RTX 2080 Super with Max-Q Design"], "mem": ["7982 MiB"]}
+:::NVLOGv0.1.0 ncf 1594265283.771073580 (ncf.py:174) args: {"data": "/data/ncf/cache/ml-20m", "epochs": 2, "batch_size": 120000, "valid_batch_size": 1048576, "factors": 64, "layers": [256, 256, 128, 64], "negative_samples": 4, "learning_rate": 0.0045, "topk": 10, "seed": 1, "threshold": 1.0, "beta1": 0.25, "beta2": 0.5, "eps": 1e-08, "dropout": 0.5, "checkpoint_dir": "/data/checkpoints/", "load_checkpoint_path": null, "mode": "train", "grads_accumulated": 1, "opt_level": "O0", "local_rank": 0, "distributed": false, "world_size": 1}
+Saving results to /data/checkpoints/
+:::NVLOGv0.1.0 ncf 1594265283.771702051 (ncf.py:184) preproc_hp_sample_eval_replacement: true
+:::NVLOGv0.1.0 ncf 1594265283.771978140 (ncf.py:185) input_hp_sample_train_replacement: true
+:::NVLOGv0.1.0 ncf 1594265283.772241116 (ncf.py:186) input_step_eval_neg_gen
+:::NVLOGv0.1.0 ncf 1594265285.073876619 (ncf.py:194) run_start
+:::NVLOGv0.1.0 ncf 1594265285.307068110 (ncf.py:201) preproc_hp_num_eval: 100
+:::NVLOGv0.1.0 ncf 1594265286.058737040 (ncf.py:207) input_size: 19861770
+:::NVLOGv0.1.0 ncf 1594265286.118591309 (ncf.py:216) input_batch_size: 120000
+:::NVLOGv0.1.0 ncf 1594265286.118906260 (ncf.py:217) input_order
+:::NVLOGv0.1.0 ncf 1594265286.119370699 (/workspace/examples/ncf/neumf.py:54) model_hp_mf_dim: 64
+:::NVLOGv0.1.0 ncf 1594265286.409541845 (/workspace/examples/ncf/neumf.py:62) model_hp_mlp_layer_sizes: [256, 256, 128, 64]
+NeuMF(
+  (mf_user_embed): Embedding(138493, 64)
+  (mf_item_embed): Embedding(26744, 64)
+  (mlp_user_embed): Embedding(138493, 128)
+  (mlp_item_embed): Embedding(26744, 128)
+  (mlp): ModuleList(
+    (0): Linear(in_features=256, out_features=256, bias=True)
+    (1): Linear(in_features=256, out_features=128, bias=True)
+    (2): Linear(in_features=128, out_features=64, bias=True)
+  )
+  (final): Linear(in_features=128, out_features=1, bias=True)
+)
+31832577 parameters
+:::NVLOGv0.1.0 ncf 1594265286.707633495 (ncf.py:246) opt_learning_rate: 0.0045
+:::NVLOGv0.1.0 ncf 1594265286.707983971 (ncf.py:247) opt_name: "Adam"
+:::NVLOGv0.1.0 ncf 1594265286.708303452 (ncf.py:248) opt_hp_Adam_beta1: 0.25
+:::NVLOGv0.1.0 ncf 1594265286.708612680 (ncf.py:249) opt_hp_Adam_beta2: 0.5
+:::NVLOGv0.1.0 ncf 1594265286.708921671 (ncf.py:250) opt_hp_Adam_epsilon: 1e-08
+:::NVLOGv0.1.0 ncf 1594265286.709227800 (ncf.py:251) model_hp_loss_fn: "binary_cross_entropy"
+:::NVLOGv0.1.0 ncf 1594265286.709522963 (ncf.py:279) train_loop
+:::NVLOGv0.1.0 ncf 1594265286.709808588 (ncf.py:282) train_epoch_start: 0
+:::NVLOGv0.1.0 ncf 1594265286.710088253 (ncf.py:283) input_hp_num_neg: 4
+:::NVLOGv0.1.0 ncf 1594265286.710362196 (ncf.py:284) input_step_train_neg_gen
+:::NVLOGv0.1.0 ncf 1594265315.393641949 (ncf.py:318) train_throughput: 3462308.3205818087
+:::NVLOGv0.1.0 ncf 1594265315.394000292 (ncf.py:319) train_epoch_stop: 0
+:::NVLOGv0.1.0 ncf 1594265315.394281149 (ncf.py:320) eval_start: 0
+Traceback (most recent call last):
+  File "ncf.py", line 366, in <module>
+    main()
+  File "ncf.py", line 324, in main
+    num_user=all_test_users, epoch=epoch, distributed=args.distributed)
+  File "ncf.py", line 140, in val_epoch
+    p.append(model(u, n, sigmoid=True).detach())
+  File "/opt/conda/lib/python3.6/site-packages/torch/nn/modules/module.py", line 532, in __call__
+    result = self.forward(*input, **kwargs)
+  File "/workspace/examples/ncf/neumf.py", line 98, in forward
+    xmlp = layer(xmlp)
+  File "/opt/conda/lib/python3.6/site-packages/torch/nn/modules/module.py", line 532, in __call__
+    result = self.forward(*input, **kwargs)
+  File "/opt/conda/lib/python3.6/site-packages/torch/nn/modules/linear.py", line 87, in forward
+    return F.linear(input, self.weight, self.bias)
+  File "/opt/conda/lib/python3.6/site-packages/torch/nn/functional.py", line 1370, in linear
+    ret = torch.addmm(bias, input, weight.t())
+RuntimeError: CUDA out of memory. Tried to allocate 1024.00 MiB (GPU 0; 7.80 GiB total capacity; 5.69 GiB already allocated; 284.44 MiB free; 6.69 GiB reserved in total by PyTorch)
+Traceback (most recent call last):
+  File "/opt/conda/lib/python3.6/runpy.py", line 193, in _run_module_as_main
+    "__main__", mod_spec)
+  File "/opt/conda/lib/python3.6/runpy.py", line 85, in _run_code
+    exec(code, run_globals)
+  File "/opt/conda/lib/python3.6/site-packages/torch/distributed/launch.py", line 253, in <module>
+    main()
+  File "/opt/conda/lib/python3.6/site-packages/torch/distributed/launch.py", line 249, in main
+    cmd=cmd)
+subprocess.CalledProcessError: Command '['/opt/conda/bin/python', '-u', 'ncf.py', '--local_rank=0', '--data', '/data/ncf/cache/ml-20m', '--epochs', '2', '--batch_size', '120000', '--opt_level', 'O0']' returned non-zero exit status 1.
+DONE!
