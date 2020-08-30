@@ -6,7 +6,7 @@ import pandas as pd
 path_result = 'results'
 
 # list_system = ['2x2080Ti_trt', '4x2080Ti_trt', '8x2080Ti_trt'] 
-list_system = ['2070MaxQ'] 
+list_system = ['2070MaxQ', '2080MaxQ', '2080SuperMaxQ', '2080Ti'] 
 list_test = {
             'PyTorch_SSD_FP32': ('SSD_FP32', "^.*Training performance =.*$", -2),
             'PyTorch_SSD_AMP': ('SSD_AMP', "^.*Training performance =.*$", -2),
@@ -21,8 +21,8 @@ list_test = {
             'PyTorch_ncf_FP16': ('ncf_FP16', "^.*best_train_throughput:.*$", -1),
             'PyTorch_transformerxlbase_FP32': ('transformerxlbase_FP32', "^.*Training throughput:.*$", -2),
             'PyTorch_transformerxlbase_FP16': ('transformerxlbase_FP16', "^.*Training throughput:.*$", -2),
-            # 'PyTorch_transformerxllarge_FP32': ('transformerxllarge_FP32', "^.*Training throughput:.*$", -2),
-            # 'PyTorch_transformerxllarge_FP16': ('transformerxllarge_FP16', "^.*Training throughput:.*$", -2),
+            'PyTorch_transformerxllarge_FP32': ('transformerxllarge_FP32', "^.*Training throughput:.*$", -2),
+            'PyTorch_transformerxllarge_FP16': ('transformerxllarge_FP16', "^.*Training throughput:.*$", -2),
             'PyTorch_tacotron2_FP32': ('tacotron2_FP32', "^.*train_epoch_avg_items/sec:.*$", -1),
             'PyTorch_tacotron2_FP16': ('tacotron2_FP16', "^.*train_epoch_avg_items/sec:.*$", -1),
             'PyTorch_waveglow_FP32': ('waveglow_FP32', "^.*train_epoch_avg_items/sec:.*$", -1),

@@ -4,10 +4,10 @@ import pandas as pd
 
 
 path_config = 'scripts/config'
-list_system = [('2080Ti', 1),
-               ('2xQuadroRTX8000NVlink_trt', 2),
-               ('4xQuadroRTX8000NVlink_trt', 4),
-               ('8xQuadroRTX8000NVlink_trt', 8)] 
+list_system = [('2070MaxQ', 1),
+               ('2080MaxQ', 1),
+               ('2080SuperMaxQ', 1),
+               ('2080Ti', 1)]
 
 # list_system = [('QuadroRTX8000', 1),
 #                ('2xQuadroRTX8000', 2),
