@@ -9,37 +9,64 @@ path_result = 'results'
 precision = 'fp32'
 
 # Choose between 'single', 'multiple', 'all'
-system = 'single'
+system = 'all'
 
+
+# list_test_fp32 = {
+#             'PyTorch_SSD_FP32': ('ssd_FP32', "^.*Training performance =.*$", -2),
+#             'PyTorch_resnet50_FP32': ('resnet50_FP32', "^.*Summary: train.loss.*$", -2),
+#             'PyTorch_maskrcnn_FP32': ('maskrcnn_FP32', "^.*Training perf is:.*$", -2),
+#             'PyTorch_gnmt_FP32': ('gnmt_FP32', "^.*Training:.*$", -4),
+#             'PyTorch_ncf_FP32': ('ncf_FP32', "^.*best_train_throughput:.*$", -1),
+#             'PyTorch_transformerxlbase_FP32': ('transformerxlbase_FP32', "^.*Training throughput:.*$", -2),
+#             'PyTorch_transformerxllarge_FP32': ('transformerxllarge_FP32', "^.*Training throughput:.*$", -2),
+#             'PyTorch_tacotron2_FP32': ('tacotron2_FP32', "^.*train_epoch_avg_items/sec:.*$", -1),
+#             'PyTorch_waveglow_FP32': ('waveglow_FP32', "^.*train_epoch_avg_items/sec:.*$", -1),
+#             'PyTorch_bert_large_squad_FP32': ('bert_large_squad_FP32', "^.*training throughput:.*$", -1),
+#             'PyTorch_bert_base_squad_FP32': ('bert_base_squad_FP32', "^.*training throughput:.*$", -1),
+#              }
 
 list_test_fp32 = {
-            'PyTorch_SSD_FP32': ('ssd_FP32', "^.*Training performance =.*$", -2),
-            'PyTorch_resnet50_FP32': ('resnet50_FP32', "^.*Summary: train.loss.*$", -2),
-            'PyTorch_maskrcnn_FP32': ('maskrcnn_FP32', "^.*Training perf is:.*$", -2),
-            'PyTorch_gnmt_FP32': ('gnmt_FP32', "^.*Training:.*$", -4),
-            'PyTorch_ncf_FP32': ('ncf_FP32', "^.*best_train_throughput:.*$", -1),
-            'PyTorch_transformerxlbase_FP32': ('transformerxlbase_FP32', "^.*Training throughput:.*$", -2),
-            'PyTorch_transformerxllarge_FP32': ('transformerxllarge_FP32', "^.*Training throughput:.*$", -2),
-            'PyTorch_tacotron2_FP32': ('tacotron2_FP32', "^.*train_epoch_avg_items/sec:.*$", -1),
-            'PyTorch_waveglow_FP32': ('waveglow_FP32', "^.*train_epoch_avg_items/sec:.*$", -1),
-            'PyTorch_bert_large_squad_FP32': ('bert_large_squad_FP32', "^.*training throughput:.*$", -1),
-            'PyTorch_bert_base_squad_FP32': ('bert_base_squad_FP32', "^.*training throughput:.*$", -1),
+            'PyTorch_SSD_FP32': ('ssd', "^.*Training performance =.*$", -2),
+            'PyTorch_resnet50_FP32': ('resnet50', "^.*Summary: train.loss.*$", -2),
+            'PyTorch_maskrcnn_FP32': ('maskrcnn', "^.*Training perf is:.*$", -2),
+            'PyTorch_gnmt_FP32': ('gnmt', "^.*Training:.*$", -4),
+            'PyTorch_ncf_FP32': ('ncf', "^.*best_train_throughput:.*$", -1),
+            'PyTorch_transformerxlbase_FP32': ('transformerxlbase', "^.*Training throughput:.*$", -2),
+            'PyTorch_transformerxllarge_FP32': ('transformerxllarge', "^.*Training throughput:.*$", -2),
+            'PyTorch_tacotron2_FP32': ('tacotron2', "^.*train_epoch_avg_items/sec:.*$", -1),
+            'PyTorch_waveglow_FP32': ('waveglow', "^.*train_epoch_avg_items/sec:.*$", -1),
+            'PyTorch_bert_large_squad_FP32': ('bert_large_squad', "^.*training throughput:.*$", -1),
+            'PyTorch_bert_base_squad_FP32': ('bert_base_squad', "^.*training throughput:.*$", -1),
              }
 
+# list_test_fp16 = {
+#             'PyTorch_SSD_AMP': ('ssd_AMP', "^.*Training performance =.*$", -2),
+#             'PyTorch_resnet50_FP16': ('resnet50_FP16', "^.*Summary: train.loss.*$", -2),
+#             'PyTorch_resnet50_AMP': ('resnet50_AMP', "^.*Summary: train.loss.*$", -2),
+#             'PyTorch_maskrcnn_FP16': ('maskrcnn_FP16', "^.*Training perf is:.*$", -2),
+#             'PyTorch_gnmt_FP16': ('gnmt_FP16', "^.*Training:.*$", -4),
+#             'PyTorch_ncf_FP16': ('ncf_FP16', "^.*best_train_throughput:.*$", -1),
+#             'PyTorch_transformerxlbase_FP16': ('transformerxlbase_FP16', "^.*Training throughput:.*$", -2),
+#             'PyTorch_transformerxllarge_FP16': ('transformerxllarge_FP16', "^.*Training throughput:.*$", -2),
+#             'PyTorch_tacotron2_FP16': ('tacotron2_FP16', "^.*train_epoch_avg_items/sec:.*$", -1),
+#             'PyTorch_waveglow_FP16': ('waveglow_FP16', "^.*train_epoch_avg_items/sec:.*$", -1),
+#             'PyTorch_bert_large_squad_FP16': ('bert_large_squad_FP16', "^.*training throughput:.*$", -1),
+#             'PyTorch_bert_base_squad_FP16': ('bert_base_squad_FP16', "^.*training throughput:.*$", -1),
+#              }
 
 list_test_fp16 = {
-            'PyTorch_SSD_AMP': ('ssd_AMP', "^.*Training performance =.*$", -2),
-            'PyTorch_resnet50_FP16': ('resnet50_FP16', "^.*Summary: train.loss.*$", -2),
-            'PyTorch_resnet50_AMP': ('resnet50_AMP', "^.*Summary: train.loss.*$", -2),
-            'PyTorch_maskrcnn_FP16': ('maskrcnn_FP16', "^.*Training perf is:.*$", -2),
-            'PyTorch_gnmt_FP16': ('gnmt_FP16', "^.*Training:.*$", -4),
-            'PyTorch_ncf_FP16': ('ncf_FP16', "^.*best_train_throughput:.*$", -1),
-            'PyTorch_transformerxlbase_FP16': ('transformerxlbase_FP16', "^.*Training throughput:.*$", -2),
-            'PyTorch_transformerxllarge_FP16': ('transformerxllarge_FP16', "^.*Training throughput:.*$", -2),
-            'PyTorch_tacotron2_FP16': ('tacotron2_FP16', "^.*train_epoch_avg_items/sec:.*$", -1),
-            'PyTorch_waveglow_FP16': ('waveglow_FP16', "^.*train_epoch_avg_items/sec:.*$", -1),
-            'PyTorch_bert_large_squad_FP16': ('bert_large_squad_FP16', "^.*training throughput:.*$", -1),
-            'PyTorch_bert_base_squad_FP16': ('bert_base_squad_FP16', "^.*training throughput:.*$", -1),
+            'PyTorch_SSD_AMP': ('ssd', "^.*Training performance =.*$", -2),
+            'PyTorch_resnet50_FP16': ('resnet50', "^.*Summary: train.loss.*$", -2),
+            'PyTorch_maskrcnn_FP16': ('maskrcnn', "^.*Training perf is:.*$", -2),
+            'PyTorch_gnmt_FP16': ('gnmt', "^.*Training:.*$", -4),
+            'PyTorch_ncf_FP16': ('ncf', "^.*best_train_throughput:.*$", -1),
+            'PyTorch_transformerxlbase_FP16': ('transformerxlbase', "^.*Training throughput:.*$", -2),
+            'PyTorch_transformerxllarge_FP16': ('transformerxllarge', "^.*Training throughput:.*$", -2),
+            'PyTorch_tacotron2_FP16': ('tacotron2', "^.*train_epoch_avg_items/sec:.*$", -1),
+            'PyTorch_waveglow_FP16': ('waveglow', "^.*train_epoch_avg_items/sec:.*$", -1),
+            'PyTorch_bert_large_squad_FP16': ('bert_large_squad', "^.*training throughput:.*$", -1),
+            'PyTorch_bert_base_squad_FP16': ('bert_base_squad', "^.*training throughput:.*$", -1),
              }
 
 list_test_all = list_test_fp32.copy()
@@ -145,9 +172,9 @@ def gather_avg(name, system, df):
                     print(system + "/" + name + " " + filename + ": something wrong")
                         
 
-        df.at[system, column_name] = round(total_throughput / count, 2)
+        df.at[system, column_name] = int(round(total_throughput / count, 2))
     else:
-        df.at[system, column_name] = 0.0
+        df.at[system, column_name] = 0
 
 
 def gather_last(name, system, df):
@@ -180,9 +207,9 @@ def gather_last(name, system, df):
 
                 if not flag:
                     print(system + "/" + name + " " + filename + ": something wrong")
-        df.at[system, column_name] = round(total_throughput / count, 2)
+        df.at[system, column_name] = int(round(total_throughput / count, 2))
     else:
-        df.at[system, column_name] = 0.0
+        df.at[system, column_name] = 0
 
 def main():
 
@@ -200,7 +227,7 @@ def main():
 
     df.index.name = 'name_gpu'
 
-    df.to_csv('pytorch-benchmark-throughput-' + precision + '.csv')
+    df.to_csv('pytorch-train-throughput-' + precision + '.csv')
 
 if __name__ == "__main__":
     main()

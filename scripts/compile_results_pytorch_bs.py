@@ -4,10 +4,10 @@ import pandas as pd
 
 
 # Choose between 'fp32', 'fp16'
-precision = 'fp32'
+precision = 'fp16'
 
 # Choose between 'single', 'multiple', 'all'
-system = 'single'
+system = 'all'
 
 path_config = 'scripts/config'
 
@@ -63,36 +63,62 @@ list_system_multiple = [
     ('p3.8xlarge', 4)
 ]
 
+# list_test_fp32 = {
+#              'PyTorch_SSD_FP32': (4, -1, 1, 'ssd_FP32'),
+#              'PyTorch_resnet50_FP32': (7, -1, 1, 'resnet50_FP32'),
+#              'PyTorch_maskrcnn_FP32': (4, -1, 0, 'maskrcnn_FP32'),
+#              'PyTorch_gnmt_FP32': (4, -1, 1, 'gnmt_FP32'),
+#              'PyTorch_ncf_FP32': (5, -1, 0, 'ncf_FP32'),
+#              'PyTorch_transformerxlbase_FP32': (5, -1, 0, 'transformerxlbase_FP32'),
+#              'PyTorch_transformerxllarge_FP32': (5, -1, 0, 'transformerxllarge_FP32'),
+#              'PyTorch_tacotron2_FP32': (7, -1, 1, 'tacotron2_FP32'),
+#              'PyTorch_waveglow_FP32': (8, -1, 1, 'waveglow_FP32'),
+#              'PyTorch_bert_large_squad_FP32': (5, -1, 1, 'bert_large_squad_FP32'),
+#              'PyTorch_bert_base_squad_FP32': (5, -1, 1, 'bert_base_squad_FP32'),
+# }
+
 list_test_fp32 = {
-             'PyTorch_SSD_FP32': (4, -1, 1, 'ssd_FP32'),
-             'PyTorch_resnet50_FP32': (7, -1, 1, 'resnet50_FP32'),
-             'PyTorch_maskrcnn_FP32': (4, -1, 0, 'maskrcnn_FP32'),
-             'PyTorch_gnmt_FP32': (4, -1, 1, 'gnmt_FP32'),
-             'PyTorch_ncf_FP32': (5, -1, 0, 'ncf_FP32'),
-             'PyTorch_transformerxlbase_FP32': (5, -1, 0, 'transformerxlbase_FP32'),
-             'PyTorch_transformerxllarge_FP32': (5, -1, 0, 'transformerxllarge_FP32'),
-             'PyTorch_tacotron2_FP32': (7, -1, 1, 'tacotron2_FP32'),
-             'PyTorch_waveglow_FP32': (8, -1, 1, 'waveglow_FP32'),
-             'PyTorch_bert_large_squad_FP32': (5, -1, 1, 'bert_large_squad_FP32'),
-             'PyTorch_bert_base_squad_FP32': (5, -1, 1, 'bert_base_squad_FP32'),
+             'PyTorch_SSD_FP32': (4, -1, 1, 'ssd'),
+             'PyTorch_resnet50_FP32': (7, -1, 1, 'resnet50'),
+             'PyTorch_maskrcnn_FP32': (4, -1, 0, 'maskrcnn'),
+             'PyTorch_gnmt_FP32': (4, -1, 1, 'gnmt'),
+             'PyTorch_ncf_FP32': (5, -1, 0, 'ncf'),
+             'PyTorch_transformerxlbase_FP32': (5, -1, 0, 'transformerxlbase'),
+             'PyTorch_transformerxllarge_FP32': (5, -1, 0, 'transformerxllarge'),
+             'PyTorch_tacotron2_FP32': (7, -1, 1, 'tacotron2'),
+             'PyTorch_waveglow_FP32': (8, -1, 1, 'waveglow'),
+             'PyTorch_bert_large_squad_FP32': (5, -1, 1, 'bert_large_squad'),
+             'PyTorch_bert_base_squad_FP32': (5, -1, 1, 'bert_base_squad'),
 }
 
+# list_test_fp16 = {
+#              'PyTorch_SSD_AMP': (4, -1, 1, 'ssd_AMP'),
+#              'PyTorch_resnet50_FP16': (9, -1, 1, 'resnet50_FP16'),
+#              'PyTorch_resnet50_AMP': (9, -1, 1, 'resnet50_AMP'),
+#              'PyTorch_maskrcnn_FP16': (4, -1, 0, 'maskrcnn_FP16'),
+#              'PyTorch_gnmt_FP16': (4, -1, 1, 'gnmt_FP16'),
+#              'PyTorch_ncf_FP16': (5, -1, 0, 'ncf_FP16'),
+#              'PyTorch_transformerxlbase_FP16': (5, -1, 0, 'transformerxlbase_FP16'),
+#              'PyTorch_transformerxllarge_FP16': (5, -1, 0, 'transformerxllarge_FP16'),
+#              'PyTorch_tacotron2_FP16': (7, -1, 1, 'tacotron2_FP16'),
+#              'PyTorch_waveglow_FP16': (8, -1, 1, 'waveglow_FP16'),
+#              'PyTorch_bert_large_squad_FP16': (5, -1, 1, 'bert_large_squad_FP16'),
+#              'PyTorch_bert_base_squad_FP16': (5, -1, 1, 'bert_base_squad_FP16'),
+# }
 
 list_test_fp16 = {
-             'PyTorch_SSD_AMP': (4, -1, 1, 'ssd_AMP'),
-             'PyTorch_resnet50_FP16': (9, -1, 1, 'resnet50_FP16'),
-             'PyTorch_resnet50_AMP': (9, -1, 1, 'resnet50_AMP'),
-             'PyTorch_maskrcnn_FP16': (4, -1, 0, 'maskrcnn_FP16'),
-             'PyTorch_gnmt_FP16': (4, -1, 1, 'gnmt_FP16'),
-             'PyTorch_ncf_FP16': (5, -1, 0, 'ncf_FP16'),
-             'PyTorch_transformerxlbase_FP16': (5, -1, 0, 'transformerxlbase_FP16'),
-             'PyTorch_transformerxllarge_FP16': (5, -1, 0, 'transformerxllarge_FP16'),
-             'PyTorch_tacotron2_FP16': (7, -1, 1, 'tacotron2_FP16'),
-             'PyTorch_waveglow_FP16': (8, -1, 1, 'waveglow_FP16'),
-             'PyTorch_bert_large_squad_FP16': (5, -1, 1, 'bert_large_squad_FP16'),
-             'PyTorch_bert_base_squad_FP16': (5, -1, 1, 'bert_base_squad_FP16'),
+             'PyTorch_SSD_AMP': (4, -1, 1, 'ssd'),
+             'PyTorch_resnet50_FP16': (9, -1, 1, 'resnet50'),
+             'PyTorch_maskrcnn_FP16': (4, -1, 0, 'maskrcnn'),
+             'PyTorch_gnmt_FP16': (4, -1, 1, 'gnmt'),
+             'PyTorch_ncf_FP16': (5, -1, 0, 'ncf'),
+             'PyTorch_transformerxlbase_FP16': (5, -1, 0, 'transformerxlbase'),
+             'PyTorch_transformerxllarge_FP16': (5, -1, 0, 'transformerxllarge'),
+             'PyTorch_tacotron2_FP16': (7, -1, 1, 'tacotron2'),
+             'PyTorch_waveglow_FP16': (8, -1, 1, 'waveglow'),
+             'PyTorch_bert_large_squad_FP16': (5, -1, 1, 'bert_large_squad'),
+             'PyTorch_bert_base_squad_FP16': (5, -1, 1, 'bert_base_squad'),
 }
-
 
 list_test_all = list_test_fp32.copy()
 for key, value in list_test_fp16.items():
@@ -139,7 +165,7 @@ def main():
         gather(system, num_gpu, df)
     df.index.name = 'name_gpu'
 
-    df.to_csv('pytorch-benchmark-bs-' + precision + '.csv')
+    df.to_csv('pytorch-train-bs-' + precision + '.csv')
 
 if __name__ == "__main__":
     main()
