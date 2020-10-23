@@ -6,7 +6,7 @@ import pandas as pd
 path_result = 'results'
 
 # Choose between 'fp32', 'fp16'
-precision = 'fp32'
+precision = 'fp16'
 
 # Choose between 'single', 'multiple', 'all'
 system = 'all'
@@ -55,6 +55,7 @@ list_test_fp32 = {
 #             'PyTorch_bert_base_squad_FP16': ('bert_base_squad_FP16', "^.*training throughput:.*$", -1),
 #              }
 
+
 list_test_fp16 = {
             'PyTorch_SSD_AMP': ('ssd', "^.*Training performance =.*$", -2),
             'PyTorch_resnet50_FP16': ('resnet50', "^.*Summary: train.loss.*$", -2),
@@ -69,60 +70,63 @@ list_test_fp16 = {
             'PyTorch_bert_base_squad_FP16': ('bert_base_squad', "^.*training throughput:.*$", -1),
              }
 
+
 list_test_all = list_test_fp32.copy()
 for key, value in list_test_fp16.items():
     list_test_all[key] = value
 
-list_system_single = [
-    'V100',
-    'QuadroRTX8000',
-    'QuadroRTX6000',
-    'QuadroRTX5000',
-    'TitanRTX',
-    '2080Ti',
-    '1080Ti',
-    '2080SuperMaxQ',
-    '2080MaxQ', 
-    '2070MaxQ',
-    ]
+
+list_system_single = {
+    'V100': 1,
+    'QuadroRTX8000': 1,
+    'QuadroRTX6000': 1,
+    'QuadroRTX5000': 1,
+    'TitanRTX': 1,
+    '2080Ti': 1,
+    '1080Ti': 1,
+    '2080SuperMaxQ': 1,
+    '2080MaxQ': 1, 
+    '2070MaxQ': 1
+    }
     
 
-list_system_multiple = [
-    '2x2080TiNVlink_trt',
-    '2x2080TiNVlink_trt2',
-    '2x2080Ti_trt',
-    '2x2080Ti_trt2',
-    '4x2080TiNVlink_trt',
-    '4x2080TiNVlink_trt2',
-    '4x2080Ti_trt',
-    '4x2080Ti_trt2',
-    '8x2080TiNVlink_trt',
-    '8x2080TiNVlink_trt2',
-    '8x2080Ti_trt',
-    '8x2080Ti_trt2',    
-    '2xQuadroRTX8000NVlink_trt',
-    '2xQuadroRTX8000NVlink_trt2',
-    '2xQuadroRTX8000_trt',
-    '2xQuadroRTX8000_trt2',
-    '4xQuadroRTX8000NVlink_trt',
-    '4xQuadroRTX8000NVlink_trt2',
-    '4xQuadroRTX8000_trt',
-    '4xQuadroRTX8000_trt2',
-    '8xQuadroRTX8000NVlink_trt',
-    '8xQuadroRTX8000NVlink_trt2',
-    '8xQuadroRTX8000_trt',
-    '8xQuadroRTX8000_trt2',
-    '2xV100',
-    '4xV100',
-    '8xV100',
-    'LambdaCloud_4x1080Ti',
-    'LambdaCloud_2xQuadroRTX6000',
-    'LambdaCloud_4xQuadroRTX6000',
-    'LambdaCloud_8xV10016G',
-    'Linode_2xQuadroRTX6000',
-    'p3.16xlarge',
-    'p3.8xlarge'
-]
+list_system_multiple = {
+    '2x2080TiNVlink_trt': 2,
+    '2x2080TiNVlink_trt2': 2,
+    '2x2080Ti_trt': 2,
+    '2x2080Ti_trt2': 2,
+    '4x2080TiNVlink_trt': 4,
+    '4x2080TiNVlink_trt2': 4,
+    '4x2080Ti_trt': 4,
+    '4x2080Ti_trt2': 4,
+    '8x2080TiNVlink_trt': 8,
+    '8x2080TiNVlink_trt2': 8,
+    '8x2080Ti_trt': 8,
+    '8x2080Ti_trt2': 8,    
+    '2xQuadroRTX8000NVlink_trt': 2,
+    '2xQuadroRTX8000NVlink_trt2': 2,
+    '2xQuadroRTX8000_trt': 2,
+    '2xQuadroRTX8000_trt2': 2,
+    '4xQuadroRTX8000NVlink_trt': 4,
+    '4xQuadroRTX8000NVlink_trt2': 4,
+    '4xQuadroRTX8000_trt': 4,
+    '4xQuadroRTX8000_trt2': 4,
+    '8xQuadroRTX8000NVlink_trt': 8,
+    '8xQuadroRTX8000NVlink_trt2': 8,
+    '8xQuadroRTX8000_trt': 8,
+    '8xQuadroRTX8000_trt2': 8,
+    '2xV100': 2,
+    '4xV100': 4,
+    '8xV100': 8,
+    'LambdaCloud_4x1080Ti': 4,
+    'LambdaCloud_2xQuadroRTX6000': 2,
+    'LambdaCloud_4xQuadroRTX6000': 4,
+    'LambdaCloud_8xV10016G': 8,
+    'Linode_2xQuadroRTX6000': 2,
+    'p3.16xlarge': 8,
+    'p3.8xlarge': 4
+}
+
 
 if precision == 'fp32':
     list_test = list_test_fp32
@@ -131,12 +135,15 @@ elif precision == 'fp16':
 else:
     sys.exit("Wrong precision: " + precision + ', choose between fp32 and fp16')
 
+
 if system == 'single':
     list_system = list_system_single
 elif system == 'multiple':
     list_system = list_system_multiple
 else:
-    list_system = list_system_single + list_system_multiple
+    list_system = {} 
+    list_system.update(list_system_single)
+    list_system.update(list_system_multiple)
 
 
 def gather_avg(name, system, df):
@@ -170,11 +177,10 @@ def gather_avg(name, system, df):
 
                 if not flag:
                     print(system + "/" + name + " " + filename + ": something wrong")
-                        
-
         df.at[system, column_name] = int(round(total_throughput / count, 2))
     else:
         df.at[system, column_name] = 0
+    df.at[system, 'num_gpu'] = list_system[system]
 
 
 def gather_last(name, system, df):
@@ -211,19 +217,22 @@ def gather_last(name, system, df):
     else:
         df.at[system, column_name] = 0
 
+    df.at[system, 'num_gpu'] = list_system[system]
+
 def main():
 
     columns = []
+    columns.append('num_gpu')
     for test_name, value in sorted(list_test.items()):
         columns.append(list_test[test_name][0])
+    list_configs = [key for key in list_system]
 
-
-    df = pd.DataFrame(index=list_system, columns=columns)
+    df = pd.DataFrame(index=list_configs, columns=columns)
     df = df.fillna(-1.0)
 
-    for system in list_system:
+    for key in list_system:
         for test_name, value in sorted(list_test.items()):
-            gather_last(test_name, system, df)
+            gather_last(test_name, key, df)
 
     df.index.name = 'name_gpu'
 

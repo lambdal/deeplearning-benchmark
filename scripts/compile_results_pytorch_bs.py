@@ -4,7 +4,7 @@ import pandas as pd
 
 
 # Choose between 'fp32', 'fp16'
-precision = 'fp16'
+precision = 'fp32'
 
 # Choose between 'single', 'multiple', 'all'
 system = 'all'
@@ -152,10 +152,12 @@ def gather(system, num_gpu, df):
             if bs == 1:
                 bs = 0
             df.at[system, value[3]] = bs
+    df.at[system, 'num_gpu'] = num_gpu
 
 
 def main():
     columns = []
+    columns.append('num_gpu')
     for test_name, value in sorted(list_test.items()):
         columns.append(value[3])
 
