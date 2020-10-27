@@ -1,0 +1,23 @@
+Container nvidia build =  16972326
+out dir is .
+python   run_squad.py --init_checkpoint=/data/bert_base/bert_base_uncased.pt --do_train --train_file=/data/squad/v1.1/train-v1.1.json --train_batch_size=10  --do_lower_case  --bert_model=bert-large-uncased  --learning_rate=0.0  --seed=1  --num_train_epochs=2.0  --max_seq_length=384  --doc_stride=128  --output_dir=.  --vocab_file=/data/bert_base/bert-base-uncased-vocab.txt  --config_file=/data/bert_base/bert_config.json  --max_steps=1000   |& tee ./logfile.txt
+device: cuda n_gpu: 1, distributed training: False, 16-bits training: False
+DLL 2020-10-27 22:19:10.131054 - PARAMETER Config : ["Namespace(amp=False, bert_model='bert-large-uncased', cache_dir=None, config_file='/data/bert_base/bert_config.json', disable_progress_bar=False, do_eval=False, do_lower_case=True, do_predict=False, do_train=True, doc_stride=128, eval_script='evaluate.py', fp16=False, gradient_accumulation_steps=1, init_checkpoint='/data/bert_base/bert_base_uncased.pt', json_summary='results/dllogger.json', learning_rate=0.0, local_rank=-1, log_freq=50, loss_scale=0, max_answer_length=30, max_query_length=64, max_seq_length=384, max_steps=1000.0, n_best_size=20, no_cuda=False, null_score_diff_threshold=0.0, num_train_epochs=2.0, output_dir='.', predict_batch_size=8, predict_file=None, seed=1, skip_cache=False, skip_checkpoint=False, train_batch_size=10, train_file='/data/squad/v1.1/train-v1.1.json', use_env=False, verbose_logging=False, version_2_with_negative=False, vocab_file='/data/bert_base/bert-base-uncased-vocab.txt', warmup_proportion=0.1)"] 
+DLL 2020-10-27 22:19:10.131620 - PARAMETER SEED : 1 
+WARNING: Output directory . already exists and is not empty. ['utils.py', 'README.md', 'optimization.py', '.gitignore', 'triton', 'vocab', 'run_swag.py', 'Dockerfile', 'scripts', 'images', 'extract_features.py', '.gitmodules', 'requirements.txt', 'schedulers.py', 'create_pretraining_data.py', 'bind.sh', 'modeling.py', 'results', 'NOTICE', 'run_squad.py', 'processors', 'data', '.git', 'checkpoints', 'inference.py', 'file_utils.py', 'configurations.yml', 'run_glue.py', 'run_pretraining.py', 'bind_pyt.py', 'run.sub', 'bert_config.json', '.dockerignore', 'LICENSE', 'tokenization.py', 'logfile.txt', '__pycache__']
+DLL 2020-10-27 22:19:23.800766 - PARAMETER loading_checkpoint : True 
+Traceback (most recent call last):
+  File "run_squad.py", line 1199, in <module>
+    main()
+  File "run_squad.py", line 933, in main
+    model.load_state_dict(torch.load(args.init_checkpoint, map_location='cpu')["model"], strict=False)
+  File "/opt/conda/lib/python3.6/site-packages/torch/serialization.py", line 595, in load
+    return _legacy_load(opened_file, map_location, pickle_module, **pickle_load_args)
+  File "/opt/conda/lib/python3.6/site-packages/torch/serialization.py", line 781, in _legacy_load
+    deserialized_objects[key]._set_from_file(f, offset, f_should_read_directly)
+RuntimeError: unexpected EOF, expected 2567837 more bytes. The file might be corrupted.
+
+real	0m15.193s
+user	0m14.930s
+sys	0m0.786s
+DONE!
