@@ -12,70 +12,67 @@ system = 'all'
 path_config = 'scripts/config'
 
 
+# list_system_single = [
+#    ('V100', 1),
+#    ('QuadroRTX8000', 1),
+#    ('QuadroRTX6000', 1),
+#    ('QuadroRTX5000', 1),
+#    ('TitanRTX', 1),
+#    ('2080Ti', 1),
+#    ('1080Ti', 1),
+#    ('2080SuperMaxQ', 1),
+#    ('2080MaxQ', 1),
+#    ('2070MaxQ', 1)
+# ]
+
+
+# list_system_multiple = [
+#     ('2x2080TiNVlink_trt', 2),
+#     ('2x2080TiNVlink_trt2', 2),
+#     ('2x2080Ti_trt', 2),
+#     ('2x2080Ti_trt2', 2),
+#     ('4x2080TiNVlink_trt', 4),
+#     ('4x2080TiNVlink_trt2', 4),
+#     ('4x2080Ti_trt', 4),
+#     ('4x2080Ti_trt2', 4),
+#     ('8x2080TiNVlink_trt', 8),
+#     ('8x2080TiNVlink_trt2', 8),
+#     ('8x2080Ti_trt', 8),
+#     ('8x2080Ti_trt2', 8),    
+#     ('2xQuadroRTX8000NVlink_trt', 2),
+#     ('2xQuadroRTX8000NVlink_trt2', 2),
+#     ('2xQuadroRTX8000_trt', 2),
+#     ('2xQuadroRTX8000_trt2', 2),
+#     ('4xQuadroRTX8000NVlink_trt', 4),
+#     ('4xQuadroRTX8000NVlink_trt2', 4),
+#     ('4xQuadroRTX8000_trt', 4),
+#     ('4xQuadroRTX8000_trt2', 4),
+#     ('8xQuadroRTX8000NVlink_trt', 8),
+#     ('8xQuadroRTX8000NVlink_trt2', 8),
+#     ('8xQuadroRTX8000_trt', 8),
+#     ('8xQuadroRTX8000_trt2', 8),
+#     ('2xV100', 2),
+#     ('4xV100', 4),
+#     ('8xV100', 8),
+#     ('LambdaCloud_4x1080Ti', 4),
+#     ('LambdaCloud_2xQuadroRTX6000', 2),
+#     ('LambdaCloud_4xQuadroRTX6000', 4),
+#     ('LambdaCloud_8xV10016G', 8),
+#     ('Linode_2xQuadroRTX6000', 2),
+#     ('p3.16xlarge',8),
+#     ('p3.8xlarge', 4)
+# ]
+
+
 list_system_single = [
-   ('V100', 1),
-   ('QuadroRTX8000', 1),
-   ('QuadroRTX6000', 1),
-   ('QuadroRTX5000', 1),
-   ('TitanRTX', 1),
-   ('2080Ti', 1),
-   ('1080Ti', 1),
-   ('2080SuperMaxQ', 1),
-   ('2080MaxQ', 1),
-   ('2070MaxQ', 1)
+   ('3080', 1)
 ]
 
 
 list_system_multiple = [
-    ('2x2080TiNVlink_trt', 2),
-    ('2x2080TiNVlink_trt2', 2),
-    ('2x2080Ti_trt', 2),
-    ('2x2080Ti_trt2', 2),
-    ('4x2080TiNVlink_trt', 4),
-    ('4x2080TiNVlink_trt2', 4),
-    ('4x2080Ti_trt', 4),
-    ('4x2080Ti_trt2', 4),
-    ('8x2080TiNVlink_trt', 8),
-    ('8x2080TiNVlink_trt2', 8),
-    ('8x2080Ti_trt', 8),
-    ('8x2080Ti_trt2', 8),    
-    ('2xQuadroRTX8000NVlink_trt', 2),
-    ('2xQuadroRTX8000NVlink_trt2', 2),
-    ('2xQuadroRTX8000_trt', 2),
-    ('2xQuadroRTX8000_trt2', 2),
-    ('4xQuadroRTX8000NVlink_trt', 4),
-    ('4xQuadroRTX8000NVlink_trt2', 4),
-    ('4xQuadroRTX8000_trt', 4),
-    ('4xQuadroRTX8000_trt2', 4),
-    ('8xQuadroRTX8000NVlink_trt', 8),
-    ('8xQuadroRTX8000NVlink_trt2', 8),
-    ('8xQuadroRTX8000_trt', 8),
-    ('8xQuadroRTX8000_trt2', 8),
-    ('2xV100', 2),
-    ('4xV100', 4),
-    ('8xV100', 8),
-    ('LambdaCloud_4x1080Ti', 4),
-    ('LambdaCloud_2xQuadroRTX6000', 2),
-    ('LambdaCloud_4xQuadroRTX6000', 4),
-    ('LambdaCloud_8xV10016G', 8),
-    ('Linode_2xQuadroRTX6000', 2),
-    ('p3.16xlarge',8),
-    ('p3.8xlarge', 4)
+    ('2x3080', 2)
 ]
 
-# list_test_fp32 = {
-#              'PyTorch_SSD_FP32': (4, -1, 1, 'ssd_FP32'),
-#              'PyTorch_resnet50_FP32': (7, -1, 1, 'resnet50_FP32'),
-#              'PyTorch_maskrcnn_FP32': (4, -1, 0, 'maskrcnn_FP32'),
-#              'PyTorch_gnmt_FP32': (4, -1, 1, 'gnmt_FP32'),
-#              'PyTorch_ncf_FP32': (5, -1, 0, 'ncf_FP32'),
-#              'PyTorch_transformerxlbase_FP32': (5, -1, 0, 'transformerxlbase_FP32'),
-#              'PyTorch_transformerxllarge_FP32': (5, -1, 0, 'transformerxllarge_FP32'),
-#              'PyTorch_tacotron2_FP32': (7, -1, 1, 'tacotron2_FP32'),
-#              'PyTorch_waveglow_FP32': (8, -1, 1, 'waveglow_FP32'),
-#              'PyTorch_bert_large_squad_FP32': (5, -1, 1, 'bert_large_squad_FP32'),
-#              'PyTorch_bert_base_squad_FP32': (5, -1, 1, 'bert_base_squad_FP32'),
-# }
 
 list_test_fp32 = {
              'PyTorch_SSD_FP32': (4, -1, 1, 'ssd'),
@@ -90,21 +87,6 @@ list_test_fp32 = {
              'PyTorch_bert_large_squad_FP32': (5, -1, 1, 'bert_large_squad'),
              'PyTorch_bert_base_squad_FP32': (5, -1, 1, 'bert_base_squad'),
 }
-
-# list_test_fp16 = {
-#              'PyTorch_SSD_AMP': (4, -1, 1, 'ssd_AMP'),
-#              'PyTorch_resnet50_FP16': (9, -1, 1, 'resnet50_FP16'),
-#              'PyTorch_resnet50_AMP': (9, -1, 1, 'resnet50_AMP'),
-#              'PyTorch_maskrcnn_FP16': (4, -1, 0, 'maskrcnn_FP16'),
-#              'PyTorch_gnmt_FP16': (4, -1, 1, 'gnmt_FP16'),
-#              'PyTorch_ncf_FP16': (5, -1, 0, 'ncf_FP16'),
-#              'PyTorch_transformerxlbase_FP16': (5, -1, 0, 'transformerxlbase_FP16'),
-#              'PyTorch_transformerxllarge_FP16': (5, -1, 0, 'transformerxllarge_FP16'),
-#              'PyTorch_tacotron2_FP16': (7, -1, 1, 'tacotron2_FP16'),
-#              'PyTorch_waveglow_FP16': (8, -1, 1, 'waveglow_FP16'),
-#              'PyTorch_bert_large_squad_FP16': (5, -1, 1, 'bert_large_squad_FP16'),
-#              'PyTorch_bert_base_squad_FP16': (5, -1, 1, 'bert_base_squad_FP16'),
-# }
 
 list_test_fp16 = {
              'PyTorch_SSD_AMP': (4, -1, 1, 'ssd'),
