@@ -9,7 +9,7 @@ PyTorch_SSD_FP32_PARAMS=(
              --data                   "/data/object_detection"
              --batch-size             "128"
              --benchmark-warmup       "50"
-             --benchmark-iterations   "50"
+             --benchmark-iterations   "200"
              --learning-rate          "0"
            )
 
@@ -19,7 +19,7 @@ PyTorch_SSD_AMP_PARAMS=(
              --data                   "/data/object_detection"
              --batch-size             "224"
              --benchmark-warmup       "50"
-             --benchmark-iterations   "20"
+             --benchmark-iterations   "200"
              --amp
              --learning-rate          "0"
            )
@@ -31,7 +31,7 @@ PyTorch_resnet50_FP32_PARAMS=(
              --arch                   "resnet50"
              --epochs                 "2" 
              --prof                   "100" 
-             --batch-size             "400"
+             --batch-size             "360"
              --raport-file            "benchmark.json"
              --print-freq             "1"
              --training-only
@@ -82,7 +82,7 @@ PyTorch_maskrcnn_FP16_PARAMS=(
              "examples/maskrcnn/pytorch"
              args      
              --config-file            "/workspace/patch/e2e_mask_rcnn_R_50_FPN_1x.yaml"
-             SOLVER.IMS_PER_BATCH     "208"
+             SOLVER.IMS_PER_BATCH     "192"
              DTYPE                    "float16"
              SOLVER.MAX_ITER          "400"
              OUTPUT_DIR               "/results"
@@ -123,7 +123,7 @@ PyTorch_ncf_FP16_PARAMS=(
             args
             --data                    "/data/ncf/cache/ml-20m"
             --epochs                  "2"
-            --batch_size              "60000000"
+            --batch_size              "56000000"
             --opt_level               "O2"
            )
 
@@ -132,7 +132,7 @@ PyTorch_transformerxlbase_FP32_PARAMS=(
             args
             --data                    "/data/transformer-xl/wikitext-103"
             --max_step                "400"
-            --batch_size              "208"
+            --batch_size              "192"
             --dataset                 "wt103" 
             --n_layer                 "16"
             --d_model                 "512"
@@ -159,7 +159,7 @@ PyTorch_transformerxlbase_FP16_PARAMS=(
             args
             --data                    "/data/transformer-xl/wikitext-103"
             --max_step                "400"
-            --batch_size              "416"
+            --batch_size              "400"
             --dataset                 "wt103" 
             --n_layer                 "16"
             --d_model                 "512"
@@ -243,7 +243,7 @@ PyTorch_tacotron2_FP32_PARAMS=(
             --weight-decay            "1e-6" 
             --grad-clip-thresh        "1.0"
             --log-file                "nvlog.json"
-            --training-files          "filelists/ljs_audio_text_train_subset_1250_filelist.txt"
+            --training-files          "filelists/ljs_audio_text_train_subset_2500_filelist.txt"
             --dataset-path            "/data/tacotron2/LJSpeech-1.1"
             --cudnn-enabled
            )
@@ -255,7 +255,7 @@ PyTorch_tacotron2_FP16_PARAMS=(
             --model-name              "Tacotron2"
             --learning-rate           "0.0" 
             --epochs                  "3" 
-            --batch-size              "256" 
+            --batch-size              "128" 
             --weight-decay            "1e-6" 
             --grad-clip-thresh        "1.0"
             --log-file                "nvlog.json"
@@ -278,7 +278,7 @@ PyTorch_waveglow_FP32_PARAMS=(
             --weight-decay            "0" 
             --grad-clip-thresh        "65504"
             --log-file                "nvlog.json"
-            --training-files          "filelists/ljs_audio_text_train_subset_625_filelist.txt"
+            --training-files          "filelists/ljs_audio_text_train_subset_2500_filelist.txt"
             --dataset-path            "/data/tacotron2/LJSpeech-1.1"
             --cudnn-enabled
             --cudnn-benchmark
@@ -292,11 +292,11 @@ PyTorch_waveglow_FP16_PARAMS=(
             --learning-rate           "0.0" 
             --epochs                  "2" 
             --segment-length          "8000"
-            --batch-size              "40" 
+            --batch-size              "24" 
             --weight-decay            "0" 
             --grad-clip-thresh        "65504"
             --log-file                "nvlog.json"
-            --training-files          "filelists/ljs_audio_text_train_subset_1250_filelist.txt"
+            --training-files          "filelists/ljs_audio_text_train_subset_2500_filelist.txt"
             --dataset-path            "/data/tacotron2/LJSpeech-1.1"
             --cudnn-enabled
             --cudnn-benchmark
@@ -318,7 +318,7 @@ PyTorch_bert_base_squad_FP32_PARAMS=(
             "."
             "train"
             "/data/bert_base/bert_config.json"
-            "10000"
+            "100"
 )
 
 PyTorch_bert_base_squad_FP16_PARAMS=(
@@ -336,7 +336,7 @@ PyTorch_bert_base_squad_FP16_PARAMS=(
             "."
             "train"
             "/data/bert_base/bert_config.json"
-            "20000"
+            "100"
 )
 
 PyTorch_bert_large_squad_FP32_PARAMS=(
@@ -354,7 +354,7 @@ PyTorch_bert_large_squad_FP32_PARAMS=(
             "."
             "train"
             "/data/bert_large/bert_config.json"
-            "5000"
+            "100"
 )
 
 PyTorch_bert_large_squad_FP16_PARAMS=(
@@ -372,5 +372,5 @@ PyTorch_bert_large_squad_FP16_PARAMS=(
             "."
             "train"
             "/data/bert_large/bert_config.json"
-            "10000"
+            "100"
 )

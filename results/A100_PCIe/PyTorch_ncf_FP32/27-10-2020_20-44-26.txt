@@ -1,0 +1,80 @@
+:::NVLOGv0.1.0 ncf 1603831468.139742136 (ncf.py:171) cpu_info: {"num": 128, "name": "AMD EPYC 7502 32-Core Processor"}
+:::NVLOGv0.1.0 ncf 1603831468.149392605 (ncf.py:171) mem_info: {"ram": "503G"}
+:::NVLOGv0.1.0 ncf 1603831472.150912762 (ncf.py:171) gpu_info: {"driver_version": "455.32.00", "num": 8, "name": ["A100-PCIE-40GB", "A100-PCIE-40GB", "A100-PCIE-40GB", "A100-PCIE-40GB", "A100-PCIE-40GB", "A100-PCIE-40GB", "A100-PCIE-40GB", "A100-PCIE-40GB"], "mem": ["40536 MiB", "40536 MiB", "40536 MiB", "40536 MiB", "40536 MiB", "40536 MiB", "40536 MiB", "40536 MiB"]}
+:::NVLOGv0.1.0 ncf 1603831472.154776335 (ncf.py:174) args: {"data": "/data/ncf/cache/ml-20m", "epochs": 2, "batch_size": 4000000, "valid_batch_size": 1048576, "factors": 64, "layers": [256, 256, 128, 64], "negative_samples": 4, "learning_rate": 0.0045, "topk": 10, "seed": 1, "threshold": 1.0, "beta1": 0.25, "beta2": 0.5, "eps": 1e-08, "dropout": 0.5, "checkpoint_dir": "/data/checkpoints/", "load_checkpoint_path": null, "mode": "train", "grads_accumulated": 1, "opt_level": "O0", "local_rank": 0, "distributed": false, "world_size": 1}
+Saving results to /data/checkpoints/
+:::NVLOGv0.1.0 ncf 1603831472.155762672 (ncf.py:184) preproc_hp_sample_eval_replacement: true
+:::NVLOGv0.1.0 ncf 1603831472.156181097 (ncf.py:185) input_hp_sample_train_replacement: true
+:::NVLOGv0.1.0 ncf 1603831472.156573772 (ncf.py:186) input_step_eval_neg_gen
+:::NVLOGv0.1.0 ncf 1603831474.068542004 (ncf.py:194) run_start
+:::NVLOGv0.1.0 ncf 1603831474.267067909 (ncf.py:201) preproc_hp_num_eval: 100
+:::NVLOGv0.1.0 ncf 1603831474.269185781 (ncf.py:207) input_size: 19861770
+:::NVLOGv0.1.0 ncf 1603831474.302940607 (ncf.py:216) input_batch_size: 4000000
+:::NVLOGv0.1.0 ncf 1603831474.303268194 (ncf.py:217) input_order
+:::NVLOGv0.1.0 ncf 1603831474.303805113 (/workspace/examples/ncf/neumf.py:54) model_hp_mf_dim: 64
+:::NVLOGv0.1.0 ncf 1603831474.593097925 (/workspace/examples/ncf/neumf.py:62) model_hp_mlp_layer_sizes: [256, 256, 128, 64]
+NeuMF(
+  (mf_user_embed): Embedding(138493, 64)
+  (mf_item_embed): Embedding(26744, 64)
+  (mlp_user_embed): Embedding(138493, 128)
+  (mlp_item_embed): Embedding(26744, 128)
+  (mlp): ModuleList(
+    (0): Linear(in_features=256, out_features=256, bias=True)
+    (1): Linear(in_features=256, out_features=128, bias=True)
+    (2): Linear(in_features=128, out_features=64, bias=True)
+  )
+  (final): Linear(in_features=128, out_features=1, bias=True)
+)
+31832577 parameters
+:::NVLOGv0.1.0 ncf 1603831475.087964773 (ncf.py:246) opt_learning_rate: 0.0045
+:::NVLOGv0.1.0 ncf 1603831475.088545561 (ncf.py:247) opt_name: "Adam"
+:::NVLOGv0.1.0 ncf 1603831475.089059353 (ncf.py:248) opt_hp_Adam_beta1: 0.25
+:::NVLOGv0.1.0 ncf 1603831475.089542150 (ncf.py:249) opt_hp_Adam_beta2: 0.5
+:::NVLOGv0.1.0 ncf 1603831475.090022087 (ncf.py:250) opt_hp_Adam_epsilon: 1e-08
+:::NVLOGv0.1.0 ncf 1603831475.090535402 (ncf.py:251) model_hp_loss_fn: "binary_cross_entropy"
+:::NVLOGv0.1.0 ncf 1603831475.090976477 (ncf.py:279) train_loop
+:::NVLOGv0.1.0 ncf 1603831475.091422796 (ncf.py:282) train_epoch_start: 0
+:::NVLOGv0.1.0 ncf 1603831475.091858864 (ncf.py:283) input_hp_num_neg: 4
+:::NVLOGv0.1.0 ncf 1603831475.092285872 (ncf.py:284) input_step_train_neg_gen
+:::NVLOGv0.1.0 ncf 1603831479.931754351 (ncf.py:318) train_throughput: 20524706.17103883
+:::NVLOGv0.1.0 ncf 1603831479.932266951 (ncf.py:319) train_epoch_stop: 0
+:::NVLOGv0.1.0 ncf 1603831479.932538509 (ncf.py:320) eval_start: 0
+ncf.py:146: UserWarning: indexing with dtype torch.uint8 is now deprecated, please use a dtype torch.bool instead. (Triggered internally at  ../aten/src/ATen/native/IndexingUtils.h:25.)
+  temp[dup_mask] = -1
+ncf.py:153: UserWarning: This overload of nonzero is deprecated:
+	nonzero(Tensor input, *, Tensor out)
+Consider using one of the following signatures instead:
+	nonzero(Tensor input, *, bool as_tuple) (Triggered internally at  ../torch/csrc/utils/python_arg_parser.cpp:882.)
+  ndcg = (math.log(2) / (torch.nonzero(ifzero)[:,1].view(-1).to(torch.float)+2).log_()).sum()
+:::NVLOGv0.1.0 ncf 1603831480.180755138 (ncf.py:155) eval_size: {"epoch": 0, "value": 13987793}
+:::NVLOGv0.1.0 ncf 1603831480.181074619 (ncf.py:156) eval_hp_num_users: 138493
+:::NVLOGv0.1.0 ncf 1603831480.181362152 (ncf.py:157) eval_hp_num_neg: 100
+Epoch 0: HR@10 = 0.8346, NDCG@10 = 0.5499, train_time = 4.84, val_time = 0.25
+:::NVLOGv0.1.0 ncf 1603831480.181758404 (ncf.py:333) eval_accuracy: {"epoch": 0, "value": 0.834648682604897}
+:::NVLOGv0.1.0 ncf 1603831480.182024956 (ncf.py:334) eval_target: 1.0
+:::NVLOGv0.1.0 ncf 1603831480.182275772 (ncf.py:335) eval_stop: 0
+:::NVLOGv0.1.0 ncf 1603831480.182527781 (ncf.py:340) eval_throughput: 55805136.52462809
+New best hr! Saving the model to:  /data/checkpoints/model.pth
+:::NVLOGv0.1.0 ncf 1603831480.521230936 (ncf.py:282) train_epoch_start: 1
+:::NVLOGv0.1.0 ncf 1603831480.521725893 (ncf.py:283) input_hp_num_neg: 4
+:::NVLOGv0.1.0 ncf 1603831480.522165537 (ncf.py:284) input_step_train_neg_gen
+:::NVLOGv0.1.0 ncf 1603831484.792917013 (ncf.py:318) train_throughput: 23259113.43694331
+:::NVLOGv0.1.0 ncf 1603831484.793719292 (ncf.py:319) train_epoch_stop: 1
+:::NVLOGv0.1.0 ncf 1603831484.794280767 (ncf.py:320) eval_start: 1
+:::NVLOGv0.1.0 ncf 1603831485.042989969 (ncf.py:155) eval_size: {"epoch": 1, "value": 13987793}
+:::NVLOGv0.1.0 ncf 1603831485.043292046 (ncf.py:156) eval_hp_num_users: 138493
+:::NVLOGv0.1.0 ncf 1603831485.043572426 (ncf.py:157) eval_hp_num_neg: 100
+Epoch 1: HR@10 = 0.8583, NDCG@10 = 0.5875, train_time = 4.27, val_time = 0.25
+:::NVLOGv0.1.0 ncf 1603831485.043955088 (ncf.py:333) eval_accuracy: {"epoch": 1, "value": 0.8582816460037691}
+:::NVLOGv0.1.0 ncf 1603831485.044207811 (ncf.py:334) eval_target: 1.0
+:::NVLOGv0.1.0 ncf 1603831485.044454575 (ncf.py:335) eval_stop: 1
+:::NVLOGv0.1.0 ncf 1603831485.044703960 (ncf.py:340) eval_throughput: 55548928.373273596
+New best hr! Saving the model to:  /data/checkpoints/model.pth
+:::NVLOGv0.1.0 ncf 1603831485.351268291 (ncf.py:356) best_train_throughput: 23259113.43694331
+:::NVLOGv0.1.0 ncf 1603831485.352174997 (ncf.py:357) best_eval_throughput: 55805136.52462809
+:::NVLOGv0.1.0 ncf 1603831485.352739573 (ncf.py:358) best_accuracy: 0.8582816460037691
+:::NVLOGv0.1.0 ncf 1603831485.353357315 (ncf.py:359) time_to_target: 11.284788370132446
+:::NVLOGv0.1.0 ncf 1603831485.353918314 (ncf.py:360) time_to_best_model: 11.282315969467163
+:::NVLOGv0.1.0 ncf 1603831485.354475498 (ncf.py:362) run_stop: {"success": false}
+:::NVLOGv0.1.0 ncf 1603831485.355011940 (ncf.py:363) run_final
+DONE!
