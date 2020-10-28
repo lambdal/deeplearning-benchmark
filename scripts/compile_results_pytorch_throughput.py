@@ -57,17 +57,17 @@ list_test_fp32 = {
 
 
 list_test_fp16 = {
-            'PyTorch_SSD_AMP': ('ssd', "^.*Training performance =.*$", -2),
-            'PyTorch_resnet50_FP16': ('resnet50', "^.*Summary: train.loss.*$", -2),
-            'PyTorch_maskrcnn_FP16': ('maskrcnn', "^.*Training perf is:.*$", -2),
-            'PyTorch_gnmt_FP16': ('gnmt', "^.*Training:.*$", -4),
-            'PyTorch_ncf_FP16': ('ncf', "^.*best_train_throughput:.*$", -1),
-            'PyTorch_transformerxlbase_FP16': ('transformerxlbase', "^.*Training throughput:.*$", -2),
-            'PyTorch_transformerxllarge_FP16': ('transformerxllarge', "^.*Training throughput:.*$", -2),
-            'PyTorch_tacotron2_FP16': ('tacotron2', "^.*train_epoch_avg_items/sec:.*$", -1),
-            'PyTorch_waveglow_FP16': ('waveglow', "^.*train_epoch_avg_items/sec:.*$", -1),
-            'PyTorch_bert_large_squad_FP16': ('bert_large_squad', "^.*training throughput:.*$", -1),
-            'PyTorch_bert_base_squad_FP16': ('bert_base_squad', "^.*training throughput:.*$", -1),
+            # 'PyTorch_SSD_AMP': ('ssd', "^.*Training performance =.*$", -2),
+            # 'PyTorch_resnet50_FP16': ('resnet50', "^.*Summary: train.loss.*$", -2),
+            # 'PyTorch_maskrcnn_FP16': ('maskrcnn', "^.*Training perf is:.*$", -2),
+            # 'PyTorch_gnmt_FP16': ('gnmt', "^.*Training:.*$", -4),
+            # 'PyTorch_ncf_FP16': ('ncf', "^.*best_train_throughput:.*$", -1),
+            # 'PyTorch_transformerxlbase_FP16': ('transformerxlbase', "^.*Training throughput:.*$", -2),
+            # 'PyTorch_transformerxllarge_FP16': ('transformerxllarge', "^.*Training throughput:.*$", -2),
+            # 'PyTorch_tacotron2_FP16': ('tacotron2', "^.*train_items_per_sec :.*$", -2),
+            # 'PyTorch_waveglow_FP16': ('waveglow', "^.*train_items_per_sec :.*$", -2),
+            # 'PyTorch_bert_large_squad_FP16': ('bert_large_squad', "^.*training_sequences_per_second :.*$", -6),
+            'PyTorch_bert_base_squad_FP16': ('bert_base_squad', "^.*training_sequences_per_second :.*$", -6),
              }
 
 
@@ -76,57 +76,65 @@ for key, value in list_test_fp16.items():
     list_test_all[key] = value
 
 
+# list_system_single = {
+#     'V100': 1,
+#     'QuadroRTX8000': 1,
+#     'QuadroRTX6000': 1,
+#     'QuadroRTX5000': 1,
+#     'TitanRTX': 1,
+#     '2080Ti': 1,
+#     '1080Ti': 1,
+#     '2080SuperMaxQ': 1,
+#     '2080MaxQ': 1, 
+#     '2070MaxQ': 1
+#     }
+    
+
+# list_system_multiple = {
+#     '2x2080TiNVlink_trt': 2,
+#     '2x2080TiNVlink_trt2': 2,
+#     '2x2080Ti_trt': 2,
+#     '2x2080Ti_trt2': 2,
+#     '4x2080TiNVlink_trt': 4,
+#     '4x2080TiNVlink_trt2': 4,
+#     '4x2080Ti_trt': 4,
+#     '4x2080Ti_trt2': 4,
+#     '8x2080TiNVlink_trt': 8,
+#     '8x2080TiNVlink_trt2': 8,
+#     '8x2080Ti_trt': 8,
+#     '8x2080Ti_trt2': 8,    
+#     '2xQuadroRTX8000NVlink_trt': 2,
+#     '2xQuadroRTX8000NVlink_trt2': 2,
+#     '2xQuadroRTX8000_trt': 2,
+#     '2xQuadroRTX8000_trt2': 2,
+#     '4xQuadroRTX8000NVlink_trt': 4,
+#     '4xQuadroRTX8000NVlink_trt2': 4,
+#     '4xQuadroRTX8000_trt': 4,
+#     '4xQuadroRTX8000_trt2': 4,
+#     '8xQuadroRTX8000NVlink_trt': 8,
+#     '8xQuadroRTX8000NVlink_trt2': 8,
+#     '8xQuadroRTX8000_trt': 8,
+#     '8xQuadroRTX8000_trt2': 8,
+#     '2xV100': 2,
+#     '4xV100': 4,
+#     '8xV100': 8,
+#     'LambdaCloud_4x1080Ti': 4,
+#     'LambdaCloud_2xQuadroRTX6000': 2,
+#     'LambdaCloud_4xQuadroRTX6000': 4,
+#     'LambdaCloud_8xV10016G': 8,
+#     'Linode_2xQuadroRTX6000': 2,
+#     'p3.16xlarge': 8,
+#     'p3.8xlarge': 4
+# }
+
 list_system_single = {
-    'V100': 1,
-    'QuadroRTX8000': 1,
-    'QuadroRTX6000': 1,
-    'QuadroRTX5000': 1,
-    'TitanRTX': 1,
-    '2080Ti': 1,
-    '1080Ti': 1,
-    '2080SuperMaxQ': 1,
-    '2080MaxQ': 1, 
-    '2070MaxQ': 1
+    '3080': 1
     }
     
 
 list_system_multiple = {
-    '2x2080TiNVlink_trt': 2,
-    '2x2080TiNVlink_trt2': 2,
-    '2x2080Ti_trt': 2,
-    '2x2080Ti_trt2': 2,
-    '4x2080TiNVlink_trt': 4,
-    '4x2080TiNVlink_trt2': 4,
-    '4x2080Ti_trt': 4,
-    '4x2080Ti_trt2': 4,
-    '8x2080TiNVlink_trt': 8,
-    '8x2080TiNVlink_trt2': 8,
-    '8x2080Ti_trt': 8,
-    '8x2080Ti_trt2': 8,    
-    '2xQuadroRTX8000NVlink_trt': 2,
-    '2xQuadroRTX8000NVlink_trt2': 2,
-    '2xQuadroRTX8000_trt': 2,
-    '2xQuadroRTX8000_trt2': 2,
-    '4xQuadroRTX8000NVlink_trt': 4,
-    '4xQuadroRTX8000NVlink_trt2': 4,
-    '4xQuadroRTX8000_trt': 4,
-    '4xQuadroRTX8000_trt2': 4,
-    '8xQuadroRTX8000NVlink_trt': 8,
-    '8xQuadroRTX8000NVlink_trt2': 8,
-    '8xQuadroRTX8000_trt': 8,
-    '8xQuadroRTX8000_trt2': 8,
-    '2xV100': 2,
-    '4xV100': 4,
-    '8xV100': 8,
-    'LambdaCloud_4x1080Ti': 4,
-    'LambdaCloud_2xQuadroRTX6000': 2,
-    'LambdaCloud_4xQuadroRTX6000': 4,
-    'LambdaCloud_8xV10016G': 8,
-    'Linode_2xQuadroRTX6000': 2,
-    'p3.16xlarge': 8,
-    'p3.8xlarge': 4
+    '2x3080': 2
 }
-
 
 if precision == 'fp32':
     list_test = list_test_fp32
