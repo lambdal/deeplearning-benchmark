@@ -82,7 +82,7 @@ PyTorch_maskrcnn_FP16_PARAMS=(
              "examples/maskrcnn/pytorch"
              args      
              --config-file            "/workspace/patch/e2e_mask_rcnn_R_50_FPN_1x.yaml"
-             SOLVER.IMS_PER_BATCH     "6"
+             SOLVER.IMS_PER_BATCH     "4"
              DTYPE                    "float16"
              SOLVER.MAX_ITER          "400"
              OUTPUT_DIR               "/results"
@@ -106,8 +106,8 @@ PyTorch_gnmt_FP16_PARAMS=(
             args
             --dataset-dir             "/data/gnmt/wmt16_de_en"
             --train-batch-size        "112"
-            --val-batch-size          "32"
-            --test-batch-size         "32"
+            --val-batch-size          "24"
+            --test-batch-size         "24"
             --math                    "fp16"
             --epochs                  "2"
             --seed                    "2"
@@ -127,7 +127,7 @@ PyTorch_ncf_FP16_PARAMS=(
             args
             --data                    "/data/ncf/cache/ml-20m"
             --epochs                  "2"
-            --batch_size              "1200000"
+            --batch_size              "1000000"
             --opt_level               "O2"
            )
 
@@ -156,6 +156,7 @@ PyTorch_transformerxlbase_FP32_PARAMS=(
             --eval_interval           "5000"
             --roll
             --cuda
+	    --no_eval
            )
 
 PyTorch_transformerxlbase_FP16_PARAMS=(
@@ -163,7 +164,7 @@ PyTorch_transformerxlbase_FP16_PARAMS=(
             args
             --data                    "/data/transformer-xl/wikitext-103"
             --max_step                "400"
-            --batch_size              "2"
+            --batch_size              "4"
             --dataset                 "wt103" 
             --n_layer                 "16"
             --d_model                 "512"
@@ -184,6 +185,7 @@ PyTorch_transformerxlbase_FP16_PARAMS=(
             --roll
             --cuda
             --fp16
+	    --no_eval
            )
 
 PyTorch_transformerxllarge_FP32_PARAMS=(
@@ -209,6 +211,7 @@ PyTorch_transformerxllarge_FP32_PARAMS=(
             --eval_interval           "5000"
             --roll
             --cuda
+	    --no_eval
            )
 
 PyTorch_transformerxllarge_FP16_PARAMS=(
@@ -234,6 +237,7 @@ PyTorch_transformerxllarge_FP16_PARAMS=(
             --eval_interval           "5000"
             --cuda
             --fp16
+	    --no_eval
            )
 
 PyTorch_tacotron2_FP32_PARAMS=(
