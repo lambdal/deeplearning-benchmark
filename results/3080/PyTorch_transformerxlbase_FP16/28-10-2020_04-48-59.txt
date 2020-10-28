@@ -1,0 +1,232 @@
+Experiment dir : LM-TFM
+Namespace(adaptive=False, amp='apex', apex_amp_opt_level='O2', append_dataset=False, append_time=False, attn_type=0, batch_chunk=1, batch_size=2, clamp_len=-1, clip=0.25, clip_nonemb=False, cuda=True, d_embed=512, d_head=64, d_inner=2048, d_model=512, data='/data/transformer-xl/wikitext-103', dataset='wt103', debug=False, decay_rate=0.5, div_val=1, dllog_file='train_log.json', dropatt=0.0, dropout=0.1, emb_init='normal', emb_init_range=0.01, eta_min=0.001, eval_batch_size=16, eval_interval=5000, eval_max_steps=-1, eval_tgt_len=192, ext_len=0, fp16=True, gpu0_bsz=-1, init='normal', init_range=0.1, init_std=0.02, local_batch_size=None, local_rank=0, log_all_ranks=False, log_interval=10, lr=0.0, lr_min=0.0, max_step=400, max_step_scheduler=None, mem_len=192, mom=0.0, multi_gpu=None, n_head=8, n_layer=16, no_env=False, no_eval=False, not_tied=False, optim='jitlamb', patience=0, pre_lnorm=False, proj_init_std=0.01, restart='', roll=True, same_length=False, sample_softmax=-1, save_all=False, scheduler='cosine', seed=1111, swap_mem=False, target_perplexity=None, target_throughput=None, tgt_len=192, tied=True, txtlog_file='train_log.log', varlen=False, vocab='word', warmup_step=1000, weight_decay=0.0, work_dir='LM-TFM')
+world size: 1
+Collecting environment information...
+PyTorch version: 1.7.0a0+7036e91
+Is debug build: False
+CUDA used to build PyTorch: 11.1
+ROCM used to build PyTorch: N/A
+
+OS: Ubuntu 18.04.5 LTS (x86_64)
+GCC version: (Ubuntu 7.5.0-3ubuntu1~18.04) 7.5.0
+Clang version: Could not collect
+CMake version: version 3.14.0
+
+Python version: 3.6 (64-bit runtime)
+Is CUDA available: True
+CUDA runtime version: Could not collect
+GPU models and configuration: 
+GPU 0: GeForce RTX 3080
+GPU 1: GeForce RTX 3080
+
+Nvidia driver version: 455.28
+cuDNN version: Probably one of the following:
+/usr/lib/x86_64-linux-gnu/libcudnn.so.8.0.4
+/usr/lib/x86_64-linux-gnu/libcudnn_adv_infer.so.8.0.4
+/usr/lib/x86_64-linux-gnu/libcudnn_adv_train.so.8.0.4
+/usr/lib/x86_64-linux-gnu/libcudnn_cnn_infer.so.8.0.4
+/usr/lib/x86_64-linux-gnu/libcudnn_cnn_train.so.8.0.4
+/usr/lib/x86_64-linux-gnu/libcudnn_ops_infer.so.8.0.4
+/usr/lib/x86_64-linux-gnu/libcudnn_ops_train.so.8.0.4
+HIP runtime version: N/A
+MIOpen runtime version: N/A
+
+Versions of relevant libraries:
+[pip3] numpy==1.19.1
+[pip3] pytorch-transformers==1.1.0
+[pip3] torch==1.7.0a0+7036e91
+[pip3] torchtext==0.8.0a0
+[pip3] torchvision==0.8.0a0
+[conda] magma-cuda110             2.5.2                         5    local
+[conda] mkl                       2019.1                      144  
+[conda] mkl-include               2019.1                      144  
+[conda] nomkl                     3.0                           0  
+[conda] numpy                     1.19.1           py36h30dfecb_0  
+[conda] numpy-base                1.19.1           py36h75fe3a5_0  
+[conda] pytorch-transformers      1.1.0                    pypi_0    pypi
+[conda] torch                     1.7.0a0+7036e91          pypi_0    pypi
+[conda] torchtext                 0.8.0a0                  pypi_0    pypi
+[conda] torchvision               0.8.0a0                  pypi_0    pypi
+Loading cached dataset...
+Selected optimization level O2:  FP16 training with FP32 batchnorm and FP32 master weights.
+
+Defaults for this optimization level are:
+enabled                : True
+opt_level              : O2
+cast_model_type        : torch.float16
+patch_torch_functions  : False
+keep_batchnorm_fp32    : True
+master_weights         : True
+loss_scale             : dynamic
+Processing user overrides (additional kwargs that are not None)...
+After processing overrides, optimization options are:
+enabled                : True
+opt_level              : O2
+cast_model_type        : torch.float16
+patch_torch_functions  : False
+keep_batchnorm_fp32    : True
+master_weights         : True
+loss_scale             : dynamic
+====================================================================================================
+    - work_dir : LM-TFM
+    - append_dataset : False
+    - append_time : False
+    - cuda : True
+    - fp16 : True
+    - restart : 
+    - debug : False
+    - log_all_ranks : False
+    - dllog_file : train_log.json
+    - txtlog_file : train_log.log
+    - save_all : False
+    - no_env : False
+    - no_eval : False
+    - log_interval : 10
+    - target_throughput : None
+    - target_perplexity : None
+    - apex_amp_opt_level : O2
+    - amp : apex
+    - data : /data/transformer-xl/wikitext-103
+    - dataset : wt103
+    - vocab : word
+    - n_layer : 16
+    - n_head : 8
+    - d_head : 64
+    - d_embed : 512
+    - d_model : 512
+    - d_inner : 2048
+    - dropout : 0.1
+    - dropatt : 0.0
+    - pre_lnorm : False
+    - attn_type : 0
+    - not_tied : False
+    - clamp_len : -1
+    - adaptive : False
+    - div_val : 1
+    - sample_softmax : -1
+    - init : normal
+    - emb_init : normal
+    - init_range : 0.1
+    - emb_init_range : 0.01
+    - init_std : 0.02
+    - proj_init_std : 0.01
+    - optim : jitlamb
+    - lr : 0.0
+    - mom : 0.0
+    - scheduler : cosine
+    - max_step_scheduler : None
+    - warmup_step : 1000
+    - decay_rate : 0.5
+    - lr_min : 0.0
+    - clip : 0.25
+    - weight_decay : 0.0
+    - clip_nonemb : False
+    - patience : 0
+    - eta_min : 0.001
+    - max_step : 400
+    - batch_size : 2
+    - local_batch_size : None
+    - batch_chunk : 1
+    - roll : True
+    - tgt_len : 192
+    - ext_len : 0
+    - mem_len : 192
+    - seed : 1111
+    - multi_gpu : None
+    - gpu0_bsz : -1
+    - same_length : False
+    - varlen : False
+    - swap_mem : False
+    - eval_tgt_len : 192
+    - eval_batch_size : 16
+    - eval_max_steps : -1
+    - eval_interval : 5000
+    - local_rank : 0
+    - tied : True
+    - n_token : 267735
+    - n_all_param : 191948759
+    - n_nonemb_param : 54599680
+====================================================================================================
+#params = 191948759
+#non emb params = 54599680
+/opt/conda/lib/python3.6/site-packages/torch/functional.py:1242: UserWarning: torch.norm is deprecated and may be removed in a future PyTorch release. Use torch.linalg.norm instead.
+  "torch.norm is deprecated and may be removed in a future PyTorch release. "
+| epoch   1 step       10 | batches     10 / 268821 | lr 0.000e+00 | ms/batch 169.7 | tok/s    2263 | loss 12.59 | ppl 293409.09
+| epoch   1 step       20 | batches     20 / 268821 | lr 0.000e+00 | ms/batch  63.9 | tok/s    6010 | loss 12.56 | ppl 284859.57
+| epoch   1 step       30 | batches     30 / 268821 | lr 0.000e+00 | ms/batch  63.9 | tok/s    6006 | loss 12.50 | ppl 268477.97
+| epoch   1 step       40 | batches     40 / 268821 | lr 0.000e+00 | ms/batch  64.1 | tok/s    5995 | loss 12.54 | ppl 279438.86
+| epoch   1 step       50 | batches     50 / 268821 | lr 0.000e+00 | ms/batch  64.1 | tok/s    5993 | loss 12.56 | ppl 285940.45
+| epoch   1 step       60 | batches     60 / 268821 | lr 0.000e+00 | ms/batch  63.9 | tok/s    6009 | loss 12.57 | ppl 287357.92
+| epoch   1 step       70 | batches     70 / 268821 | lr 0.000e+00 | ms/batch  64.7 | tok/s    5931 | loss 12.59 | ppl 294253.53
+| epoch   1 step       80 | batches     80 / 268821 | lr 0.000e+00 | ms/batch  64.1 | tok/s    5993 | loss 12.53 | ppl 277188.39
+| epoch   1 step       90 | batches     90 / 268821 | lr 0.000e+00 | ms/batch  64.7 | tok/s    5936 | loss 12.54 | ppl 280052.14
+| epoch   1 step      100 | batches    100 / 268821 | lr 0.000e+00 | ms/batch  64.1 | tok/s    5995 | loss 12.57 | ppl 286484.06
+| epoch   1 step      110 | batches    110 / 268821 | lr 0.000e+00 | ms/batch  64.3 | tok/s    5974 | loss 12.56 | ppl 286076.33
+| epoch   1 step      120 | batches    120 / 268821 | lr 0.000e+00 | ms/batch  64.2 | tok/s    5979 | loss 12.58 | ppl 290764.70
+| epoch   1 step      130 | batches    130 / 268821 | lr 0.000e+00 | ms/batch  64.1 | tok/s    5992 | loss 12.54 | ppl 280266.74
+| epoch   1 step      140 | batches    140 / 268821 | lr 0.000e+00 | ms/batch  64.4 | tok/s    5967 | loss 12.56 | ppl 285208.71
+| epoch   1 step      150 | batches    150 / 268821 | lr 0.000e+00 | ms/batch  64.2 | tok/s    5980 | loss 12.51 | ppl 271205.66
+| epoch   1 step      160 | batches    160 / 268821 | lr 0.000e+00 | ms/batch  64.2 | tok/s    5982 | loss 12.53 | ppl 275786.31
+| epoch   1 step      170 | batches    170 / 268821 | lr 0.000e+00 | ms/batch  64.3 | tok/s    5972 | loss 12.55 | ppl 282798.05
+| epoch   1 step      180 | batches    180 / 268821 | lr 0.000e+00 | ms/batch  64.1 | tok/s    5989 | loss 12.47 | ppl 259597.26
+| epoch   1 step      190 | batches    190 / 268821 | lr 0.000e+00 | ms/batch  64.8 | tok/s    5928 | loss 12.55 | ppl 283383.77
+| epoch   1 step      200 | batches    200 / 268821 | lr 0.000e+00 | ms/batch  64.1 | tok/s    5994 | loss 12.55 | ppl 283035.86
+| epoch   1 step      210 | batches    210 / 268821 | lr 0.000e+00 | ms/batch  64.6 | tok/s    5943 | loss 12.53 | ppl 276556.64
+| epoch   1 step      220 | batches    220 / 268821 | lr 0.000e+00 | ms/batch  64.1 | tok/s    5991 | loss 12.56 | ppl 283648.61
+| epoch   1 step      230 | batches    230 / 268821 | lr 0.000e+00 | ms/batch  64.5 | tok/s    5955 | loss 12.57 | ppl 288121.27
+| epoch   1 step      240 | batches    240 / 268821 | lr 0.000e+00 | ms/batch  64.2 | tok/s    5983 | loss 12.54 | ppl 280568.21
+| epoch   1 step      250 | batches    250 / 268821 | lr 0.000e+00 | ms/batch  64.5 | tok/s    5957 | loss 12.58 | ppl 290392.25
+| epoch   1 step      260 | batches    260 / 268821 | lr 0.000e+00 | ms/batch  64.5 | tok/s    5954 | loss 12.58 | ppl 290636.34
+| epoch   1 step      270 | batches    270 / 268821 | lr 0.000e+00 | ms/batch  64.5 | tok/s    5956 | loss 12.57 | ppl 288516.67
+| epoch   1 step      280 | batches    280 / 268821 | lr 0.000e+00 | ms/batch  64.4 | tok/s    5965 | loss 12.53 | ppl 277499.60
+| epoch   1 step      290 | batches    290 / 268821 | lr 0.000e+00 | ms/batch  64.3 | tok/s    5970 | loss 12.54 | ppl 280459.49
+| epoch   1 step      300 | batches    300 / 268821 | lr 0.000e+00 | ms/batch  64.3 | tok/s    5974 | loss 12.56 | ppl 284123.10
+| epoch   1 step      310 | batches    310 / 268821 | lr 0.000e+00 | ms/batch  64.4 | tok/s    5960 | loss 12.55 | ppl 282399.64
+| epoch   1 step      320 | batches    320 / 268821 | lr 0.000e+00 | ms/batch  64.2 | tok/s    5982 | loss 12.56 | ppl 284058.97
+| epoch   1 step      330 | batches    330 / 268821 | lr 0.000e+00 | ms/batch  64.2 | tok/s    5981 | loss 12.55 | ppl 282996.13
+| epoch   1 step      340 | batches    340 / 268821 | lr 0.000e+00 | ms/batch  64.0 | tok/s    6004 | loss 12.56 | ppl 284430.18
+| epoch   1 step      350 | batches    350 / 268821 | lr 0.000e+00 | ms/batch  64.1 | tok/s    5994 | loss 12.57 | ppl 288890.21
+| epoch   1 step      360 | batches    360 / 268821 | lr 0.000e+00 | ms/batch  64.3 | tok/s    5975 | loss 12.58 | ppl 291240.15
+| epoch   1 step      370 | batches    370 / 268821 | lr 0.000e+00 | ms/batch  64.4 | tok/s    5959 | loss 12.55 | ppl 282731.09
+| epoch   1 step      380 | batches    380 / 268821 | lr 0.000e+00 | ms/batch  64.0 | tok/s    5998 | loss 12.59 | ppl 295027.72
+| epoch   1 step      390 | batches    390 / 268821 | lr 0.000e+00 | ms/batch  64.2 | tok/s    5979 | loss 12.55 | ppl 281505.36
+| epoch   1 step      400 | batches    400 / 268821 | lr 0.000e+00 | ms/batch  63.9 | tok/s    6007 | loss 12.55 | ppl 283052.55
+----------------------------------------------------------------------------------------------------
+| Eval   0 at step      400 | time:  4.32s | valid loss 12.53 | valid ppl 277523.969
+----------------------------------------------------------------------------------------------------
+Saving checkpoint to LM-TFM/checkpoint_last.pt
+Saving checkpoint to LM-TFM/checkpoint_best.pt
+----------------------------------------------------------------------------------------------------
+End of training
+Loading checkpoint from LM-TFM/checkpoint_best.pt
+Traceback (most recent call last):
+  File "train.py", line 1060, in <module>
+    main()
+  File "train.py", line 995, in main
+    test_loss = evaluate(te_iter, model, args)
+  File "train.py", line 421, in evaluate
+    loss, mems = model(data, target, mems)
+  File "/opt/conda/lib/python3.6/site-packages/torch/nn/modules/module.py", line 727, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/opt/conda/lib/python3.6/site-packages/apex/amp/_initialize.py", line 197, in new_fwd
+    **applier(kwargs, input_caster))
+  File "/workspace/examples/transformer-xl/pytorch/mem_transformer.py", line 785, in forward
+    loss = self.crit(pred_hid.view(-1, pred_hid.size(-1)), target.view(-1))
+  File "/opt/conda/lib/python3.6/site-packages/torch/nn/modules/module.py", line 727, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/workspace/examples/transformer-xl/pytorch/utils/proj_adaptive_softmax.py", line 144, in forward
+    nll = -F.log_softmax(logit, dim=-1) \
+  File "/opt/conda/lib/python3.6/site-packages/torch/nn/functional.py", line 1608, in log_softmax
+    ret = input.log_softmax(dim)
+RuntimeError: CUDA out of memory. Tried to allocate 1.53 GiB (GPU 0; 9.78 GiB total capacity; 6.65 GiB already allocated; 855.69 MiB free; 7.98 GiB reserved in total by PyTorch)
+Traceback (most recent call last):
+  File "/opt/conda/lib/python3.6/runpy.py", line 193, in _run_module_as_main
+    "__main__", mod_spec)
+  File "/opt/conda/lib/python3.6/runpy.py", line 85, in _run_code
+    exec(code, run_globals)
+  File "/opt/conda/lib/python3.6/site-packages/torch/distributed/launch.py", line 261, in <module>
+    main()
+  File "/opt/conda/lib/python3.6/site-packages/torch/distributed/launch.py", line 257, in main
+    cmd=cmd)
+subprocess.CalledProcessError: Command '['/opt/conda/bin/python', '-u', 'train.py', '--local_rank=0', '--data', '/data/transformer-xl/wikitext-103', '--max_step', '400', '--batch_size', '2', '--dataset', 'wt103', '--n_layer', '16', '--d_model', '512', '--n_head', '8', '--d_head', '64', '--d_inner', '2048', '--dropout', '0.1', '--dropatt', '0.0', '--optim', 'jitlamb', '--lr', '0.0', '--eta_min', '0.001', '--warmup_step', '1000', '--tgt_len', '192', '--mem_len', '192', '--eval_tgt_len', '192', '--log_interval', '10', '--eval_interval', '5000', '--roll', '--cuda', '--fp16']' returned non-zero exit status 1.
+DONE!

@@ -1,0 +1,193 @@
+Experiment dir : LM-TFM
+Namespace(adaptive=False, amp='apex', apex_amp_opt_level='O2', append_dataset=False, append_time=False, attn_type=0, batch_chunk=1, batch_size=4, clamp_len=-1, clip=0.25, clip_nonemb=False, cuda=True, d_embed=512, d_head=64, d_inner=2048, d_model=512, data='/data/transformer-xl/wikitext-103', dataset='wt103', debug=False, decay_rate=0.5, div_val=1, dllog_file='train_log.json', dropatt=0.0, dropout=0.1, emb_init='normal', emb_init_range=0.01, eta_min=0.001, eval_batch_size=16, eval_interval=5000, eval_max_steps=-1, eval_tgt_len=192, ext_len=0, fp16=False, gpu0_bsz=-1, init='normal', init_range=0.1, init_std=0.02, local_batch_size=None, local_rank=0, log_all_ranks=False, log_interval=10, lr=0.0, lr_min=0.0, max_step=400, max_step_scheduler=None, mem_len=192, mom=0.0, multi_gpu=None, n_head=8, n_layer=16, no_env=False, no_eval=False, not_tied=False, optim='jitlamb', patience=0, pre_lnorm=False, proj_init_std=0.01, restart='', roll=True, same_length=False, sample_softmax=-1, save_all=False, scheduler='cosine', seed=1111, swap_mem=False, target_perplexity=None, target_throughput=None, tgt_len=192, tied=True, txtlog_file='train_log.log', varlen=False, vocab='word', warmup_step=1000, weight_decay=0.0, work_dir='LM-TFM')
+world size: 2
+Collecting environment information...
+PyTorch version: 1.7.0a0+7036e91
+Is debug build: False
+CUDA used to build PyTorch: 11.1
+ROCM used to build PyTorch: N/A
+
+OS: Ubuntu 18.04.5 LTS (x86_64)
+GCC version: (Ubuntu 7.5.0-3ubuntu1~18.04) 7.5.0
+Clang version: Could not collect
+CMake version: version 3.14.0
+
+Python version: 3.6 (64-bit runtime)
+Is CUDA available: True
+CUDA runtime version: Could not collect
+GPU models and configuration: 
+GPU 0: GeForce RTX 3080
+GPU 1: GeForce RTX 3080
+
+Nvidia driver version: 455.28
+cuDNN version: Probably one of the following:
+/usr/lib/x86_64-linux-gnu/libcudnn.so.8.0.4
+/usr/lib/x86_64-linux-gnu/libcudnn_adv_infer.so.8.0.4
+/usr/lib/x86_64-linux-gnu/libcudnn_adv_train.so.8.0.4
+/usr/lib/x86_64-linux-gnu/libcudnn_cnn_infer.so.8.0.4
+/usr/lib/x86_64-linux-gnu/libcudnn_cnn_train.so.8.0.4
+/usr/lib/x86_64-linux-gnu/libcudnn_ops_infer.so.8.0.4
+/usr/lib/x86_64-linux-gnu/libcudnn_ops_train.so.8.0.4
+HIP runtime version: N/A
+MIOpen runtime version: N/A
+
+Versions of relevant libraries:
+[pip3] numpy==1.19.1
+[pip3] pytorch-transformers==1.1.0
+[pip3] torch==1.7.0a0+7036e91
+[pip3] torchtext==0.8.0a0
+[pip3] torchvision==0.8.0a0
+[conda] magma-cuda110             2.5.2                         5    local
+[conda] mkl                       2019.1                      144  
+[conda] mkl-include               2019.1                      144  
+[conda] nomkl                     3.0                           0  
+[conda] numpy                     1.19.1           py36h30dfecb_0  
+[conda] numpy-base                1.19.1           py36h75fe3a5_0  
+[conda] pytorch-transformers      1.1.0                    pypi_0    pypi
+[conda] torch                     1.7.0a0+7036e91          pypi_0    pypi
+[conda] torchtext                 0.8.0a0                  pypi_0    pypi
+[conda] torchvision               0.8.0a0                  pypi_0    pypi
+Loading cached dataset...
+====================================================================================================
+    - work_dir : LM-TFM
+    - append_dataset : False
+    - append_time : False
+    - cuda : True
+    - fp16 : False
+    - restart : 
+    - debug : False
+    - log_all_ranks : False
+    - dllog_file : train_log.json
+    - txtlog_file : train_log.log
+    - save_all : False
+    - no_env : False
+    - no_eval : False
+    - log_interval : 10
+    - target_throughput : None
+    - target_perplexity : None
+    - apex_amp_opt_level : O2
+    - amp : apex
+    - data : /data/transformer-xl/wikitext-103
+    - dataset : wt103
+    - vocab : word
+    - n_layer : 16
+    - n_head : 8
+    - d_head : 64
+    - d_embed : 512
+    - d_model : 512
+    - d_inner : 2048
+    - dropout : 0.1
+    - dropatt : 0.0
+    - pre_lnorm : False
+    - attn_type : 0
+    - not_tied : False
+    - clamp_len : -1
+    - adaptive : False
+    - div_val : 1
+    - sample_softmax : -1
+    - init : normal
+    - emb_init : normal
+    - init_range : 0.1
+    - emb_init_range : 0.01
+    - init_std : 0.02
+    - proj_init_std : 0.01
+    - optim : jitlamb
+    - lr : 0.0
+    - mom : 0.0
+    - scheduler : cosine
+    - max_step_scheduler : None
+    - warmup_step : 1000
+    - decay_rate : 0.5
+    - lr_min : 0.0
+    - clip : 0.25
+    - weight_decay : 0.0
+    - clip_nonemb : False
+    - patience : 0
+    - eta_min : 0.001
+    - max_step : 400
+    - batch_size : 4
+    - local_batch_size : None
+    - batch_chunk : 1
+    - roll : True
+    - tgt_len : 192
+    - ext_len : 0
+    - mem_len : 192
+    - seed : 1111
+    - multi_gpu : None
+    - gpu0_bsz : -1
+    - same_length : False
+    - varlen : False
+    - swap_mem : False
+    - eval_tgt_len : 192
+    - eval_batch_size : 16
+    - eval_max_steps : -1
+    - eval_interval : 5000
+    - local_rank : 0
+    - tied : True
+    - n_token : 267735
+    - n_all_param : 191948759
+    - n_nonemb_param : 54599680
+====================================================================================================
+#params = 191948759
+#non emb params = 54599680
+/opt/conda/lib/python3.6/site-packages/torch/functional.py:1242: UserWarning: torch.norm is deprecated and may be removed in a future PyTorch release. Use torch.linalg.norm instead.
+  "torch.norm is deprecated and may be removed in a future PyTorch release. "
+/opt/conda/lib/python3.6/site-packages/torch/functional.py:1242: UserWarning: torch.norm is deprecated and may be removed in a future PyTorch release. Use torch.linalg.norm instead.
+  "torch.norm is deprecated and may be removed in a future PyTorch release. "
+| epoch   1 step       10 | batches     10 / 134411 | lr 0.000e+00 | ms/batch 184.0 | tok/s    4202 | loss 12.56 | ppl 286260.96
+| epoch   1 step       20 | batches     20 / 134411 | lr 0.000e+00 | ms/batch  76.9 | tok/s    9987 | loss 12.58 | ppl 290829.93
+| epoch   1 step       30 | batches     30 / 134411 | lr 0.000e+00 | ms/batch  76.9 | tok/s    9986 | loss 12.52 | ppl 274564.00
+| epoch   1 step       40 | batches     40 / 134411 | lr 0.000e+00 | ms/batch  76.9 | tok/s    9985 | loss 12.51 | ppl 270680.82
+| epoch   1 step       50 | batches     50 / 134411 | lr 0.000e+00 | ms/batch  76.9 | tok/s    9981 | loss 12.57 | ppl 288532.55
+| epoch   1 step       60 | batches     60 / 134411 | lr 0.000e+00 | ms/batch  76.9 | tok/s    9981 | loss 12.56 | ppl 284124.83
+| epoch   1 step       70 | batches     70 / 134411 | lr 0.000e+00 | ms/batch  76.9 | tok/s    9981 | loss 12.58 | ppl 289239.21
+| epoch   1 step       80 | batches     80 / 134411 | lr 0.000e+00 | ms/batch  77.0 | tok/s    9973 | loss 12.58 | ppl 291467.16
+| epoch   1 step       90 | batches     90 / 134411 | lr 0.000e+00 | ms/batch  77.0 | tok/s    9979 | loss 12.56 | ppl 283850.75
+| epoch   1 step      100 | batches    100 / 134411 | lr 0.000e+00 | ms/batch  77.1 | tok/s    9961 | loss 12.59 | ppl 293262.48
+| epoch   1 step      110 | batches    110 / 134411 | lr 0.000e+00 | ms/batch  77.2 | tok/s    9953 | loss 12.56 | ppl 283682.96
+| epoch   1 step      120 | batches    120 / 134411 | lr 0.000e+00 | ms/batch  77.1 | tok/s    9957 | loss 12.57 | ppl 288558.41
+| epoch   1 step      130 | batches    130 / 134411 | lr 0.000e+00 | ms/batch  77.1 | tok/s    9957 | loss 12.55 | ppl 281718.63
+| epoch   1 step      140 | batches    140 / 134411 | lr 0.000e+00 | ms/batch  77.1 | tok/s    9959 | loss 12.54 | ppl 278298.47
+| epoch   1 step      150 | batches    150 / 134411 | lr 0.000e+00 | ms/batch  77.1 | tok/s    9957 | loss 12.54 | ppl 279412.74
+| epoch   1 step      160 | batches    160 / 134411 | lr 0.000e+00 | ms/batch  77.2 | tok/s    9952 | loss 12.57 | ppl 288402.15
+| epoch   1 step      170 | batches    170 / 134411 | lr 0.000e+00 | ms/batch  77.1 | tok/s    9956 | loss 12.55 | ppl 283198.57
+| epoch   1 step      180 | batches    180 / 134411 | lr 0.000e+00 | ms/batch  77.2 | tok/s    9950 | loss 12.54 | ppl 280106.42
+| epoch   1 step      190 | batches    190 / 134411 | lr 0.000e+00 | ms/batch  77.3 | tok/s    9934 | loss 12.55 | ppl 283465.53
+| epoch   1 step      200 | batches    200 / 134411 | lr 0.000e+00 | ms/batch  77.3 | tok/s    9935 | loss 12.56 | ppl 286123.95
+| epoch   1 step      210 | batches    210 / 134411 | lr 0.000e+00 | ms/batch  77.1 | tok/s    9958 | loss 12.54 | ppl 278548.06
+| epoch   1 step      220 | batches    220 / 134411 | lr 0.000e+00 | ms/batch  77.1 | tok/s    9961 | loss 12.54 | ppl 279094.76
+| epoch   1 step      230 | batches    230 / 134411 | lr 0.000e+00 | ms/batch  77.1 | tok/s    9965 | loss 12.55 | ppl 283234.22
+| epoch   1 step      240 | batches    240 / 134411 | lr 0.000e+00 | ms/batch  77.1 | tok/s    9960 | loss 12.55 | ppl 280806.11
+| epoch   1 step      250 | batches    250 / 134411 | lr 0.000e+00 | ms/batch  77.1 | tok/s    9961 | loss 12.57 | ppl 287737.31
+| epoch   1 step      260 | batches    260 / 134411 | lr 0.000e+00 | ms/batch  77.1 | tok/s    9962 | loss 12.58 | ppl 289670.95
+| epoch   1 step      270 | batches    270 / 134411 | lr 0.000e+00 | ms/batch  77.2 | tok/s    9950 | loss 12.57 | ppl 288752.76
+| epoch   1 step      280 | batches    280 / 134411 | lr 0.000e+00 | ms/batch  77.2 | tok/s    9953 | loss 12.54 | ppl 278531.06
+| epoch   1 step      290 | batches    290 / 134411 | lr 0.000e+00 | ms/batch  77.2 | tok/s    9951 | loss 12.56 | ppl 284921.49
+| epoch   1 step      300 | batches    300 / 134411 | lr 0.000e+00 | ms/batch  77.1 | tok/s    9959 | loss 12.53 | ppl 277266.63
+| epoch   1 step      310 | batches    310 / 134411 | lr 0.000e+00 | ms/batch  77.2 | tok/s    9952 | loss 12.51 | ppl 271120.01
+| epoch   1 step      320 | batches    320 / 134411 | lr 0.000e+00 | ms/batch  77.2 | tok/s    9947 | loss 12.56 | ppl 283592.62
+| epoch   1 step      330 | batches    330 / 134411 | lr 0.000e+00 | ms/batch  77.2 | tok/s    9947 | loss 12.54 | ppl 279861.84
+| epoch   1 step      340 | batches    340 / 134411 | lr 0.000e+00 | ms/batch  77.4 | tok/s    9928 | loss 12.52 | ppl 273574.71
+| epoch   1 step      350 | batches    350 / 134411 | lr 0.000e+00 | ms/batch  77.3 | tok/s    9933 | loss 12.53 | ppl 277116.47
+| epoch   1 step      360 | batches    360 / 134411 | lr 0.000e+00 | ms/batch  77.3 | tok/s    9937 | loss 12.56 | ppl 284705.28
+| epoch   1 step      370 | batches    370 / 134411 | lr 0.000e+00 | ms/batch  77.3 | tok/s    9939 | loss 12.57 | ppl 287138.08
+| epoch   1 step      380 | batches    380 / 134411 | lr 0.000e+00 | ms/batch  77.3 | tok/s    9939 | loss 12.55 | ppl 282140.22
+| epoch   1 step      390 | batches    390 / 134411 | lr 0.000e+00 | ms/batch  77.3 | tok/s    9931 | loss 12.56 | ppl 285817.41
+| epoch   1 step      400 | batches    400 / 134411 | lr 0.000e+00 | ms/batch  77.3 | tok/s    9930 | loss 12.55 | ppl 281550.23
+----------------------------------------------------------------------------------------------------
+| Eval   0 at step      400 | time:  3.61s | valid loss 12.53 | valid ppl 277526.675
+----------------------------------------------------------------------------------------------------
+Saving checkpoint to LM-TFM/checkpoint_last.pt
+Saving checkpoint to LM-TFM/checkpoint_best.pt
+----------------------------------------------------------------------------------------------------
+End of training
+Loading checkpoint from LM-TFM/checkpoint_best.pt
+====================================================================================================
+| End of training | test time:  4.00s | test loss 12.53 | test ppl 276697.382
+====================================================================================================
+Training time: 0.71 minutes
+Training throughput: 9954.42 tok/s
+*****************************************
+Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+*****************************************
+DONE!
