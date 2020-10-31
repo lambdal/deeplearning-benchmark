@@ -35,6 +35,7 @@ PyTorch_resnet50_FP32_PARAMS=(
              --raport-file            "benchmark.json"
              --print-freq             "1"
              --training-only
+	     --data-backend pytorch
            )
 
 PyTorch_resnet50_FP16_PARAMS=(
@@ -50,6 +51,7 @@ PyTorch_resnet50_FP16_PARAMS=(
              --raport-file            "benchmark.json"
              --print-freq             "1"
              --training-only  
+	     --data-backend pytorch
            )
 
 PyTorch_resnet50_AMP_PARAMS=(
@@ -61,10 +63,11 @@ PyTorch_resnet50_AMP_PARAMS=(
              --static-loss-scale      "256"
              --epochs                 "2" 
              --prof                   "100" 
-             --batch-size             "768"
+             --batch-size             "720"
              --raport-file            "benchmark.json"
              --print-freq             "1"
              --training-only   
+	     --data-backend pytorch
            )
 
 PyTorch_maskrcnn_FP32_PARAMS=(
