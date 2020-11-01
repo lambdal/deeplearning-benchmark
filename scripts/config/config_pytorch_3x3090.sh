@@ -31,7 +31,7 @@ PyTorch_resnet50_FP32_PARAMS=(
              --arch                   "resnet50"
              --epochs                 "2" 
              --prof                   "100" 
-             --batch-size             "224"
+             --batch-size             "200"
              --raport-file            "benchmark.json"
              --print-freq             "1"
              --training-only
