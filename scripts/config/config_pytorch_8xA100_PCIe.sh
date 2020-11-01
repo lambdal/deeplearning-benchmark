@@ -85,9 +85,9 @@ PyTorch_maskrcnn_FP16_PARAMS=(
              "examples/maskrcnn/pytorch"
              args      
              --config-file            "/workspace/patch/e2e_mask_rcnn_R_50_FPN_1x.yaml"
-             SOLVER.IMS_PER_BATCH     "360"
+             SOLVER.IMS_PER_BATCH     "200"
              DTYPE                    "float16"
-             SOLVER.MAX_ITER          "400"
+             SOLVER.MAX_ITER          "200"
              OUTPUT_DIR               "/results"
              PATHS_CATALOG            "/workspace/patch/paths_catalog_ci.py"
            )
