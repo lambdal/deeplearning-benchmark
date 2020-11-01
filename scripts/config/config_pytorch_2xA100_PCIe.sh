@@ -47,7 +47,7 @@ PyTorch_resnet50_FP16_PARAMS=(
              --static-loss-scale      "256"
              --epochs                 "2" 
              --prof                   "100" 
-             --batch-size             "768"
+             --batch-size             "720"
              --raport-file            "benchmark.json"
              --print-freq             "1"
              --training-only
