@@ -235,8 +235,8 @@ PyTorch_transformerxllarge_FP16_PARAMS=(
 PyTorch_tacotron2_FP32_PARAMS=(
             "examples/tacotron2"
             args
+	    -o                        "./"
             --model-name              "Tacotron2"
-            --output_directory        "./" 
             --learning-rate           "0.0" 
             --epochs                  "2" 
             --batch-size              "80" 
@@ -251,11 +251,11 @@ PyTorch_tacotron2_FP32_PARAMS=(
 PyTorch_tacotron2_FP16_PARAMS=(
             "examples/tacotron2"
             args
+	    -o                        "./"
             --model-name              "Tacotron2"
-            --output_directory        "./" 
             --learning-rate           "0.0" 
             --epochs                  "2" 
-            --batch-size              "160" 
+            --batch-size              "80" 
             --weight-decay            "1e-6" 
             --grad-clip-thresh        "1.0"
             --log-file                "nvlog.json"
@@ -269,8 +269,8 @@ PyTorch_tacotron2_FP16_PARAMS=(
 PyTorch_waveglow_FP32_PARAMS=(
             "examples/tacotron2"
             args      
+	    -o                        "./"
             --model-name              "WaveGlow"
-            --output_directory        "./" 
             --learning-rate           "0.0" 
             --epochs                  "2" 
             --segment-length          "8000"
@@ -287,12 +287,12 @@ PyTorch_waveglow_FP32_PARAMS=(
 PyTorch_waveglow_FP16_PARAMS=(
             "examples/tacotron2"
             args      
+	    -o                        "./"
             --model-name              "WaveGlow"
-            --output_directory        "./" 
             --learning-rate           "0.0" 
             --epochs                  "2" 
             --segment-length          "8000"
-            --batch-size              "20" 
+            --batch-size              "12" 
             --weight-decay            "0" 
             --grad-clip-thresh        "65504"
             --log-file                "nvlog.json"
