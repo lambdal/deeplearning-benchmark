@@ -4,7 +4,7 @@ import pandas as pd
 
 
 # Choose between 'fp32', 'fp16'
-precision = 'fp32'
+precision = 'fp16'
 
 # Choose between 'single', 'multiple', 'all'
 system = 'all'
@@ -12,66 +12,74 @@ system = 'all'
 path_config = 'scripts/config'
 
 
-# list_system_single = [
-#    ('V100', 1),
-#    ('QuadroRTX8000', 1),
-#    ('QuadroRTX6000', 1),
-#    ('QuadroRTX5000', 1),
-#    ('TitanRTX', 1),
-#    ('2080Ti', 1),
-#    ('1080Ti', 1),
-#    ('2080SuperMaxQ', 1),
-#    ('2080MaxQ', 1),
-#    ('2070MaxQ', 1)
-# ]
-
-
-# list_system_multiple = [
-#     ('2x2080TiNVlink_trt', 2),
-#     ('2x2080TiNVlink_trt2', 2),
-#     ('2x2080Ti_trt', 2),
-#     ('2x2080Ti_trt2', 2),
-#     ('4x2080TiNVlink_trt', 4),
-#     ('4x2080TiNVlink_trt2', 4),
-#     ('4x2080Ti_trt', 4),
-#     ('4x2080Ti_trt2', 4),
-#     ('8x2080TiNVlink_trt', 8),
-#     ('8x2080TiNVlink_trt2', 8),
-#     ('8x2080Ti_trt', 8),
-#     ('8x2080Ti_trt2', 8),    
-#     ('2xQuadroRTX8000NVlink_trt', 2),
-#     ('2xQuadroRTX8000NVlink_trt2', 2),
-#     ('2xQuadroRTX8000_trt', 2),
-#     ('2xQuadroRTX8000_trt2', 2),
-#     ('4xQuadroRTX8000NVlink_trt', 4),
-#     ('4xQuadroRTX8000NVlink_trt2', 4),
-#     ('4xQuadroRTX8000_trt', 4),
-#     ('4xQuadroRTX8000_trt2', 4),
-#     ('8xQuadroRTX8000NVlink_trt', 8),
-#     ('8xQuadroRTX8000NVlink_trt2', 8),
-#     ('8xQuadroRTX8000_trt', 8),
-#     ('8xQuadroRTX8000_trt2', 8),
-#     ('2xV100', 2),
-#     ('4xV100', 4),
-#     ('8xV100', 8),
-#     ('LambdaCloud_4x1080Ti', 4),
-#     ('LambdaCloud_2xQuadroRTX6000', 2),
-#     ('LambdaCloud_4xQuadroRTX6000', 4),
-#     ('LambdaCloud_8xV10016G', 8),
-#     ('Linode_2xQuadroRTX6000', 2),
-#     ('p3.16xlarge',8),
-#     ('p3.8xlarge', 4)
-# ]
-
-
 list_system_single = [
-   ('3080', 1)
+   ('V100', 1),
+   ('QuadroRTX8000', 1),
+   ('QuadroRTX6000', 1),
+   ('QuadroRTX5000', 1),
+   ('TitanRTX', 1),
+   ('2080Ti', 1),
+   ('1080Ti', 1),
+   ('2080SuperMaxQ', 1),
+   ('2080MaxQ', 1),
+   ('2070MaxQ', 1),
+   ('3080', 1),
+   ('3090', 1),
+   ('A100_PCIe', 1)
 ]
 
 
 list_system_multiple = [
-    ('2x3080', 2)
+    ('2x2080TiNVlink_trt', 2),
+    ('2x2080TiNVlink_trt2', 2),
+    ('2x2080Ti_trt', 2),
+    ('2x2080Ti_trt2', 2),
+    ('4x2080TiNVlink_trt', 4),
+    ('4x2080TiNVlink_trt2', 4),
+    ('4x2080Ti_trt', 4),
+    ('4x2080Ti_trt2', 4),
+    ('8x2080TiNVlink_trt', 8),
+    ('8x2080TiNVlink_trt2', 8),
+    ('8x2080Ti_trt', 8),
+    ('8x2080Ti_trt2', 8),    
+    ('2xQuadroRTX8000NVlink_trt', 2),
+    ('2xQuadroRTX8000NVlink_trt2', 2),
+    ('2xQuadroRTX8000_trt', 2),
+    ('2xQuadroRTX8000_trt2', 2),
+    ('4xQuadroRTX8000NVlink_trt', 4),
+    ('4xQuadroRTX8000NVlink_trt2', 4),
+    ('4xQuadroRTX8000_trt', 4),
+    ('4xQuadroRTX8000_trt2', 4),
+    ('8xQuadroRTX8000NVlink_trt', 8),
+    ('8xQuadroRTX8000NVlink_trt2', 8),
+    ('8xQuadroRTX8000_trt', 8),
+    ('8xQuadroRTX8000_trt2', 8),
+    ('2xV100', 2),
+    ('4xV100', 4),
+    ('8xV100', 8),
+    ('LambdaCloud_4x1080Ti', 4),
+    ('LambdaCloud_2xQuadroRTX6000', 2),
+    ('LambdaCloud_4xQuadroRTX6000', 4),
+    ('LambdaCloud_8xV10016G', 8),
+    ('Linode_2xQuadroRTX6000', 2),
+    ('p3.16xlarge',8),
+    ('p3.8xlarge', 4),
+    ('2x3090', 2),
+    ('3x3090', 3),
+    ('2xA100_PCIe', 2),
+    ('4xA100_PCIe', 4),
+    ('8xA100_PCIe', 8)
 ]
+
+
+# list_system_single = [
+#    ('3080', 1)
+# ]
+
+
+# list_system_multiple = [
+#     ('2x3080', 2)
+# ]
 
 
 list_test_fp32 = {

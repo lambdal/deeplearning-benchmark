@@ -11,21 +11,54 @@ precision = 'fp16'
 # Choose between 'single', 'multiple', 'all'
 system = 'all'
 
-list_test_fp32 = {
-            'PyTorch_SSD_FP32': ('ssd', "^.*Training performance =.*$", -2),
-            'PyTorch_resnet50_FP32': ('resnet50', "^.*Summary: train.loss.*$", -2),
-            'PyTorch_maskrcnn_FP32': ('maskrcnn', "^.*Training perf is:.*$", -2),
-            'PyTorch_gnmt_FP32': ('gnmt', "^.*Training:.*$", -4),
-            'PyTorch_ncf_FP32': ('ncf', "^.*best_train_throughput:.*$", -1),
-            'PyTorch_transformerxlbase_FP32': ('transformerxlbase', "^.*Training throughput:.*$", -2),
-            'PyTorch_transformerxllarge_FP32': ('transformerxllarge', "^.*Training throughput:.*$", -2),
-            'PyTorch_tacotron2_FP32': ('tacotron2', "^.*train_items_per_sec :.*$", -2),
-            'PyTorch_waveglow_FP32': ('waveglow', "^.*train_items_per_sec :.*$", -2),
-            'PyTorch_bert_large_squad_FP32': ('bert_large_squad', "^.*training_sequences_per_second :.*$", -6),
-            'PyTorch_bert_base_squad_FP32': ('bert_base_squad', "^.*training_sequences_per_second :.*$", -6),
-             }
+list_test_fp32 = [
+            # nvcr.io/nvidia/pytorch:20.01-py3
+            {
+                'PyTorch_SSD_FP32': ('ssd', "^.*Training performance =.*$", -2),
+                'PyTorch_resnet50_FP32': ('resnet50', "^.*Summary: train.loss.*$", -2),
+                'PyTorch_maskrcnn_FP32': ('maskrcnn', "^.*Training perf is:.*$", -2),
+                'PyTorch_gnmt_FP32': ('gnmt', "^.*Training:.*$", -4),
+                'PyTorch_ncf_FP32': ('ncf', "^.*best_train_throughput:.*$", -1),
+                'PyTorch_transformerxlbase_FP32': ('transformerxlbase', "^.*Training throughput:.*$", -2),
+                'PyTorch_transformerxllarge_FP32': ('transformerxllarge', "^.*Training throughput:.*$", -2),
+                'PyTorch_tacotron2_FP32': ('tacotron2', "^.*train_epoch_avg_items/sec:.*$", -1),
+                'PyTorch_waveglow_FP32': ('waveglow', "^.*train_epoch_avg_items/sec:.*$", -1),
+                'PyTorch_bert_large_squad_FP32': ('bert_large_squad', "^.*training throughput:.*$", -1),
+                'PyTorch_bert_base_squad_FP32': ('bert_base_squad', "^.*training throughput:.*$", -1),
+             },
+            # nvcr.io/nvidia/pytorch:20.10-py3
+            {
+                'PyTorch_SSD_FP32': ('ssd', "^.*Training performance =.*$", -2),
+                'PyTorch_resnet50_FP32': ('resnet50', "^.*Summary: train.loss.*$", -2),
+                'PyTorch_maskrcnn_FP32': ('maskrcnn', "^.*Training perf is:.*$", -2),
+                'PyTorch_gnmt_FP32': ('gnmt', "^.*Training:.*$", -4),
+                'PyTorch_ncf_FP32': ('ncf', "^.*best_train_throughput:.*$", -1),
+                'PyTorch_transformerxlbase_FP32': ('transformerxlbase', "^.*Training throughput:.*$", -2),
+                'PyTorch_transformerxllarge_FP32': ('transformerxllarge', "^.*Training throughput:.*$", -2),
+                'PyTorch_tacotron2_FP32': ('tacotron2', "^.*train_items_per_sec :.*$", -2),
+                'PyTorch_waveglow_FP32': ('waveglow', "^.*train_items_per_sec :.*$", -2),
+                'PyTorch_bert_large_squad_FP32': ('bert_large_squad', "^.*training_sequences_per_second :.*$", -6),
+                'PyTorch_bert_base_squad_FP32': ('bert_base_squad', "^.*training_sequences_per_second :.*$", -6),
+             }             
+]
 
-list_test_fp16 = {
+list_test_fp16 = [
+        # nvcr.io/nvidia/pytorch:20.01-py3
+        {
+            'PyTorch_SSD_AMP': ('ssd', "^.*Training performance =.*$", -2),
+            'PyTorch_resnet50_FP16': ('resnet50', "^.*Summary: train.loss.*$", -2),
+            'PyTorch_maskrcnn_FP16': ('maskrcnn', "^.*Training perf is:.*$", -2),
+            'PyTorch_gnmt_FP16': ('gnmt', "^.*Training:.*$", -4),
+            'PyTorch_ncf_FP16': ('ncf', "^.*best_train_throughput:.*$", -1),
+            'PyTorch_transformerxlbase_FP16': ('transformerxlbase', "^.*Training throughput:.*$", -2),
+            'PyTorch_transformerxllarge_FP16': ('transformerxllarge', "^.*Training throughput:.*$", -2),
+            'PyTorch_tacotron2_FP16': ('tacotron2', "^.*train_epoch_avg_items/sec:.*$", -1),
+            'PyTorch_waveglow_FP16': ('waveglow', "^.*train_epoch_avg_items/sec:.*$", -1),
+            'PyTorch_bert_large_squad_FP16': ('bert_large_squad', "^.*training throughput:.*$", -1),
+            'PyTorch_bert_base_squad_FP16': ('bert_base_squad', "^.*training throughput:.*$", -1),
+        },
+        # nvcr.io/nvidia/pytorch:20.10-py3
+        {
             'PyTorch_SSD_AMP': ('ssd', "^.*Training performance =.*$", -2),
             'PyTorch_resnet50_FP16': ('resnet50', "^.*Summary: train.loss.*$", -2),
             'PyTorch_maskrcnn_FP16': ('maskrcnn', "^.*Training perf is:.*$", -2),
@@ -37,73 +70,83 @@ list_test_fp16 = {
             'PyTorch_waveglow_FP16': ('waveglow', "^.*train_items_per_sec :.*$", -2),
             'PyTorch_bert_large_squad_FP16': ('bert_large_squad', "^.*training_sequences_per_second :.*$", -6),
             'PyTorch_bert_base_squad_FP16': ('bert_base_squad', "^.*training_sequences_per_second :.*$", -6),
-             }
-
-
-list_test_all = list_test_fp32.copy()
-for key, value in list_test_fp16.items():
-    list_test_all[key] = value
-
-
-# list_system_single = {
-#     'V100': 1,
-#     'QuadroRTX8000': 1,
-#     'QuadroRTX6000': 1,
-#     'QuadroRTX5000': 1,
-#     'TitanRTX': 1,
-#     '2080Ti': 1,
-#     '1080Ti': 1,
-#     '2080SuperMaxQ': 1,
-#     '2080MaxQ': 1, 
-#     '2070MaxQ': 1
-#     }
-    
-
-# list_system_multiple = {
-#     '2x2080TiNVlink_trt': 2,
-#     '2x2080TiNVlink_trt2': 2,
-#     '2x2080Ti_trt': 2,
-#     '2x2080Ti_trt2': 2,
-#     '4x2080TiNVlink_trt': 4,
-#     '4x2080TiNVlink_trt2': 4,
-#     '4x2080Ti_trt': 4,
-#     '4x2080Ti_trt2': 4,
-#     '8x2080TiNVlink_trt': 8,
-#     '8x2080TiNVlink_trt2': 8,
-#     '8x2080Ti_trt': 8,
-#     '8x2080Ti_trt2': 8,    
-#     '2xQuadroRTX8000NVlink_trt': 2,
-#     '2xQuadroRTX8000NVlink_trt2': 2,
-#     '2xQuadroRTX8000_trt': 2,
-#     '2xQuadroRTX8000_trt2': 2,
-#     '4xQuadroRTX8000NVlink_trt': 4,
-#     '4xQuadroRTX8000NVlink_trt2': 4,
-#     '4xQuadroRTX8000_trt': 4,
-#     '4xQuadroRTX8000_trt2': 4,
-#     '8xQuadroRTX8000NVlink_trt': 8,
-#     '8xQuadroRTX8000NVlink_trt2': 8,
-#     '8xQuadroRTX8000_trt': 8,
-#     '8xQuadroRTX8000_trt2': 8,
-#     '2xV100': 2,
-#     '4xV100': 4,
-#     '8xV100': 8,
-#     'LambdaCloud_4x1080Ti': 4,
-#     'LambdaCloud_2xQuadroRTX6000': 2,
-#     'LambdaCloud_4xQuadroRTX6000': 4,
-#     'LambdaCloud_8xV10016G': 8,
-#     'Linode_2xQuadroRTX6000': 2,
-#     'p3.16xlarge': 8,
-#     'p3.8xlarge': 4
-# }
+        }
+]
 
 list_system_single = {
-    '3080': 1
+    'V100': [0, 1],
+    'QuadroRTX8000': [0, 1],
+    'QuadroRTX6000': [0, 1],
+    'QuadroRTX5000': [0, 1],
+    'TitanRTX': [0, 1],
+    '2080Ti': [0, 1],
+    '1080Ti': [0, 1],
+    '2080SuperMaxQ': [0, 1],
+    '2080MaxQ': [0, 1], 
+    '2070MaxQ': [0, 1],
+    '3080': [1, 1],
+    '3090': [1, 1],
+    'A100_PCIe': [1, 1]
     }
     
 
 list_system_multiple = {
-    '2x3080': 2
+    '2x2080TiNVlink_trt': [0, 2],
+    '2x2080TiNVlink_trt2': [0, 2],
+    '2x2080Ti_trt': [0, 2],
+    '2x2080Ti_trt2': [0, 2],
+    '4x2080TiNVlink_trt': [0, 4],
+    '4x2080TiNVlink_trt2': [0, 4],
+    '4x2080Ti_trt': [0, 4],
+    '4x2080Ti_trt2': [0, 4],
+    '8x2080TiNVlink_trt': [0, 8],
+    '8x2080TiNVlink_trt2': [0, 8],
+    '8x2080Ti_trt': [0, 8],
+    '8x2080Ti_trt2': [0, 8],    
+    '2xQuadroRTX8000NVlink_trt': [0, 2],
+    '2xQuadroRTX8000NVlink_trt2': [0, 2],
+    '2xQuadroRTX8000_trt': [0, 2],
+    '2xQuadroRTX8000_trt2': [0, 2],
+    '4xQuadroRTX8000NVlink_trt': [0, 4],
+    '4xQuadroRTX8000NVlink_trt2': [0, 4],
+    '4xQuadroRTX8000_trt': [0, 4],
+    '4xQuadroRTX8000_trt2': [0, 4],
+    '8xQuadroRTX8000NVlink_trt': [0, 8],
+    '8xQuadroRTX8000NVlink_trt2': [0, 8],
+    '8xQuadroRTX8000_trt': [0, 8],
+    '8xQuadroRTX8000_trt2': [0, 8],
+    '2xV100': [0, 2],
+    '4xV100': [0, 4],
+    '8xV100': [0, 8],
+    'LambdaCloud_4x1080Ti': [0, 4],
+    'LambdaCloud_2xQuadroRTX6000': [0, 2],
+    'LambdaCloud_4xQuadroRTX6000': [0, 4],
+    'LambdaCloud_8xV10016G': [0, 8],
+    'Linode_2xQuadroRTX6000': [0, 2],
+    'p3.16xlarge': [0, 8],
+    'p3.8xlarge': [0, 4],
+    '2x3090': [1, 2],
+    '3x3090': [1, 3],
+    '2xA100_PCIe': [1, 2],
+    '4xA100_PCIe': [1, 4],
+    '8xA100_PCIe': [1, 8]
 }
+
+# [version, num_gpus]
+# list_system_single = {
+#     '3080': [1, 1],
+#     '3090': [1, 1],
+#     'A100_PCIe': [1, 1]
+# }
+    
+# list_system_multiple = {
+#     '2x3090': [1, 2],
+#     '3x3090': [1, 3],
+#     '2xA100_PCIe': [1, 2],
+#     '4xA100_PCIe': [1, 4],
+#     '8xA100_PCIe': [1, 8]
+# }
+
 
 if precision == 'fp32':
     list_test = list_test_fp32
@@ -123,46 +166,9 @@ else:
     list_system.update(list_system_multiple)
 
 
-def gather_avg(name, system, df):
+def gather_last(name, system, df, version):
     
-    column_name, key, pos = list_test[name]
-    pattern = re.compile(key)
-
-    path = path_result + '/' + system + '/' + name
-    count = 0.000001
-    total_throughput = 0.0
-    if os.path.exists(path):
-        for filename in os.listdir(path):
-            if filename.endswith(".txt"):
-                flag = False
-                for i, line in enumerate(open(os.path.join(path, filename))):
-
-                    for match in re.finditer(pattern, line):
-
-                        try:
-                            throughput = float(match.group().split(' ')[pos])
-                            
-                            if throughput > 0:
-                                count += 1
-                                total_throughput += throughput
-                                flag = True
-                            else:
-                                pass
-
-                        except:
-                            pass
-
-                if not flag:
-                    print(system + "/" + name + " " + filename + ": something wrong")
-        df.at[system, column_name] = int(round(total_throughput / count, 2))
-    else:
-        df.at[system, column_name] = 0
-    df.at[system, 'num_gpu'] = list_system[system]
-
-
-def gather_last(name, system, df):
-    
-    column_name, key, pos = list_test[name]
+    column_name, key, pos = list_test[version][name]
     pattern = re.compile(key)
 
     path = path_result + '/' + system + '/' + name
@@ -194,22 +200,23 @@ def gather_last(name, system, df):
     else:
         df.at[system, column_name] = 0
 
-    df.at[system, 'num_gpu'] = list_system[system]
+    df.at[system, 'num_gpu'] = list_system[system][1]
 
 def main():
 
     columns = []
     columns.append('num_gpu')
-    for test_name, value in sorted(list_test.items()):
-        columns.append(list_test[test_name][0])
+    for test_name, value in sorted(list_test[0].items()):
+        columns.append(list_test[0][test_name][0])
     list_configs = [key for key in list_system]
 
     df = pd.DataFrame(index=list_configs, columns=columns)
     df = df.fillna(-1.0)
 
     for key in list_system:
-        for test_name, value in sorted(list_test.items()):
-            gather_last(test_name, key, df)
+        for test_name, value in sorted(list_test[0].items()):
+            version = list_system[key][0]
+            gather_last(test_name, key, df, version)
 
     df.index.name = 'name_gpu'
 
