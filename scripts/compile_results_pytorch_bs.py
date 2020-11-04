@@ -4,7 +4,7 @@ import pandas as pd
 
 
 # Choose between 'fp32', 'fp16'
-precision = 'fp16'
+precision = 'fp32'
 
 # Choose between 'single', 'multiple', 'all'
 system = 'all'
@@ -25,7 +25,8 @@ list_system_single = [
    ('2070MaxQ', 1),
    ('3080', 1),
    ('3090', 1),
-   ('A100_PCIe', 1)
+   ('A100_PCIe', 1),
+   ('A100_SXM4', 1)
 ]
 
 
@@ -68,7 +69,10 @@ list_system_multiple = [
     ('3x3090', 3),
     ('2xA100_PCIe', 2),
     ('4xA100_PCIe', 4),
-    ('8xA100_PCIe', 8)
+    ('8xA100_PCIe', 8),
+    ('2xA100_SXM4', 2),
+    ('4xA100_SXM4', 4),
+    ('8xA100_SXM4', 8)
 ]
 
 

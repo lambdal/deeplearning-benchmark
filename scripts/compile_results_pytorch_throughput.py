@@ -86,7 +86,8 @@ list_system_single = {
     '2070MaxQ': [0, 1],
     '3080': [1, 1],
     '3090': [1, 1],
-    'A100_PCIe': [1, 1]
+    'A100_PCIe': [1, 1],
+    'A100_SXM4': [1, 1]
     }
     
 
@@ -129,7 +130,10 @@ list_system_multiple = {
     '3x3090': [1, 3],
     '2xA100_PCIe': [1, 2],
     '4xA100_PCIe': [1, 4],
-    '8xA100_PCIe': [1, 8]
+    '8xA100_PCIe': [1, 8],
+    '2xA100_SXM4': [1, 2],
+    '4xA100_SXM4': [1, 4],
+    '8xA100_SXM4': [1, 8]
 }
 
 # [version, num_gpus]
