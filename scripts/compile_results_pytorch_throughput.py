@@ -7,7 +7,7 @@ import pandas as pd
 path_result = 'results'
 
 # Choose between 'fp32', 'fp16'
-precision = 'fp32'
+precision = 'fp16'
 
 # Choose between 'single', 'multiple', 'all'
 system = 'all'
@@ -138,7 +138,7 @@ list_system_multiple = {
     '8xA100_SXM4': ([1, 8], '8x A100 40GB SXM4'),
     # '2xA100_p4': [1, 2],
     # '4xA100_p4': [1, 4],
-    '8xA100_p4': ([1, 8], 'p4d.24xlarge ')
+    '8xA100_p4': ([1, 8], 'p4d.24xlarge')
 }
 
 

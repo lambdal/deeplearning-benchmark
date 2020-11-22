@@ -1,10 +1,11 @@
+# -*- coding: utf-8 -*-
 import os
 import re
 import pandas as pd
 
 
 # Choose between 'fp32', 'fp16'
-precision = 'fp32'
+precision = 'fp16'
 
 # Choose between 'single', 'multiple', 'all'
 system = 'all'
@@ -13,70 +14,70 @@ path_config = 'scripts/config'
 
 
 list_system_single = [
-   ('V100', 1),
-   ('QuadroRTX8000', 1),
-   ('QuadroRTX6000', 1),
-   ('QuadroRTX5000', 1),
-   ('TitanRTX', 1),
-   ('2080Ti', 1),
-   ('1080Ti', 1),
-   ('2080SuperMaxQ', 1),
-   ('2080MaxQ', 1),
-   ('2070MaxQ', 1),
-   ('3080', 1),
-   ('3090', 1),
-   ('A100_PCIe', 1),
-   ('A100_SXM4', 1),
-   ('A100_p4', 1)
+   ('V100', (1, 'V100 32GB')),
+   ('QuadroRTX8000', (1, 'RTX 8000')),
+   ('QuadroRTX6000', (1, 'RTX 6000')),
+   ('QuadroRTX5000', (1, 'RTX 5000')),
+   ('TitanRTX', (1, 'Titan RTX')),
+   ('2080Ti', (1, 'RTX 2080Ti')),
+   ('1080Ti', (1, 'GTX 1080Ti')),
+   ('2080SuperMaxQ', (1, 'RTX 2080 SUPER MAX-Q')),
+   ('2080MaxQ', (1, 'RTX 2080 MAX-Q')),
+   ('2070MaxQ', (1, 'RTX 2070 MAX-Q')),
+   ('3080', (1, 'RTX 3080')),
+   ('3090', (1, 'RTX 3090')),
+   ('A100_PCIe', (1, 'A100 40GB PCIe')),
+   ('A100_SXM4', (1, 'A100 40GB SXM4'))
+   # ('A100_p4', 1)
 ]
 
 
 list_system_multiple = [
-    ('2x2080TiNVlink_trt', 2),
-    ('2x2080TiNVlink_trt2', 2),
-    ('2x2080Ti_trt', 2),
-    ('2x2080Ti_trt2', 2),
-    ('4x2080TiNVlink_trt', 4),
-    ('4x2080TiNVlink_trt2', 4),
-    ('4x2080Ti_trt', 4),
-    ('4x2080Ti_trt2', 4),
-    ('8x2080TiNVlink_trt', 8),
-    ('8x2080TiNVlink_trt2', 8),
-    ('8x2080Ti_trt', 8),
-    ('8x2080Ti_trt2', 8),    
-    ('2xQuadroRTX8000NVlink_trt', 2),
-    ('2xQuadroRTX8000NVlink_trt2', 2),
-    ('2xQuadroRTX8000_trt', 2),
-    ('2xQuadroRTX8000_trt2', 2),
-    ('4xQuadroRTX8000NVlink_trt', 4),
-    ('4xQuadroRTX8000NVlink_trt2', 4),
-    ('4xQuadroRTX8000_trt', 4),
-    ('4xQuadroRTX8000_trt2', 4),
-    ('8xQuadroRTX8000NVlink_trt', 8),
-    ('8xQuadroRTX8000NVlink_trt2', 8),
-    ('8xQuadroRTX8000_trt', 8),
-    ('8xQuadroRTX8000_trt2', 8),
-    ('2xV100', 2),
-    ('4xV100', 4),
-    ('8xV100', 8),
-    ('LambdaCloud_4x1080Ti', 4),
-    ('LambdaCloud_2xQuadroRTX6000', 2),
-    ('LambdaCloud_4xQuadroRTX6000', 4),
-    ('LambdaCloud_8xV10016G', 8),
-    ('Linode_2xQuadroRTX6000', 2),
-    ('p3.16xlarge',8),
-    ('p3.8xlarge', 4),
-    ('2x3090', 2),
-    ('3x3090', 3),
-    ('2xA100_PCIe', 2),
-    ('4xA100_PCIe', 4),
-    ('8xA100_PCIe', 8),
-    ('2xA100_SXM4', 2),
-    ('4xA100_SXM4', 4),
-    ('8xA100_SXM4', 8),
-    ('2xA100_p4', 2),
-    ('4xA100_p4', 4),
-    ('8xA100_p4', 8)
+    ('2x2080TiNVlink_trt', (2, '2x RTX 2080Ti NVLink')),
+    # ('2x2080TiNVlink_trt2', 2),
+    ('2x2080Ti_trt', (2, '2x RTX 2080Ti')),
+    # ('2x2080Ti_trt2', 2),
+    ('4x2080TiNVlink_trt', (4, '4x RTX 2080Ti NVLink')),
+    # ('4x2080TiNVlink_trt2', 4),
+    ('4x2080Ti_trt', (4, '4x RTX 2080Ti')),
+    # ('4x2080Ti_trt2', 4),
+    ('8x2080TiNVlink_trt', (8, '8x RTX 2080Ti NVLink')),
+    # ('8x2080TiNVlink_trt2', 8),
+    ('8x2080Ti_trt', (8, '8x RTX 2080Ti')),
+    # ('8x2080Ti_trt2', 8),    
+    # ('2xQuadroRTX8000NVlink_trt', 2),
+    ('2xQuadroRTX8000NVlink_trt2', (2, '2x RTX 8000 NVLink')),
+    # ('2xQuadroRTX8000_trt', 2),
+    ('2xQuadroRTX8000_trt2', (2, '2x RTX 8000')),
+    # ('4xQuadroRTX8000NVlink_trt', 4),
+    ('4xQuadroRTX8000NVlink_trt2', (4, '4x RTX 8000 NVLink')),
+    # ('4xQuadroRTX8000_trt', 4),
+    ('4xQuadroRTX8000_trt2', (4, '4x RTX 8000')),
+    # ('8xQuadroRTX8000NVlink_trt', 8),
+    ('8xQuadroRTX8000NVlink_trt2', (8, '8x RTX 8000 NVLink')),
+    # ('8xQuadroRTX8000_trt', 8),
+    ('8xQuadroRTX8000_trt2', (8, '8x RTX 8000')),
+    ('2xV100', (2, '2x V100 32GB')),
+    ('4xV100', (4, '4x V100 32GB')),
+    ('8xV100', (8, '8x V100 32GB')),
+    ('LambdaCloud_4x1080Ti', (4, 'Lambda Cloud — 4x GTX 1080Ti')),
+    ('LambdaCloud_2xQuadroRTX6000', (2, 'Lambda Cloud — 2x RTX 6000')),
+    ('LambdaCloud_4xQuadroRTX6000', (4, 'Lambda Cloud — 4x RTX 6000')),
+    ('LambdaCloud_8xV10016G', (8, 'Lambda Cloud — 8x V100 16GB')),
+    ('Linode_2xQuadroRTX6000', (2, 'Linode Cloud — 2x RTX 6000')),
+    ('p3.16xlarge', (8, 'p3.16xlarge')),
+    ('p3.8xlarge', (4, 'p3.8xlarge')),
+    ('2x3090', (2, '2x RTX 3090')),
+    ('3x3090', (3, '3x RTX 3090')),
+    ('2xA100_PCIe', (2, '2x A100 40GB PCIe')),
+    ('4xA100_PCIe', (4, '4x A100 40GB PCIe')),
+    ('8xA100_PCIe', (8, '8x A100 40GB PCIe')),
+    ('2xA100_SXM4', (2, '2x A100 40GB SXM4')),
+    ('4xA100_SXM4', (4, '4x A100 40GB SXM4')),
+    ('8xA100_SXM4', (8, '8x A100 40GB SXM4')),
+    # ('2xA100_p4', 2),
+    # ('4xA100_p4', 4),
+    ('8xA100_p4', (8, 'p4d.24xlarge'))
 ]
 
 
@@ -136,9 +137,9 @@ elif system == 'multiple':
 else:
     list_system = list_system_single + list_system_multiple
 
-def gather(system, num_gpu, df):
+def gather(key, num_gpu, name, df):
     
-    f_name = os.path.join(path_config, 'config_pytorch_' + system + '.sh')
+    f_name = os.path.join(path_config, 'config_pytorch_' + key + '.sh')
     with open(f_name, 'r') as f:
         lines = f.readlines()
 
@@ -149,8 +150,8 @@ def gather(system, num_gpu, df):
             bs = int(line[value[1]][1:-1]) * (num_gpu if value[2] else 1)
             if bs == 1:
                 bs = 0
-            df.at[system, value[3]] = bs
-    df.at[system, 'num_gpu'] = num_gpu
+            df.at[name, value[3]] = bs
+    df.at[name, 'num_gpu'] = num_gpu
 
 
 def main():
@@ -159,10 +160,13 @@ def main():
     for test_name, value in sorted(list_test.items()):
         columns.append(value[3])
 
-    df = pd.DataFrame(index=[i[0] for i in list_system], columns=columns)
+    df = pd.DataFrame(index=[i[1][1] for i in list_system], columns=columns)
 
-    for (system, num_gpu) in list_system:
-        gather(system, num_gpu, df)
+    for s in list_system:
+        key = s[0] 
+        num_gpu = s[1][0]
+        s_name = s[1][1]
+        gather(key, num_gpu, s_name, df)
     df.index.name = 'name_gpu'
 
     df.to_csv('pytorch-train-bs-' + precision + '.csv')
