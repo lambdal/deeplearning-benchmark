@@ -7,7 +7,7 @@ import pandas as pd
 path_result = 'results'
 
 # Choose between 'fp32', 'fp16'
-precision = 'fp16'
+precision = 'fp32'
 
 # Choose between 'single', 'multiple', 'all'
 system = 'all'
@@ -128,6 +128,7 @@ list_system_multiple = {
     'Linode_2xQuadroRTX6000': ([0, 2], 'Linode Cloud — 2x RTX 6000'),
     'p3.16xlarge': ([0, 8], 'p3.16xlarge'),
     'p3.8xlarge': ([0, 4], 'p3.8xlarge'),
+    '2x3080': ([1, 2], '2x RTX 3080'),
     '2x3090': ([1, 2], '2x RTX 3090'),
     '3x3090': ([1, 3], '3x RTX 3090'),
     '2xA100_PCIe': ([1, 2], '2x A100 40GB PCIe'),
