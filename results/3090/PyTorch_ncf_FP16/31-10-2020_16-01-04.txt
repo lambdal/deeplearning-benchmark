@@ -1,0 +1,99 @@
+:::NVLOGv0.1.0 ncf 1604160065.195400953 (ncf.py:171) cpu_info: {"num": 64, "name": "AMD Ryzen Threadripper 3970X 32-Core Processor"}
+:::NVLOGv0.1.0 ncf 1604160065.201637745 (ncf.py:171) mem_info: {"ram": "251G"}
+:::NVLOGv0.1.0 ncf 1604160065.567654848 (ncf.py:171) gpu_info: {"driver_version": "455.28", "num": 3, "name": ["GeForce RTX 3090", "GeForce RTX 3090", "GeForce RTX 3090"], "mem": ["24265 MiB", "24268 MiB", "24268 MiB"]}
+:::NVLOGv0.1.0 ncf 1604160065.570037365 (ncf.py:174) args: {"data": "/data/ncf/cache/ml-20m", "epochs": 2, "batch_size": 4278184, "valid_batch_size": 1048576, "factors": 64, "layers": [256, 256, 128, 64], "negative_samples": 4, "learning_rate": 0.0045, "topk": 10, "seed": 1, "threshold": 1.0, "beta1": 0.25, "beta2": 0.5, "eps": 1e-08, "dropout": 0.5, "checkpoint_dir": "/data/checkpoints/", "load_checkpoint_path": null, "mode": "train", "grads_accumulated": 1, "opt_level": "O2", "local_rank": 0, "distributed": false, "world_size": 1}
+Saving results to /data/checkpoints/
+:::NVLOGv0.1.0 ncf 1604160065.570782423 (ncf.py:184) preproc_hp_sample_eval_replacement: true
+:::NVLOGv0.1.0 ncf 1604160065.571133614 (ncf.py:185) input_hp_sample_train_replacement: true
+:::NVLOGv0.1.0 ncf 1604160065.571468592 (ncf.py:186) input_step_eval_neg_gen
+:::NVLOGv0.1.0 ncf 1604160066.554908991 (ncf.py:194) run_start
+:::NVLOGv0.1.0 ncf 1604160066.697471380 (ncf.py:201) preproc_hp_num_eval: 100
+:::NVLOGv0.1.0 ncf 1604160066.698669910 (ncf.py:207) input_size: 19861770
+:::NVLOGv0.1.0 ncf 1604160066.715612650 (ncf.py:216) input_batch_size: 4278184
+:::NVLOGv0.1.0 ncf 1604160066.715847015 (ncf.py:217) input_order
+:::NVLOGv0.1.0 ncf 1604160066.716220140 (/workspace/examples/ncf/neumf.py:54) model_hp_mf_dim: 64
+:::NVLOGv0.1.0 ncf 1604160066.945173979 (/workspace/examples/ncf/neumf.py:62) model_hp_mlp_layer_sizes: [256, 256, 128, 64]
+Selected optimization level O2:  FP16 training with FP32 batchnorm and FP32 master weights.
+
+Defaults for this optimization level are:
+enabled                : True
+opt_level              : O2
+cast_model_type        : torch.float16
+patch_torch_functions  : False
+keep_batchnorm_fp32    : True
+master_weights         : True
+loss_scale             : dynamic
+Processing user overrides (additional kwargs that are not None)...
+After processing overrides, optimization options are:
+enabled                : True
+opt_level              : O2
+cast_model_type        : torch.float16
+patch_torch_functions  : False
+keep_batchnorm_fp32    : False
+master_weights         : True
+loss_scale             : dynamic
+NeuMF(
+  (mf_user_embed): Embedding(138493, 64)
+  (mf_item_embed): Embedding(26744, 64)
+  (mlp_user_embed): Embedding(138493, 128)
+  (mlp_item_embed): Embedding(26744, 128)
+  (mlp): ModuleList(
+    (0): Linear(in_features=256, out_features=256, bias=True)
+    (1): Linear(in_features=256, out_features=128, bias=True)
+    (2): Linear(in_features=128, out_features=64, bias=True)
+  )
+  (final): Linear(in_features=128, out_features=1, bias=True)
+)
+31832577 parameters
+:::NVLOGv0.1.0 ncf 1604160067.374064207 (ncf.py:246) opt_learning_rate: 0.0045
+:::NVLOGv0.1.0 ncf 1604160067.374317884 (ncf.py:247) opt_name: "Adam"
+:::NVLOGv0.1.0 ncf 1604160067.374530792 (ncf.py:248) opt_hp_Adam_beta1: 0.25
+:::NVLOGv0.1.0 ncf 1604160067.374741793 (ncf.py:249) opt_hp_Adam_beta2: 0.5
+:::NVLOGv0.1.0 ncf 1604160067.374951839 (ncf.py:250) opt_hp_Adam_epsilon: 1e-08
+:::NVLOGv0.1.0 ncf 1604160067.375159025 (ncf.py:251) model_hp_loss_fn: "binary_cross_entropy"
+:::NVLOGv0.1.0 ncf 1604160067.375364304 (ncf.py:279) train_loop
+:::NVLOGv0.1.0 ncf 1604160067.375574112 (ncf.py:282) train_epoch_start: 0
+:::NVLOGv0.1.0 ncf 1604160067.375786781 (ncf.py:283) input_hp_num_neg: 4
+:::NVLOGv0.1.0 ncf 1604160067.375991106 (ncf.py:284) input_step_train_neg_gen
+:::NVLOGv0.1.0 ncf 1604160071.898674726 (ncf.py:318) train_throughput: 21960500.28142638
+:::NVLOGv0.1.0 ncf 1604160071.899162531 (ncf.py:319) train_epoch_stop: 0
+:::NVLOGv0.1.0 ncf 1604160071.899579048 (ncf.py:320) eval_start: 0
+ncf.py:146: UserWarning: indexing with dtype torch.uint8 is now deprecated, please use a dtype torch.bool instead. (Triggered internally at  ../aten/src/ATen/native/IndexingUtils.h:25.)
+  temp[dup_mask] = -1
+ncf.py:153: UserWarning: This overload of nonzero is deprecated:
+	nonzero(Tensor input, *, Tensor out)
+Consider using one of the following signatures instead:
+	nonzero(Tensor input, *, bool as_tuple) (Triggered internally at  ../torch/csrc/utils/python_arg_parser.cpp:882.)
+  ndcg = (math.log(2) / (torch.nonzero(ifzero)[:,1].view(-1).to(torch.float)+2).log_()).sum()
+:::NVLOGv0.1.0 ncf 1604160072.125300884 (ncf.py:155) eval_size: {"epoch": 0, "value": 13987793}
+:::NVLOGv0.1.0 ncf 1604160072.125564098 (ncf.py:156) eval_hp_num_users: 138493
+:::NVLOGv0.1.0 ncf 1604160072.125805616 (ncf.py:157) eval_hp_num_neg: 100
+Epoch 0: HR@10 = 0.8349, NDCG@10 = 0.5496, train_time = 4.52, val_time = 0.23
+:::NVLOGv0.1.0 ncf 1604160072.126111507 (ncf.py:333) eval_accuracy: {"epoch": 0, "value": 0.8349014029589943}
+:::NVLOGv0.1.0 ncf 1604160072.126326799 (ncf.py:334) eval_target: 1.0
+:::NVLOGv0.1.0 ncf 1604160072.126544714 (ncf.py:335) eval_stop: 0
+:::NVLOGv0.1.0 ncf 1604160072.126759052 (ncf.py:340) eval_throughput: 61424047.509990074
+New best hr! Saving the model to:  /data/checkpoints/model.pth
+:::NVLOGv0.1.0 ncf 1604160072.411215782 (ncf.py:282) train_epoch_start: 1
+:::NVLOGv0.1.0 ncf 1604160072.411607027 (ncf.py:283) input_hp_num_neg: 4
+:::NVLOGv0.1.0 ncf 1604160072.411930323 (ncf.py:284) input_step_train_neg_gen
+:::NVLOGv0.1.0 ncf 1604160076.579837799 (ncf.py:318) train_throughput: 23830001.49264644
+:::NVLOGv0.1.0 ncf 1604160076.580321074 (ncf.py:319) train_epoch_stop: 1
+:::NVLOGv0.1.0 ncf 1604160076.580744743 (ncf.py:320) eval_start: 1
+:::NVLOGv0.1.0 ncf 1604160076.804620743 (ncf.py:155) eval_size: {"epoch": 1, "value": 13987793}
+:::NVLOGv0.1.0 ncf 1604160076.804885864 (ncf.py:156) eval_hp_num_users: 138493
+:::NVLOGv0.1.0 ncf 1604160076.805130243 (ncf.py:157) eval_hp_num_neg: 100
+Epoch 1: HR@10 = 0.8518, NDCG@10 = 0.5765, train_time = 4.17, val_time = 0.23
+:::NVLOGv0.1.0 ncf 1604160076.805435896 (ncf.py:333) eval_accuracy: {"epoch": 1, "value": 0.8518408872650604}
+:::NVLOGv0.1.0 ncf 1604160076.805659533 (ncf.py:334) eval_target: 1.0
+:::NVLOGv0.1.0 ncf 1604160076.805869102 (ncf.py:335) eval_stop: 1
+:::NVLOGv0.1.0 ncf 1604160076.806082964 (ncf.py:340) eval_throughput: 61929521.58339456
+New best hr! Saving the model to:  /data/checkpoints/model.pth
+:::NVLOGv0.1.0 ncf 1604160077.091094494 (ncf.py:356) best_train_throughput: 23830001.49264644
+:::NVLOGv0.1.0 ncf 1604160077.091487408 (ncf.py:357) best_eval_throughput: 61929521.58339456
+:::NVLOGv0.1.0 ncf 1604160077.091814995 (ncf.py:358) best_accuracy: 0.8518408872650604
+:::NVLOGv0.1.0 ncf 1604160077.092139721 (ncf.py:359) time_to_target: 10.537253856658936
+:::NVLOGv0.1.0 ncf 1604160077.092462063 (ncf.py:360) time_to_best_model: 10.536080598831177
+:::NVLOGv0.1.0 ncf 1604160077.092792034 (ncf.py:362) run_stop: {"success": false}
+:::NVLOGv0.1.0 ncf 1604160077.093107462 (ncf.py:363) run_final
+DONE!
