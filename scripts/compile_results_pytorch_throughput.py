@@ -2,77 +2,18 @@
 import os
 import sys
 import re
+import argparse
+
+
 import pandas as pd
 
-path_result = 'results'
 
-# Choose between 'fp32', 'fp16'
-precision = 'fp32'
-
-# Choose between 'single', 'multiple', 'all'
-system = 'all'
-
-list_test_fp32 = [
-            # nvcr.io/nvidia/pytorch:20.01-py3
-            {
-                'PyTorch_SSD_FP32': ('ssd', "^.*Training performance =.*$", -2),
-                'PyTorch_resnet50_FP32': ('resnet50', "^.*Summary: train.loss.*$", -2),
-                'PyTorch_maskrcnn_FP32': ('maskrcnn', "^.*Training perf is:.*$", -2),
-                'PyTorch_gnmt_FP32': ('gnmt', "^.*Training:.*$", -4),
-                'PyTorch_ncf_FP32': ('ncf', "^.*best_train_throughput:.*$", -1),
-                'PyTorch_transformerxlbase_FP32': ('transformerxlbase', "^.*Training throughput:.*$", -2),
-                'PyTorch_transformerxllarge_FP32': ('transformerxllarge', "^.*Training throughput:.*$", -2),
-                'PyTorch_tacotron2_FP32': ('tacotron2', "^.*train_epoch_avg_items/sec:.*$", -1),
-                'PyTorch_waveglow_FP32': ('waveglow', "^.*train_epoch_avg_items/sec:.*$", -1),
-                'PyTorch_bert_large_squad_FP32': ('bert_large_squad', "^.*training throughput:.*$", -1),
-                'PyTorch_bert_base_squad_FP32': ('bert_base_squad', "^.*training throughput:.*$", -1),
-             },
-            # nvcr.io/nvidia/pytorch:20.10-py3
-            {
-                'PyTorch_SSD_FP32': ('ssd', "^.*Training performance =.*$", -2),
-                'PyTorch_resnet50_FP32': ('resnet50', "^.*Summary: train.loss.*$", -2),
-                'PyTorch_maskrcnn_FP32': ('maskrcnn', "^.*Training perf is:.*$", -2),
-                'PyTorch_gnmt_FP32': ('gnmt', "^.*Training:.*$", -4),
-                'PyTorch_ncf_FP32': ('ncf', "^.*best_train_throughput:.*$", -1),
-                'PyTorch_transformerxlbase_FP32': ('transformerxlbase', "^.*Training throughput:.*$", -2),
-                'PyTorch_transformerxllarge_FP32': ('transformerxllarge', "^.*Training throughput:.*$", -2),
-                'PyTorch_tacotron2_FP32': ('tacotron2', "^.*train_items_per_sec :.*$", -2),
-                'PyTorch_waveglow_FP32': ('waveglow', "^.*train_items_per_sec :.*$", -2),
-                'PyTorch_bert_large_squad_FP32': ('bert_large_squad', "^.*training_sequences_per_second :.*$", -6),
-                'PyTorch_bert_base_squad_FP32': ('bert_base_squad', "^.*training_sequences_per_second :.*$", -6),
-             }             
-]
-
-list_test_fp16 = [
-        # nvcr.io/nvidia/pytorch:20.01-py3
-        {
-            'PyTorch_SSD_AMP': ('ssd', "^.*Training performance =.*$", -2),
-            'PyTorch_resnet50_FP16': ('resnet50', "^.*Summary: train.loss.*$", -2),
-            'PyTorch_maskrcnn_FP16': ('maskrcnn', "^.*Training perf is:.*$", -2),
-            'PyTorch_gnmt_FP16': ('gnmt', "^.*Training:.*$", -4),
-            'PyTorch_ncf_FP16': ('ncf', "^.*best_train_throughput:.*$", -1),
-            'PyTorch_transformerxlbase_FP16': ('transformerxlbase', "^.*Training throughput:.*$", -2),
-            'PyTorch_transformerxllarge_FP16': ('transformerxllarge', "^.*Training throughput:.*$", -2),
-            'PyTorch_tacotron2_FP16': ('tacotron2', "^.*train_epoch_avg_items/sec:.*$", -1),
-            'PyTorch_waveglow_FP16': ('waveglow', "^.*train_epoch_avg_items/sec:.*$", -1),
-            'PyTorch_bert_large_squad_FP16': ('bert_large_squad', "^.*training throughput:.*$", -1),
-            'PyTorch_bert_base_squad_FP16': ('bert_base_squad', "^.*training throughput:.*$", -1),
-        },
-        # nvcr.io/nvidia/pytorch:20.10-py3
-        {
-            'PyTorch_SSD_AMP': ('ssd', "^.*Training performance =.*$", -2),
-            'PyTorch_resnet50_FP16': ('resnet50', "^.*Summary: train.loss.*$", -2),
-            'PyTorch_maskrcnn_FP16': ('maskrcnn', "^.*Training perf is:.*$", -2),
-            'PyTorch_gnmt_FP16': ('gnmt', "^.*Training:.*$", -4),
-            'PyTorch_ncf_FP16': ('ncf', "^.*best_train_throughput:.*$", -1),
-            'PyTorch_transformerxlbase_FP16': ('transformerxlbase', "^.*Training throughput:.*$", -2),
-            'PyTorch_transformerxllarge_FP16': ('transformerxllarge', "^.*Training throughput:.*$", -2),
-            'PyTorch_tacotron2_FP16': ('tacotron2', "^.*train_items_per_sec :.*$", -2),
-            'PyTorch_waveglow_FP16': ('waveglow', "^.*train_items_per_sec :.*$", -2),
-            'PyTorch_bert_large_squad_FP16': ('bert_large_squad', "^.*training_sequences_per_second :.*$", -6),
-            'PyTorch_bert_base_squad_FP16': ('bert_base_squad', "^.*training_sequences_per_second :.*$", -6),
-        }
-]
+# naming convention
+# key: config name
+# value: ([version, num_gpus], rename)
+# version: 0 for pytorch:20.01-py3, and 1 for pytorch:20.10-py3
+# num_gpus: sometimes num_gpus can't be inferred from config name (for example p3.16xlarge) or missing from the result log. So we ask for user to specify it here.
+# rename: renaming the system so it is easier to read
 
 list_system_single = {
     'V100': ([0, 1], 'V100 32GB'),
@@ -91,7 +32,6 @@ list_system_single = {
     'A100_SXM4': ([1, 1], 'A100 40GB SXM4'),
     # 'A100_p4': [1, 1]
     }
-    
 
 list_system_multiple = {
     '2x2080TiNVlink_trt': ([0, 2], '2x RTX 2080Ti NVLink'),
@@ -142,26 +82,69 @@ list_system_multiple = {
     '8xA100_p4': ([1, 8], 'p4d.24xlarge')
 }
 
+list_test_fp32 = [
+            # nvcr.io/nvidia/pytorch:20.01-py3
+            {
+                'PyTorch_SSD_FP32': ('ssd', "^.*Training performance =.*$", -2),
+                'PyTorch_resnet50_FP32': ('resnet50', "^.*Summary: train.loss.*$", -2),
+                'PyTorch_maskrcnn_FP32': ('maskrcnn', "^.*Training perf is:.*$", -2),
+                'PyTorch_gnmt_FP32': ('gnmt', "^.*Training:.*$", -4),
+                'PyTorch_ncf_FP32': ('ncf', "^.*best_train_throughput:.*$", -1),
+                'PyTorch_transformerxlbase_FP32': ('transformerxlbase', "^.*Training throughput:.*$", -2),
+                'PyTorch_transformerxllarge_FP32': ('transformerxllarge', "^.*Training throughput:.*$", -2),
+                'PyTorch_tacotron2_FP32': ('tacotron2', "^.*train_epoch_avg_items/sec:.*$", -1),
+                'PyTorch_waveglow_FP32': ('waveglow', "^.*train_epoch_avg_items/sec:.*$", -1),
+                'PyTorch_bert_large_squad_FP32': ('bert_large_squad', "^.*training throughput:.*$", -1),
+                'PyTorch_bert_base_squad_FP32': ('bert_base_squad', "^.*training throughput:.*$", -1),
+             },
+            # nvcr.io/nvidia/pytorch:20.10-py3
+            {
+                'PyTorch_SSD_FP32': ('ssd', "^.*Training performance =.*$", -2),
+                'PyTorch_resnet50_FP32': ('resnet50', "^.*Summary: train.loss.*$", -2),
+                'PyTorch_maskrcnn_FP32': ('maskrcnn', "^.*Training perf is:.*$", -2),
+                'PyTorch_gnmt_FP32': ('gnmt', "^.*Training:.*$", -4),
+                'PyTorch_ncf_FP32': ('ncf', "^.*best_train_throughput:.*$", -1),
+                'PyTorch_transformerxlbase_FP32': ('transformerxlbase', "^.*Training throughput:.*$", -2),
+                'PyTorch_transformerxllarge_FP32': ('transformerxllarge', "^.*Training throughput:.*$", -2),
+                'PyTorch_tacotron2_FP32': ('tacotron2', "^.*train_items_per_sec :.*$", -2),
+                'PyTorch_waveglow_FP32': ('waveglow', "^.*train_items_per_sec :.*$", -2),
+                'PyTorch_bert_large_squad_FP32': ('bert_large_squad', "^.*training_sequences_per_second :.*$", -6),
+                'PyTorch_bert_base_squad_FP32': ('bert_base_squad', "^.*training_sequences_per_second :.*$", -6),
+             }             
+]
 
-if precision == 'fp32':
-    list_test = list_test_fp32
-elif precision == 'fp16':
-    list_test = list_test_fp16
-else:
-    sys.exit("Wrong precision: " + precision + ', choose between fp32 and fp16')
+list_test_fp16 = [
+        # version 0: nvcr.io/nvidia/pytorch:20.01-py3
+        {
+            'PyTorch_SSD_AMP': ('ssd', "^.*Training performance =.*$", -2),
+            'PyTorch_resnet50_FP16': ('resnet50', "^.*Summary: train.loss.*$", -2),
+            'PyTorch_maskrcnn_FP16': ('maskrcnn', "^.*Training perf is:.*$", -2),
+            'PyTorch_gnmt_FP16': ('gnmt', "^.*Training:.*$", -4),
+            'PyTorch_ncf_FP16': ('ncf', "^.*best_train_throughput:.*$", -1),
+            'PyTorch_transformerxlbase_FP16': ('transformerxlbase', "^.*Training throughput:.*$", -2),
+            'PyTorch_transformerxllarge_FP16': ('transformerxllarge', "^.*Training throughput:.*$", -2),
+            'PyTorch_tacotron2_FP16': ('tacotron2', "^.*train_epoch_avg_items/sec:.*$", -1),
+            'PyTorch_waveglow_FP16': ('waveglow', "^.*train_epoch_avg_items/sec:.*$", -1),
+            'PyTorch_bert_large_squad_FP16': ('bert_large_squad', "^.*training throughput:.*$", -1),
+            'PyTorch_bert_base_squad_FP16': ('bert_base_squad', "^.*training throughput:.*$", -1),
+        },
+        # version 1: nvcr.io/nvidia/pytorch:20.10-py3
+        {
+            'PyTorch_SSD_AMP': ('ssd', "^.*Training performance =.*$", -2),
+            'PyTorch_resnet50_FP16': ('resnet50', "^.*Summary: train.loss.*$", -2),
+            'PyTorch_maskrcnn_FP16': ('maskrcnn', "^.*Training perf is:.*$", -2),
+            'PyTorch_gnmt_FP16': ('gnmt', "^.*Training:.*$", -4),
+            'PyTorch_ncf_FP16': ('ncf', "^.*best_train_throughput:.*$", -1),
+            'PyTorch_transformerxlbase_FP16': ('transformerxlbase', "^.*Training throughput:.*$", -2),
+            'PyTorch_transformerxllarge_FP16': ('transformerxllarge', "^.*Training throughput:.*$", -2),
+            'PyTorch_tacotron2_FP16': ('tacotron2', "^.*train_items_per_sec :.*$", -2),
+            'PyTorch_waveglow_FP16': ('waveglow', "^.*train_items_per_sec :.*$", -2),
+            'PyTorch_bert_large_squad_FP16': ('bert_large_squad', "^.*training_sequences_per_second :.*$", -6),
+            'PyTorch_bert_base_squad_FP16': ('bert_base_squad', "^.*training_sequences_per_second :.*$", -6),
+        }
+]
 
-
-if system == 'single':
-    list_system = list_system_single
-elif system == 'multiple':
-    list_system = list_system_multiple
-else:
-    list_system = {} 
-    list_system.update(list_system_single)
-    list_system.update(list_system_multiple)
-
-
-def gather_last(name, system, config_name, df, version):
+def gather_last(list_test, list_system, name, system, config_name, df, version, path_result):
     column_name, key, pos = list_test[version][name]
     pattern = re.compile(key)
 
@@ -197,6 +180,37 @@ def gather_last(name, system, config_name, df, version):
     df.at[config_name, 'num_gpu'] = list_system[system][0][1]
 
 def main():
+    parser = argparse.ArgumentParser(description='Gather benchmark results.')
+
+    parser.add_argument('--path', type=str, default='results',
+                        help='path that has the results')    
+
+    parser.add_argument('--precision', type=str, default='fp32',
+                        choices=['fp32', 'fp16'],
+                        help='Choose becnhmark precision')
+
+    parser.add_argument('--system', type=str, default='all',
+                        choices=['single', 'multiple', 'all'],
+                        help='Choose system type (single or multiple GPUs)')
+
+    args = parser.parse_args()
+
+    if args.precision == 'fp32':
+        list_test = list_test_fp32
+    elif args.precision == 'fp16':
+        list_test = list_test_fp16
+    else:
+        sys.exit("Wrong precision: " + precision + ', choose between fp32 and fp16')
+
+
+    if args.system == 'single':
+        list_system = list_system_single
+    elif args.system == 'multiple':
+        list_system = list_system_multiple
+    else:
+        list_system = {} 
+        list_system.update(list_system_single)
+        list_system.update(list_system_multiple)
 
     columns = []
     columns.append('num_gpu')
@@ -211,11 +225,11 @@ def main():
         for test_name, value in sorted(list_test[0].items()):
             version = list_system[key][0][0]
             config_name = list_system[key][1]
-            gather_last(test_name, key, config_name, df, version)
+            gather_last(list_test, list_system, test_name, key, config_name, df, version, args.path)
 
     df.index.name = 'name_gpu'
 
-    df.to_csv('pytorch-train-throughput-' + precision + '.csv')
+    df.to_csv('pytorch-train-throughput-' + args.precision + '.csv')
 
 if __name__ == "__main__":
     main()
