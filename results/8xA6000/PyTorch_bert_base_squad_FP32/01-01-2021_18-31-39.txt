@@ -1,3 +1,6 @@
+Container nvidia build =  16972326
+out dir is /results
+python   -m torch.distributed.launch --nproc_per_node=8 run_squad.py --init_checkpoint=/data/bert_base/bert_base_uncased.pt --do_train --train_file=/data/squad/v1.1/train-v1.1.json --train_batch_size=56  --do_lower_case  --bert_model=bert-large-uncased  --learning_rate=0.0  --seed=1  --num_train_epochs=2.0  --max_seq_length=384  --doc_stride=128  --output_dir=/results  --vocab_file=/data/bert_base/bert-base-uncased-vocab.txt  --config_file=/data/bert_base/bert_config.json  --max_steps=100   |& tee /results/logfile.txt
 device: cuda:4 n_gpu: 1, distributed training: True, 16-bits training: False
 WARNING: Output directory /results already exists and is not empty. ['8x2080Ti_trt', '2xQuadroRTX8000_trt2', '2xA6000', '8x2080TiNVlink_trt2', '4xQuadroRTX8000_trt2', '2070MaxQ', '8xA100_p4', '4xA100_PCIe', '8xQuadroRTX8000_trt2', 'p3.16xlarge', '2x2080Ti_trt2', 'A6000', '2xV100', '8xQuadroRTX8000NVlink_trt', '2xQuadroRTX8000NVlink_trt2', '2xA100_p4', 'V100', '3x3090', 'LambdaCloud_8xV10016G', '2xQuadroRTX8000NVlink_trt', '8xV100', 'A100_PCIe', 'A100_p4', 'LambdaCloud_4xQuadroRTX6000', 'QuadroRTX5000', '8xQuadroRTX8000NVlink_trt2', '4xQuadroRTX8000NVlink_trt2', '2xA100_SXM4', 'LambdaCloud_4x1080Ti', 'logfile.txt', '4xA6000', '4x2080TiNVlink_trt2', '2x2080Ti_trt', '4x2080Ti_trt', '1080Ti', 'Linode_2xQuadroRTX6000', 'bert_config.json', '4xQuadroRTX8000_trt', '4xA100_p4', 'QuadroRTX8000', '4xV100', '2x2080TiNVlink_trt2', '4x2080Ti_trt2', '2080SuperMaxQ', '2xQuadroRTX8000_trt', 'QuadroRTX6000', '3080', '4x2080TiNVlink_trt', '3090', '2x3080', 'pytorch_model.bin', 'LambdaCloud_1xQuadroRTX6000', 'A100_SXM4', 'p3.2xlarge', '8xQuadroRTX8000_trt', '2x2080TiNVlink_trt', '2xA100_PCIe', 'LambdaCloud_2xQuadroRTX6000', 'TitanRTX', '8x2080Ti_trt2', '8xA100_PCIe', '2080Ti', '8xA6000', '2080MaxQ', '4xQuadroRTX8000NVlink_trt', '2x3090', 'p3.8xlarge', '8x2080TiNVlink_trt', '4xA100_SXM4', '8xA100_SXM4']
 device: cuda:1 n_gpu: 1, distributed training: True, 16-bits training: False
@@ -89,3 +92,8 @@ DLL 2021-01-01 18:32:11.086606 - Training Epoch: 0 Training Iteration: 1  step_l
 *****************************************
 Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
 *****************************************
+
+real	1m37.088s
+user	10m56.201s
+sys	1m19.655s
+DONE!
