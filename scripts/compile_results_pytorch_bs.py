@@ -26,7 +26,8 @@ list_system_single = [
    ('3080', 'RTX 3080'),
    ('3090', 'RTX 3090'),
    ('A100_PCIe', 'A100 40GB PCIe'),
-   ('A100_SXM4', 'A100 40GB SXM4')
+   ('A100_SXM4', 'A100 40GB SXM4'),
+   ('A6000', 'RTX A6000')
 ]
 
 
@@ -65,7 +66,6 @@ list_system_multiple = [
     ('8xA6000', '8x RTX A6000'),
     ('4xA6000', '4x RTX A6000'),
     ('2xA6000', '2x RTX A6000'),
-    ('A6000', 'RTX A6000'),
     ('8xA100_p4', 'p4d.24xlarge')
 ]
 
