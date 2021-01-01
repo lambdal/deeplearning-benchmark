@@ -62,7 +62,10 @@ list_system_multiple = [
     ('2xA100_SXM4', '2x A100 40GB SXM4'),
     ('4xA100_SXM4', '4x A100 40GB SXM4'),
     ('8xA100_SXM4', '8x A100 40GB SXM4'),
-    ('8xA6000', '8x A6000'),
+    ('8xA6000', '8x RTX A6000'),
+    ('4xA6000', '4x RTX A6000'),
+    ('2xA6000', '2x RTX A6000'),
+    ('A6000', 'RTX A6000'),
     ('8xA100_p4', 'p4d.24xlarge')
 ]
 
