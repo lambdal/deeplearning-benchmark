@@ -35,6 +35,7 @@ PyTorch_resnet50_FP32_PARAMS=(
              --raport-file            "benchmark.json"
              --print-freq             "1"
              --training-only
+	     --data-backend syntetic
            )
 
 PyTorch_resnet50_FP16_PARAMS=(
@@ -49,7 +50,8 @@ PyTorch_resnet50_FP16_PARAMS=(
              --batch-size             "448"
              --raport-file            "benchmark.json"
              --print-freq             "1"
-             --training-only  
+             --training-only
+	     --data-backend syntetic  
            )
 
 PyTorch_resnet50_AMP_PARAMS=(
@@ -64,7 +66,8 @@ PyTorch_resnet50_AMP_PARAMS=(
              --batch-size             "448"
              --raport-file            "benchmark.json"
              --print-freq             "1"
-             --training-only   
+             --training-only
+	     --data-backend syntetic   
            )
 
 PyTorch_maskrcnn_FP32_PARAMS=(
@@ -274,7 +277,7 @@ PyTorch_waveglow_FP32_PARAMS=(
             --learning-rate           "0.0" 
             --epochs                  "2" 
             --segment-length          "8000"
-            --batch-size              "10" 
+            --batch-size              "8" 
             --weight-decay            "0" 
             --grad-clip-thresh        "65504"
             --log-file                "nvlog.json"

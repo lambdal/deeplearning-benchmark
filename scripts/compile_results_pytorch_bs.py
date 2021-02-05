@@ -57,6 +57,8 @@ list_system_multiple = [
     ('2x3080', '2x RTX 3080'),
     ('2x3090', '2x RTX 3090'),
     ('3x3090', '3x RTX 3090'),
+    ('4x3090', '4x RTX 3090'),
+    ('8x3090', '8x RTX 3090'),
     ('2xA100_PCIe', '2x A100 40GB PCIe'),
     ('4xA100_PCIe', '4x A100 40GB PCIe'),
     ('8xA100_PCIe', '8x A100 40GB PCIe'),
