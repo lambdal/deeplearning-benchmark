@@ -1,4 +1,4 @@
-# Benchmarks
+# PyTorch Benchmarks
 
 
 This project provides a wrapper to run PyTorch benchmarks using NVidia's [Deep Learning Examples](https://github.com/NVIDIA/DeepLearningExamples/tree/master/PyTorch) repo. 
