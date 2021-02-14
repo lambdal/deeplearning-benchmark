@@ -8,4 +8,4 @@ This repo hosts benchmark scripts to benchmark GPUs using NVIDIA GPU-Accelerated
 
 |    **Framework**   |    **Link**    |
 |:------------------:|:--------------:|
-|      PyTorch       |     [README](https://github.com/lambdal/deeplearning-benchmark/pytorch/README.md)     |
+|      PyTorch       |     [README](https://github.com/lambdal/deeplearning-benchmark/blob/master/pytorch/README.md)     |
