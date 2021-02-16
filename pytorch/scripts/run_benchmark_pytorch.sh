@@ -12,7 +12,7 @@ echo ${NUM_GPU}
 declare -A TASKS=(
     [PyTorch_SSD_FP32]=benchmark_pytorch_ssd
     [PyTorch_SSD_AMP]=benchmark_pytorch_ssd
-    #[PyTorch_resnet50_FP32]=benchmark_pytorch_resnet50
+    [PyTorch_resnet50_FP32]=benchmark_pytorch_resnet50
     [PyTorch_resnet50_FP16]=benchmark_pytorch_resnet50
     #[PyTorch_resnet50_AMP]=benchmark_pytorch_resnet50
     [PyTorch_maskrcnn_FP32]=benchmark_pytorch_maskrcnn

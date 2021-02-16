@@ -27,6 +27,7 @@ list_test_fp32 = [
             # tensorflow:20.12-tf1-py3
             {
                 'TensorFlow_resnet50_FP32': ('resnet50', "^.*train_throughput.*$", -2),
+                'TensorFlow_SSD_FP32': ('ssd', "^.*training performance.*$", -2),
             },       
 ]
 
@@ -34,6 +35,7 @@ list_test_fp16 = [
         # version 0: tensorflow:20.12-tf1-py3
         {
             'TensorFlow_resnet50_FP16': ('resnet50', "^.*train_throughput.*$", -2),
+            'TensorFlow_SSD_FP16': ('ssd', "^.*training performance.*$", -2),
         },
 ]
 

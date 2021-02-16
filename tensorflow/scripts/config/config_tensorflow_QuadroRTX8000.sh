@@ -4,6 +4,23 @@ NUM_GPU=1
 NUM_EXP=1
 
 
+TensorFlow_SSD_FP32_PARAMS=(
+             "nvidia-examples/ssdv1.2"
+             args
+             --model_dir "output"
+             --pipeline_config_path "/workspace/nvidia-examples/ssdv1.2/configs/ssd320_bench.config"
+           )
+
+
+TensorFlow_SSD_FP16_PARAMS=(
+             "nvidia-examples/ssdv1.2"
+             args
+             --model_dir "output"
+             --pipeline_config_path "/workspace/nvidia-examples/ssdv1.2/configs/ssd320_bench.config"
+             --amp
+           )
+
+
 TensorFlow_resnet50_FP32_PARAMS=(
              "nvidia-examples/resnet50v1.5"
              args
@@ -28,4 +45,5 @@ TensorFlow_resnet50_FP16_PARAMS=(
              --use_static_loss_scaling 
              --loss_scale "128"
            )
+
 

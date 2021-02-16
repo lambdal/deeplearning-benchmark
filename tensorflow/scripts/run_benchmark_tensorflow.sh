@@ -10,8 +10,10 @@ echo ${NUM_GPU}
 
 
 declare -A TASKS=(
-    [TensorFlow_resnet50_FP32]=benchmark_tensorflow_resnet50
-    [TensorFlow_resnet50_FP16]=benchmark_tensorflow_resnet50
+    # [TensorFlow_resnet50_FP32]=benchmark_tensorflow_resnet50
+    # [TensorFlow_resnet50_FP16]=benchmark_tensorflow_resnet50
+    [TensorFlow_SSD_FP32]=benchmark_tensorflow_ssd
+    [TensorFlow_SSD_FP16]=benchmark_tensorflow_ssd
 )
 
 
@@ -19,8 +21,6 @@ benchmark_tensorflow_resnet50() {
     
     local task="$1"
     local result="$2"
-
-    echo "benchmark_tensorflow_resnet50 is called"
 
     TASK_PARAMS=${task}_PARAMS[@]
     local command_para=$(sed 's/.*args //' <<<${!TASK_PARAMS})
@@ -31,6 +31,46 @@ benchmark_tensorflow_resnet50() {
     rm -rf output
 
     echo "DONE!" >> ${result}
+}
+
+
+
+benchmark_tensorflow_ssd() {
+    
+    local task="$1"
+    local result="$2"
+
+    TASK_PARAMS=${task}_PARAMS[@]
+    local command_para=$(sed 's/.*args //' <<<${!TASK_PARAMS})
+
+    export PYTHONPATH=/workspace/nvidia-examples/ssdv1.2/models/research:/workspace/nvidia-examples/ssdv1.2/models/research/slim:$PYTHONPATH
+    
+    TENSOR_OPS=0
+    export TF_ENABLE_CUBLAS_TENSOR_OP_MATH_FP32=${TENSOR_OPS}
+    export TF_ENABLE_CUDNN_TENSOR_OP_MATH_FP32=${TENSOR_OPS}
+    export TF_ENABLE_CUDNN_RNN_TENSOR_OP_MATH_FP32=${TENSOR_OPS}
+
+    mpirun --allow-run-as-root \
+           -np $NUM_GPU \
+           -H localhost:$NUM_GPU \
+           -bind-to none \
+           -map-by slot \
+           -x NCCL_DEBUG=INFO \
+           -x LD_LIBRARY_PATH \
+           -x PATH \
+           -mca pml ob1 \
+           -mca btl ^openib \
+            python -u ./object_detection/model_main.py \
+                   --alsologtostder \
+                   ${command_para} |& tee ${result}  
+
+    rm -rf output
+
+    PERF=$(cat ${result} | sed -n 's|.*global_step/sec: \(\S\+\).*|\1|p' | python -c "import sys; x = sys.stdin.readlines(); x = [float(a) for a in x[int(len(x)*3/4):]]; print(32*$NUM_GPU*sum(x)/len(x), 'img/s')")
+    echo "Single GPU single precision training performance: $PERF" >> ${result}
+
+    echo "DONE!" >> ${result}
+    
 }
 
 

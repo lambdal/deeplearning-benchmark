@@ -38,3 +38,23 @@ sudo reboot
 # Test
 docker run --gpus all nvidia/cuda:10.0-base nvidia-smi
 ```
+
+
+#### Data Preparation
+
+
+If you really want to create the data from scratch, use this
+
+```
+docker run --gpus all --rm --shm-size=64g -v /media/ubuntu/Data2/data/deeplearning-benchmark/tensorflow:/data \
+-v $(pwd)"/scripts":/scripts \
+-v $(pwd)"/results":/results \
+nvcr.io/nvidia/tensorflow:20.12-tf1-py3 \
+/bin/bash -c "cp -r /scripts/* /workspace; ./run_prepare.sh"
+```
+
+#### Run Benchmark
+
+```
+
+```
