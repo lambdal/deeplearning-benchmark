@@ -1,0 +1,188 @@
+Experiment dir : LM-TFM
+Namespace(adaptive=False, amp='apex', apex_amp_opt_level='O2', append_dataset=False, append_time=False, attn_type=0, batch_chunk=1, batch_size=128, clamp_len=-1, clip=0.25, clip_nonemb=False, cuda=True, d_embed=1024, d_head=64, d_inner=4096, d_model=1024, data='/data/transformer-xl/wikitext-103', dataset='wt103', debug=False, decay_rate=0.5, div_val=1, dllog_file='train_log.json', dropatt=0.2, dropout=0.2, emb_init='normal', emb_init_range=0.01, eta_min=0.001, eval_batch_size=16, eval_interval=5000, eval_max_steps=-1, eval_tgt_len=128, ext_len=0, fp16=True, gpu0_bsz=-1, init='normal', init_range=0.1, init_std=0.02, local_batch_size=None, local_rank=0, log_all_ranks=False, log_interval=10, lr=0.0, lr_min=0.0, max_step=100, max_step_scheduler=None, mem_len=256, mom=0.0, multi_gpu=None, n_head=16, n_layer=18, no_env=False, no_eval=False, not_tied=False, optim='adam', patience=0, pre_lnorm=False, proj_init_std=0.01, restart='', roll=False, same_length=False, sample_softmax=-1, save_all=False, scheduler='cosine', seed=1111, swap_mem=False, target_perplexity=None, target_throughput=None, tgt_len=256, tied=True, txtlog_file='train_log.log', varlen=False, vocab='word', warmup_step=16000, weight_decay=0.0, work_dir='LM-TFM')
+world size: 4
+Collecting environment information...
+PyTorch version: 1.7.0a0+7036e91
+Is debug build: False
+CUDA used to build PyTorch: 11.1
+ROCM used to build PyTorch: N/A
+
+OS: Ubuntu 18.04.5 LTS (x86_64)
+GCC version: (Ubuntu 7.5.0-3ubuntu1~18.04) 7.5.0
+Clang version: Could not collect
+CMake version: version 3.14.0
+
+Python version: 3.6 (64-bit runtime)
+Is CUDA available: True
+CUDA runtime version: Could not collect
+GPU models and configuration: 
+GPU 0: RTX A6000
+GPU 1: RTX A6000
+GPU 2: RTX A6000
+GPU 3: RTX A6000
+
+Nvidia driver version: 460.56
+cuDNN version: Probably one of the following:
+/usr/lib/x86_64-linux-gnu/libcudnn.so.8.0.4
+/usr/lib/x86_64-linux-gnu/libcudnn_adv_infer.so.8.0.4
+/usr/lib/x86_64-linux-gnu/libcudnn_adv_train.so.8.0.4
+/usr/lib/x86_64-linux-gnu/libcudnn_cnn_infer.so.8.0.4
+/usr/lib/x86_64-linux-gnu/libcudnn_cnn_train.so.8.0.4
+/usr/lib/x86_64-linux-gnu/libcudnn_ops_infer.so.8.0.4
+/usr/lib/x86_64-linux-gnu/libcudnn_ops_train.so.8.0.4
+HIP runtime version: N/A
+MIOpen runtime version: N/A
+
+Versions of relevant libraries:
+[pip3] numpy==1.19.1
+[pip3] pytorch-transformers==1.1.0
+[pip3] torch==1.7.0a0+7036e91
+[pip3] torchtext==0.8.0a0
+[pip3] torchvision==0.8.0a0
+[conda] magma-cuda110             2.5.2                         5    local
+[conda] mkl                       2019.1                      144  
+[conda] mkl-include               2019.1                      144  
+[conda] nomkl                     3.0                           0  
+[conda] numpy                     1.19.1           py36h30dfecb_0  
+[conda] numpy-base                1.19.1           py36h75fe3a5_0  
+[conda] pytorch-transformers      1.1.0                    pypi_0    pypi
+[conda] torch                     1.7.0a0+7036e91          pypi_0    pypi
+[conda] torchtext                 0.8.0a0                  pypi_0    pypi
+[conda] torchvision               0.8.0a0                  pypi_0    pypi
+Loading cached dataset...
+Selected optimization level O2:  FP16 training with FP32 batchnorm and FP32 master weights.
+
+Defaults for this optimization level are:
+enabled                : True
+opt_level              : O2
+cast_model_type        : torch.float16
+patch_torch_functions  : False
+keep_batchnorm_fp32    : True
+master_weights         : True
+loss_scale             : dynamic
+Processing user overrides (additional kwargs that are not None)...
+After processing overrides, optimization options are:
+enabled                : True
+opt_level              : O2
+cast_model_type        : torch.float16
+patch_torch_functions  : False
+keep_batchnorm_fp32    : True
+master_weights         : True
+loss_scale             : dynamic
+====================================================================================================
+    - work_dir : LM-TFM
+    - append_dataset : False
+    - append_time : False
+    - cuda : True
+    - fp16 : True
+    - restart : 
+    - debug : False
+    - log_all_ranks : False
+    - dllog_file : train_log.json
+    - txtlog_file : train_log.log
+    - save_all : False
+    - no_env : False
+    - no_eval : False
+    - log_interval : 10
+    - target_throughput : None
+    - target_perplexity : None
+    - apex_amp_opt_level : O2
+    - amp : apex
+    - data : /data/transformer-xl/wikitext-103
+    - dataset : wt103
+    - vocab : word
+    - n_layer : 18
+    - n_head : 16
+    - d_head : 64
+    - d_embed : 1024
+    - d_model : 1024
+    - d_inner : 4096
+    - dropout : 0.2
+    - dropatt : 0.2
+    - pre_lnorm : False
+    - attn_type : 0
+    - not_tied : False
+    - clamp_len : -1
+    - adaptive : False
+    - div_val : 1
+    - sample_softmax : -1
+    - init : normal
+    - emb_init : normal
+    - init_range : 0.1
+    - emb_init_range : 0.01
+    - init_std : 0.02
+    - proj_init_std : 0.01
+    - optim : adam
+    - lr : 0.0
+    - mom : 0.0
+    - scheduler : cosine
+    - max_step_scheduler : None
+    - warmup_step : 16000
+    - decay_rate : 0.5
+    - lr_min : 0.0
+    - clip : 0.25
+    - weight_decay : 0.0
+    - clip_nonemb : False
+    - patience : 0
+    - eta_min : 0.001
+    - max_step : 100
+    - batch_size : 128
+    - local_batch_size : None
+    - batch_chunk : 1
+    - roll : False
+    - tgt_len : 256
+    - ext_len : 0
+    - mem_len : 256
+    - seed : 1111
+    - multi_gpu : None
+    - gpu0_bsz : -1
+    - same_length : False
+    - varlen : False
+    - swap_mem : False
+    - eval_tgt_len : 128
+    - eval_batch_size : 16
+    - eval_max_steps : -1
+    - eval_interval : 5000
+    - local_rank : 0
+    - tied : True
+    - n_token : 267735
+    - n_all_param : 519963095
+    - n_nonemb_param : 245532672
+====================================================================================================
+#params = 519963095
+#non emb params = 245532672
+/opt/conda/lib/python3.6/site-packages/torch/functional.py:1242: UserWarning: torch.norm is deprecated and may be removed in a future PyTorch release. Use torch.linalg.norm instead.
+  "torch.norm is deprecated and may be removed in a future PyTorch release. "
+/opt/conda/lib/python3.6/site-packages/torch/functional.py:1242: UserWarning: torch.norm is deprecated and may be removed in a future PyTorch release. Use torch.linalg.norm instead.
+  "torch.norm is deprecated and may be removed in a future PyTorch release. "
+/opt/conda/lib/python3.6/site-packages/torch/functional.py:1242: UserWarning: torch.norm is deprecated and may be removed in a future PyTorch release. Use torch.linalg.norm instead.
+  "torch.norm is deprecated and may be removed in a future PyTorch release. "
+/opt/conda/lib/python3.6/site-packages/torch/functional.py:1242: UserWarning: torch.norm is deprecated and may be removed in a future PyTorch release. Use torch.linalg.norm instead.
+  "torch.norm is deprecated and may be removed in a future PyTorch release. "
+| epoch   1 step       10 | batches     10 / 3151 | lr 0.000e+00 | ms/batch 1467.7 | tok/s   22779 | loss 12.73 | ppl 338916.51
+| epoch   1 step       20 | batches     20 / 3151 | lr 0.000e+00 | ms/batch 728.8 | tok/s   44964 | loss 12.73 | ppl 337838.04
+| epoch   1 step       30 | batches     30 / 3151 | lr 0.000e+00 | ms/batch 730.2 | tok/s   44874 | loss 12.73 | ppl 337961.14
+| epoch   1 step       40 | batches     40 / 3151 | lr 0.000e+00 | ms/batch 730.4 | tok/s   44860 | loss 12.73 | ppl 336938.72
+| epoch   1 step       50 | batches     50 / 3151 | lr 0.000e+00 | ms/batch 731.3 | tok/s   44810 | loss 12.73 | ppl 337707.90
+| epoch   1 step       60 | batches     60 / 3151 | lr 0.000e+00 | ms/batch 732.0 | tok/s   44763 | loss 12.73 | ppl 338631.55
+| epoch   1 step       70 | batches     70 / 3151 | lr 0.000e+00 | ms/batch 733.7 | tok/s   44662 | loss 12.73 | ppl 338886.13
+| epoch   1 step       80 | batches     80 / 3151 | lr 0.000e+00 | ms/batch 733.1 | tok/s   44699 | loss 12.73 | ppl 339387.44
+| epoch   1 step       90 | batches     90 / 3151 | lr 0.000e+00 | ms/batch 733.5 | tok/s   44674 | loss 12.73 | ppl 336889.56
+| epoch   1 step      100 | batches    100 / 3151 | lr 0.000e+00 | ms/batch 733.4 | tok/s   44678 | loss 12.73 | ppl 337355.10
+----------------------------------------------------------------------------------------------------
+| Eval   0 at step      100 | time:  3.36s | valid loss 12.65 | valid ppl 311482.191
+----------------------------------------------------------------------------------------------------
+Saving checkpoint to LM-TFM/checkpoint_last.pt
+Saving checkpoint to LM-TFM/checkpoint_best.pt
+----------------------------------------------------------------------------------------------------
+End of training
+Loading checkpoint from LM-TFM/checkpoint_best.pt
+====================================================================================================
+| End of training | test time:  4.95s | test loss 12.66 | test ppl 313574.795
+====================================================================================================
+Training time: 1.75 minutes
+Training throughput: 44735.21 tok/s
+*****************************************
+Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+*****************************************
+DONE!

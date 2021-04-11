@@ -28,7 +28,8 @@ list_system_single = [
    ('3090', 'RTX 3090'),
    ('A100_PCIe', 'A100 40GB PCIe'),
    ('A100_SXM4', 'A100 40GB SXM4'),
-   ('A6000', 'RTX A6000')
+   ('A6000', 'RTX A6000'),
+   ('LambdaCloud_A6000', 'Lambda Cloud — RTX A6000')
 ]
 
 
@@ -72,7 +73,9 @@ list_system_multiple = [
     ('8xA6000', '8x RTX A6000'),
     ('4xA6000', '4x RTX A6000'),
     ('2xA6000', '2x RTX A6000'),
-    ('8xA100_p4', 'p4d.24xlarge')
+    ('8xA100_p4', 'p4d.24xlarge'),
+    ('LambdaCloud_2xA6000', 'Lambda Cloud — 2x RTX A6000'),
+    ('LambdaCloud_4xA6000', 'Lambda Cloud — 4x RTX A6000')
 ]
 
 

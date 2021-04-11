@@ -31,7 +31,8 @@ list_system_single = {
     '3090': ([1, 1], 'RTX 3090'),
     'A100_PCIe': ([1, 1], 'A100 40GB PCIe'),
     'A100_SXM4': ([1, 1], 'A100 40GB SXM4'),
-    'A6000': ([1, 1], 'RTX A6000')
+    'A6000': ([1, 1], 'RTX A6000'),
+    'LambdaCloud_A6000': ([1, 1], 'Lambda Cloud — RTX A6000')
     # 'A100_p4': [1, 1]
     }
 
@@ -67,6 +68,8 @@ list_system_multiple = {
     'LambdaCloud_2xQuadroRTX6000': ([0, 2], 'Lambda Cloud — 2x RTX 6000'),
     'LambdaCloud_4xQuadroRTX6000': ([0, 4], 'Lambda Cloud — 4x RTX 6000'),
     'LambdaCloud_8xV10016G': ([0, 8], 'Lambda Cloud — 8x V100 16GB'),
+    'LambdaCloud_2xA6000': ([1, 2], 'Lambda Cloud — 2x RTX A6000'),
+    'LambdaCloud_4xA6000': ([1, 4], 'Lambda Cloud — 4x RTX A6000'),
     'Linode_2xQuadroRTX6000': ([0, 2], 'Linode Cloud — 2x RTX 6000'),
     'p3.16xlarge': ([0, 8], 'p3.16xlarge'),
     'p3.8xlarge': ([0, 4], 'p3.8xlarge'),
@@ -228,6 +231,9 @@ def main():
         columns.append(list_test[0][test_name][0])
     list_configs = [list_system[key][1] for key in list_system]
 
+    print(columns)
+    print(list_configs)
+    
     df = pd.DataFrame(index=list_configs, columns=columns)
     df = df.fillna(-1.0)
 
