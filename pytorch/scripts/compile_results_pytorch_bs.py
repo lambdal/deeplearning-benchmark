@@ -29,7 +29,8 @@ list_system_single = [
    ('A100_PCIe', 'A100 40GB PCIe'),
    ('A100_SXM4', 'A100 40GB SXM4'),
    ('A6000', 'RTX A6000'),
-   ('LambdaCloud_A6000', 'Lambda Cloud — RTX A6000')
+   ('LambdaCloud_A6000', 'Lambda Cloud — RTX A6000'),
+   ('3080Max-Q', 'RTX 3080 Max-Q'),
 ]
 
 

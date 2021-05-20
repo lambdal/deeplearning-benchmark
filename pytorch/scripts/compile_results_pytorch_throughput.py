@@ -32,7 +32,8 @@ list_system_single = {
     'A100_PCIe': ([1, 1], 'A100 40GB PCIe'),
     'A100_SXM4': ([1, 1], 'A100 40GB SXM4'),
     'A6000': ([1, 1], 'RTX A6000'),
-    'LambdaCloud_A6000': ([1, 1], 'Lambda Cloud — RTX A6000')
+    'LambdaCloud_A6000': ([1, 1], 'Lambda Cloud — RTX A6000'),
+    '3080Max-Q': ([1, 1], 'RTX 3080 Max-Q'),
     # 'A100_p4': [1, 1]
     }
 

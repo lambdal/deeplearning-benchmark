@@ -1,0 +1,67 @@
+DLL 2021-05-20 00:50:09.486260 - PARAMETER output : ./ 
+DLL 2021-05-20 00:50:09.486323 - PARAMETER dataset_path : /data/tacotron2/LJSpeech-1.1 
+DLL 2021-05-20 00:50:09.486351 - PARAMETER model_name : WaveGlow 
+DLL 2021-05-20 00:50:09.486375 - PARAMETER log_file : nvlog.json 
+DLL 2021-05-20 00:50:09.486395 - PARAMETER anneal_steps : None 
+DLL 2021-05-20 00:50:09.486416 - PARAMETER anneal_factor : 0.1 
+DLL 2021-05-20 00:50:09.486437 - PARAMETER epochs : 2 
+DLL 2021-05-20 00:50:09.486457 - PARAMETER epochs_per_checkpoint : 50 
+DLL 2021-05-20 00:50:09.486476 - PARAMETER checkpoint_path :  
+DLL 2021-05-20 00:50:09.486494 - PARAMETER resume_from_last : False 
+DLL 2021-05-20 00:50:09.486514 - PARAMETER dynamic_loss_scaling : True 
+DLL 2021-05-20 00:50:09.486535 - PARAMETER amp : False 
+DLL 2021-05-20 00:50:09.486556 - PARAMETER cudnn_enabled : True 
+DLL 2021-05-20 00:50:09.486574 - PARAMETER cudnn_benchmark : True 
+DLL 2021-05-20 00:50:09.486592 - PARAMETER disable_uniform_initialize_bn_weight : False 
+DLL 2021-05-20 00:50:09.486610 - PARAMETER use_saved_learning_rate : False 
+DLL 2021-05-20 00:50:09.486628 - PARAMETER learning_rate : 0.0 
+DLL 2021-05-20 00:50:09.486648 - PARAMETER weight_decay : 0.0 
+DLL 2021-05-20 00:50:09.486667 - PARAMETER grad_clip_thresh : 65504.0 
+DLL 2021-05-20 00:50:09.486686 - PARAMETER batch_size : 10 
+DLL 2021-05-20 00:50:09.486703 - PARAMETER grad_clip : 5.0 
+DLL 2021-05-20 00:50:09.486721 - PARAMETER load_mel_from_disk : False 
+DLL 2021-05-20 00:50:09.486739 - PARAMETER training_files : filelists/ljs_audio_text_train_subset_625_filelist.txt 
+DLL 2021-05-20 00:50:09.486757 - PARAMETER validation_files : filelists/ljs_audio_text_val_filelist.txt 
+DLL 2021-05-20 00:50:09.486774 - PARAMETER text_cleaners : ['english_cleaners'] 
+DLL 2021-05-20 00:50:09.486797 - PARAMETER max_wav_value : 32768.0 
+DLL 2021-05-20 00:50:09.486815 - PARAMETER sampling_rate : 22050 
+DLL 2021-05-20 00:50:09.486833 - PARAMETER filter_length : 1024 
+DLL 2021-05-20 00:50:09.486850 - PARAMETER hop_length : 256 
+DLL 2021-05-20 00:50:09.486868 - PARAMETER win_length : 1024 
+DLL 2021-05-20 00:50:09.486886 - PARAMETER mel_fmin : 0.0 
+DLL 2021-05-20 00:50:09.486903 - PARAMETER mel_fmax : 8000.0 
+DLL 2021-05-20 00:50:09.486921 - PARAMETER rank : 0 
+DLL 2021-05-20 00:50:09.486939 - PARAMETER world_size : 1 
+DLL 2021-05-20 00:50:09.486956 - PARAMETER dist_url : tcp://localhost:23456 
+DLL 2021-05-20 00:50:09.486974 - PARAMETER group_name : group_name 
+DLL 2021-05-20 00:50:09.486991 - PARAMETER dist_backend : nccl 
+DLL 2021-05-20 00:50:09.487010 - PARAMETER bench_class :  
+DLL 2021-05-20 00:50:09.487028 - PARAMETER model_name : Tacotron2_PyT 
+train.py:402: SyntaxWarning: "is not" with a literal. Did you mean "!="?
+  if args.checkpoint_path is not "":
+DLL 2021-05-20 00:50:14.676091 - (0, 0) glob_iter/iters_per_epoch : 0/62 
+DLL 2021-05-20 00:50:17.977726 - (0, 0) train_loss : 0.00304560549557209 
+DLL 2021-05-20 00:50:20.703234 - (0, 0) train_items_per_sec : 13273.220512628897 
+DLL 2021-05-20 00:50:20.703311 - (0, 0) train_iter_time : 6.027173279000635 
+DLL 2021-05-20 00:50:20.705332 - (0, 1) glob_iter/iters_per_epoch : 1/62 
+Traceback (most recent call last):
+  File "train.py", line 545, in <module>
+    main()
+  File "train.py", line 472, in main
+    y_pred = model(x)
+  File "/opt/conda/lib/python3.8/site-packages/torch/nn/modules/module.py", line 889, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/workspace/examples/tacotron2/waveglow/model.py", line 231, in forward
+    output = self.WN[k]((audio_0, spect))
+  File "/opt/conda/lib/python3.8/site-packages/torch/nn/modules/module.py", line 889, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/workspace/examples/tacotron2/waveglow/model.py", line 151, in forward
+    self.cond_layers[i](spect),
+  File "/opt/conda/lib/python3.8/site-packages/torch/nn/modules/module.py", line 889, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/opt/conda/lib/python3.8/site-packages/torch/nn/modules/conv.py", line 263, in forward
+    return self._conv_forward(input, self.weight, self.bias)
+  File "/opt/conda/lib/python3.8/site-packages/torch/nn/modules/conv.py", line 259, in _conv_forward
+    return F.conv1d(input, weight, bias, self.stride,
+RuntimeError: CUDA out of memory. Tried to allocate 40.00 MiB (GPU 0; 15.75 GiB total capacity; 12.26 GiB already allocated; 10.38 MiB free; 13.80 GiB reserved in total by PyTorch)
+DONE!
