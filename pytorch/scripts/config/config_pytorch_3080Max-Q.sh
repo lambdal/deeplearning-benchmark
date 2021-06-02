@@ -282,7 +282,6 @@ PyTorch_waveglow_FP32_PARAMS=(
             args      
 	    -o        "./"
             --model-name              "WaveGlow"
-            --output_directory        "./" 
             --learning-rate           "0.0" 
             --epochs                  "2" 
             --segment-length          "8000"
@@ -301,7 +300,6 @@ PyTorch_waveglow_FP16_PARAMS=(
             args      
 	    -o        "./"
             --model-name              "WaveGlow"
-            --output_directory        "./" 
             --learning-rate           "0.0" 
             --epochs                  "2" 
             --segment-length          "8000"
