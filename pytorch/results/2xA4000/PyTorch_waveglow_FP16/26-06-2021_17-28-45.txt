@@ -1,0 +1,111 @@
+train.py:402: SyntaxWarning: "is not" with a literal. Did you mean "!="?
+  if args.checkpoint_path is not "":
+DLL 2021-06-26 17:28:47.577009 - PARAMETER output : ./ 
+DLL 2021-06-26 17:28:47.577067 - PARAMETER dataset_path : /data/tacotron2/LJSpeech-1.1 
+DLL 2021-06-26 17:28:47.577091 - PARAMETER model_name : WaveGlow 
+DLL 2021-06-26 17:28:47.577108 - PARAMETER log_file : nvlog.json 
+DLL 2021-06-26 17:28:47.577125 - PARAMETER anneal_steps : None 
+DLL 2021-06-26 17:28:47.577145 - PARAMETER anneal_factor : 0.1 
+DLL 2021-06-26 17:28:47.577162 - PARAMETER epochs : 2 
+DLL 2021-06-26 17:28:47.577178 - PARAMETER epochs_per_checkpoint : 50 
+DLL 2021-06-26 17:28:47.577194 - PARAMETER checkpoint_path :  
+DLL 2021-06-26 17:28:47.577211 - PARAMETER resume_from_last : False 
+DLL 2021-06-26 17:28:47.577227 - PARAMETER dynamic_loss_scaling : True 
+DLL 2021-06-26 17:28:47.577245 - PARAMETER amp : False 
+DLL 2021-06-26 17:28:47.577262 - PARAMETER cudnn_enabled : True 
+DLL 2021-06-26 17:28:47.577277 - PARAMETER cudnn_benchmark : True 
+DLL 2021-06-26 17:28:47.577293 - PARAMETER disable_uniform_initialize_bn_weight : False 
+DLL 2021-06-26 17:28:47.577309 - PARAMETER use_saved_learning_rate : False 
+DLL 2021-06-26 17:28:47.577323 - PARAMETER learning_rate : 0.0 
+DLL 2021-06-26 17:28:47.577338 - PARAMETER weight_decay : 0.0 
+DLL 2021-06-26 17:28:47.577354 - PARAMETER grad_clip_thresh : 65504.0 
+DLL 2021-06-26 17:28:47.577369 - PARAMETER batch_size : 10 
+DLL 2021-06-26 17:28:47.577384 - PARAMETER grad_clip : 5.0 
+DLL 2021-06-26 17:28:47.577399 - PARAMETER load_mel_from_disk : False 
+DLL 2021-06-26 17:28:47.577413 - PARAMETER training_files : filelists/ljs_audio_text_train_subset_625_filelist.txt 
+DLL 2021-06-26 17:28:47.577428 - PARAMETER validation_files : filelists/ljs_audio_text_val_filelist.txt 
+DLL 2021-06-26 17:28:47.577442 - PARAMETER text_cleaners : ['english_cleaners'] 
+DLL 2021-06-26 17:28:47.577581 - PARAMETER max_wav_value : 32768.0 
+DLL 2021-06-26 17:28:47.577596 - PARAMETER sampling_rate : 22050 
+DLL 2021-06-26 17:28:47.577611 - PARAMETER filter_length : 1024 
+DLL 2021-06-26 17:28:47.577626 - PARAMETER hop_length : 256 
+DLL 2021-06-26 17:28:47.577640 - PARAMETER win_length : 1024 
+DLL 2021-06-26 17:28:47.577655 - PARAMETER mel_fmin : 0.0 
+DLL 2021-06-26 17:28:47.577670 - PARAMETER mel_fmax : 8000.0 
+DLL 2021-06-26 17:28:47.577684 - PARAMETER rank : 0 
+DLL 2021-06-26 17:28:47.577699 - PARAMETER world_size : 2 
+DLL 2021-06-26 17:28:47.577725 - PARAMETER dist_url : tcp://localhost:23456 
+DLL 2021-06-26 17:28:47.577740 - PARAMETER group_name : group_name 
+DLL 2021-06-26 17:28:47.577754 - PARAMETER dist_backend : nccl 
+DLL 2021-06-26 17:28:47.577768 - PARAMETER bench_class :  
+DLL 2021-06-26 17:28:47.577783 - PARAMETER model_name : Tacotron2_PyT 
+Initializing Distributed
+Done initializing distributed
+train.py:402: SyntaxWarning: "is not" with a literal. Did you mean "!="?
+  if args.checkpoint_path is not "":
+/opt/conda/lib/python3.8/site-packages/torch/distributed/distributed_c10d.py:144: UserWarning: torch.distributed.reduce_op is deprecated, please use torch.distributed.ReduceOp instead
+  warnings.warn("torch.distributed.reduce_op is deprecated, please use "
+Traceback (most recent call last):
+  File "train.py", line 545, in <module>
+    main()
+  File "train.py", line 472, in main
+    y_pred = model(x)
+  File "/opt/conda/lib/python3.8/site-packages/torch/nn/modules/module.py", line 889, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/opt/conda/lib/python3.8/site-packages/apex/parallel/distributed.py", line 560, in forward
+    result = self.module(*inputs, **kwargs)
+  File "/opt/conda/lib/python3.8/site-packages/torch/nn/modules/module.py", line 889, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/workspace/examples/tacotron2/waveglow/model.py", line 231, in forward
+    output = self.WN[k]((audio_0, spect))
+  File "/opt/conda/lib/python3.8/site-packages/torch/nn/modules/module.py", line 889, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/workspace/examples/tacotron2/waveglow/model.py", line 149, in forward
+    acts = fused_add_tanh_sigmoid_multiply(
+RuntimeError: The following operation failed in the TorchScript interpreter.
+Traceback of TorchScript (most recent call last):
+  File "/workspace/examples/tacotron2/waveglow/model.py", line 35, in fused_add_tanh_sigmoid_multiply
+def fused_add_tanh_sigmoid_multiply(input_a, input_b, n_channels):
+    n_channels_int = n_channels[0]
+    in_act = input_a + input_b
+             ~~~~~~~~~~~~~~~~~ <--- HERE
+    t_act = torch.tanh(in_act[:, :n_channels_int, :])
+    s_act = torch.sigmoid(in_act[:, n_channels_int:, :])
+RuntimeError: CUDA out of memory. Tried to allocate 40.00 MiB (GPU 1; 15.74 GiB total capacity; 12.39 GiB already allocated; 36.69 MiB free; 13.79 GiB reserved in total by PyTorch)
+
+/opt/conda/lib/python3.8/site-packages/torch/distributed/distributed_c10d.py:144: UserWarning: torch.distributed.reduce_op is deprecated, please use torch.distributed.ReduceOp instead
+  warnings.warn("torch.distributed.reduce_op is deprecated, please use "
+DLL 2021-06-26 17:29:27.464615 - (0, 0) glob_iter/iters_per_epoch : 0/31 
+DLL 2021-06-26 17:29:45.327652 - (0, 0) train_loss : 0.00236226012930274 
+DLL 2021-06-26 17:29:55.387375 - (0, 0) train_items_per_sec : 5730.079261622114 
+DLL 2021-06-26 17:29:55.387453 - (0, 0) train_iter_time : 27.922824920000494 
+DLL 2021-06-26 17:29:55.389250 - (0, 1) glob_iter/iters_per_epoch : 1/31 
+Traceback (most recent call last):
+  File "train.py", line 545, in <module>
+    main()
+  File "train.py", line 472, in main
+    y_pred = model(x)
+  File "/opt/conda/lib/python3.8/site-packages/torch/nn/modules/module.py", line 889, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/opt/conda/lib/python3.8/site-packages/apex/parallel/distributed.py", line 560, in forward
+    result = self.module(*inputs, **kwargs)
+  File "/opt/conda/lib/python3.8/site-packages/torch/nn/modules/module.py", line 889, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/workspace/examples/tacotron2/waveglow/model.py", line 231, in forward
+    output = self.WN[k]((audio_0, spect))
+  File "/opt/conda/lib/python3.8/site-packages/torch/nn/modules/module.py", line 889, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/workspace/examples/tacotron2/waveglow/model.py", line 149, in forward
+    acts = fused_add_tanh_sigmoid_multiply(
+RuntimeError: The following operation failed in the TorchScript interpreter.
+Traceback of TorchScript (most recent call last):
+  File "/workspace/examples/tacotron2/waveglow/model.py", line 35, in fused_add_tanh_sigmoid_multiply
+def fused_add_tanh_sigmoid_multiply(input_a, input_b, n_channels):
+    n_channels_int = n_channels[0]
+    in_act = input_a + input_b
+             ~~~~~~~~~~~~~~~~~ <--- HERE
+    t_act = torch.tanh(in_act[:, :n_channels_int, :])
+    s_act = torch.sigmoid(in_act[:, n_channels_int:, :])
+RuntimeError: CUDA out of memory. Tried to allocate 40.00 MiB (GPU 0; 15.74 GiB total capacity; 12.39 GiB already allocated; 36.69 MiB free; 13.79 GiB reserved in total by PyTorch)
+
+DONE!

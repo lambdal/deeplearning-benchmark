@@ -1,0 +1,81 @@
+=> creating model '('resnet50', 'classic', 1000)'
+Version: {'net': <class 'image_classification.resnet.ResNet'>, 'block': <class 'image_classification.resnet.Bottleneck'>, 'layers': [3, 4, 6, 3], 'widths': [64, 128, 256, 512], 'expansion': 4}
+Config: {'conv': <class 'torch.nn.modules.conv.Conv2d'>, 'conv_init': 'fan_out', 'nonlinearity': 'relu', 'last_bn_0_init': False, 'activation': <function <lambda> at 0x7f372e9bde50>}
+Num classes: 1000
+DLL 2021-06-26 17:50:12.676628 - PARAMETER data : /data/imagenet  data_backend : syntetic  arch : resnet50  model_config : classic  num_classes : 1000  workers : 5  epochs : 2  run_epochs : -1  batch_size : 288  optimizer_batch_size : -1  lr : 0.1  lr_schedule : step  warmup : 0  label_smoothing : 0.0  mixup : 0.0  momentum : 0.9  weight_decay : 0.0001  bn_weight_decay : False  nesterov : False  print_freq : 1  resume : None  pretrained_weights :   fp16 : True  static_loss_scale : 256.0  dynamic_loss_scale : False  prof : 100  amp : False  seed : None  gather_checkpoints : False  raport_file : benchmark.json  evaluate : False  training_only : True  save_checkpoints : True  checkpoint_filename : checkpoint.pth.tar  workspace : ./  memory_format : nchw  distributed : True  local_rank : 0  gpu : 0  world_size : 2 
+ ! Weight decay NOT applied to BN parameters 
+98
+63
+Warning:  FP16_Optimizer is deprecated and dangerous, and will be deleted soon.  If it still works, you're probably getting lucky.  For mixed precision, use the documented API https://nvidia.github.io/apex/amp.html, with opt_level=O1.
+RUNNING EPOCHS FROM 0 TO 2
+Traceback (most recent call last):
+  File "./main.py", line 541, in <module>
+    main(args)
+  File "./main.py", line 505, in main
+    train_loop(
+  File "/workspace/examples/resnet50v1.5/image_classification/training.py", line 521, in train_loop
+    train(
+  File "/workspace/examples/resnet50v1.5/image_classification/training.py", line 340, in train
+    loss = step(input, target, optimizer_step=optimizer_step)
+  File "/workspace/examples/resnet50v1.5/image_classification/training.py", line 235, in _step
+    loss, output = model_and_loss(input_var, target_var)
+  File "/opt/conda/lib/python3.8/site-packages/torch/nn/modules/module.py", line 889, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/workspace/examples/resnet50v1.5/image_classification/training.py", line 90, in forward
+    output = self.model(data)
+  File "/opt/conda/lib/python3.8/site-packages/torch/nn/modules/module.py", line 889, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/opt/conda/lib/python3.8/site-packages/apex/parallel/distributed.py", line 560, in forward
+    result = self.module(*inputs, **kwargs)
+  File "/opt/conda/lib/python3.8/site-packages/torch/nn/modules/module.py", line 889, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/opt/conda/lib/python3.8/site-packages/torch/nn/modules/container.py", line 118, in forward
+    input = module(input)
+  File "/opt/conda/lib/python3.8/site-packages/torch/nn/modules/module.py", line 889, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/workspace/examples/resnet50v1.5/image_classification/resnet.py", line 294, in forward
+    x = self.fc(x)
+  File "/opt/conda/lib/python3.8/site-packages/torch/nn/modules/module.py", line 889, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/opt/conda/lib/python3.8/site-packages/torch/nn/modules/linear.py", line 94, in forward
+    return F.linear(input, self.weight, self.bias)
+  File "/opt/conda/lib/python3.8/site-packages/torch/nn/functional.py", line 1753, in linear
+    return torch._C._nn.linear(input, weight, bias)
+RuntimeError: CUDA error: CUBLAS_STATUS_NOT_INITIALIZED when calling `cublasCreate(handle)`
+Traceback (most recent call last):
+  File "./main.py", line 541, in <module>
+    main(args)
+  File "./main.py", line 505, in main
+    train_loop(
+  File "/workspace/examples/resnet50v1.5/image_classification/training.py", line 521, in train_loop
+    train(
+  File "/workspace/examples/resnet50v1.5/image_classification/training.py", line 340, in train
+    loss = step(input, target, optimizer_step=optimizer_step)
+  File "/workspace/examples/resnet50v1.5/image_classification/training.py", line 235, in _step
+    loss, output = model_and_loss(input_var, target_var)
+  File "/opt/conda/lib/python3.8/site-packages/torch/nn/modules/module.py", line 889, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/workspace/examples/resnet50v1.5/image_classification/training.py", line 90, in forward
+    output = self.model(data)
+  File "/opt/conda/lib/python3.8/site-packages/torch/nn/modules/module.py", line 889, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/opt/conda/lib/python3.8/site-packages/apex/parallel/distributed.py", line 560, in forward
+    result = self.module(*inputs, **kwargs)
+  File "/opt/conda/lib/python3.8/site-packages/torch/nn/modules/module.py", line 889, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/opt/conda/lib/python3.8/site-packages/torch/nn/modules/container.py", line 118, in forward
+    input = module(input)
+  File "/opt/conda/lib/python3.8/site-packages/torch/nn/modules/module.py", line 889, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/workspace/examples/resnet50v1.5/image_classification/resnet.py", line 294, in forward
+    x = self.fc(x)
+  File "/opt/conda/lib/python3.8/site-packages/torch/nn/modules/module.py", line 889, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/opt/conda/lib/python3.8/site-packages/torch/nn/modules/linear.py", line 94, in forward
+    return F.linear(input, self.weight, self.bias)
+  File "/opt/conda/lib/python3.8/site-packages/torch/nn/functional.py", line 1753, in linear
+    return torch._C._nn.linear(input, weight, bias)
+RuntimeError: CUDA error: CUBLAS_STATUS_NOT_INITIALIZED when calling `cublasCreate(handle)`
+['/opt/conda/bin/python', '-u', './main.py', '/data/imagenet', '--arch', 'resnet50', '--fp16', '--static-loss-scale', '256', '--epochs', '2', '--prof', '100', '--batch-size', '288', '--raport-file', 'benchmark.json', '--print-freq', '1', '--training-only', '--data-backend', 'syntetic']
+['/opt/conda/bin/python', '-u', './main.py', '/data/imagenet', '--arch', 'resnet50', '--fp16', '--static-loss-scale', '256', '--epochs', '2', '--prof', '100', '--batch-size', '288', '--raport-file', 'benchmark.json', '--print-freq', '1', '--training-only', '--data-backend', 'syntetic']
+DONE!

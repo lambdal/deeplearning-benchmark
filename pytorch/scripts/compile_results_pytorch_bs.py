@@ -33,6 +33,7 @@ list_system_single = [
    ('LambdaCloud_A6000', 'Lambda Cloud — RTX A6000'),
    ('3080Max-Q', 'RTX 3080 Max-Q'),
    ('A40', 'RTX A40'),
+   ('A4000', 'RTX A4000'),
 ]
 
 
@@ -84,6 +85,9 @@ list_system_multiple = [
     ('8xA40', '8x RTX A40'),
     ('4xA40', '4x RTX A40'),
     ('2xA40', '2x RTX A40'),
+    ('8xA4000', '8x RTX A4000'),
+    ('4xA4000', '4x RTX A4000'),
+    ('2xA4000', '2x RTX A4000'),
 ]
 
 
