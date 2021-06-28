@@ -155,7 +155,7 @@ list_test_fp16 = [
         },
         # version 1: nvcr.io/nvidia/pytorch:20.10-py3
         {
-            'PyTorch_SSD_AMP': ('ssd', "^.*Training performance =.*$", -2),
+            'PyTorch_SSD_AMP': ('ssd', "^.*Training performance =.*$", 3),
             'PyTorch_resnet50_FP16': ('resnet50', "^.*Summary: train.loss.*$", -2),
             'PyTorch_maskrcnn_FP16': ('maskrcnn', "^.*Training perf is:.*$", -2),
             'PyTorch_gnmt_FP16': ('gnmt', "^.*Training:.*$", -4),

@@ -43,7 +43,7 @@ PyTorch_resnet50_FP16_PARAMS=(
              args
                                       "/data/imagenet"
              --arch                   "resnet50"
-             --fp16
+             --amp
              --static-loss-scale      "256"
              --epochs                 "2" 
              --prof                   "100" 
@@ -262,7 +262,7 @@ PyTorch_tacotron2_FP16_PARAMS=(
             -o        "./" 
             --learning-rate           "0.0" 
             --epochs                  "3" 
-            --batch-size              "100" 
+            --batch-size              "48" 
             --weight-decay            "1e-6" 
             --grad-clip-thresh        "1.0"
             --log-file                "nvlog.json"
