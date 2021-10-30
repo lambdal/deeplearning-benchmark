@@ -10,9 +10,10 @@ import pandas as pd
 # You need add your own experiments here so it can be included in the generated csv files
 # naming convention
 # key: config name
-# value: renaming the system so it is easier to read
+# full name: renaming the system so it is easier to read
+# watt per gpu
+# price per gpu
 
-# key, full name, watt per gpu, price per gpu
 list_system_single = [
    ('V100', 'V100 32GB',  250, 11357),
    ('QuadroRTX8000', 'RTX 8000', 260, 6900),
@@ -21,9 +22,9 @@ list_system_single = [
    ('TitanRTX', 'Titan RTX', 280, 3500),
    ('2080Ti', 'RTX 2080Ti', 250, 1928),
    ('1080Ti', 'GTX 1080Ti', 250, 892),
-   ('2080SuperMaxQ', 'RTX 2080 SUPER MAX-Q', 80, 600),
-   ('2080MaxQ', 'RTX 2080 MAX-Q', 90, 600),
-   ('2070MaxQ', 'RTX 2070 MAX-Q', 90, 600),
+   ('2080SuperMaxQ', 'RTX 2080 SUPER MAX-Q', 80, 1377),
+   ('2080MaxQ', 'RTX 2080 MAX-Q', 90, 1032),
+   ('2070MaxQ', 'RTX 2070 MAX-Q', 90, 975),
    ('3070', 'RTX 3070', 220, 1035),
    ('3080', 'RTX 3080', 320, 1642),
    ('3090', 'RTX 3090', 350, 3142),
@@ -32,7 +33,7 @@ list_system_single = [
    ('A6000', 'RTX A6000', 300, 5785),
    ('A5000', 'RTX A5000', 230, 2857),
    ('LambdaCloud_A6000', 'Lambda Cloud — RTX A6000', 300, 5785),
-   ('3080Max-Q', 'RTX 3080 Max-Q', 80, 600),
+   ('3080Max-Q', 'RTX 3080 Max-Q', 80, 1600),
    ('A40', 'RTX A40', 300, 6464),
    ('A4000', 'RTX A4000', 140, 1321),
 ]
