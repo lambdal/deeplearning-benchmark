@@ -38,9 +38,9 @@ docker run --gpus all nvidia/cuda:10.0-base nvidia-smi
 
 #### Pull images
 
+NVIDIA has removed the examples from their PyTorch NGC container. The latest container has it is `pytorch:21.07-py3`
 ```
-# Use pytorch:20.01-py3 for pre-Ampere cards, and pytorch:20.10-py3 for Ampere cards
-NAME_NGC=pytorch:20.01-py3
+NAME_NGC=pytorch:21.07-py3
 docker pull nvcr.io/nvidia/${NAME_NGC}
 ```
 
@@ -49,7 +49,7 @@ docker pull nvcr.io/nvidia/${NAME_NGC}
 
 __ImageNet (For ResNet only)__
 
-You can use synthetic data or real data to benchmark ResNet. To run benchmark with synthetic data, simply add `--data-backend syntetic` to the [config file](https://github.com/lambdal/deeplearning-benchmark/blob/master/scripts/config/config_pytorch_2xA100_p4.sh#L38) (right, there is a typo in NVidia's code).
+You can use synthetic data or real data to benchmark ResNet. To run benchmark with synthetic data, simply add `--data-backend syntetic` to the [config file](https://github.com/lambdal/deeplearning-benchmark/blob/master/pytorch/scripts/config/config_pytorch_2xA100_p4.sh#L38) (right, there is a typo in NVidia's code).
 
 If you want to benchmark ResNet with real data, here are the steps assuming `ILSVRC2012_img_train.tar` and `ILSVRC2012_img_val.tar` have already been downloaded to your home directory.
 
@@ -71,6 +71,8 @@ __Data for Other Models__
 Here is the one line to get data ready for other (non-ResNet) models.
 
 ```
+cd deeplearning-benchmark/pytorch
+
 docker run --gpus all --rm --shm-size=64g \
 -v ~/data:/data -v $(pwd)"/scripts":/scripts nvcr.io/nvidia/${NAME_NGC} \
 /bin/bash -c "cp -r /scripts/* /workspace;  ./run_prepare.sh"
@@ -78,7 +80,7 @@ docker run --gpus all --rm --shm-size=64g \
 
 #### Prepare configuration files
 
-Benchmark is defined in a configuration file. For example, here is a [config file](https://github.com/lambdal/deeplearning-benchmark/blob/master/scripts/config/config_pytorch_2xV100.sh) that creates benchmark jobs for a 2xV100 setup. It specifies the number of GPUs, the number of experiments for each task, and the input arguments for individual task (SSD, ResNet, TransformerXL etc.)
+Benchmark is defined in a configuration file. For example, here is a [config file](https://github.com/lambdal/deeplearning-benchmark/blob/master/pytorch/scripts/config/config_pytorch_2xV100.sh) that creates benchmark jobs for a 2xV100 setup. It specifies the number of GPUs, the number of experiments for each task, and the input arguments for individual task (SSD, ResNet, TransformerXL etc.)
 
 ```
 # Number of GPUs
@@ -125,22 +127,22 @@ You can customize the folders to mount the data, scripts and results, the follow
 You can also tasks for a particular model. For example, pass `resnet` to `run_benchmark.sh` means you want to benchmark ResNet (in both fp32, amp, and fp16), and `resnet_fp32` means you only want to benchmark ResNet in FP32.
 
 ```
-cd deeplearning-benchmark
+cd deeplearning-benchmark/pytorch
 
 # 2xV100 on all tasks
 docker run --gpus '"device=list-of-gpus"' --rm --shm-size=64g \
 -v ~/data:/data -v $(pwd)"/scripts":/scripts -v $(pwd)"/results":/results nvcr.io/nvidia/${NAME_NGC} \
 /bin/bash -c "cp -r /scripts/* /workspace; ./run_benchmark.sh 2xV100 all"
 
-# TitanRTX on all resnet tasks
+# TitanRTX on resnet tasks (fp32 and fp16)
 docker run --gpus '"device=list-of-gpus"' --rm --shm-size=64g \
 -v ~/data:/data -v $(pwd)"/scripts":/scripts -v $(pwd)"/results":/results nvcr.io/nvidia/${NAME_NGC} \
-/bin/bash -c "cp -r /scripts/* /workspace; ./run_benchmark.sh 2xV100 resnet"
+/bin/bash -c "cp -r /scripts/* /workspace; ./run_benchmark.sh titanrtx resnet"
 
 # TitanRTX on renset fp32
 docker run --gpus '"device=list-of-gpus"' --rm --shm-size=64g \
 -v ~/data:/data -v $(pwd)"/scripts":/scripts -v $(pwd)"/results":/results nvcr.io/nvidia/${NAME_NGC} \
-/bin/bash -c "cp -r /scripts/* /workspace; ./run_benchmark.sh 2xV100 resnet_fp32"
+/bin/bash -c "cp -r /scripts/* /workspace; ./run_benchmark.sh titanrtx resnet_fp32"
 ```
 
 #### Gather Results
@@ -153,7 +155,7 @@ python scripts/compile_results_pytorch_throughput.py --precision fp32 --system a
 python scripts/compile_results_pytorch_bs.py --precision fp32 --system all
 ```
 
-To gather your own benchmarks, you need to add your system to the `list_system`. See the scripts ([1](https://github.com/lambdal/deeplearning-benchmark/blob/master/scripts/compile_results_pytorch_throughput.py),[2](https://github.com/lambdal/deeplearning-benchmark/blob/master/scripts/compile_results_pytorch_bs.py)) for details.
+To gather your own benchmarks, you need to add your system to the `list_system`. See the scripts ([1](https://github.com/lambdal/deeplearning-benchmark/blob/master/pytorch/scripts/compile_results_pytorch_throughput.py),[2](https://github.com/lambdal/deeplearning-benchmark/blob/master/pytorch/scripts/compile_results_pytorch_bs.py)) for details.
 
 
 ### Notes
