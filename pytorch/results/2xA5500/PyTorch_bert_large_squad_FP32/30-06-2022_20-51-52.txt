@@ -1,0 +1,90 @@
+Container nvidia build =  25165078
+out dir is .
+python   -m torch.distributed.launch --nproc_per_node=2 run_squad.py --init_checkpoint=/data/bert_large/bert_large_uncased.pt --do_train --train_file=/data/squad/v1.1/train-v1.1.json --train_batch_size=8  --do_lower_case  --bert_model=bert-large-uncased  --learning_rate=0.0  --seed=1  --num_train_epochs=2.0  --max_seq_length=384  --doc_stride=128  --output_dir=.  --vocab_file=/data/bert_large/bert-large-uncased-vocab.txt  --config_file=/data/bert_large/bert_config.json  --max_steps=100   |& tee ./logfile.txt
+The module torch.distributed.launch is deprecated and going to be removed in future.Migrate to torch.distributed.run
+WARNING:torch.distributed.run:--use_env is deprecated and will be removed in future releases.
+ Please read local_rank from `os.environ('LOCAL_RANK')` instead.
+INFO:torch.distributed.launcher.api:Starting elastic_operator with launch configs:
+  entrypoint       : run_squad.py
+  min_nodes        : 1
+  max_nodes        : 1
+  nproc_per_node   : 2
+  run_id           : none
+  rdzv_backend     : static
+  rdzv_endpoint    : 127.0.0.1:29500
+  rdzv_configs     : {'rank': 0, 'timeout': 900}
+  max_restarts     : 3
+  monitor_interval : 5
+  log_dir          : None
+  metrics_cfg      : {}
+
+INFO:torch.distributed.elastic.agent.server.local_elastic_agent:log directory set to: /tmp/torchelastic_uzkqkd__/none_5a4elzfc
+INFO:torch.distributed.elastic.agent.server.api:[default] starting workers for entrypoint: python
+INFO:torch.distributed.elastic.agent.server.api:[default] Rendezvous'ing worker group
+/opt/conda/lib/python3.8/site-packages/torch/distributed/elastic/utils/store.py:52: FutureWarning: This is an experimental API and will be changed in future.
+  warnings.warn(
+INFO:torch.distributed.elastic.agent.server.api:[default] Rendezvous complete for workers. Result:
+  restart_count=0
+  master_addr=127.0.0.1
+  master_port=29500
+  group_rank=0
+  group_world_size=1
+  local_ranks=[0, 1]
+  role_ranks=[0, 1]
+  global_ranks=[0, 1]
+  role_world_sizes=[2, 2]
+  global_world_sizes=[2, 2]
+
+INFO:torch.distributed.elastic.agent.server.api:[default] Starting worker group
+INFO:torch.distributed.elastic.multiprocessing:Setting worker0 reply file to: /tmp/torchelastic_uzkqkd__/none_5a4elzfc/attempt_0/0/error.json
+INFO:torch.distributed.elastic.multiprocessing:Setting worker1 reply file to: /tmp/torchelastic_uzkqkd__/none_5a4elzfc/attempt_0/1/error.json
+06/30/2022 20:51:54 - INFO - torch.distributed.distributed_c10d -   Added key: store_based_barrier_key:1 to store for rank: 0
+06/30/2022 20:51:54 - INFO - torch.distributed.distributed_c10d -   Added key: store_based_barrier_key:1 to store for rank: 1
+06/30/2022 20:51:54 - INFO - torch.distributed.distributed_c10d -   Rank 1: Completed store-based barrier for key:store_based_barrier_key:1 with 2 nodes.
+06/30/2022 20:51:54 - INFO - torch.distributed.distributed_c10d -   Rank 0: Completed store-based barrier for key:store_based_barrier_key:1 with 2 nodes.
+device: cuda:0 n_gpu: 1, distributed training: True, 16-bits training: False
+device: cuda:1 n_gpu: 1, distributed training: True, 16-bits training: False
+DLL 2022-06-30 20:51:54.151107 - PARAMETER Config : ["Namespace(amp=False, bert_model='bert-large-uncased', cache_dir=None, config_file='/data/bert_large/bert_config.json', disable_progress_bar=False, do_eval=False, do_lower_case=True, do_predict=False, do_train=True, doc_stride=128, eval_script='evaluate.py', fp16=False, gradient_accumulation_steps=1, init_checkpoint='/data/bert_large/bert_large_uncased.pt', json_summary='results/dllogger.json', learning_rate=0.0, local_rank=0, log_freq=50, loss_scale=0, max_answer_length=30, max_query_length=64, max_seq_length=384, max_steps=100.0, n_best_size=20, no_cuda=False, null_score_diff_threshold=0.0, num_train_epochs=2.0, output_dir='.', predict_batch_size=8, predict_file=None, seed=1, skip_cache=False, skip_checkpoint=False, train_batch_size=8, train_file='/data/squad/v1.1/train-v1.1.json', use_env=False, verbose_logging=False, version_2_with_negative=False, vocab_file='/data/bert_large/bert-large-uncased-vocab.txt', warmup_proportion=0.1)"] 
+DLL 2022-06-30 20:51:54.151297 - PARAMETER SEED : 1 
+WARNING: Output directory . already exists and is not empty. ['inference.py', 'run.sub', 'configurations.yml', 'bert_config.json', 'bind.sh', 'modeling.py', 'optimization.py', 'images', 'results', '.gitignore', 'triton', 'LICENSE', 'tokenization.py', 'file_utils.py', 'run_squad.py', 'requirements.txt', '.git', '.dockerignore', 'NOTICE', 'data', 'run_swag.py', 'create_pretraining_data.py', 'checkpoints', 'processors', '.gitmodules', 'run_glue.py', 'schedulers.py', 'extract_features.py', 'bind_pyt.py', 'Dockerfile', 'vocab', 'utils.py', 'scripts', 'README.md', 'run_pretraining.py', '__pycache__', 'logfile.txt']
+WARNING: Output directory . already exists and is not empty. ['inference.py', 'run.sub', 'configurations.yml', 'bert_config.json', 'bind.sh', 'modeling.py', 'optimization.py', 'images', 'results', '.gitignore', 'triton', 'LICENSE', 'tokenization.py', 'file_utils.py', 'run_squad.py', 'requirements.txt', '.git', '.dockerignore', 'NOTICE', 'data', 'run_swag.py', 'create_pretraining_data.py', 'checkpoints', 'processors', '.gitmodules', 'run_glue.py', 'schedulers.py', 'extract_features.py', 'bind_pyt.py', 'Dockerfile', 'vocab', 'utils.py', 'scripts', 'README.md', 'run_pretraining.py', '__pycache__', 'logfile.txt']
+DLL 2022-06-30 20:52:05.933357 - PARAMETER loading_checkpoint : True 
+DLL 2022-06-30 20:52:05.933531 - PARAMETER loaded_checkpoint : True 
+DLL 2022-06-30 20:52:07.369465 - PARAMETER model_weights_num : 335150082 
+DLL 2022-06-30 20:52:16.485048 - PARAMETER train_start : True 
+DLL 2022-06-30 20:52:16.485206 - PARAMETER training_samples : 87599 
+DLL 2022-06-30 20:52:16.485233 - PARAMETER training_features : 88641 
+DLL 2022-06-30 20:52:16.485258 - PARAMETER train_batch_size : 8 
+DLL 2022-06-30 20:52:16.485300 - PARAMETER steps : 10949.0 
+Iteration:   0%|          | 0/5541 [00:00<?, ?it/s]/workspace/examples/bert/optimization.py:150: UserWarning: This overload of add_ is deprecated:
+	add_(Number alpha, Tensor other)
+Consider using one of the following signatures instead:
+	add_(Tensor other, *, Number alpha) (Triggered internally at  /opt/pytorch/pytorch/torch/csrc/utils/python_arg_parser.cpp:1026.)
+  next_m.mul_(beta1).add_(1 - beta1, grad)
+/workspace/examples/bert/optimization.py:150: UserWarning: This overload of add_ is deprecated:
+	add_(Number alpha, Tensor other)
+Consider using one of the following signatures instead:
+	add_(Tensor other, *, Number alpha) (Triggered internally at  /opt/pytorch/pytorch/torch/csrc/utils/python_arg_parser.cpp:1026.)
+  next_m.mul_(beta1).add_(1 - beta1, grad)
+DLL 2022-06-30 20:52:19.319443 - Training Epoch: 0 Training Iteration: 1  step_loss : 6.124230861663818  learning_rate : 0.0 
+Iteration:   0%|          | 1/5541 [00:01<1:55:50,  1.25s/it]Iteration:   0%|          | 2/5541 [00:01<1:34:01,  1.02s/it]Iteration:   0%|          | 3/5541 [00:02<1:18:48,  1.17it/s]Iteration:   0%|          | 4/5541 [00:02<1:08:07,  1.35it/s]Iteration:   0%|          | 5/5541 [00:03<1:00:41,  1.52it/s]Iteration:   0%|          | 6/5541 [00:03<55:27,  1.66it/s]  Iteration:   0%|          | 7/5541 [00:04<51:49,  1.78it/s]Iteration:   0%|          | 8/5541 [00:04<49:13,  1.87it/s]Iteration:   0%|          | 9/5541 [00:05<47:30,  1.94it/s]Iteration:   0%|          | 10/5541 [00:05<46:19,  1.99it/s]Iteration:   0%|          | 11/5541 [00:05<45:28,  2.03it/s]Iteration:   0%|          | 12/5541 [00:06<44:50,  2.05it/s]Iteration:   0%|          | 13/5541 [00:06<44:26,  2.07it/s]Iteration:   0%|          | 14/5541 [00:07<44:05,  2.09it/s]Iteration:   0%|          | 15/5541 [00:07<43:54,  2.10it/s]Iteration:   0%|          | 16/5541 [00:08<43:46,  2.10it/s]Iteration:   0%|          | 17/5541 [00:08<43:43,  2.11it/s]Iteration:   0%|          | 18/5541 [00:09<43:35,  2.11it/s]Iteration:   0%|          | 19/5541 [00:09<43:35,  2.11it/s]Iteration:   0%|          | 20/5541 [00:10<43:28,  2.12it/s]Iteration:   0%|          | 21/5541 [00:10<43:23,  2.12it/s]Iteration:   0%|          | 22/5541 [00:11<43:18,  2.12it/s]Iteration:   0%|          | 23/5541 [00:11<43:19,  2.12it/s]Iteration:   0%|          | 24/5541 [00:12<43:16,  2.12it/s]Iteration:   0%|          | 25/5541 [00:12<43:17,  2.12it/s]Iteration:   0%|          | 26/5541 [00:13<43:14,  2.13it/s]Iteration:   0%|          | 27/5541 [00:13<43:11,  2.13it/s]Iteration:   1%|          | 28/5541 [00:13<43:09,  2.13it/s]Iteration:   1%|          | 29/5541 [00:14<43:09,  2.13it/s]Iteration:   1%|          | 30/5541 [00:14<43:09,  2.13it/s]Iteration:   1%|          | 31/5541 [00:15<43:08,  2.13it/s]Iteration:   1%|          | 32/5541 [00:15<43:08,  2.13it/s]Iteration:   1%|          | 33/5541 [00:16<43:08,  2.13it/s]Iteration:   1%|          | 34/5541 [00:16<43:07,  2.13it/s]Iteration:   1%|          | 35/5541 [00:17<43:06,  2.13it/s]Iteration:   1%|          | 36/5541 [00:17<43:06,  2.13it/s]Iteration:   1%|          | 37/5541 [00:18<43:06,  2.13it/s]Iteration:   1%|          | 38/5541 [00:18<43:05,  2.13it/s]Iteration:   1%|          | 39/5541 [00:19<43:03,  2.13it/s]Iteration:   1%|          | 40/5541 [00:19<43:03,  2.13it/s]Iteration:   1%|          | 41/5541 [00:20<43:05,  2.13it/s]Iteration:   1%|          | 42/5541 [00:20<43:07,  2.13it/s]Iteration:   1%|          | 43/5541 [00:21<43:09,  2.12it/s]Iteration:   1%|          | 44/5541 [00:21<43:12,  2.12it/s]Iteration:   1%|          | 45/5541 [00:21<43:10,  2.12it/s]Iteration:   1%|          | 46/5541 [00:22<43:11,  2.12it/s]Iteration:   1%|          | 47/5541 [00:22<43:11,  2.12it/s]Iteration:   1%|          | 48/5541 [00:23<43:12,  2.12it/s]Iteration:   1%|          | 49/5541 [00:23<43:10,  2.12it/s]Iteration:   1%|          | 50/5541 [00:24<43:07,  2.12it/s]DLL 2022-06-30 20:52:42.850309 - Training Epoch: 0 Training Iteration: 51  step_loss : 6.007765769958496  learning_rate : 0.0 
+Iteration:   1%|          | 51/5541 [00:24<43:08,  2.12it/s]Iteration:   1%|          | 52/5541 [00:25<43:13,  2.12it/s]Iteration:   1%|          | 53/5541 [00:25<43:11,  2.12it/s]Iteration:   1%|          | 54/5541 [00:26<43:06,  2.12it/s]Iteration:   1%|          | 55/5541 [00:26<43:03,  2.12it/s]Iteration:   1%|          | 56/5541 [00:27<43:01,  2.13it/s]Iteration:   1%|          | 57/5541 [00:27<43:01,  2.12it/s]Iteration:   1%|          | 58/5541 [00:28<42:59,  2.13it/s]Iteration:   1%|          | 59/5541 [00:28<42:58,  2.13it/s]Iteration:   1%|          | 60/5541 [00:29<42:57,  2.13it/s]Iteration:   1%|          | 61/5541 [00:29<43:00,  2.12it/s]Iteration:   1%|          | 62/5541 [00:29<42:58,  2.12it/s]Iteration:   1%|          | 63/5541 [00:30<42:56,  2.13it/s]Iteration:   1%|          | 64/5541 [00:30<42:56,  2.13it/s]Iteration:   1%|          | 65/5541 [00:31<42:57,  2.12it/s]Iteration:   1%|          | 66/5541 [00:31<42:57,  2.12it/s]Iteration:   1%|          | 67/5541 [00:32<42:58,  2.12it/s]Iteration:   1%|          | 68/5541 [00:32<42:57,  2.12it/s]Iteration:   1%|          | 69/5541 [00:33<42:56,  2.12it/s]Iteration:   1%|▏         | 70/5541 [00:33<42:58,  2.12it/s]Iteration:   1%|▏         | 71/5541 [00:34<42:57,  2.12it/s]Iteration:   1%|▏         | 72/5541 [00:34<42:56,  2.12it/s]Iteration:   1%|▏         | 73/5541 [00:35<42:56,  2.12it/s]Iteration:   1%|▏         | 74/5541 [00:35<42:55,  2.12it/s]Iteration:   1%|▏         | 75/5541 [00:36<42:58,  2.12it/s]Iteration:   1%|▏         | 76/5541 [00:36<42:54,  2.12it/s]Iteration:   1%|▏         | 77/5541 [00:37<42:53,  2.12it/s]Iteration:   1%|▏         | 78/5541 [00:37<42:52,  2.12it/s]Iteration:   1%|▏         | 79/5541 [00:37<42:52,  2.12it/s]Iteration:   1%|▏         | 80/5541 [00:38<42:53,  2.12it/s]Iteration:   1%|▏         | 81/5541 [00:38<42:51,  2.12it/s]Iteration:   1%|▏         | 82/5541 [00:39<42:50,  2.12it/s]Iteration:   1%|▏         | 83/5541 [00:39<42:50,  2.12it/s]Iteration:   2%|▏         | 84/5541 [00:40<42:51,  2.12it/s]Iteration:   2%|▏         | 85/5541 [00:40<42:55,  2.12it/s]Iteration:   2%|▏         | 86/5541 [00:41<42:55,  2.12it/s]Iteration:   2%|▏         | 87/5541 [00:41<42:55,  2.12it/s]Iteration:   2%|▏         | 88/5541 [00:42<42:56,  2.12it/s]Iteration:   2%|▏         | 89/5541 [00:42<42:55,  2.12it/s]Iteration:   2%|▏         | 90/5541 [00:43<42:56,  2.12it/s]Iteration:   2%|▏         | 91/5541 [00:43<42:55,  2.12it/s]Iteration:   2%|▏         | 92/5541 [00:44<42:55,  2.12it/s]Iteration:   2%|▏         | 93/5541 [00:44<42:55,  2.11it/s]Iteration:   2%|▏         | 94/5541 [00:45<42:53,  2.12it/s]Iteration:   2%|▏         | 95/5541 [00:45<42:51,  2.12it/s]Iteration:   2%|▏         | 96/5541 [00:45<42:53,  2.12it/s]Iteration:   2%|▏         | 97/5541 [00:46<42:50,  2.12it/s]Iteration:   2%|▏         | 98/5541 [00:46<42:47,  2.12it/s]Iteration:   2%|▏         | 99/5541 [00:47<42:45,  2.12it/s]Iteration:   2%|▏         | 100/5541 [00:47<42:44,  2.12it/s]DLL 2022-06-30 20:53:06.419273 - Training Epoch: 0 Training Iteration: 101  step_loss : 6.085964202880859  learning_rate : 0.0 
+Iteration:   2%|▏         | 101/5541 [00:48<42:43,  2.12it/s]Iteration:   2%|▏         | 101/5541 [00:48<43:24,  2.09it/s]
+Iteration:   0%|          | 0/5541 [00:00<?, ?it/s]Iteration:   0%|          | 0/5541 [00:00<?, ?it/s]
+DLL 2022-06-30 20:53:07.972437 -  e2e_train_time : 48.36335611343384  training_sequences_per_second : 33.08289847063715  final_loss : 6.085964202880859 
+INFO:torch.distributed.elastic.agent.server.api:[default] worker group successfully finished. Waiting 300 seconds for other agents to finish.
+INFO:torch.distributed.elastic.agent.server.api:Local worker group finished (SUCCEEDED). Waiting 300 seconds for other agents to finish
+/opt/conda/lib/python3.8/site-packages/torch/distributed/elastic/utils/store.py:70: FutureWarning: This is an experimental API and will be changed in future.
+  warnings.warn(
+INFO:torch.distributed.elastic.agent.server.api:Done waiting for other agents. Elapsed: 0.0003952980041503906 seconds
+{"name": "torchelastic.worker.status.SUCCEEDED", "source": "WORKER", "timestamp": 0, "metadata": {"run_id": "none", "global_rank": 0, "group_rank": 0, "worker_id": "1428", "role": "default", "hostname": "b096b8675b10", "state": "SUCCEEDED", "total_run_time": 80, "rdzv_backend": "static", "raw_error": null, "metadata": "{\"group_world_size\": 1, \"entry_point\": \"python\", \"local_rank\": [0], \"role_rank\": [0], \"role_world_size\": [2]}", "agent_restarts": 0}}
+{"name": "torchelastic.worker.status.SUCCEEDED", "source": "WORKER", "timestamp": 0, "metadata": {"run_id": "none", "global_rank": 1, "group_rank": 0, "worker_id": "1429", "role": "default", "hostname": "b096b8675b10", "state": "SUCCEEDED", "total_run_time": 80, "rdzv_backend": "static", "raw_error": null, "metadata": "{\"group_world_size\": 1, \"entry_point\": \"python\", \"local_rank\": [1], \"role_rank\": [1], \"role_world_size\": [2]}", "agent_restarts": 0}}
+{"name": "torchelastic.worker.status.SUCCEEDED", "source": "AGENT", "timestamp": 0, "metadata": {"run_id": "none", "global_rank": null, "group_rank": 0, "worker_id": null, "role": "default", "hostname": "b096b8675b10", "state": "SUCCEEDED", "total_run_time": 80, "rdzv_backend": "static", "raw_error": null, "metadata": "{\"group_world_size\": 1, \"entry_point\": \"python\"}", "agent_restarts": 0}}
+*****************************************
+Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+*****************************************
+
+real	1m20.825s
+user	2m11.742s
+sys	0m20.564s
+DONE!
