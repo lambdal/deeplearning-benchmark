@@ -29,7 +29,7 @@ PyTorch_resnet50_FP32_PARAMS=(
              args
                                       "/data/imagenet"
              --arch                   "resnet50"
-             --epochs                 "2" 
+             --epochs                 "1" 
              --prof                   "100" 
              --batch-size             "496"
              --raport-file            "benchmark.json"
@@ -45,7 +45,7 @@ PyTorch_resnet50_FP16_PARAMS=(
              --arch                   "resnet50"
              --fp16
              --static-loss-scale      "256"
-             --epochs                 "2" 
+             --epochs                 "1" 
              --prof                   "100" 
              --batch-size             "912"
              --raport-file            "benchmark.json"
@@ -61,7 +61,7 @@ PyTorch_resnet50_AMP_PARAMS=(
              --arch                   "resnet50"
              --amp
              --static-loss-scale      "256"
-             --epochs                 "2" 
+             --epochs                 "1" 
              --prof                   "100" 
              --batch-size             "928"
              --raport-file            "benchmark.json"
@@ -100,7 +100,7 @@ PyTorch_gnmt_FP32_PARAMS=(
             --val-batch-size          "32"
             --test-batch-size         "32"
             --math                    "fp32"
-            --epochs                  "2"
+            --epochs                  "1"
             --seed                    "2"
            )
 
@@ -112,7 +112,7 @@ PyTorch_gnmt_FP16_PARAMS=(
             --val-batch-size          "32"
             --test-batch-size         "32"
             --math                    "fp16"
-            --epochs                  "2"
+            --epochs                  "1"
             --seed                    "2"
            )
 
@@ -245,7 +245,7 @@ PyTorch_tacotron2_FP32_PARAMS=(
             --model-name              "Tacotron2"
             --output        "./" 
             --learning-rate           "0.0" 
-            --epochs                  "2" 
+            --epochs                  "1" 
             --batch-size              "136" 
             --weight-decay            "1e-6" 
             --grad-clip-thresh        "1.0"
@@ -261,7 +261,7 @@ PyTorch_tacotron2_FP16_PARAMS=(
             --model-name              "Tacotron2"
             --output        "./" 
             --learning-rate           "0.0" 
-            --epochs                  "2" 
+            --epochs                  "1" 
             --batch-size              "148" 
             --weight-decay            "1e-6" 
             --grad-clip-thresh        "1.0"
@@ -279,7 +279,7 @@ PyTorch_waveglow_FP32_PARAMS=(
             -o        "./"
             --model-name              "WaveGlow"
 	    --learning-rate           "0.0" 
-            --epochs                  "2" 
+            --epochs                  "1" 
             --segment-length          "8000"
             --batch-size              "26" 
             --weight-decay            "0" 
@@ -297,7 +297,7 @@ PyTorch_waveglow_FP16_PARAMS=(
 	    -o        "./"
             --model-name              "WaveGlow"
             --learning-rate           "0.0" 
-            --epochs                  "2" 
+            --epochs                  "1" 
             --segment-length          "8000"
             --batch-size              "32" 
             --weight-decay            "0" 

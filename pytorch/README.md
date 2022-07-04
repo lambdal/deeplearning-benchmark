@@ -39,7 +39,7 @@ docker run --gpus all nvidia/cuda:10.0-base nvidia-smi
 
 NVIDIA has removed the examples from their PyTorch NGC container. The latest container has it is `pytorch:21.07-py3`
 ```
-NAME_NGC=pytorch:21.07-py3
+export NAME_NGC=pytorch:21.07-py3
 docker pull nvcr.io/nvidia/${NAME_NGC}
 ```
 
