@@ -23,3 +23,5 @@ fi
 
 ./run_benchmark_pytorch.sh $SYSTEM $TASK_NAME $TIME_OUT
 
+python /scripts/check.py --path /results/${SYSTEM} |& tee /results/${SYSTEM}/summary.txt
+

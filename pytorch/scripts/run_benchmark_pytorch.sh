@@ -35,9 +35,9 @@ declare -A TASKS=(
 
 main() {
     for task in "${!TASKS[@]}"; do
-	if [[ "${task,,}" == *"$TASK_NAME"* ]] || [ "$TASK_NAME" == "all" ]; then
-		timeout -s SIGKILL $TIME_OUT bash ./benchmark_pytorch.sh $SYSTEM ${TASKS[${task}]} $task $TIME_OUT
-	fi	
+        if [[ "${task,,}" == *"$TASK_NAME"* ]] || [ "$TASK_NAME" == "all" ]; then
+            timeout -s SIGKILL $TIME_OUT bash ./benchmark_pytorch.sh $SYSTEM ${TASKS[${task}]} $task
+        fi
     done
 
     chmod -R a+rwx /results/${SYSTEM}

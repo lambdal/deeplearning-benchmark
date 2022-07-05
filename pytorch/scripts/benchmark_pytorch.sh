@@ -3,7 +3,6 @@
 SYSTEM=${1:-"2080Ti"}
 func=${2:-"benchmark_pytorch_ncf"}
 task=${3:-"PyTorch_ncf_FP32"}
-TIME_OUT=${4:-"1800"}
 
 source config/config_pytorch_${SYSTEM}.sh
 
