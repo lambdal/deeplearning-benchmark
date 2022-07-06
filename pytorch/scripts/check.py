@@ -12,7 +12,10 @@ def main():
     print("Check results folder : {}".format(args.path))
 
     if os.path.exists(args.path):
-        for taskname in os.listdir(args.path):
+        lst = os.listdir(args.path)
+        lst.sort()
+        print(lst)
+        for taskname in lst:
             # Get the txt file inside of the folder 
             if not taskname.endswith(".txt"):
                 task_dir = os.path.join(args.path, taskname)
@@ -21,9 +24,9 @@ def main():
                         with open(os.path.join(task_dir, filename), 'r') as f:
                             last_line = f.readlines()[-1]
                             if "DONE!" in last_line:
-                                print(colored("{: <40} : {: >20}".format(taskname, "sucessful"), "green"))
+                                print(colored("{: <35} : {: >10}".format(taskname, "sucessful"), "green"))
                             else:
-                                print(colored("{: <40} : {: >20}".format(taskname, "unsucessful"), "red"))
+                                print(colored("{: <35} : {: >10}".format(taskname, "unsucessful"), "red"))
 
 
 if __name__ == "__main__":
