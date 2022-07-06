@@ -1,6 +1,6 @@
 import os
 import argparse
-
+from termcolor import colored
 
 def main():
     parser = argparse.ArgumentParser(description='Gather benchmark results.')
@@ -21,9 +21,9 @@ def main():
                         with open(os.path.join(task_dir, filename), 'r') as f:
                             last_line = f.readlines()[-1]
                             if "DONE!" in last_line:
-                                print("{: <40} : {: >20}".format(taskname, "sucessful"))
+                                print(colored("{: <40} : {: >20}".format(taskname, "sucessful"), "green"))
                             else:
-                                print("{: <40} : {: >20}".format(taskname, "unsucessful"))
+                                print(colored("{: <40} : {: >20}".format(taskname, "unsucessful"), "red"))
 
 
 if __name__ == "__main__":

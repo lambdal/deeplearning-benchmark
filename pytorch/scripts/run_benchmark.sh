@@ -4,6 +4,7 @@ SYSTEM=${1:-"2080Ti"}
 TASK_NAME=${2:-"all"}
 TIME_OUT=${3:-"1800"}
 
+pip install termcolor
 # pip install 'git+https://github.com/NVIDIA/dllogger'
 
 cp /scripts/patch/run_squad.py examples/bert

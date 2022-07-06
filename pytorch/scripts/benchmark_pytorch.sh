@@ -70,7 +70,6 @@ benchmark_pytorch_gnmt() {
 
     TASK_PARAMS=${task}_PARAMS[@]
     local command_para=$(sed 's/.*args //' <<<${!TASK_PARAMS})
-
     python3 -m torch.distributed.launch --nproc_per_node=${NUM_GPU} train.py ${command_para} |& tee ${result}
 
     echo "DONE!" >> ${result}
