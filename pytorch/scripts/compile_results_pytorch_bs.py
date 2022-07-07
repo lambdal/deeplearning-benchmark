@@ -3,9 +3,11 @@ import os
 import re
 import argparse
 
+import subprocess
+from subprocess import Popen, PIPE
+from os import environ
 
 import pandas as pd
-
 
 # You need add your own experiments here so it can be included in the generated csv files
 # naming convention
@@ -15,98 +17,98 @@ import pandas as pd
 # price per gpu
 
 list_system_single = [
-   ('V100', 'V100 32GB',  250, 11357),
-   ('QuadroRTX8000', 'Quadro RTX 8000', 260, 6900),
-   ('QuadroRTX8000', 'Quadro RTX 8000', 260, 6900),
-   ('QuadroRTX6000', 'Quadro RTX 6000', 260, 4964),
-   ('QuadroRTX5000', 'Quadro RTX 5000', 230, 2392),
-   ('TitanRTX', 'Titan RTX', 280, 3500),
-   ('2080Ti', 'RTX 2080Ti', 250, 1928),
-   ('1080Ti', 'GTX 1080Ti', 250, 892),
-   ('2080SuperMaxQ', 'RTX 2080 SUPER MAX-Q', 80, 1377),
-   ('2080MaxQ', 'RTX 2080 MAX-Q', 90, 1032),
-   ('2070MaxQ', 'RTX 2070 MAX-Q', 90, 975),
-   ('3070', 'RTX 3070', 220, 1035),
-   ('3080', 'RTX 3080', 320, 1642),
-   ('3090', 'RTX 3090', 350, 3142),
-#    ('3090Ti', 'RTX 3090Ti', 450, 1999),
-   ('A100_PCIe', 'A100 40GB PCIe', 250, 12785),
-   ('A100_80GB_PCIe', 'A100 80GB PCIe', 300, 15143),
-   ('A100_SXM4', 'A100 40GB SXM4', 400, 14571),
-   ('A100_80GB_SXM4', 'A100 80GB SXM4', 400, 18571),
-   ('A6000', 'RTX A6000', 300, 5785),
-   ('A5000', 'RTX A5000', 230, 2857),
-   ('LambdaCloud_A6000', 'Lambda Cloud — RTX A6000', 300, 5785),
-   ('3080Max-Q', 'RTX 3080 Max-Q', 80, 1600),
-   ('A40', 'RTX A40', 300, 6464),
-   ('A4000', 'RTX A4000', 140, 1321),
-   ('A4500', 'RTX A4500', 200, 1928),
-   ('A5500', 'RTX A5500', 230, 4500)
+   ('V100', 'V100 32GB',  250, 11357, "v0"),
+   ('QuadroRTX8000', 'Quadro RTX 8000', 260, 6900, "v0"),
+   ('QuadroRTX8000_v1', 'Quadro RTX 8000 V1', 260, 6900, "v1"),
+   ('QuadroRTX6000', 'Quadro RTX 6000', 260, 4964, "v0"),
+   ('QuadroRTX5000', 'Quadro RTX 5000', 230, 2392, "v0"),
+   ('TitanRTX', 'Titan RTX', 280, 3500, "v0"),
+   ('2080Ti', 'RTX 2080Ti', 250, 1928, "v0"),
+   ('1080Ti', 'GTX 1080Ti', 250, 892, "v0"),
+   ('2080SuperMaxQ', 'RTX 2080 SUPER MAX-Q', 80, 1377, "v0"),
+   ('2080MaxQ', 'RTX 2080 MAX-Q', 90, 1032, "v0"),
+   ('2070MaxQ', 'RTX 2070 MAX-Q', 90, 975, "v0"),
+   ('3070', 'RTX 3070', 220, 1035, "v0"),
+   ('3080', 'RTX 3080', 320, 1642, "v0"),
+   ('3090', 'RTX 3090', 350, 3142, "v0"),
+#    ('3090Ti', 'RTX 3090Ti', 450, 1999, "v0"),
+   ('A100_PCIe', 'A100 40GB PCIe', 250, 12785, "v0"),
+   ('A100_80GB_PCIe', 'A100 80GB PCIe', 300, 15143, "v0"),
+   ('A100_SXM4', 'A100 40GB SXM4', 400, 14571, "v0"),
+   ('A100_80GB_SXM4', 'A100 80GB SXM4', 400, 18571, "v0"),
+   ('A6000', 'RTX A6000', 300, 5785, "v0"),
+   ('A5000', 'RTX A5000', 230, 2857, "v0"),
+   ('LambdaCloud_A6000', 'Lambda Cloud — RTX A6000', 300, 5785, "v0"),
+   ('3080Max-Q', 'RTX 3080 Max-Q', 80, 1600, "v0"),
+   ('A40', 'RTX A40', 300, 6464, "v0"),
+   ('A4000', 'RTX A4000', 140, 1321, "v0"),
+   ('A4500', 'RTX A4500', 200, 1928, "v0"),
+   ('A5500', 'RTX A5500', 230, 4500, "v0"),
 ]
 
 
 list_system_multiple = [
-    ('2x2080TiNVlink_trt', '2x RTX 2080Ti NVLink', 250, 1928),
-    ('2x2080Ti_trt', '2x RTX 2080Ti', 250, 1928),
-    ('4x2080TiNVlink_trt', '4x RTX 2080Ti NVLink', 250, 1928),
-    ('4x2080Ti_trt', '4x RTX 2080Ti', 250, 1928),
-    ('8x2080TiNVlink_trt', '8x RTX 2080Ti NVLink', 250, 1928),
-    ('8x2080Ti_trt', '8x RTX 2080Ti', 250, 1928),
-    ('2xQuadroRTX8000NVlink_trt2', '2x Quadro RTX 8000 NVLink', 260, 6900),
-    ('2xQuadroRTX8000_trt2', '2x Quadro RTX 8000', 260, 6900),
-    ('4xQuadroRTX8000NVlink_trt2', '4x Quadro RTX 8000 NVLink', 260, 6900),
-    ('4xQuadroRTX8000_trt2', '4x Quadro RTX 8000', 260, 6900),
-    ('8xQuadroRTX8000NVlink_trt2', '8x Quadro RTX 8000 NVLink', 260, 6900),
-    ('8xQuadroRTX8000_trt2', '8x Quadro RTX 8000', 260, 6900),
-    ('2xV100', '2x V100 32GB', 250, 11357),
-    ('4xV100', '4x V100 32GB', 250, 11357),
-    ('8xV100', '8x V100 32GB', 250, 11357),
-    ('p3.16xlarge', 'p3.16xlarge', 300, 10664),
-    ('p3.8xlarge', 'p3.8xlarge', 300, 10664),
-    ('LambdaCloud_8xV10016G', 'Lambda Cloud — 8x V100 16GB', 300, 10664),
-    ('LambdaCloud_4x1080Ti', 'Lambda Cloud — 4x GTX 1080Ti', 250, 892),
-    ('LambdaCloud_2xQuadroRTX6000', 'Lambda Cloud — 2x Quadro RTX 6000', 260, 4964),
-    ('LambdaCloud_4xQuadroRTX6000', 'Lambda Cloud — 4x Quadro RTX 6000', 260, 4964),
-    ('Linode_2xQuadroRTX6000', 'Linode Cloud — 2x Quadro RTX 6000', 260, 4964),
-    ('2x3070', '2x RTX 3070', 220, 1035),
-    ('4x3070', '4x RTX 3070', 220, 1035),
-    ('8x3070', '8x RTX 3070', 220, 1035),
-    ('2x3080', '2x RTX 3080', 320, 1642),
-    ('2x3090', '2x RTX 3090', 350, 3142),
-    ('3x3090', '3x RTX 3090', 350, 3142),
-    ('4x3090', '4x RTX 3090', 350, 3142),
-    ('8x3090', '8x RTX 3090', 350, 3142),
-    ('2xA100_PCIe', '2x A100 40GB PCIe', 250, 12785),
-    ('4xA100_PCIe', '4x A100 40GB PCIe', 250, 12785),
-    ('8xA100_PCIe', '8x A100 40GB PCIe', 250, 12785),
-    ('2xA100_80GB_PCIe', '2x A100 80GB PCIe', 300, 15143),
-    ('2xA100_SXM4', '2x A100 40GB SXM4', 400, 14571),
-    ('4xA100_SXM4', '4x A100 40GB SXM4', 400, 14571),
-    ('8xA100_SXM4', '8x A100 40GB SXM4', 400, 14571),
-    ('2xA100_80GB_SXM4', '2x A100 80GB SXM4', 400, 18571),
-    ('4xA100_80GB_SXM4', '4x A100 80GB SXM4', 400, 18571),
-    ('8xA100_80GB_SXM4', '8x A100 80GB SXM4', 400, 18571),
-    ('8xA100_p4', 'p4d.24xlarge', 400, 14571),
-    ('2xA6000', '2x RTX A6000', 300, 5785),
-    ('4xA6000', '4x RTX A6000', 300, 5785),
-    ('8xA6000', '8x RTX A6000', 300, 5785),
-    ('LambdaCloud_2xA6000', 'Lambda Cloud — 2x RTX A6000', 300, 5785),
-    ('LambdaCloud_4xA6000', 'Lambda Cloud — 4x RTX A6000', 300, 5785),
-    ('2xA5000', '2x RTX A5000', 230, 2857),
-    ('4xA5000', '4x RTX A5000', 230, 2857),
-    ('2xA40', '2x RTX A40', 300, 6464),
-    ('4xA40', '4x RTX A40', 300, 6464),
-    ('8xA40', '8x RTX A40', 300, 6464),
-    ('2xA4000', '2x RTX A4000', 140, 1321),
-    ('4xA4000', '4x RTX A4000', 140, 1321),
-    ('8xA4000', '8x RTX A4000', 140, 1321),
-    ('16xA4000', '16x RTX A4000', 140, 1321),
-    ('2xA4500', '2x RTX A4500', 200, 1928),
-    ('4xA4500', '4x RTX A4500', 200, 1928),
-    ('8xA4500', '8x RTX A4500', 200, 1928),
-    ('2xA5500', '2x RTX A5500', 230, 4500),
-    ('4xA5500', '4x RTX A5500', 230, 4500),
-    ('8xA5500', '8x RTX A5500', 230, 4500)
+    ('2x2080TiNVlink_trt', '2x RTX 2080Ti NVLink', 250, 1928, "v0"),
+    ('2x2080Ti_trt', '2x RTX 2080Ti', 250, 1928, "v0"),
+    ('4x2080TiNVlink_trt', '4x RTX 2080Ti NVLink', 250, 1928, "v0"),
+    ('4x2080Ti_trt', '4x RTX 2080Ti', 250, 1928, "v0"),
+    ('8x2080TiNVlink_trt', '8x RTX 2080Ti NVLink', 250, 1928, "v0"),
+    ('8x2080Ti_trt', '8x RTX 2080Ti', 250, 1928, "v0"),
+    ('2xQuadroRTX8000NVlink_trt2', '2x Quadro RTX 8000 NVLink', 260, 6900, "v0"),
+    ('2xQuadroRTX8000_trt2', '2x Quadro RTX 8000', 260, 6900, "v0"),
+    ('4xQuadroRTX8000NVlink_trt2', '4x Quadro RTX 8000 NVLink', 260, 6900, "v0"),
+    ('4xQuadroRTX8000_trt2', '4x Quadro RTX 8000', 260, 6900, "v0"),
+    ('8xQuadroRTX8000NVlink_trt2', '8x Quadro RTX 8000 NVLink', 260, 6900, "v0"),
+    ('8xQuadroRTX8000_trt2', '8x Quadro RTX 8000', 260, 6900, "v0"),
+    ('2xV100', '2x V100 32GB', 250, 11357, "v0"),
+    ('4xV100', '4x V100 32GB', 250, 11357, "v0"),
+    ('8xV100', '8x V100 32GB', 250, 11357, "v0"),
+    ('p3.16xlarge', 'p3.16xlarge', 300, 10664, "v0"),
+    ('p3.8xlarge', 'p3.8xlarge', 300, 10664, "v0"),
+    ('LambdaCloud_8xV10016G', 'Lambda Cloud — 8x V100 16GB', 300, 10664, "v0"),
+    ('LambdaCloud_4x1080Ti', 'Lambda Cloud — 4x GTX 1080Ti', 250, 892, "v0"),
+    ('LambdaCloud_2xQuadroRTX6000', 'Lambda Cloud — 2x Quadro RTX 6000', 260, 4964, "v0"),
+    ('LambdaCloud_4xQuadroRTX6000', 'Lambda Cloud — 4x Quadro RTX 6000', 260, 4964, "v0"),
+    ('Linode_2xQuadroRTX6000', 'Linode Cloud — 2x Quadro RTX 6000', 260, 4964, "v0"),
+    ('2x3070', '2x RTX 3070', 220, 1035, "v0"),
+    ('4x3070', '4x RTX 3070', 220, 1035, "v0"),
+    ('8x3070', '8x RTX 3070', 220, 1035, "v0"),
+    ('2x3080', '2x RTX 3080', 320, 1642, "v0"),
+    ('2x3090', '2x RTX 3090', 350, 3142, "v0"),
+    ('3x3090', '3x RTX 3090', 350, 3142, "v0"),
+    ('4x3090', '4x RTX 3090', 350, 3142, "v0"),
+    ('8x3090', '8x RTX 3090', 350, 3142, "v0"),
+    ('2xA100_PCIe', '2x A100 40GB PCIe', 250, 12785, "v0"),
+    ('4xA100_PCIe', '4x A100 40GB PCIe', 250, 12785, "v0"),
+    ('8xA100_PCIe', '8x A100 40GB PCIe', 250, 12785, "v0"),
+    ('2xA100_80GB_PCIe', '2x A100 80GB PCIe', 300, 15143, "v0"),
+    ('2xA100_SXM4', '2x A100 40GB SXM4', 400, 14571, "v0"),
+    ('4xA100_SXM4', '4x A100 40GB SXM4', 400, 14571, "v0"),
+    ('8xA100_SXM4', '8x A100 40GB SXM4', 400, 14571, "v0"),
+    ('2xA100_80GB_SXM4', '2x A100 80GB SXM4', 400, 18571, "v0"),
+    ('4xA100_80GB_SXM4', '4x A100 80GB SXM4', 400, 18571, "v0"),
+    ('8xA100_80GB_SXM4', '8x A100 80GB SXM4', 400, 18571, "v0"),
+    ('8xA100_p4', 'p4d.24xlarge', 400, 14571, "v0"),
+    ('2xA6000', '2x RTX A6000', 300, 5785, "v0"),
+    ('4xA6000', '4x RTX A6000', 300, 5785, "v0"),
+    ('8xA6000', '8x RTX A6000', 300, 5785, "v0"),
+    ('LambdaCloud_2xA6000', 'Lambda Cloud — 2x RTX A6000', 300, 5785, "v0"),
+    ('LambdaCloud_4xA6000', 'Lambda Cloud — 4x RTX A6000', 300, 5785, "v0"),
+    ('2xA5000', '2x RTX A5000', 230, 2857, "v0"),
+    ('4xA5000', '4x RTX A5000', 230, 2857, "v0"),
+    ('2xA40', '2x RTX A40', 300, 6464, "v0"),
+    ('4xA40', '4x RTX A40', 300, 6464, "v0"),
+    ('8xA40', '8x RTX A40', 300, 6464, "v0"),
+    ('2xA4000', '2x RTX A4000', 140, 1321, "v0"),
+    ('4xA4000', '4x RTX A4000', 140, 1321, "v0"),
+    ('8xA4000', '8x RTX A4000', 140, 1321, "v0"),
+    ('16xA4000', '16x RTX A4000', 140, 1321, "v0"),
+    ('2xA4500', '2x RTX A4500', 200, 1928, "v0"),
+    ('4xA4500', '4x RTX A4500', 200, 1928, "v0"),
+    ('8xA4500', '8x RTX A4500', 200, 1928, "v0"),
+    ('2xA5500', '2x RTX A5500', 230, 4500, "v0"),
+    ('4xA5500', '4x RTX A5500', 230, 4500, "v0"),
+    ('8xA5500', '8x RTX A5500', 230, 4500, "v0")
 ]
 
 
@@ -140,23 +142,53 @@ list_test_fp16 = {
 }
 
 
-def gather(list_test, key, name, df, path_config, watt, price):
-    
-    f_name = os.path.join(path_config, 'config_pytorch_' + key + '.sh')
-    with open(f_name, 'r') as f:
-        lines = f.readlines()
+def gather(list_test, key, name, df, path_config, watt, price, version):
 
-        idx_gpu = [i for i, s in enumerate(lines) if 'NUM_GPU=' in s]
-        num_gpu = int(lines[idx_gpu[0]].rstrip().split("=")[1])
+    if version == "v0":
+        f_name = os.path.join(path_config, 'config_v0/config_pytorch_' + key + '.sh')
+        with open(f_name, 'r') as f:
+            lines = f.readlines()
 
-        for test_name, value in sorted(list_test.items()):
-            idx = lines.index(test_name + "_PARAMS=(\n")
-            line = lines[idx + value[0]].rstrip().split(" ")
-            line = list(filter(lambda a: a != "", line))
-            bs = int(line[value[1]][1:-1]) * (num_gpu if value[2] else 1)
-            if bs == 1:
-                bs = 0
-            df.at[name, value[3]] = bs
+            idx_gpu = [i for i, s in enumerate(lines) if 'NUM_GPU=' in s]
+            num_gpu = int(lines[idx_gpu[0]].rstrip().split("=")[1])
+
+            for test_name, value in sorted(list_test.items()):
+                idx = lines.index(test_name + "_PARAMS=(\n")
+                line = lines[idx + value[0]].rstrip().split(" ")
+                line = list(filter(lambda a: a != "", line))
+                bs = int(line[value[1]][1:-1]) * (num_gpu if value[2] else 1)
+                if bs == 1:
+                    bs = 0
+                df.at[name, value[3]] = bs        
+    elif version == "v1": 
+        f_name = os.path.join(path_config, 'config_v1/config_pytorch_' + key + '.sh')
+        with open(f_name, 'r') as f:
+            lines = f.readlines()
+            
+            f_template_name = [s for s in lines if "source" in s][0].split(" ")[1].strip()
+
+            with open(os.path.join("scripts", f_template_name), 'r') as f_template:
+                lines_template = f_template.readlines()
+                
+                idx_gpu = [i for i, s in enumerate(lines_template) if 'NUM_GPU=' in s]
+                num_gpu = int(lines_template[idx_gpu[0]].rstrip().split("=")[1])
+
+                for test_name, value in sorted(list_test.items()):
+
+                    # check if lines has it
+                    line = [s for s in lines if test_name in s]
+                    if line:
+                        bs = int(line[0].split("=")[1].rstrip())
+                    else:
+                        idx = lines_template.index(test_name + "_PARAMS=(\n")
+                        line = lines_template[idx + value[0]].rstrip().split(" ")
+                        line = list(filter(lambda a: a != "", line))
+                        bs = int(line[value[1]][1:-1]) * (num_gpu if value[2] else 1)
+
+                    if bs == 1:
+                        bs = 0
+                    df.at[name, value[3]] = bs
+
     df.at[name, 'num_gpu'] = num_gpu
     df.at[name, 'watt'] = watt * num_gpu
     df.at[name, 'price'] = price * num_gpu
@@ -165,7 +197,7 @@ def gather(list_test, key, name, df, path_config, watt, price):
 def main():
     parser = argparse.ArgumentParser(description='Gather benchmark results.')
 
-    parser.add_argument('--path', type=str, default='scripts/config',
+    parser.add_argument('--path', type=str, default='scripts',
                         help='path that has the results')    
 
     parser.add_argument('--precision', type=str, default='fp32',
@@ -210,7 +242,8 @@ def main():
         s_name = s[1]
         watt = s[2]
         price = s[3]
-        gather(list_test, key, s_name, df, args.path, watt, price)
+        version = s[4]
+        gather(list_test, key, s_name, df, args.path, watt, price, version)
 
     df.index.name = 'name_gpu'
 

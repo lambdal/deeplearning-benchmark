@@ -101,8 +101,7 @@ PyTorch_gnmt_FP32_PARAMS=(
             --test-batch-size         "32"
             --math                    "fp32"
             --epochs                  "1"
-            --seed                    "2"
-            --no-eval                    
+            --seed                    "2"                    
            )
 
 PyTorch_gnmt_FP16_PARAMS=(
@@ -114,8 +113,7 @@ PyTorch_gnmt_FP16_PARAMS=(
             --test-batch-size         "32"
             --math                    "fp16"
             --epochs                  "1"
-            --seed                    "2"
-            --no-eval                    
+            --seed                    "2"                  
            )
 
 PyTorch_ncf_FP32_PARAMS=(
