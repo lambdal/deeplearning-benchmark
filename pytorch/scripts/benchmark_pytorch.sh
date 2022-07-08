@@ -17,7 +17,9 @@ benchmark_pytorch_ssd() {
     python -m torch.distributed.launch --nproc_per_node=${NUM_GPU} main.py \
     --mode benchmark-training ${command_para} |& tee ${result} 
 
-    echo "DONE!" >> ${result}
+    if ! grep -q "RuntimeError" "$result"; then
+        echo "DONE!" >> ${result}
+    fi    
 }
 
 
@@ -32,7 +34,9 @@ benchmark_pytorch_resnet50() {
     python ./multiproc.py --nproc_per_node ${NUM_GPU} ./main.py \
     ${command_para} |& tee ${result}
 
-    echo "DONE!" >> ${result}
+    if ! grep -q "RuntimeError" "$result"; then
+        echo "DONE!" >> ${result}
+    fi 
 }
 
 
@@ -56,7 +60,9 @@ benchmark_pytorch_maskrcnn() {
     calc=$(echo $time 1.0 $GLOBAL_BATCH | awk '{ printf "%f", $2 * $3 / $1 }')
     
     echo "Training perf is: "$calc" FPS" >> ${result}
-    echo "DONE!" >> ${result}
+    if ! grep -q "RuntimeError" "$result"; then
+        echo "DONE!" >> ${result}
+    fi 
     rm /results/*.txt
     rm /results/*.pth
     rm /results/*checkpoint* 
@@ -72,7 +78,9 @@ benchmark_pytorch_gnmt() {
     local command_para=$(sed 's/.*args //' <<<${!TASK_PARAMS})
     python3 -m torch.distributed.launch --nproc_per_node=${NUM_GPU} train.py ${command_para} |& tee ${result}
 
-    echo "DONE!" >> ${result}
+    if ! grep -q "RuntimeError" "$result"; then
+        echo "DONE!" >> ${result}
+    fi 
 }
 
 
@@ -86,7 +94,9 @@ benchmark_pytorch_ncf() {
 
     python -m torch.distributed.launch --nproc_per_node=${NUM_GPU} ncf.py ${command_para} |& tee ${result}
 
-    echo "DONE!" >> ${result}
+    if ! grep -q "RuntimeError" "$result"; then
+        echo "DONE!" >> ${result}
+    fi 
 }
 
 
@@ -100,7 +110,10 @@ benchmark_pytorch_transformerxl() {
 
     python -m torch.distributed.launch --nproc_per_node=${NUM_GPU} train.py ${command_para} |& tee ${result}
 
-    echo "DONE!" >> ${result}
+
+    if ! grep -q "RuntimeError" "$result"; then
+        echo "DONE!" >> ${result}
+    fi
 }
 
 
@@ -115,7 +128,10 @@ benchmark_pytorch_tacotron2() {
     python -m multiproc ${NUM_GPU} train.py \
     ${command_para}  |& tee ${result}
     
-    echo "DONE!" >> ${result}
+
+    if ! grep -q "RuntimeError" "$result"; then
+        echo "DONE!" >> ${result}
+    fi
 }
 
 
@@ -129,7 +145,10 @@ benchmark_pytorch_bert_squad() {
 
     bash scripts/run_squad.sh ${command_para} |& tee ${result}
     
-    echo "DONE!" >> ${result}
+
+    if ! grep -q "RuntimeError" "$result"; then
+        echo "DONE!" >> ${result}
+    fi
 }
 
 
