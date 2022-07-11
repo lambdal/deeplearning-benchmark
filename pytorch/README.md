@@ -30,7 +30,7 @@ Different NGC releases can cause non-trivial performance changes to the same har
 
 A Ubuntu machine with at least one GPU and up-to-date NVIDIA driver. Access to the internet.
 
-If you start from a baremetal Ubuntu machine without NVIDIA driver. Install [Lambda stack](https://lambdalabs.com/lambda-stack-deep-learning-software) to have the . 
+If you start from a baremetal Ubuntu machine without NVIDIA driver. Install [Lambda stack](https://lambdalabs.com/lambda-stack-deep-learning-software). 
 
 For workstation
 
@@ -104,10 +104,36 @@ Benchmark tasks are defined in a configuration file inside of `deeplearning-benc
 * Create a new config file in that folder for your benchmark, either based on a pre-existing template, or from scratch (not recommended)
 * Run the benchmark and reduce the batch size in the config file for tests that failed due to out of memory.
 
+Here is an example of a customized benchmarking a single QuadroRTX8000. You can find it at `deeplearning-benchmark/pytorch/scripts/config_v1/config_pytorch_QuadroRTX8000_v1.sh`.
 
-Here is a template [config file](https://github.com/lambdal/deeplearning-benchmark/blob/feat/timeout/pytorch/scripts/config_v1/config_pytorch_48GB.sh) that creates the jobs for a single GPU with `48GB` of memory. Memory size is crucial here because it decides most of the variations (a.k.a batch size) in the config. 
+```
+#!/bin/bash
 
-The template file specifies the number of GPUs, the number of experiments for each task, and the input arguments for individual task (SSD, ResNet, TransformerXL etc.)
+# Referencing a template of same amount of GPU memory
+source config_v1/config_pytorch_48GB.sh
+
+# Place holder for changes to the tempalte
+declare -A BATCH_SIZE_FIX=(
+)
+source config_v1/fix_bs.sh
+```
+
+We will use this config later. Notice we added `v1` in the path and filename to diffferentiate it from some [old config files](https://github.com/lambdal/deeplearning-benchmark/tree/feat/timeout/pytorch/scripts/config_v0) that were created without referencing templates. 
+
+The above cumstomized config file doesn't make any changes to the batch size set in the template. Here is an example of how to do it:
+
+```
+declare -A BATCH_SIZE_FIX=(
+    [PyTorch_SSD_FP32]=12
+    [PyTorch_ncf_FP32]=121
+    [PyTorch_bert_base_squad_FP32]=22
+)
+```
+
+
+The referenced [template](https://github.com/lambdal/deeplearning-benchmark/blob/feat/timeout/pytorch/scripts/config_v1/config_pytorch_48GB.sh) configures all the jobs for a single GPU with `48GB` of memory. Memory size is crucial here because it decides the batch size for different types of GPUs. The template file also specifies the number of GPUs, the number of experiments for each task, and the input arguments for individual task (SSD, ResNet, TransformerXL etc.)
+
+
 
 ```
 # Number of GPUs
@@ -119,57 +145,33 @@ NUM_EXP=1
 # Task: benchmark SSD in FP32
 PyTorch_SSD_FP32_PARAMS=(
              "examples/ssd"
-             args
-             --data                   "/data/object_detection"
-             --batch-size             "144"
-             --benchmark-warmup       "10"
-             --benchmark-iterations   "40"
-	           --learning-rate          "0"
+              args
+              --data                   "/data/object_detection"
+              --batch-size             "144"
+              --benchmark-warmup       "10"
+              --benchmark-iterations   "40"
+              --learning-rate          "0"
            )
 
 
 
 # Task: benchmarking SSD in Automatic Mixed Precision (AMP)
 PyTorch_SSD_AMP_PARAMS=(
-             "examples/ssd"
-             args
-             --data                   "/data/object_detection"
-             --batch-size             "256"
-             --benchmark-warmup       "10"
-             --benchmark-iterations   "40"
-             --amp
-	           --learning-rate          "0"
+              "examples/ssd"
+              args
+              --data                   "/data/object_detection"
+              --batch-size             "256"
+              --benchmark-warmup       "10"
+              --benchmark-iterations   "40"
+              --amp
+              --learning-rate          "0"
            )
 
 # More tasks
 ...
 ```
 
-Here is an example of a customized benchmarking a single QuadroRTX8000.
-
-```
-#!/bin/bash
-
-# Use the settings in the template
-source config_v1/config_pytorch_48GB.sh
-
-# Place holder for changes to the tempalte
-declare -A BATCH_SIZE_FIX=(
-)
-source config_v1/fix_bs.sh
-```
-
-The above config file is saved as `deeplearning-benchmark/pytorch/scripts/config_v1/config_pytorch_QuadroRTX8000_v1.sh` for later use. We use `v1` in the path and filename to diffferentiate it from [old config files](https://github.com/lambdal/deeplearning-benchmark/tree/feat/timeout/pytorch/scripts/config_v0) that were created without referencing templates. 
-
-Here is an example of how to change batch size for specific models in the customized config file:
-
-```
-declare -A BATCH_SIZE_FIX=(
-    [PyTorch_SSD_FP32]=12
-    [PyTorch_ncf_FP32]=121
-    [PyTorch_bert_base_squad_FP32]=22
-)
-```
+**Your customized config file should always reference a template that uses the SAME number of GPUs and the SAME GPU memory**. For example, referencing `config_pytorch_48GB.sh` in `config_pytorch_QuadroRTX8000_v1.sh` and `config_pytorch_A6000_v1.sh`, and referencing `config_pytorch_2x24GB.sh` in `config_pytorch_2x3090_v1.sh`.
 
 
 #### Step 6: Run Benchmark
