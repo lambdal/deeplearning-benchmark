@@ -186,7 +186,7 @@ Docker options:
 
 `run_benchmark_sh` options:
 * config name: The name of the config file you want to call. For example, use`QuadroRTX8000_v1` to use `config_pytorch_QuadroRTX8000_v1.sh`
-* task: use `all` for all the tasks defined in the config file (22 tasks in total). Or you can call specific task. For example, use `resnet50_fp32` (all lower cases) to only run a single task, or `resnet50` for all the resnet50 related task (fp32 and fp16)
+* task: use `all` for all the tasks defined in the config file (23 tasks in total). Or you can call specific task. For example, use `resnet50_fp32` (all lower cases) to only run a single task, or `resnet50` for all the resnet50 related task (fp32 and fp16)
 * timeout limit: `600` is the default (in seconds). The benchmark will kill a task if it takes longer than this (e.g. weirdness when a GPU hangs in a multi-gpu job)
 
 Here is the full command to benchmark the above `QuadroRTX8000_v1` config for all models, with 600 secs timeout limit:
@@ -202,7 +202,35 @@ nvcr.io/nvidia/pytorch:21.07-py3 \
 /bin/bash -c "cp -r /scripts/* /workspace; ./run_benchmark.sh QuadroRTX8000_v1 all 600"
 ```
 
-As an example of running a specific task, e.g. `resnet50_fp32` with 300 seconds timeout limit, this is the command
+If everything went well, you should see all the tasked are masked as successful at the end:
+
+```
+PyTorch_SSD_AMP                     :  sucessful
+PyTorch_SSD_FP32                    :  sucessful
+PyTorch_bert_base_squad_FP16        :  sucessful
+PyTorch_bert_base_squad_FP32        :  sucessful
+PyTorch_bert_large_squad_FP16       :  sucessful
+PyTorch_bert_large_squad_FP32       :  sucessful
+PyTorch_gnmt_FP16                   :  sucessful
+PyTorch_gnmt_FP32                   :  sucessful
+PyTorch_maskrcnn_FP16               :  sucessful
+PyTorch_maskrcnn_FP32               :  sucessful
+PyTorch_ncf_FP16                    :  sucessful
+PyTorch_ncf_FP32                    :  sucessful
+PyTorch_resnet50_AMP                :  sucessful
+PyTorch_resnet50_FP16               :  sucessful
+PyTorch_resnet50_FP32               :  sucessful
+PyTorch_tacotron2_FP16              :  sucessful
+PyTorch_tacotron2_FP32              :  sucessful
+PyTorch_transformerxlbase_FP16      :  sucessful
+PyTorch_transformerxlbase_FP32      :  sucessful
+PyTorch_transformerxllarge_FP16     :  sucessful
+PyTorch_transformerxllarge_FP32     :  sucessful
+PyTorch_waveglow_FP16               :  sucessful
+PyTorch_waveglow_FP32               :  sucessful
+```
+
+If any of these task failed, you can adjust the batch size in the customized config file, and re-run it. For example, you can re-run `PyTorch_resnet50_FP32` with this command
 
 ```
 docker run \
@@ -212,7 +240,7 @@ docker run \
 -v $(pwd)"/scripts":/scripts \
 -v $(pwd)"/results":/results \
 nvcr.io/nvidia/pytorch:21.07-py3 \
-/bin/bash -c "cp -r /scripts/* /workspace; ./run_benchmark.sh QuadroRTX8000_v1 resnet50_fp32 300"
+/bin/bash -c "cp -r /scripts/* /workspace; ./run_benchmark.sh QuadroRTX8000_v1 resnet50_fp32 600"
 ```
 
 #### Step 7: Gather Results
