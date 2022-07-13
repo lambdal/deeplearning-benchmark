@@ -115,7 +115,7 @@ PyTorch_SSD_AMP_PARAMS=(
 ...
 ```
 
-See [this folder](https://github.com/lambdal/deeplearning-benchmark/blob/master/scripts/config) for reference of different GPU configurations.
+See [this folder](https://github.com/lambdal/deeplearning-benchmark/tree/master/pytorch/scripts/config) for reference of different GPU configurations.
 
 #### Run Benchmark
 
@@ -146,7 +146,7 @@ docker run --gpus '"device=list-of-gpus"' --rm --shm-size=64g \
 
 #### Gather Results
 
-We provide some simply script to gather the results (everything in the results folder) to [CSV](https://github.com/lambdal/deeplearning-benchmark/blob/master/pytorch-train-throughput-fp32.csv) files for both training throughput and batch size.
+We provide some simply script to gather the results (everything in the results folder) to [CSV](https://github.com/lambdal/deeplearning-benchmark/blob/master/pytorch/pytorch-train-throughput-fp32.csv) files for both training throughput and batch size.
 
 ```
 python scripts/compile_results_pytorch_throughput.py --precision fp32 --system all
