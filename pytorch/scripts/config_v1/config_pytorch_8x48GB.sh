@@ -1,6 +1,6 @@
 #!/bin/bash
 
-NUM_GPU=4
+NUM_GPU=8
 NUM_EXP=1
 
 PyTorch_SSD_FP32_PARAMS=(
@@ -74,7 +74,7 @@ PyTorch_maskrcnn_FP32_PARAMS=(
              "examples/maskrcnn/pytorch"
              args
              --config-file            "/workspace/patch/e2e_mask_rcnn_R_50_FPN_1x.yaml"
-             SOLVER.IMS_PER_BATCH     "64"
+             SOLVER.IMS_PER_BATCH     "128"
              DTYPE                    "float32"
              SOLVER.MAX_ITER          "40"
              OUTPUT_DIR               "/results"
@@ -85,7 +85,7 @@ PyTorch_maskrcnn_FP16_PARAMS=(
              "examples/maskrcnn/pytorch"
              args      
              --config-file            "/workspace/patch/e2e_mask_rcnn_R_50_FPN_1x.yaml"
-             SOLVER.IMS_PER_BATCH     "64"
+             SOLVER.IMS_PER_BATCH     "128"
              DTYPE                    "float16"
              SOLVER.MAX_ITER          "40"
              OUTPUT_DIR               "/results"
@@ -123,7 +123,7 @@ PyTorch_ncf_FP32_PARAMS=(
             args
             --data                    "/data/ncf/cache/ml-20m"
             --epochs                  "2"
-            --batch_size              "20000000"
+            --batch_size              "40000000"
             --opt_level               "O0"
            )
 
@@ -132,7 +132,7 @@ PyTorch_ncf_FP16_PARAMS=(
             args
             --data                    "/data/ncf/cache/ml-20m"
             --epochs                  "2"
-            --batch_size              "40000000"
+            --batch_size              "80000000"
             --opt_level               "O2"
            )
 
@@ -141,7 +141,7 @@ PyTorch_transformerxlbase_FP32_PARAMS=(
             args
             --data                    "/data/transformer-xl/wikitext-103"
             --max_step                "40"
-            --batch_size              "128"
+            --batch_size              "256"
             --dataset                 "wt103" 
             --n_layer                 "16"
             --d_model                 "512"
@@ -168,7 +168,7 @@ PyTorch_transformerxlbase_FP16_PARAMS=(
             args
             --data                    "/data/transformer-xl/wikitext-103"
             --max_step                "40"
-            --batch_size              "256"
+            --batch_size              "512"
             --dataset                 "wt103" 
             --n_layer                 "16"
             --d_model                 "512"
@@ -196,7 +196,7 @@ PyTorch_transformerxllarge_FP32_PARAMS=(
             args
             --data                    "/data/transformer-xl/wikitext-103"
             --max_step                "40"
-            --batch_size              "64"
+            --batch_size              "128"
             --dataset                 "wt103" 
             --n_layer                 "18"
             --d_model                 "1024"
@@ -221,7 +221,7 @@ PyTorch_transformerxllarge_FP16_PARAMS=(
             args
             --data                    "/data/transformer-xl/wikitext-103"
             --max_step                "40"
-            --batch_size              "128"
+            --batch_size              "256"
             --dataset                 "wt103" 
             --n_layer                 "18"
             --d_model                 "1024"

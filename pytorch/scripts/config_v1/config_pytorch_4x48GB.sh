@@ -1,6 +1,6 @@
 #!/bin/bash
 
-NUM_GPU=1
+NUM_GPU=4
 NUM_EXP=1
 
 PyTorch_SSD_FP32_PARAMS=(
@@ -47,7 +47,7 @@ PyTorch_resnet50_FP16_PARAMS=(
              --static-loss-scale      "256"
              --epochs                 "1" 
              --prof                   "50" 
-             --batch-size             "912"
+             --batch-size             "928"
              --raport-file            "benchmark.json"
              --print-freq             "1"
              --training-only  
@@ -74,7 +74,7 @@ PyTorch_maskrcnn_FP32_PARAMS=(
              "examples/maskrcnn/pytorch"
              args
              --config-file            "/workspace/patch/e2e_mask_rcnn_R_50_FPN_1x.yaml"
-             SOLVER.IMS_PER_BATCH     "32"
+             SOLVER.IMS_PER_BATCH     "128"
              DTYPE                    "float32"
              SOLVER.MAX_ITER          "40"
              OUTPUT_DIR               "/results"
@@ -85,7 +85,7 @@ PyTorch_maskrcnn_FP16_PARAMS=(
              "examples/maskrcnn/pytorch"
              args      
              --config-file            "/workspace/patch/e2e_mask_rcnn_R_50_FPN_1x.yaml"
-             SOLVER.IMS_PER_BATCH     "32"
+             SOLVER.IMS_PER_BATCH     "128"
              DTYPE                    "float16"
              SOLVER.MAX_ITER          "40"
              OUTPUT_DIR               "/results"
@@ -101,7 +101,7 @@ PyTorch_gnmt_FP32_PARAMS=(
             --test-batch-size         "32"
             --math                    "fp32"
             --epochs                  "1"
-            --seed                    "2"                    
+            --seed                    "2"
             --no-eval
            )
 
@@ -115,7 +115,7 @@ PyTorch_gnmt_FP16_PARAMS=(
             --math                    "fp16"
             --epochs                  "1"
             --seed                    "2"
-            --no-eval                  
+            --no-eval
            )
 
 PyTorch_ncf_FP32_PARAMS=(
@@ -123,7 +123,7 @@ PyTorch_ncf_FP32_PARAMS=(
             args
             --data                    "/data/ncf/cache/ml-20m"
             --epochs                  "2"
-            --batch_size              "5000000"
+            --batch_size              "20000000"
             --opt_level               "O0"
            )
 
@@ -132,7 +132,7 @@ PyTorch_ncf_FP16_PARAMS=(
             args
             --data                    "/data/ncf/cache/ml-20m"
             --epochs                  "2"
-            --batch_size              "10000000"
+            --batch_size              "40000000"
             --opt_level               "O2"
            )
 
@@ -141,7 +141,7 @@ PyTorch_transformerxlbase_FP32_PARAMS=(
             args
             --data                    "/data/transformer-xl/wikitext-103"
             --max_step                "40"
-            --batch_size              "32"
+            --batch_size              "128"
             --dataset                 "wt103" 
             --n_layer                 "16"
             --d_model                 "512"
@@ -168,7 +168,7 @@ PyTorch_transformerxlbase_FP16_PARAMS=(
             args
             --data                    "/data/transformer-xl/wikitext-103"
             --max_step                "40"
-            --batch_size              "64"
+            --batch_size              "256"
             --dataset                 "wt103" 
             --n_layer                 "16"
             --d_model                 "512"
@@ -196,7 +196,7 @@ PyTorch_transformerxllarge_FP32_PARAMS=(
             args
             --data                    "/data/transformer-xl/wikitext-103"
             --max_step                "40"
-            --batch_size              "16"
+            --batch_size              "64"
             --dataset                 "wt103" 
             --n_layer                 "18"
             --d_model                 "1024"
@@ -221,7 +221,7 @@ PyTorch_transformerxllarge_FP16_PARAMS=(
             args
             --data                    "/data/transformer-xl/wikitext-103"
             --max_step                "40"
-            --batch_size              "32"
+            --batch_size              "128"
             --dataset                 "wt103" 
             --n_layer                 "18"
             --d_model                 "1024"
@@ -247,12 +247,12 @@ PyTorch_tacotron2_FP32_PARAMS=(
             --model-name              "Tacotron2"
             --output        "./" 
             --learning-rate           "0.0" 
-            --epochs                  "1" 
+            --epochs                  "2" 
             --batch-size              "136" 
             --weight-decay            "1e-6" 
             --grad-clip-thresh        "1.0"
             --log-file                "nvlog.json"
-            --training-files          "filelists/ljs_audio_text_train_subset_625_filelist.txt"
+            --training-files          "filelists/ljs_audio_text_train_subset_1250_filelist.txt"
             --dataset-path            "/data/tacotron2/LJSpeech-1.1"
             --cudnn-enabled
            )
@@ -263,12 +263,12 @@ PyTorch_tacotron2_FP16_PARAMS=(
             --model-name              "Tacotron2"
             --output        "./" 
             --learning-rate           "0.0" 
-            --epochs                  "1" 
+            --epochs                  "2" 
             --batch-size              "148" 
             --weight-decay            "1e-6" 
             --grad-clip-thresh        "1.0"
             --log-file                "nvlog.json"
-            --training-files          "filelists/ljs_audio_text_train_subset_1250_filelist.txt"
+            --training-files          "filelists/ljs_audio_text_train_subset_2500_filelist.txt"
             --dataset-path            "/data/tacotron2/LJSpeech-1.1"
             --cudnn-enabled
             --amp-run
@@ -281,7 +281,7 @@ PyTorch_waveglow_FP32_PARAMS=(
             -o        "./"
             --model-name              "WaveGlow"
 	    --learning-rate           "0.0" 
-            --epochs                  "1" 
+            --epochs                  "2" 
             --segment-length          "8000"
             --batch-size              "26" 
             --weight-decay            "0" 
@@ -299,7 +299,7 @@ PyTorch_waveglow_FP16_PARAMS=(
 	    -o        "./"
             --model-name              "WaveGlow"
             --learning-rate           "0.0" 
-            --epochs                  "1" 
+            --epochs                  "2" 
             --segment-length          "8000"
             --batch-size              "32" 
             --weight-decay            "0" 
