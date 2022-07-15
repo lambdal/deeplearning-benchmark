@@ -286,6 +286,21 @@ See the scripts ([1](https://github.com/lambdal/deeplearning-benchmark/blob/mast
 
 ### Notes
 
+#### Kill the benchmark 
+
+```
+ubuntu@ubuntu-desktop:~$ docker container ls
+CONTAINER ID   IMAGE                              COMMAND                  CREATED          STATUS          PORTS                NAMES
+e32cf156915c   nvcr.io/nvidia/pytorch:21.07-py3   "/usr/local/bin/nvid…"   27 seconds ago   Up 26 seconds   6006/tcp, 8888/tcp   elastic_austin
+
+
+ubuntu@ubuntu-desktop:~$ docker top e32cf156915c
+UID                 PID                 PPID                C                   STIME               TTY                 TIME                CMD
+root                224082              224056              0                   09:38               ?                   00:00:00            /bin/bash -c cp -r /scripts/* /workspace; ./run_benchmark.sh QuadroRTX8000_v1 all 600
+
+ubuntu@ubuntu-desktop:~$ sudo kill -9 224082
+```
+
 #### Batch size 
 Here are some pitfalls about creating benchmarks (more precisely, setting the input arguments for tasks in the config files).
 
