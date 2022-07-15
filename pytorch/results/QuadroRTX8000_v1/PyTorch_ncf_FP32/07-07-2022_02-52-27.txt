@@ -1,0 +1,118 @@
+The module torch.distributed.launch is deprecated and going to be removed in future.Migrate to torch.distributed.run
+WARNING:torch.distributed.run:--use_env is deprecated and will be removed in future releases.
+ Please read local_rank from `os.environ('LOCAL_RANK')` instead.
+INFO:torch.distributed.launcher.api:Starting elastic_operator with launch configs:
+  entrypoint       : ncf.py
+  min_nodes        : 1
+  max_nodes        : 1
+  nproc_per_node   : 1
+  run_id           : none
+  rdzv_backend     : static
+  rdzv_endpoint    : 127.0.0.1:29500
+  rdzv_configs     : {'rank': 0, 'timeout': 900}
+  max_restarts     : 3
+  monitor_interval : 5
+  log_dir          : None
+  metrics_cfg      : {}
+
+INFO:torch.distributed.elastic.agent.server.local_elastic_agent:log directory set to: /tmp/torchelastic_0z_4m0u1/none_jztqq2xi
+INFO:torch.distributed.elastic.agent.server.api:[default] starting workers for entrypoint: python
+INFO:torch.distributed.elastic.agent.server.api:[default] Rendezvous'ing worker group
+/opt/conda/lib/python3.8/site-packages/torch/distributed/elastic/utils/store.py:52: FutureWarning: This is an experimental API and will be changed in future.
+  warnings.warn(
+INFO:torch.distributed.elastic.agent.server.api:[default] Rendezvous complete for workers. Result:
+  restart_count=0
+  master_addr=127.0.0.1
+  master_port=29500
+  group_rank=0
+  group_world_size=1
+  local_ranks=[0]
+  role_ranks=[0]
+  global_ranks=[0]
+  role_world_sizes=[1]
+  global_world_sizes=[1]
+
+INFO:torch.distributed.elastic.agent.server.api:[default] Starting worker group
+INFO:torch.distributed.elastic.multiprocessing:Setting worker0 reply file to: /tmp/torchelastic_0z_4m0u1/none_jztqq2xi/attempt_0/0/error.json
+:::NVLOGv0.1.0 ncf 1657162348.707499504 (ncf.py:171) cpu_info: {"num": 12, "name": "Intel(R) Core(TM) i7-6850K CPU @ 3.60GHz"}
+:::NVLOGv0.1.0 ncf 1657162348.718515873 (ncf.py:171) mem_info: {"ram": "125Gi"}
+:::NVLOGv0.1.0 ncf 1657162348.961699009 (ncf.py:171) gpu_info: {"driver_version": "510.60.02", "num": 1, "name": ["Quadro RTX 8000"], "mem": ["49152 MiB"]}
+:::NVLOGv0.1.0 ncf 1657162348.966649055 (ncf.py:174) args: {"data": "/data/ncf/cache/ml-20m", "epochs": 2, "batch_size": 5000000, "valid_batch_size": 1048576, "factors": 64, "layers": [256, 256, 128, 64], "negative_samples": 4, "learning_rate": 0.0045, "topk": 10, "seed": 1, "threshold": 1.0, "beta1": 0.25, "beta2": 0.5, "eps": 1e-08, "dropout": 0.5, "checkpoint_dir": "/data/checkpoints/", "load_checkpoint_path": null, "mode": "train", "grads_accumulated": 1, "opt_level": "O0", "local_rank": 0, "distributed": false, "world_size": 1}
+Saving results to /data/checkpoints/
+:::NVLOGv0.1.0 ncf 1657162348.968669653 (ncf.py:184) preproc_hp_sample_eval_replacement: true
+:::NVLOGv0.1.0 ncf 1657162348.969739437 (ncf.py:185) input_hp_sample_train_replacement: true
+:::NVLOGv0.1.0 ncf 1657162348.970750570 (ncf.py:186) input_step_eval_neg_gen
+:::NVLOGv0.1.0 ncf 1657162350.862510920 (ncf.py:194) run_start
+:::NVLOGv0.1.0 ncf 1657162351.096997738 (ncf.py:201) preproc_hp_num_eval: 100
+:::NVLOGv0.1.0 ncf 1657162351.098568678 (ncf.py:207) input_size: 19861770
+:::NVLOGv0.1.0 ncf 1657162351.168161392 (ncf.py:216) input_batch_size: 5000000
+:::NVLOGv0.1.0 ncf 1657162351.168625593 (ncf.py:217) input_order
+:::NVLOGv0.1.0 ncf 1657162351.169221163 (/workspace/examples/ncf/neumf.py:54) model_hp_mf_dim: 64
+:::NVLOGv0.1.0 ncf 1657162351.398811579 (/workspace/examples/ncf/neumf.py:62) model_hp_mlp_layer_sizes: [256, 256, 128, 64]
+NeuMF(
+  (mf_user_embed): Embedding(138493, 64)
+  (mf_item_embed): Embedding(26744, 64)
+  (mlp_user_embed): Embedding(138493, 128)
+  (mlp_item_embed): Embedding(26744, 128)
+  (mlp): ModuleList(
+    (0): Linear(in_features=256, out_features=256, bias=True)
+    (1): Linear(in_features=256, out_features=128, bias=True)
+    (2): Linear(in_features=128, out_features=64, bias=True)
+  )
+  (final): Linear(in_features=128, out_features=1, bias=True)
+)
+31832577 parameters
+:::NVLOGv0.1.0 ncf 1657162352.020113945 (ncf.py:246) opt_learning_rate: 0.0045
+:::NVLOGv0.1.0 ncf 1657162352.020543575 (ncf.py:247) opt_name: "Adam"
+:::NVLOGv0.1.0 ncf 1657162352.020931959 (ncf.py:248) opt_hp_Adam_beta1: 0.25
+:::NVLOGv0.1.0 ncf 1657162352.021312714 (ncf.py:249) opt_hp_Adam_beta2: 0.5
+:::NVLOGv0.1.0 ncf 1657162352.021694183 (ncf.py:250) opt_hp_Adam_epsilon: 1e-08
+:::NVLOGv0.1.0 ncf 1657162352.022071600 (ncf.py:251) model_hp_loss_fn: "binary_cross_entropy"
+:::NVLOGv0.1.0 ncf 1657162352.022443056 (ncf.py:279) train_loop
+:::NVLOGv0.1.0 ncf 1657162352.022814035 (ncf.py:282) train_epoch_start: 0
+:::NVLOGv0.1.0 ncf 1657162352.023191452 (ncf.py:283) input_hp_num_neg: 4
+:::NVLOGv0.1.0 ncf 1657162352.023560524 (ncf.py:284) input_step_train_neg_gen
+:::NVLOGv0.1.0 ncf 1657162364.396770716 (ncf.py:318) train_throughput: 8026696.542162204
+:::NVLOGv0.1.0 ncf 1657162364.397639990 (ncf.py:319) train_epoch_stop: 0
+:::NVLOGv0.1.0 ncf 1657162364.398416281 (ncf.py:320) eval_start: 0
+ncf.py:146: UserWarning: indexing with dtype torch.uint8 is now deprecated, please use a dtype torch.bool instead. (Triggered internally at  /opt/pytorch/pytorch/aten/src/ATen/native/IndexingUtils.h:29.)
+  temp[dup_mask] = -1
+:::NVLOGv0.1.0 ncf 1657162364.989201307 (ncf.py:155) eval_size: {"epoch": 0, "value": 13987793}
+:::NVLOGv0.1.0 ncf 1657162364.989646912 (ncf.py:156) eval_hp_num_users: 138493
+:::NVLOGv0.1.0 ncf 1657162364.990021229 (ncf.py:157) eval_hp_num_neg: 100
+Epoch 0: HR@10 = 0.8337, NDCG@10 = 0.5492, train_time = 12.37, val_time = 0.59
+:::NVLOGv0.1.0 ncf 1657162364.990504503 (ncf.py:333) eval_accuracy: {"epoch": 0, "value": 0.833652242351599}
+:::NVLOGv0.1.0 ncf 1657162364.990841627 (ncf.py:334) eval_target: 1.0
+:::NVLOGv0.1.0 ncf 1657162364.991187572 (ncf.py:335) eval_stop: 0
+:::NVLOGv0.1.0 ncf 1657162364.991522312 (ncf.py:340) eval_throughput: 23538341.044262182
+New best hr! Saving the model to:  /data/checkpoints/model.pth
+:::NVLOGv0.1.0 ncf 1657162365.316173553 (ncf.py:282) train_epoch_start: 1
+:::NVLOGv0.1.0 ncf 1657162365.316582918 (ncf.py:283) input_hp_num_neg: 4
+:::NVLOGv0.1.0 ncf 1657162365.316915989 (ncf.py:284) input_step_train_neg_gen
+:::NVLOGv0.1.0 ncf 1657162377.187697649 (ncf.py:318) train_throughput: 8366169.456335123
+:::NVLOGv0.1.0 ncf 1657162377.188105106 (ncf.py:319) train_epoch_stop: 1
+:::NVLOGv0.1.0 ncf 1657162377.188443422 (ncf.py:320) eval_start: 1
+:::NVLOGv0.1.0 ncf 1657162377.784509420 (ncf.py:155) eval_size: {"epoch": 1, "value": 13987793}
+:::NVLOGv0.1.0 ncf 1657162377.785101891 (ncf.py:156) eval_hp_num_users: 138493
+:::NVLOGv0.1.0 ncf 1657162377.785558939 (ncf.py:157) eval_hp_num_neg: 100
+Epoch 1: HR@10 = 0.8423, NDCG@10 = 0.5615, train_time = 11.87, val_time = 0.60
+:::NVLOGv0.1.0 ncf 1657162377.786143064 (ncf.py:333) eval_accuracy: {"epoch": 1, "value": 0.8423097196248186}
+:::NVLOGv0.1.0 ncf 1657162377.786549807 (ncf.py:334) eval_target: 1.0
+:::NVLOGv0.1.0 ncf 1657162377.786950350 (ncf.py:335) eval_stop: 1
+:::NVLOGv0.1.0 ncf 1657162377.787362814 (ncf.py:340) eval_throughput: 23371323.252100844
+New best hr! Saving the model to:  /data/checkpoints/model.pth
+:::NVLOGv0.1.0 ncf 1657162378.059116125 (ncf.py:356) best_train_throughput: 8366169.456335123
+:::NVLOGv0.1.0 ncf 1657162378.059526443 (ncf.py:357) best_eval_throughput: 23538341.044262182
+:::NVLOGv0.1.0 ncf 1657162378.059863567 (ncf.py:358) best_accuracy: 0.8423097196248186
+:::NVLOGv0.1.0 ncf 1657162378.060199022 (ncf.py:359) time_to_target: 27.19785976409912
+:::NVLOGv0.1.0 ncf 1657162378.060538530 (ncf.py:360) time_to_best_model: 27.19660782814026
+:::NVLOGv0.1.0 ncf 1657162378.060871840 (ncf.py:362) run_stop: {"success": false}
+:::NVLOGv0.1.0 ncf 1657162378.061192274 (ncf.py:363) run_final
+INFO:torch.distributed.elastic.agent.server.api:[default] worker group successfully finished. Waiting 300 seconds for other agents to finish.
+INFO:torch.distributed.elastic.agent.server.api:Local worker group finished (SUCCEEDED). Waiting 300 seconds for other agents to finish
+/opt/conda/lib/python3.8/site-packages/torch/distributed/elastic/utils/store.py:70: FutureWarning: This is an experimental API and will be changed in future.
+  warnings.warn(
+INFO:torch.distributed.elastic.agent.server.api:Done waiting for other agents. Elapsed: 0.0006792545318603516 seconds
+{"name": "torchelastic.worker.status.SUCCEEDED", "source": "WORKER", "timestamp": 0, "metadata": {"run_id": "none", "global_rank": 0, "group_rank": 0, "worker_id": "166", "role": "default", "hostname": "70188eb6454c", "state": "SUCCEEDED", "total_run_time": 35, "rdzv_backend": "static", "raw_error": null, "metadata": "{\"group_world_size\": 1, \"entry_point\": \"python\", \"local_rank\": [0], \"role_rank\": [0], \"role_world_size\": [1]}", "agent_restarts": 0}}
+{"name": "torchelastic.worker.status.SUCCEEDED", "source": "AGENT", "timestamp": 0, "metadata": {"run_id": "none", "global_rank": null, "group_rank": 0, "worker_id": null, "role": "default", "hostname": "70188eb6454c", "state": "SUCCEEDED", "total_run_time": 35, "rdzv_backend": "static", "raw_error": null, "metadata": "{\"group_world_size\": 1, \"entry_point\": \"python\"}", "agent_restarts": 0}}
+DONE!

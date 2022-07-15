@@ -20,6 +20,7 @@ import pandas as pd
 list_system_single = {
     'V100': ([0, 1], 'V100 32GB', 250, 11357),
     'QuadroRTX8000': ([0, 1], 'Quadro RTX 8000', 260, 6900),
+    'QuadroRTX8000_v1': ([1, 1], 'Quadro RTX 8000 V1', 260, 6900),
     'QuadroRTX6000': ([0, 1], 'Quadro RTX 6000', 260, 4964),
     'QuadroRTX5000': ([0, 1], 'Quadro RTX 5000', 230, 2392),
     'TitanRTX': ([0, 1], 'Titan RTX', 280, 3500),
@@ -190,6 +191,8 @@ def gather_last(list_test, list_system, name, system, config_name, df, version, 
 
                     for match in re.finditer(pattern, line):
                         try:
+                            # print(match.group().split(' '))
+                            # print(pos)
                             throughput = float(match.group().split(' ')[pos])
                         except:
                             pass
