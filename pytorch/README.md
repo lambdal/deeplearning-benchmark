@@ -186,7 +186,7 @@ Docker options:
 
 `run_benchmark_sh` options:
 * config name: The name of the config file you want to call. For example, use`QuadroRTX8000_v1` to use `config_pytorch_QuadroRTX8000_v1.sh`
-* task: use `all` for all the tasks defined in the config file (23 tasks in total). Or you can call specific task. For example, use `resnet50_fp32` (all lower cases) to only run a single task, or `resnet50` for all the resnet50 related task (fp32 and fp16)
+* task: use `all` for all the tasks defined in the config file (23 tasks in total). Or you can call specific task. For example, use `resnet50_fp32` (__all lower cases__) to only run a single task, or `resnet50` for all the resnet50 related task (fp32 and fp16)
 * timeout limit: `600` is the default (in seconds). The benchmark will kill a task if it takes longer than this (e.g. weirdness when a GPU hangs in a multi-gpu job)
 
 Here is the full command to benchmark the above `QuadroRTX8000_v1` config for all models, with 600 secs timeout limit:
