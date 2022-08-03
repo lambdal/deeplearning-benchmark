@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source config_v1/config_pytorch_48GB.sh
+source config_v1/config_pytorch_40GB.sh
 
 declare -A BATCH_SIZE_FIX=(
     [PyTorch_tacotron2_FP32]=48
