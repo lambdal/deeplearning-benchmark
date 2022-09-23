@@ -7,7 +7,7 @@ PyTorch_SSD_FP32_PARAMS=(
              "examples/ssd"
              args
              --data                   "/data/object_detection"
-             --batch-size             "144"
+             --batch-size             "128"
              --benchmark-warmup       "10"
              --benchmark-iterations   "40"
 	     --learning-rate          "0"
