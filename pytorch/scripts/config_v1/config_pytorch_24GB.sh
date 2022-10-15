@@ -295,6 +295,8 @@ PyTorch_bert_base_squad_FP32_PARAMS=(
             "2.0"
             "26"
             "0.0"
+            "0.1"
+            "fp32"
             "${NUM_GPU}"
             "1"
             "/data/squad/v1.1"
@@ -312,6 +314,8 @@ PyTorch_bert_base_squad_FP16_PARAMS=(
             "2.0"
             "52"
             "0.0"
+            "0.1"
+            "fp16"
             "${NUM_GPU}"
             "1"
             "/data/squad/v1.1"
@@ -320,7 +324,6 @@ PyTorch_bert_base_squad_FP16_PARAMS=(
             "train"
             "/data/bert_base/bert_config.json"
             "100"
-            --fp16
 )
 
 PyTorch_bert_large_squad_FP32_PARAMS=(
@@ -330,6 +333,8 @@ PyTorch_bert_large_squad_FP32_PARAMS=(
             "2.0"
             "8"
             "0.0"
+            "0.1"
+            "fp32"
             "${NUM_GPU}"
             "1"
             "/data/squad/v1.1"
@@ -347,6 +352,8 @@ PyTorch_bert_large_squad_FP16_PARAMS=(
             "2.0"
             "16"
             "0.0"
+            "0.1"
+            "fp16"
             "${NUM_GPU}"
             "1"
             "/data/squad/v1.1"
@@ -355,5 +362,4 @@ PyTorch_bert_large_squad_FP16_PARAMS=(
             "train"
             "/data/bert_large/bert_config.json"
             "100"
-            --fp16
 )
