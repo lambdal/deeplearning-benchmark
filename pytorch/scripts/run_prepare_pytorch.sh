@@ -20,6 +20,7 @@ popd
 pushd .
 
 cd benchmark/Translation/GNMT
+pip install -r requirements.txt
 mkdir -p /data/gnmt/wmt16_de_en
 bash scripts/wmt16_en_de.sh /data/gnmt/wmt16_de_en
 chmod -R a+rwx /data/gnmt/

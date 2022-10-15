@@ -42,6 +42,9 @@ benchmark_pytorch_resnet50() {
 
 benchmark_pytorch_maskrcnn() {
 
+    echo "Skip MaskRCNN until maskrcnn_benchmark can be built."
+    return 1
+
     local task="$1"
     local result="$2"
 
@@ -50,7 +53,10 @@ benchmark_pytorch_maskrcnn() {
 
     GLOBAL_BATCH=`echo ${!TASK_PARAMS} | grep -oP '(?<=SOLVER.IMS_PER_BATCH )\w+'`
 
-    python -m torch.distributed.launch --nproc_per_node=${NUM_GPU} tools/train_net.py \
+    # python setup.py install
+    # pip install -r requirements.txt
+
+    python -m torch.distributed.launch --nproc_per_node=${NUM_GPU} --use_env tools/train_net.py \
     --skip-test \
     ${command_para} \
     | tee $result
@@ -74,6 +80,8 @@ benchmark_pytorch_gnmt() {
     local task="$1"
     local result="$2"
 
+    pip install -r requirements.txt
+
     TASK_PARAMS=${task}_PARAMS[@]
     local command_para=$(sed 's/.*args //' <<<${!TASK_PARAMS})
     python3 -m torch.distributed.launch --nproc_per_node=${NUM_GPU} train.py ${command_para} |& tee ${result}
@@ -92,7 +100,7 @@ benchmark_pytorch_ncf() {
     TASK_PARAMS=${task}_PARAMS[@]
     local command_para=$(sed 's/.*args //' <<<${!TASK_PARAMS})
 
-    python -m torch.distributed.launch --nproc_per_node=${NUM_GPU} ncf.py ${command_para} |& tee ${result}
+    python -m torch.distributed.launch --nproc_per_node=${NUM_GPU} --use_env ncf.py ${command_para} |& tee ${result}
 
     if ! grep -q "RuntimeError" "$result"; then
         echo "DONE!" >> ${result}
@@ -122,6 +130,8 @@ benchmark_pytorch_tacotron2() {
     local task="$1"
     local result="$2"
 
+    pip install -r requirements.txt
+
     TASK_PARAMS=${task}_PARAMS[@]
     local command_para=$(sed 's/.*args //' <<<${!TASK_PARAMS})
 
@@ -139,6 +149,8 @@ benchmark_pytorch_bert_squad() {
 
     local task="$1"
     local result="$2"
+    
+    pip install -r requirements.txt
 
     TASK_PARAMS=${task}_PARAMS[@]
     local command_para=$(sed 's/.*args //' <<<${!TASK_PARAMS})
