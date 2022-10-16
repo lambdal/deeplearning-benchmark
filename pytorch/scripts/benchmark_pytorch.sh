@@ -14,6 +14,10 @@ benchmark_pytorch_ssd() {
     TASK_PARAMS=${task}_PARAMS[@]
     local command_para=$(sed 's/.*args //' <<<${!TASK_PARAMS})
 
+    echo "************************************************************"
+    echo $command_para
+    echo "************************************************************"
+
     python -m torch.distributed.launch --nproc_per_node=${NUM_GPU} main.py \
     --mode benchmark-training ${command_para} |& tee ${result} 
 
@@ -30,6 +34,10 @@ benchmark_pytorch_resnet50() {
 
     TASK_PARAMS=${task}_PARAMS[@]
     local command_para=$(sed 's/.*args //' <<<${!TASK_PARAMS})
+
+    echo "************************************************************"
+    echo $command_para
+    echo "************************************************************"
 
     python ./multiproc.py --nproc_per_node ${NUM_GPU} ./main.py \
     ${command_para} |& tee ${result}
@@ -50,6 +58,10 @@ benchmark_pytorch_maskrcnn() {
 
     TASK_PARAMS=${task}_PARAMS[@]
     local command_para=$(sed 's/.*args //' <<<${!TASK_PARAMS})
+
+    echo "************************************************************"
+    echo $command_para
+    echo "************************************************************"
 
     GLOBAL_BATCH=`echo ${!TASK_PARAMS} | grep -oP '(?<=SOLVER.IMS_PER_BATCH )\w+'`
 
@@ -84,6 +96,11 @@ benchmark_pytorch_gnmt() {
 
     TASK_PARAMS=${task}_PARAMS[@]
     local command_para=$(sed 's/.*args //' <<<${!TASK_PARAMS})
+
+    echo "************************************************************"
+    echo $command_para
+    echo "************************************************************"
+
     python3 -m torch.distributed.launch --nproc_per_node=${NUM_GPU} train.py ${command_para} |& tee ${result}
 
     if ! grep -q "RuntimeError" "$result"; then
@@ -99,6 +116,10 @@ benchmark_pytorch_ncf() {
 
     TASK_PARAMS=${task}_PARAMS[@]
     local command_para=$(sed 's/.*args //' <<<${!TASK_PARAMS})
+
+    echo "************************************************************"
+    echo $command_para
+    echo "************************************************************"
 
     python -m torch.distributed.launch --nproc_per_node=${NUM_GPU} --use_env ncf.py ${command_para} |& tee ${result}
 
@@ -116,8 +137,11 @@ benchmark_pytorch_transformerxl() {
     TASK_PARAMS=${task}_PARAMS[@]
     local command_para=$(sed 's/.*args //' <<<${!TASK_PARAMS})
 
-    python -m torch.distributed.launch --nproc_per_node=${NUM_GPU} train.py ${command_para} |& tee ${result}
+    echo "************************************************************"
+    echo $command_para
+    echo "************************************************************"
 
+    python -m torch.distributed.launch --nproc_per_node=${NUM_GPU} train.py ${command_para} |& tee ${result}
 
     if ! grep -q "RuntimeError" "$result"; then
         echo "DONE!" >> ${result}
@@ -134,6 +158,10 @@ benchmark_pytorch_tacotron2() {
 
     TASK_PARAMS=${task}_PARAMS[@]
     local command_para=$(sed 's/.*args //' <<<${!TASK_PARAMS})
+
+    echo "************************************************************"
+    echo $command_para
+    echo "************************************************************"
 
     python -m multiproc ${NUM_GPU} train.py \
     ${command_para}  |& tee ${result}
@@ -154,6 +182,10 @@ benchmark_pytorch_bert_squad() {
 
     TASK_PARAMS=${task}_PARAMS[@]
     local command_para=$(sed 's/.*args //' <<<${!TASK_PARAMS})
+
+    echo "************************************************************"
+    echo $command_para
+    echo "************************************************************"
 
     bash scripts/run_squad.sh ${command_para} |& tee ${result}
     

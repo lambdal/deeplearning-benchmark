@@ -111,7 +111,7 @@ source config_v1/config_pytorch_48GB.sh
 # Place holder for changes to the tempalte
 declare -A BATCH_SIZE_FIX=(
 )
-source config_v1/fix_bs.sh
+source config_v1/fix.sh
 ```
 
 We will use this config later. Notice we added `v1` in the path and filename to diffferentiate it from some [old config files](https://github.com/lambdal/deeplearning-benchmark/tree/feat/timeout/pytorch/scripts/config_v0) that were created without referencing templates. 
@@ -129,7 +129,21 @@ declare -A BATCH_SIZE_FIX=(
 
 The referenced [template](https://github.com/lambdal/deeplearning-benchmark/blob/feat/timeout/pytorch/scripts/config_v1/config_pytorch_48GB.sh) configures all the jobs for a single GPU with `48GB` of memory. Memory size is crucial here because it decides the batch size for different types of GPUs. The template file also specifies the number of GPUs, the number of experiments for each task, and the input arguments for individual task (SSD, ResNet, TransformerXL etc.)
 
+You can also customize the number of iterations for SSD (`--benchmark-iterations`) and the dataset for tacotron2/waveglow (`--training-files`). This is useful for benchmarking multi-gpu training with GPUs that have large memory (so to make sure the number of steps/dataset are enough to get valid results). Below is an example of how to set it in the config file:
 
+```
+declare -A SSD_ITER_FIX=(
+    [PyTorch_SSD_FP32]=100
+    [PyTorch_SSD_AMP]=100
+)
+
+declare -A tacotron2_DATA_FIX=(
+    [PyTorch_tacotron2_FP32]="filelists/ljs_audio_text_train_subset_1250_filelist.txt"
+    [PyTorch_tacotron2_FP16]="filelists/ljs_audio_text_train_subset_2500_filelist.txt"
+    [PyTorch_waveglow_FP32]="filelists/ljs_audio_text_train_subset_1250_filelist.txt"
+    [PyTorch_waveglow_FP16]="filelists/ljs_audio_text_train_subset_2500_filelist.txt"
+)
+```
 
 ```
 # Number of GPUs
