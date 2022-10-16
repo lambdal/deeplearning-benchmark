@@ -19,6 +19,7 @@ import pandas as pd
 list_system_single = [
    ('QuadroRTX8000_v1', 'Quadro RTX 8000 V1', 260, 6900, "v1"),
    ('4090_v1', 'RTX 4090', 450, 1599, "v1"),
+   ('A100_40GB_PCIe_v1', 'A100 40GB PCIe', 250, 12785, "v1"),
 ]
 
 

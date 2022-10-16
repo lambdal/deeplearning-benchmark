@@ -39,7 +39,7 @@ PyTorch_resnet50_FP32_PARAMS=(
            )
 
 PyTorch_resnet50_AMP_PARAMS=(
-             "examples/resnet50v1.5"
+             "benchmark/Classification/ConvNets"
              args
                                       "/data/imagenet"
              --arch                   "resnet50"
