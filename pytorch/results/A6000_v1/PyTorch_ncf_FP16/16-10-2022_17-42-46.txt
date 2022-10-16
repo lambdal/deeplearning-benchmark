@@ -1,0 +1,48 @@
+DLL 2022-10-16 17:42:49.320524 - PARAMETER data : /data/ncf/cache/ml-20m  feature_spec_file : feature_spec.yaml  epochs : 2  batch_size : 10000000  valid_batch_size : 1048576  factors : 64  layers : [256, 256, 128, 64]  negative_samples : 4  learning_rate : 0.0045  topk : 10  seed : None  threshold : 1.0  beta1 : 0.25  beta2 : 0.5  eps : 1e-08  dropout : 0.5  checkpoint_dir :   load_checkpoint_path : None  mode : train  grads_accumulated : 1  amp : True  log_path : log.json  world_size : 1  distributed : False  local_rank : 0 
+Selected optimization level O2:  FP16 training with FP32 batchnorm and FP32 master weights.
+
+Defaults for this optimization level are:
+enabled                : True
+opt_level              : O2
+cast_model_type        : torch.float16
+patch_torch_functions  : False
+keep_batchnorm_fp32    : True
+master_weights         : True
+loss_scale             : dynamic
+Processing user overrides (additional kwargs that are not None)...
+After processing overrides, optimization options are:
+enabled                : True
+opt_level              : O2
+cast_model_type        : torch.float16
+patch_torch_functions  : False
+keep_batchnorm_fp32    : False
+master_weights         : True
+loss_scale             : dynamic
+NeuMF(
+  (mf_user_embed): Embedding(138493, 64)
+  (mf_item_embed): Embedding(26744, 64)
+  (mlp_user_embed): Embedding(138493, 128)
+  (mlp_item_embed): Embedding(26744, 128)
+  (mlp): ModuleList(
+    (0): Linear(in_features=256, out_features=256, bias=True)
+    (1): Linear(in_features=256, out_features=128, bias=True)
+    (2): Linear(in_features=128, out_features=64, bias=True)
+  )
+  (final): Linear(in_features=128, out_features=1, bias=True)
+)
+31832577 parameters
+DLL 2022-10-16 17:42:55.459748 - (0,) train_throughput : 2.303e+07 samples/s hr@10 : 0.83250 None train_epoch_time : 4.313 s validation_epoch_time : 0.195 s eval_throughput : 7.180e+07 samples/s validation_loss : 0.09013 None train_loss : 0.25924 None
+New best hr!
+DLL 2022-10-16 17:42:59.580480 - (1,) train_throughput : 2.528e+07 samples/s hr@10 : 0.83476 None train_epoch_time : 3.929 s validation_epoch_time : 0.192 s eval_throughput : 7.299e+07 samples/s validation_loss : 0.14675 None train_loss : 0.23372 None
+New best hr!
+DLL 2022-10-16 17:42:59.580752 - () best_train_throughput : 25276479.298909593 samples/s best_eval_throughput : 72991889.68439178 samples/s mean_train_throughput : 24151244.347079825 samples/s mean_eval_throughput : 72397956.00588281 samples/s best_accuracy : 0.8347569913280816 None best_epoch : 1 None time_to_target : 10.134871482849121 s time_to_best_model : 10.134761333465576 s validation_loss : 0.14675 None train_loss : 0.23372 None
+/opt/conda/lib/python3.8/site-packages/torch/distributed/launch.py:180: FutureWarning: The module torch.distributed.launch is deprecated
+and will be removed in future. Use torchrun.
+Note that --use_env is set by default in torchrun.
+If your script expects `--local_rank` argument to be set, please
+change it to read from `os.environ['LOCAL_RANK']` instead. See 
+https://pytorch.org/docs/stable/distributed.html#launch-utility for 
+further instructions
+
+  warnings.warn(
+DONE!

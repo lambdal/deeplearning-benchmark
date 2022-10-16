@@ -21,6 +21,7 @@ list_system_single = {
     'QuadroRTX8000_v1': ([1, 1], 'Quadro RTX 8000', 260, 6900),
     '4090_v1': ([1, 1], 'RTX 4090', 450, 1599),
     'A100_40GB_PCIe_v1': ([1, 1], 'A100 40GB PCIe', 250, 12785),
+    'A6000_v1': ([1, 1], 'RTX A6000', 300, 5785),
     }
 
 list_system_multiple = {
