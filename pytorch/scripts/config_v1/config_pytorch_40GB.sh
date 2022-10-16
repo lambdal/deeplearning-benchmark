@@ -241,7 +241,7 @@ PyTorch_tacotron2_FP16_PARAMS=(
             --model-name              "Tacotron2"
             --learning-rate           "0.0" 
             --epochs                  "3" 
-            --batch-size              "128" 
+            --batch-size              "144" 
             --weight-decay            "1e-6" 
             --grad-clip-thresh        "1.0"
             --log-file                "nvlog.json"
