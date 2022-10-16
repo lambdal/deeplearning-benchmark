@@ -129,7 +129,8 @@ declare -A BATCH_SIZE_FIX=(
 
 The referenced [template](https://github.com/lambdal/deeplearning-benchmark/blob/feat/timeout/pytorch/scripts/config_v1/config_pytorch_48GB.sh) configures all the jobs for a single GPU with `48GB` of memory. Memory size is crucial here because it decides the batch size for different types of GPUs. The template file also specifies the number of GPUs, the number of experiments for each task, and the input arguments for individual task (SSD, ResNet, TransformerXL etc.)
 
-You can also customize the number of iterations for SSD (`--benchmark-iterations`) and the dataset for tacotron2/waveglow (`--training-files`). This is useful for benchmarking multi-gpu training with GPUs that have large memory (so to make sure the number of steps/dataset are enough to get valid results). Below is an example of how to set it in the config file:
+
+The config file for multi-GPU benchmark uses the settings of a single-GPU config file, and allows specific changes to be added. For example, you can  customize the number of iterations for SSD (`--benchmark-iterations`) and the dataset for tacotron2/waveglow (`--training-files`). This is useful for benchmarking multi-gpu training with GPUs that have large memory (so to make sure the number of steps/dataset are enough to get valid results). Below is an example of how to set it in the config file:
 
 ```
 declare -A SSD_ITER_FIX=(
@@ -144,41 +145,15 @@ declare -A tacotron2_DATA_FIX=(
     [PyTorch_waveglow_FP16]="filelists/ljs_audio_text_train_subset_2500_filelist.txt"
 )
 ```
+The config file for multi-GPU benchmark should always include the following BERT customization. This is because the number of GPUs it is explicitly set as an argument of BERT training. It will stay as `1` (when the single-GPU config file is sourced), unless explictly overwritten in the multi-GPU config file.  
 
 ```
-# Number of GPUs
-NUM_GPU=1 
-
-# Number of experiments to run for each task. Set to one unless you want to run the same model multiple times
-NUM_EXP=1
-
-# Task: benchmark SSD in FP32
-PyTorch_SSD_FP32_PARAMS=(
-             "examples/ssd"
-              args
-              --data                   "/data/object_detection"
-              --batch-size             "144"
-              --benchmark-warmup       "10"
-              --benchmark-iterations   "40"
-              --learning-rate          "0"
-           )
-
-
-
-# Task: benchmarking SSD in Automatic Mixed Precision (AMP)
-PyTorch_SSD_AMP_PARAMS=(
-              "examples/ssd"
-              args
-              --data                   "/data/object_detection"
-              --batch-size             "256"
-              --benchmark-warmup       "10"
-              --benchmark-iterations   "40"
-              --amp
-              --learning-rate          "0"
-           )
-
-# More tasks
-...
+declare -A BERT_GPU_FIX=(
+    [PyTorch_bert_base_squad_FP32]=${NUM_GPU}
+    [PyTorch_bert_base_squad_FP16]=${NUM_GPU}
+    [PyTorch_bert_large_squad_FP32]=${NUM_GPU}
+    [PyTorch_bert_large_squad_FP16]=${NUM_GPU}
+)
 ```
 
 **Your customized config file should always reference a template that uses the SAME number of GPUs and the SAME GPU memory**. For example, referencing `config_pytorch_48GB.sh` in `config_pytorch_QuadroRTX8000_v1.sh` and `config_pytorch_A6000_v1.sh`, and referencing `config_pytorch_2x24GB.sh` in `config_pytorch_2x3090_v1.sh`.

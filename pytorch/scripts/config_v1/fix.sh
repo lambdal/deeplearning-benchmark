@@ -42,3 +42,14 @@ for fix_task in "${!tacotron2_DATA_FIX[@]}"; do
         fi
     done
 done
+
+# NUM_GPU for BERT training has to be explicitly set
+for fix_task in "${!BERT_GPU_FIX[@]}"; do
+    declare -n FIX_TASK_PARAMS=${fix_task}_PARAMS
+
+    for i in ${!FIX_TASK_PARAMS[@]}; do
+        if [ ${FIX_TASK_PARAMS[i]} == "fp32" ] || [ ${FIX_TASK_PARAMS[i]} == "fp16" ]; then
+            FIX_TASK_PARAMS[$i+1]=${BERT_GPU_FIX[$fix_task]}
+        fi
+    done
+done
