@@ -195,7 +195,7 @@ docker run \
 -v ~/data:/data \
 -v $(pwd)"/scripts":/scripts \
 -v $(pwd)"/results":/results \
-nvcr.io/nvidia/pytorch:${NAME_NGC} \
+nvcr.io/nvidia/${NAME_NGC} \
 /bin/bash -c "cp -r /scripts/* /workspace; ./run_benchmark.sh QuadroRTX8000_v1 all 1500"
 ```
 
@@ -234,7 +234,7 @@ docker run \
 -v ~/data:/data \
 -v $(pwd)"/scripts":/scripts \
 -v $(pwd)"/results":/results \
-nvcr.io/nvidia/pytorch:${NAME_NGC} \
+nvcr.io/nvidia/${NAME_NGC} \
 /bin/bash -c "cp -r /scripts/* /workspace; ./run_benchmark.sh QuadroRTX8000_v1 resnet50_fp32 1500"
 ```
 
