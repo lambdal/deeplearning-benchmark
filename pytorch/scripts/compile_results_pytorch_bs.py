@@ -25,6 +25,7 @@ list_system_single = [
 
 
 list_system_multiple = [
+   ('2xA6000_v1', '2x RTX A6000', 300, 5785, "v1"),
 ]
 
 
