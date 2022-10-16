@@ -289,7 +289,7 @@ PyTorch_waveglow_FP16_PARAMS=(
            )
 
 PyTorch_bert_base_squad_FP32_PARAMS=(
-            "benchmark/SpeechSynthesis/Tacotron2"
+            "benchmark/LanguageModeling/BERT"
             args
             "/data/bert_base/bert_base_uncased.pt"
             "2.0"
@@ -308,7 +308,7 @@ PyTorch_bert_base_squad_FP32_PARAMS=(
 )
 
 PyTorch_bert_base_squad_FP16_PARAMS=(
-            "benchmark/SpeechSynthesis/Tacotron2"
+            "benchmark/LanguageModeling/BERT"
             args      
             "/data/bert_base/bert_base_uncased.pt"
             "2.0"
@@ -327,7 +327,7 @@ PyTorch_bert_base_squad_FP16_PARAMS=(
 )
 
 PyTorch_bert_large_squad_FP32_PARAMS=(
-            "benchmark/SpeechSynthesis/Tacotron2"
+            "benchmark/LanguageModeling/BERT"
             args      
             "/data/bert_large/bert_large_uncased.pt"
             "2.0"
@@ -346,7 +346,7 @@ PyTorch_bert_large_squad_FP32_PARAMS=(
 )
 
 PyTorch_bert_large_squad_FP16_PARAMS=(
-            "benchmark/SpeechSynthesis/Tacotron2"
+            "benchmark/LanguageModeling/BERT"
             args      
             "/data/bert_large/bert_large_uncased.pt"
             "2.0"
