@@ -4,9 +4,9 @@ NUM_GPU=1
 NUM_EXP=1
 
 PyTorch_SSD_FP32_PARAMS=(
-             "examples/ssd"
+             "benchmark/Detection/SSD"
              args
-             --data                   "benchmark/Detection/SSD"
+             --data                   "/data/object_detection"
              --batch-size             "128"
              --benchmark-warmup       "50"
              --benchmark-iterations   "200"
@@ -14,9 +14,9 @@ PyTorch_SSD_FP32_PARAMS=(
            )
 
 PyTorch_SSD_AMP_PARAMS=(
-             "examples/ssd"
+             "benchmark/Detection/SSD"
              args
-             --data                   "benchmark/Detection/SSD"
+             --data                   "/data/object_detection"
              --batch-size             "224"
              --benchmark-warmup       "50"
              --benchmark-iterations   "200"

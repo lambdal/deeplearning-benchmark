@@ -4,24 +4,24 @@ NUM_GPU=1
 NUM_EXP=1
 
 PyTorch_SSD_FP32_PARAMS=(
-             "examples/ssd"
+             "benchmark/Detection/SSD"
              args
-             --data                   "benchmark/Detection/SSD"
+             --data                   "/data/object_detection"
              --batch-size             "144"
              --benchmark-warmup       "10"
              --benchmark-iterations   "40"
-	     --learning-rate          "0"
+	           --learning-rate          "0"
            )
 
 PyTorch_SSD_AMP_PARAMS=(
-             "examples/ssd"
+             "benchmark/Detection/SSD"
              args
-             --data                   "benchmark/Detection/SSD"
+             --data                   "/data/object_detection"
              --batch-size             "256"
              --benchmark-warmup       "10"
              --benchmark-iterations   "40"
              --amp
-	     --learning-rate          "0"
+	           --learning-rate          "0"
            )
 
 PyTorch_resnet50_FP32_PARAMS=(
@@ -35,7 +35,7 @@ PyTorch_resnet50_FP32_PARAMS=(
              --raport-file            "benchmark.json"
              --print-freq             "1"
              --training-only
-	     --data-backend "synthetic"
+	           --data-backend "synthetic"
            )
 
 PyTorch_resnet50_AMP_PARAMS=(
@@ -51,7 +51,7 @@ PyTorch_resnet50_AMP_PARAMS=(
              --raport-file            "benchmark.json"
              --print-freq             "1"
              --training-only   
-	     --data-backend "synthetic"
+	           --data-backend "synthetic"
            )
 
 PyTorch_maskrcnn_FP32_PARAMS=(

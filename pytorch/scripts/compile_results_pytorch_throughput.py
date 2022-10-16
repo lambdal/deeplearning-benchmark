@@ -43,9 +43,9 @@ list_test_fp32 = [
         # version 1: nvcr.io/nvidia/pytorch:22.09-py3
         {
             'PyTorch_SSD_FP32': ('ssd', "^.*Training performance =.*$", -2),
-            'PyTorch_resnet50_FP32': ('resnet50', "^.*Summary: train.loss.*$", -2),
-            'PyTorch_gnmt_FP32': ('gnmt', "^.*Training:.*$", -4),
-            'PyTorch_ncf_FP32': ('ncf', "^.*best_train_throughput:.*$", -1),
+            'PyTorch_resnet50_FP32': ('resnet50', "^.*Summary: train.loss.*$", 11),
+            'PyTorch_gnmt_FP32': ('gnmt', "^.*Training:.*$", 4),
+            'PyTorch_ncf_FP32': ('ncf', "^.*best_train_throughput.*$", 7),
             'PyTorch_transformerxlbase_FP32': ('transformerxlbase', "^.*Training throughput:.*$", -2),
             'PyTorch_transformerxllarge_FP32': ('transformerxllarge', "^.*Training throughput:.*$", -2),
             'PyTorch_tacotron2_FP32': ('tacotron2', "^.*train_items_per_sec :.*$", -2),
@@ -73,9 +73,9 @@ list_test_fp16 = [
         # version 1: nvcr.io/nvidia/pytorch:22.09-py3
         {
             'PyTorch_SSD_AMP': ('ssd', "^.*Training performance =.*$", 3),
-            'PyTorch_resnet50_AMP': ('resnet50', "^.*Summary: train.loss.*$", -2),
-            'PyTorch_gnmt_FP16': ('gnmt', "^.*Training:.*$", -4),
-            'PyTorch_ncf_FP16': ('ncf', "^.*best_train_throughput:.*$", -1),
+            'PyTorch_resnet50_AMP': ('resnet50', "^.*Summary: train.loss.*$", 11),
+            'PyTorch_gnmt_FP16': ('gnmt', "^.*Training:.*$", 4),
+            'PyTorch_ncf_FP16': ('ncf', "^.*best_train_throughput.*$", 7),
             'PyTorch_transformerxlbase_FP16': ('transformerxlbase', "^.*Training throughput:.*$", -2),
             'PyTorch_transformerxllarge_FP16': ('transformerxllarge', "^.*Training throughput:.*$", -2),
             'PyTorch_tacotron2_FP16': ('tacotron2', "^.*train_items_per_sec :.*$", -2),
@@ -86,15 +86,10 @@ list_test_fp16 = [
 ]
 
 def gather_last(list_test, list_system, name, system, config_name, df, version, path_result):
-    print(list_test)
-    print(version)
-    print(name)
-    print('---------------------------')
     column_name, key, pos = list_test[version][name]
     pattern = re.compile(key)
-
     path = path_result + '/' + system + '/' + name
-    count = 0.000001
+    count = 0.000000001
     total_throughput = 0.0
 
     if os.path.exists(path):
@@ -104,11 +99,9 @@ def gather_last(list_test, list_system, name, system, config_name, df, version, 
                 throughput = 0
                 # Sift through all lines and only keep the last occurrence
                 for i, line in enumerate(open(os.path.join(path, filename))):
-
                     for match in re.finditer(pattern, line):
-                        try:
-                            # print(match.group().split(' '))
-                            # print(pos)
+                        # print(match.group().split(' '))
+                        try:    
                             throughput = float(match.group().split(' ')[pos])
                         except:
                             pass
@@ -170,12 +163,9 @@ def main():
     columns.append('watt')
     columns.append('price')
 
-    for test_name, value in sorted(list_test[0].items()):
-        columns.append(list_test[0][test_name][0])
+    for test_name, value in sorted(list_test[args.version].items()):
+        columns.append(list_test[args.version][test_name][0])
     list_configs = [list_system[key][1] for key in list_system]
-
-    print(columns)
-    print(list_configs)
     
     df = pd.DataFrame(index=list_configs, columns=columns)
     df = df.fillna(-1.0)
