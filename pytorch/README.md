@@ -87,7 +87,7 @@ docker run --gpus all --rm --shm-size=64g \
 -v ~/DeepLearningExamples/PyTorch:/workspace/benchmark \
 -v ~/data:/data \
 -v $(pwd)"/scripts":/scripts \
--it nvcr.io/nvidia/pytorch:${NAME_NGC} \
+nvcr.io/nvidia/${NAME_NGC} \
 /bin/bash -c "cp -r /scripts/* /workspace;  ./run_prepare.sh"
 ```
 
