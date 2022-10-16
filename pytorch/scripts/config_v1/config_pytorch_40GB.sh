@@ -110,6 +110,7 @@ PyTorch_ncf_FP16_PARAMS=(
             --data                    "/data/ncf/cache/ml-20m"
             --epochs                  "2"
             --batch_size              "7500000"
+            --amp
            )
 
 PyTorch_transformerxlbase_FP32_PARAMS=(
