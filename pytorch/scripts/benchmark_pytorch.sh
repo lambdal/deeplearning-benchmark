@@ -21,12 +21,12 @@ benchmark_pytorch_ssd() {
     echo "GPU ${NUM_GPU}" >> ${RESULTS_PATH}benchmark.para
     echo "************************************************************"
 
-    # python -m torch.distributed.launch --nproc_per_node=${NUM_GPU} main.py \
-    # --mode benchmark-training ${command_para} |& tee ${result} 
+    python -m torch.distributed.launch --nproc_per_node=${NUM_GPU} main.py \
+    --mode benchmark-training ${command_para} |& tee ${result} 
 
-    # if ! grep -q "RuntimeError" "$result"; then
-    #     echo "DONE!" >> ${result}
-    # fi    
+    if ! grep -q "RuntimeError" "$result"; then
+        echo "DONE!" >> ${result}
+    fi    
 }
 
 
@@ -45,12 +45,12 @@ benchmark_pytorch_resnet50() {
     echo "GPU ${NUM_GPU}" >> ${RESULTS_PATH}benchmark.para
     echo "************************************************************"
 
-    # python ./multiproc.py --nproc_per_node ${NUM_GPU} ./main.py \
-    # ${command_para} |& tee ${result}
+    python ./multiproc.py --nproc_per_node ${NUM_GPU} ./main.py \
+    ${command_para} |& tee ${result}
 
-    # if ! grep -q "RuntimeError" "$result"; then
-    #     echo "DONE!" >> ${result}
-    # fi 
+    if ! grep -q "RuntimeError" "$result"; then
+        echo "DONE!" >> ${result}
+    fi 
 }
 
 
@@ -75,22 +75,22 @@ benchmark_pytorch_maskrcnn() {
     # python setup.py install
     # pip install -r requirements.txt
 
-    # python -m torch.distributed.launch --nproc_per_node=${NUM_GPU} --use_env tools/train_net.py \
-    # --skip-test \
-    # ${command_para} \
-    # | tee $result
+    python -m torch.distributed.launch --nproc_per_node=${NUM_GPU} --use_env tools/train_net.py \
+    --skip-test \
+    ${command_para} \
+    | tee $result
     
-    # time=`cat $result | grep -F 'maskrcnn_benchmark.trainer INFO: Total training time' | tail -n 1 | awk -F'(' '{print $2}' | awk -F' s ' '{print $1}' | egrep -o [0-9.]+`
-    # statement=`cat $result | grep -F 'maskrcnn_benchmark.trainer INFO: Total training time' | tail -n 1`
-    # calc=$(echo $time 1.0 $GLOBAL_BATCH | awk '{ printf "%f", $2 * $3 / $1 }')
+    time=`cat $result | grep -F 'maskrcnn_benchmark.trainer INFO: Total training time' | tail -n 1 | awk -F'(' '{print $2}' | awk -F' s ' '{print $1}' | egrep -o [0-9.]+`
+    statement=`cat $result | grep -F 'maskrcnn_benchmark.trainer INFO: Total training time' | tail -n 1`
+    calc=$(echo $time 1.0 $GLOBAL_BATCH | awk '{ printf "%f", $2 * $3 / $1 }')
     
-    # echo "Training perf is: "$calc" FPS" >> ${result}
-    # if ! grep -q "RuntimeError" "$result"; then
-    #     echo "DONE!" >> ${result}
-    # fi 
-    # rm /results/*.txt
-    # rm /results/*.pth
-    # rm /results/*checkpoint* 
+    echo "Training perf is: "$calc" FPS" >> ${result}
+    if ! grep -q "RuntimeError" "$result"; then
+        echo "DONE!" >> ${result}
+    fi 
+    rm /results/*.txt
+    rm /results/*.pth
+    rm /results/*checkpoint* 
 }
 
 
@@ -111,11 +111,11 @@ benchmark_pytorch_gnmt() {
     echo "GPU ${NUM_GPU}" >> ${RESULTS_PATH}benchmark.para
     echo "************************************************************"
 
-    # python3 -m torch.distributed.launch --nproc_per_node=${NUM_GPU} train.py ${command_para} |& tee ${result}
+    python3 -m torch.distributed.launch --nproc_per_node=${NUM_GPU} train.py ${command_para} |& tee ${result}
 
-    # if ! grep -q "RuntimeError" "$result"; then
-    #     echo "DONE!" >> ${result}
-    # fi 
+    if ! grep -q "RuntimeError" "$result"; then
+        echo "DONE!" >> ${result}
+    fi 
 }
 
 
@@ -134,11 +134,11 @@ benchmark_pytorch_ncf() {
     echo "GPU ${NUM_GPU}" >> ${RESULTS_PATH}benchmark.para
     echo "************************************************************"
 
-    # python -m torch.distributed.launch --nproc_per_node=${NUM_GPU} --use_env ncf.py ${command_para} |& tee ${result}
+    python -m torch.distributed.launch --nproc_per_node=${NUM_GPU} --use_env ncf.py ${command_para} |& tee ${result}
 
-    # if ! grep -q "RuntimeError" "$result"; then
-    #     echo "DONE!" >> ${result}
-    # fi 
+    if ! grep -q "RuntimeError" "$result"; then
+        echo "DONE!" >> ${result}
+    fi 
 }
 
 
@@ -157,11 +157,11 @@ benchmark_pytorch_transformerxl() {
     echo "GPU ${NUM_GPU}" >> ${RESULTS_PATH}benchmark.para
     echo "************************************************************"
 
-    # python -m torch.distributed.launch --nproc_per_node=${NUM_GPU} train.py ${command_para} |& tee ${result}
+    python -m torch.distributed.launch --nproc_per_node=${NUM_GPU} train.py ${command_para} |& tee ${result}
 
-    # if ! grep -q "RuntimeError" "$result"; then
-    #     echo "DONE!" >> ${result}
-    # fi
+    if ! grep -q "RuntimeError" "$result"; then
+        echo "DONE!" >> ${result}
+    fi
 }
 
 
@@ -182,13 +182,13 @@ benchmark_pytorch_tacotron2() {
     echo "GPU ${NUM_GPU}" >> ${RESULTS_PATH}benchmark.para
     echo "************************************************************"
 
-    # python -m multiproc ${NUM_GPU} train.py \
-    # ${command_para}  |& tee ${result}
+    python -m multiproc ${NUM_GPU} train.py \
+    ${command_para}  |& tee ${result}
     
 
-    # if ! grep -q "RuntimeError" "$result"; then
-    #     echo "DONE!" >> ${result}
-    # fi
+    if ! grep -q "RuntimeError" "$result"; then
+        echo "DONE!" >> ${result}
+    fi
 }
 
 
@@ -209,12 +209,12 @@ benchmark_pytorch_bert_squad() {
     echo "GPU ${NUM_GPU}" >> ${RESULTS_PATH}benchmark.para    
     echo "************************************************************"
 
-    # bash scripts/run_squad.sh ${command_para} |& tee ${result}
+    bash scripts/run_squad.sh ${command_para} |& tee ${result}
     
 
-    # if ! grep -q "RuntimeError" "$result"; then
-    #     echo "DONE!" >> ${result}
-    # fi
+    if ! grep -q "RuntimeError" "$result"; then
+        echo "DONE!" >> ${result}
+    fi
 }
 
 
