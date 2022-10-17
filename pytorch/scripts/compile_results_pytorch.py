@@ -44,7 +44,7 @@ list_test_fp32 = [
             },
         # version 1: nvcr.io/nvidia/pytorch:22.09-py3
         {
-            'PyTorch_SSD_FP32': ('ssd', "^.*Training performance =.*$", -2),
+            'PyTorch_SSD_FP32': ('ssd', "^.*Average images/sec:.*$", -1),
             'PyTorch_resnet50_FP32': ('resnet50', "^.*Summary: train.loss.*$", 11),
             'PyTorch_gnmt_FP32': ('gnmt', "^.*Training:.*$", 4),
             'PyTorch_ncf_FP32': ('ncf', "^.*best_train_throughput.*$", 7),
@@ -74,7 +74,7 @@ list_test_fp16 = [
         },
         # version 1: nvcr.io/nvidia/pytorch:22.09-py3
         {
-            'PyTorch_SSD_AMP': ('ssd', "^.*Training performance =.*$", 3),
+            'PyTorch_SSD_AMP': ('ssd', "^.*Average images/sec:.*$", -1),
             'PyTorch_resnet50_AMP': ('resnet50', "^.*Summary: train.loss.*$", 11),
             'PyTorch_gnmt_FP16': ('gnmt', "^.*Training:.*$", 4),
             'PyTorch_ncf_FP16': ('ncf', "^.*best_train_throughput.*$", 7),
@@ -102,7 +102,7 @@ def gather_throughput(list_test, list_system, name, system, config_name, df, ver
                 # Sift through all lines and only keep the last occurrence
                 for i, line in enumerate(open(os.path.join(path, filename))):
                     for match in re.finditer(pattern, line):
-                        # print(match.group().split(' '))
+                        # print(match.group().split(' ')) # for debug
                         try:    
                             throughput = float(match.group().split(' ')[pos])
                         except:

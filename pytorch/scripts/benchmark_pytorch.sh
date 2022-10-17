@@ -17,7 +17,7 @@ benchmark_pytorch_ssd() {
 
     echo "************************************************************"
     echo $command_para
-    echo "GLOBAL_BATCH $((BATCH * NUM_GPU))" > ${RESULTS_PATH}BS.meta
+    echo "GLOBAL_BATCH $((BATCH * NUM_GPU))" > ${RESULTS_PATH}benchmark.para
     echo "GPU ${NUM_GPU}" >> ${RESULTS_PATH}benchmark.para
     echo "************************************************************"
 
