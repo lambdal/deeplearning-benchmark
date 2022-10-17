@@ -25,7 +25,7 @@ list_system_single = {
 
 list_system_multiple = {
     '2xA6000_v1': ([1, 2], '2x RTX A6000', 300, 5785),
-    # '2x4090_v1': ([1, 2], '2x RTX 4090', 450, 1599),
+    '2x4090_v1': ([1, 2], '2x RTX 4090', 450, 1599),
 }
 list_test_fp32 = [
         # version 0: nvcr.io/nvidia/pytorch:20.01-py3 and 20.10-py3

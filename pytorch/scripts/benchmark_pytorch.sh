@@ -21,6 +21,7 @@ benchmark_pytorch_ssd() {
     echo "GPU ${NUM_GPU}" >> ${RESULTS_PATH}benchmark.para
     echo "************************************************************"
 
+    export NCCL_P2P_DISABLE=1
     python -m torch.distributed.launch --nproc_per_node=${NUM_GPU} main.py \
     --mode benchmark-training ${command_para} |& tee ${result} 
 
@@ -45,6 +46,7 @@ benchmark_pytorch_resnet50() {
     echo "GPU ${NUM_GPU}" >> ${RESULTS_PATH}benchmark.para
     echo "************************************************************"
 
+    export NCCL_P2P_DISABLE=1
     python ./multiproc.py --nproc_per_node ${NUM_GPU} ./main.py \
     ${command_para} |& tee ${result}
 
@@ -75,6 +77,7 @@ benchmark_pytorch_maskrcnn() {
     # python setup.py install
     # pip install -r requirements.txt
 
+    export NCCL_P2P_DISABLE=1
     python -m torch.distributed.launch --nproc_per_node=${NUM_GPU} --use_env tools/train_net.py \
     --skip-test \
     ${command_para} \
@@ -111,6 +114,7 @@ benchmark_pytorch_gnmt() {
     echo "GPU ${NUM_GPU}" >> ${RESULTS_PATH}benchmark.para
     echo "************************************************************"
 
+    export NCCL_P2P_DISABLE=1
     python3 -m torch.distributed.launch --nproc_per_node=${NUM_GPU} train.py ${command_para} |& tee ${result}
 
     if ! grep -q "RuntimeError" "$result"; then
@@ -134,6 +138,7 @@ benchmark_pytorch_ncf() {
     echo "GPU ${NUM_GPU}" >> ${RESULTS_PATH}benchmark.para
     echo "************************************************************"
 
+    export NCCL_P2P_DISABLE=1
     python -m torch.distributed.launch --nproc_per_node=${NUM_GPU} --use_env ncf.py ${command_para} |& tee ${result}
 
     if ! grep -q "RuntimeError" "$result"; then
@@ -157,6 +162,7 @@ benchmark_pytorch_transformerxl() {
     echo "GPU ${NUM_GPU}" >> ${RESULTS_PATH}benchmark.para
     echo "************************************************************"
 
+    export NCCL_P2P_DISABLE=1
     python -m torch.distributed.launch --nproc_per_node=${NUM_GPU} train.py ${command_para} |& tee ${result}
 
     if ! grep -q "RuntimeError" "$result"; then
@@ -182,6 +188,7 @@ benchmark_pytorch_tacotron2() {
     echo "GPU ${NUM_GPU}" >> ${RESULTS_PATH}benchmark.para
     echo "************************************************************"
 
+    export NCCL_P2P_DISABLE=1
     python -m multiproc ${NUM_GPU} train.py \
     ${command_para}  |& tee ${result}
     
@@ -209,6 +216,7 @@ benchmark_pytorch_bert_squad() {
     echo "GPU ${NUM_GPU}" >> ${RESULTS_PATH}benchmark.para    
     echo "************************************************************"
 
+    export NCCL_P2P_DISABLE=1
     bash scripts/run_squad.sh ${command_para} |& tee ${result}
     
 
