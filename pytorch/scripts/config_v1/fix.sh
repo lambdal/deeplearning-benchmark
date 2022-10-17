@@ -7,7 +7,7 @@ for fix_task in "${!BATCH_SIZE_FIX[@]}"; do
     # dealt with bert seperately (benchmark launched by shell script)
     if [[ "$fix_task" == *"bert"* ]];
     then
-        FIX_TASK_PARAMS[5]=${BATCH_SIZE_FIX[$fix_task]}
+        FIX_TASK_PARAMS[4]=${BATCH_SIZE_FIX[$fix_task]}
     else
         for i in ${!FIX_TASK_PARAMS[@]}; do
             if [ ${FIX_TASK_PARAMS[i]} == "--batch-size" ] || [ ${FIX_TASK_PARAMS[i]} == "SOLVER.IMS_PER_BATCH" ] || [ ${FIX_TASK_PARAMS[i]} == "--train-batch-size" ] || [ ${FIX_TASK_PARAMS[i]} == "--batch_size" ]; then

@@ -294,7 +294,7 @@ PyTorch_bert_base_squad_FP32_PARAMS=(
             args
             "/data/bert_base/bert_base_uncased.pt"
             "2.0"
-            "26"
+            "48"
             "0.0"
             "0.1"
             "fp32"
@@ -313,7 +313,7 @@ PyTorch_bert_base_squad_FP16_PARAMS=(
             args      
             "/data/bert_base/bert_base_uncased.pt"
             "2.0"
-            "52"
+            "96"
             "0.0"
             "0.1"
             "fp16"
@@ -332,7 +332,7 @@ PyTorch_bert_large_squad_FP32_PARAMS=(
             args      
             "/data/bert_large/bert_large_uncased.pt"
             "2.0"
-            "8"
+            "16"
             "0.0"
             "0.1"
             "fp32"
@@ -351,7 +351,7 @@ PyTorch_bert_large_squad_FP16_PARAMS=(
             args      
             "/data/bert_large/bert_large_uncased.pt"
             "2.0"
-            "16"
+            "28"
             "0.0"
             "0.1"
             "fp16"
