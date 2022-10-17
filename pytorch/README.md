@@ -232,14 +232,11 @@ nvcr.io/nvidia/${NAME_NGC} \
 We provide some simply script to gather the results (everything in the results folder) to [CSV](https://github.com/lambdal/deeplearning-benchmark/blob/master/pytorch-train-throughput-fp32.csv) files for both training throughput and batch size.
 
 ```
-python scripts/compile_results_pytorch_throughput.py --precision fp32 --system all
-python scripts/compile_results_pytorch_throughput.py --precision fp16 --system all
-
-python scripts/compile_results_pytorch_bs.py --precision fp32 --system all
-python scripts/compile_results_pytorch_bs.py --precision fp16 --system all
+python scripts/compile_results_pytorch.py --precision fp32 --system all
+python scripts/compile_results_pytorch.py --precision fp16 --system all
 ```
 
-To gather your own benchmarks, you need to add your system to the `list_system`. For example, this is the line you need to add to the `compile_results_pytorch_throughput.py` script:
+To gather your own benchmarks, you need to add your system to the `list_system`. For example, this is the line you need to add to the `compile_results_pytorch.py` script:
 
 ```
 # key: QuadroRTX8000_v1 as the config name
@@ -253,19 +250,8 @@ To gather your own benchmarks, you need to add your system to the `list_system`.
 'QuadroRTX8000_v1': ([1, 1], 'Quadro RTX 8000 V1', 260, 6900),
 ```
 
-And this is the line you need to add to the `compile_results_pytorch_bs.py` script:
 
-```
-# key: config name
-# full name: renaming the system so it is easier to read (for releasing on our benchmark webpage)
-# watt per gpu
-# price per gpu
-
-('QuadroRTX8000_v1', 'Quadro RTX 8000 V1', 260, 6900, "v1"),
-```
-
-
-See the scripts ([1](https://github.com/lambdal/deeplearning-benchmark/blob/master/pytorch/scripts/compile_results_pytorch_throughput.py),[2](https://github.com/lambdal/deeplearning-benchmark/blob/master/pytorch/scripts/compile_results_pytorch_bs.py)) for details. 
+See the [script](https://github.com/lambdal/deeplearning-benchmark/blob/master/pytorch/scripts/compile_results_pytorch.py) for details. 
 
 
 ### Notes

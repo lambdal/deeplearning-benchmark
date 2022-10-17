@@ -7,7 +7,6 @@ import argparse
 
 import pandas as pd
 
-
 # naming convention
 # key: config name
 # value: ([version, num_gpus], rename)
@@ -26,8 +25,8 @@ list_system_single = {
 
 list_system_multiple = {
     '2xA6000_v1': ([1, 2], '2x RTX A6000', 300, 5785),
+    # '2x4090_v1': ([1, 2], '2x RTX 4090', 450, 1599),
 }
-
 list_test_fp32 = [
         # version 0: nvcr.io/nvidia/pytorch:20.01-py3 and 20.10-py3
         {
@@ -88,7 +87,7 @@ list_test_fp16 = [
         }
 ]
 
-def gather_last(list_test, list_system, name, system, config_name, df, version, path_result):
+def gather_throughput(list_test, list_system, name, system, config_name, df, version, path_result):
     column_name, key, pos = list_test[version][name]
     pattern = re.compile(key)
     path = path_result + '/' + system + '/' + name
@@ -124,6 +123,23 @@ def gather_last(list_test, list_system, name, system, config_name, df, version, 
     df.at[config_name, 'watt'] = list_system[system][2] * int(list_system[system][0][1])
     df.at[config_name, 'price'] = list_system[system][3] * int(list_system[system][0][1])
 
+
+def gather_bs(list_test, list_system, name, system, config_name, df, version, path_result):
+    column_name, key, pos = list_test[version][name]
+    path = path_result + '/' + system + '/' + name
+
+    if os.path.exists(path):
+        for filename in os.listdir(path):
+            if filename.endswith(".para"):
+                with open(os.path.join(path, filename)) as f:
+                    first_line = f.readline()
+                    df.at[config_name, column_name] = int(first_line.split(" ")[1])
+
+    df.at[config_name, 'num_gpu'] = list_system[system][0][1]
+    df.at[config_name, 'watt'] = list_system[system][2] * int(list_system[system][0][1])
+    df.at[config_name, 'price'] = list_system[system][3] * int(list_system[system][0][1])
+
+
 def main():
     parser = argparse.ArgumentParser(description='Gather benchmark results.')
 
@@ -149,7 +165,7 @@ def main():
     elif args.precision == 'fp16':
         list_test = list_test_fp16
     else:
-        sys.exit("Wrong precision: " + precision + ', choose between fp32 and fp16')
+        sys.exit("Wrong precision: " + args.precision + ', choose between fp32 and fp16')
 
 
     if args.system == 'single':
@@ -170,17 +186,23 @@ def main():
         columns.append(list_test[args.version][test_name][0])
     list_configs = [list_system[key][1] for key in list_system]
     
-    df = pd.DataFrame(index=list_configs, columns=columns)
-    df = df.fillna(-1.0)
+    df_throughput = pd.DataFrame(index=list_configs, columns=columns)
+    df_throughput = df_throughput.fillna(-1.0)
+
+    df_bs = pd.DataFrame(index=list_configs, columns=columns)
     
     for key in list_system:
         version = list_system[key][0][0]
         config_name = list_system[key][1]
         for test_name, value in sorted(list_test[version].items()):
-            gather_last(list_test, list_system, test_name, key, config_name, df, version, args.path)
+            gather_throughput(list_test, list_system, test_name, key, config_name, df_throughput, version, args.path)
+            gather_bs(list_test, list_system, test_name, key, config_name, df_bs, version, args.path)
 
-    df.index.name = 'name_gpu'
-    df.to_csv('pytorch-train-throughput-' + args.precision + '.csv')
+    df_throughput.index.name = 'name_gpu'
+    df_throughput.to_csv('pytorch-train-throughput-' + args.precision + '.csv')
+
+    df_bs.index.name = 'name_gpu'
+    df_bs.to_csv('pytorch-train-bs-' + args.precision + '.csv')
 
 if __name__ == "__main__":
     main()
