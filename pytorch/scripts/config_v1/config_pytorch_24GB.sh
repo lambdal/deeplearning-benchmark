@@ -91,7 +91,7 @@ PyTorch_gnmt_FP16_PARAMS=(
             "benchmark/Translation/GNMT"
             args
             --dataset-dir             "/data/gnmt/wmt16_de_en"
-            --train-batch-size        "480"
+            --train-batch-size        "464"
             --math                    "fp16"
             --epochs                  "1"
             --seed                    "2"
