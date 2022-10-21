@@ -82,7 +82,7 @@ PyTorch_gnmt_FP32_PARAMS=(
             --dataset-dir             "/data/gnmt/wmt16_de_en"
             --train-batch-size        "512"
             --math                    "fp32"
-            --epochs                  "2"
+            --epochs                  "1"
             --seed                    "2"
            )
 
@@ -92,7 +92,7 @@ PyTorch_gnmt_FP16_PARAMS=(
             --dataset-dir             "/data/gnmt/wmt16_de_en"
             --train-batch-size        "800"
             --math                    "fp16"
-            --epochs                  "2"
+            --epochs                  "1"
             --seed                    "2"
            )
 

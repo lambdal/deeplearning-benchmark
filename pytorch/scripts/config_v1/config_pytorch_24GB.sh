@@ -82,18 +82,20 @@ PyTorch_gnmt_FP32_PARAMS=(
             --dataset-dir             "/data/gnmt/wmt16_de_en"
             --train-batch-size        "288"
             --math                    "fp32"
-            --epochs                  "2"
+            --epochs                  "1"
             --seed                    "2"
+	    --train-loader-workers    "8"
            )
 
 PyTorch_gnmt_FP16_PARAMS=(
             "benchmark/Translation/GNMT"
             args
             --dataset-dir             "/data/gnmt/wmt16_de_en"
-            --train-batch-size        "464"
+            --train-batch-size        "480"
             --math                    "fp16"
-            --epochs                  "2"
+            --epochs                  "1"
             --seed                    "2"
+	    --train-loader-workers    "8"
            )
 
 PyTorch_ncf_FP32_PARAMS=(

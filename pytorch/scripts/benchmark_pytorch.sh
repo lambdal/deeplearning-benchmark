@@ -117,7 +117,7 @@ benchmark_pytorch_gnmt() {
     export NCCL_P2P_DISABLE=1
     python3 -m torch.distributed.launch --nproc_per_node=${NUM_GPU} train.py ${command_para} |& tee ${result}
 
-    if ! grep -q "RuntimeError" "$result"; then
+    if ! grep -q -E "RuntimeError|OutOfMemoryError" "$result"; then
         echo "DONE!" >> ${result}
     fi 
 }
