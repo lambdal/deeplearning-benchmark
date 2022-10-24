@@ -266,7 +266,7 @@ PyTorch_waveglow_FP32_PARAMS=(
 	    --learning-rate           "0.0" 
             --epochs                  "1" 
             --segment-length          "8000"
-            --batch-size              "26" 
+            --batch-size              "32" 
             --weight-decay            "0" 
             --grad-clip-thresh        "65504"
             --log-file                "nvlog.json"
