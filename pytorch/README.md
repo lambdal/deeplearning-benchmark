@@ -17,14 +17,7 @@ All the benchmarks here are for single-node (single GPU or multiple GPUs). They 
 (Update 2022.07) NVIDIA has stopped packaging [Deep Learning Examples](https://github.com/NVIDIA/DeepLearningExamples/tree/master/PyTorch) into their PyTorch NGC images. This guide uses the last PyTorch NGC release (`pytorch:21.07-py3`) that supports the examples.
 
 
-Different NGC releases can cause non-trivial performance changes to the same hardware. Depend on specific deep learning models, a newer version of NGC can cause the same hardware to run either faster or slower. Below is a major NGC upgrade we adpated to produce [our benchmark](https://lambdalabs.com/gpu-benchmarks). The upgrade was necessary for benchmarking Ampere GPUs, and might be required again for future achitectures (e.g. Hopper)
-
-
-| GPU Generation | NVidia Driver | NGC Version |
-|---|---|---|
-| Pre-Ampere  | >=440.33 | >=pytorch:20.01-py3 |
-| Ampere  | >=455.32 | >=pytorch:20.10-py3 |
-
+Different NGC releases can cause non-trivial performance changes to the same hardware. Depend on specific deep learning models, a newer version of NGC can cause the same hardware to run either faster or slower. We are in the progress of refreshing [our benchmark](https://lambdalabs.com/gpu-benchmarks). with the latest PyTorch NGC release (`pytorch:21.07-py3`)
 
 #### Step 0: Prerequisite
 
