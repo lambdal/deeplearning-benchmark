@@ -266,7 +266,7 @@ PyTorch_waveglow_FP32_PARAMS=(
 	    --learning-rate           "0.0" 
             --epochs                  "1" 
             --segment-length          "8000"
-            --batch-size              "26" 
+            --batch-size              "32" 
             --weight-decay            "0" 
             --grad-clip-thresh        "65504"
             --log-file                "nvlog.json"
@@ -300,7 +300,7 @@ PyTorch_bert_base_squad_FP32_PARAMS=(
             args
             "/data/bert_base/bert_base_uncased.pt"
             "2.0"
-            "56"
+            "96"
             "0.0"
             "0.1"
             "fp32"
@@ -319,7 +319,7 @@ PyTorch_bert_base_squad_FP16_PARAMS=(
             args      
             "/data/bert_base/bert_base_uncased.pt"
             "2.0"
-            "108"
+            "192"
             "0.0"
             "0.1"
             "fp16"
@@ -338,7 +338,7 @@ PyTorch_bert_large_squad_FP32_PARAMS=(
             args      
             "/data/bert_large/bert_large_uncased.pt"
             "2.0"
-            "18"
+            "32"
             "0.0"
             "0.1"
             "fp32"
@@ -357,7 +357,7 @@ PyTorch_bert_large_squad_FP16_PARAMS=(
             args      
             "/data/bert_large/bert_large_uncased.pt"
             "2.0"
-            "36"
+            "64"
             "0.0"
             "0.1"
             "fp16"
