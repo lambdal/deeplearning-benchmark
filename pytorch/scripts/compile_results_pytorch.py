@@ -18,6 +18,7 @@ import pandas as pd
 
 list_system_single = {
     'QuadroRTX8000_v1': ([1, 1], 'Quadro RTX 8000', 260, 6900),
+    '3090_v1': ([1, 1], 'RTX 3090', 350, 3142),
     '4090_v1': ([1, 1], 'RTX 4090', 450, 1599),
     'A100_40GB_PCIe_v1': ([1, 1], 'A100 40GB PCIe', 250, 12785),
     'A6000_v1': ([1, 1], 'RTX A6000', 300, 5785),
@@ -25,6 +26,7 @@ list_system_single = {
 
 list_system_multiple = {
     '2xA6000_v1': ([1, 2], '2x RTX A6000', 300, 5785),
+    '2x3090_v1': ([1, 2], '2x RTX 3090', 350, 3142),
     '2x4090_v1': ([1, 2], '2x RTX 4090', 450, 1599),
 }
 list_test_fp32 = [
