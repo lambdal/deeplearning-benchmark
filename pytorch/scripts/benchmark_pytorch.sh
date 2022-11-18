@@ -25,7 +25,7 @@ benchmark_pytorch_ssd() {
     python -m torch.distributed.launch --nproc_per_node=${NUM_GPU} main.py \
     --mode benchmark-training ${command_para} |& tee ${result} 
 
-    if ! grep -q "RuntimeError" "$result"; then
+    if ! grep -E "RuntimeError|OutOfMemoryError" "$result"; then
         echo "DONE!" >> ${result}
     fi    
 }
@@ -50,7 +50,7 @@ benchmark_pytorch_resnet50() {
     python ./multiproc.py --nproc_per_node ${NUM_GPU} ./main.py \
     ${command_para} |& tee ${result}
 
-    if ! grep -q "RuntimeError" "$result"; then
+    if ! grep -E "RuntimeError|OutOfMemoryError" "$result"; then
         echo "DONE!" >> ${result}
     fi 
 }
@@ -88,7 +88,7 @@ benchmark_pytorch_maskrcnn() {
     calc=$(echo $time 1.0 $GLOBAL_BATCH | awk '{ printf "%f", $2 * $3 / $1 }')
     
     echo "Training perf is: "$calc" FPS" >> ${result}
-    if ! grep -q "RuntimeError" "$result"; then
+    if ! grep -E "RuntimeError|OutOfMemoryError" "$result"; then
         echo "DONE!" >> ${result}
     fi 
     rm /results/*.txt
@@ -117,7 +117,7 @@ benchmark_pytorch_gnmt() {
     export NCCL_P2P_DISABLE=1
     python3 -m torch.distributed.launch --nproc_per_node=${NUM_GPU} train.py ${command_para} |& tee ${result}
 
-    if ! grep -q -E "RuntimeError|OutOfMemoryError" "$result"; then
+    if ! grep -E "RuntimeError|OutOfMemoryError" "$result"; then
         echo "DONE!" >> ${result}
     fi 
 }
@@ -141,7 +141,7 @@ benchmark_pytorch_ncf() {
     export NCCL_P2P_DISABLE=1
     python -m torch.distributed.launch --nproc_per_node=${NUM_GPU} --use_env ncf.py ${command_para} |& tee ${result}
 
-    if ! grep -q "RuntimeError" "$result"; then
+    if ! grep -E "RuntimeError|OutOfMemoryError" "$result"; then
         echo "DONE!" >> ${result}
     fi 
 }
@@ -165,7 +165,7 @@ benchmark_pytorch_transformerxl() {
     export NCCL_P2P_DISABLE=1
     python -m torch.distributed.launch --nproc_per_node=${NUM_GPU} train.py ${command_para} |& tee ${result}
 
-    if ! grep -q "RuntimeError" "$result"; then
+    if ! grep -E "RuntimeError|OutOfMemoryError" "$result"; then
         echo "DONE!" >> ${result}
     fi
 }
@@ -193,7 +193,7 @@ benchmark_pytorch_tacotron2() {
     ${command_para}  |& tee ${result}
     
 
-    if ! grep -q "RuntimeError" "$result"; then
+    if ! grep -E "RuntimeError|OutOfMemoryError" "$result"; then
         echo "DONE!" >> ${result}
     fi
 }
@@ -220,7 +220,7 @@ benchmark_pytorch_bert_squad() {
     bash scripts/run_squad.sh ${command_para} |& tee ${result}
     
 
-    if ! grep -q "RuntimeError" "$result"; then
+    if ! grep -E "RuntimeError|OutOfMemoryError" "$result"; then
         echo "DONE!" >> ${result}
     fi
 }

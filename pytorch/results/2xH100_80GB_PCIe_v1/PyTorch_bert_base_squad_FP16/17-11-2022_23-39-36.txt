@@ -1,0 +1,119 @@
+Container nvidia build =  44877844
+out dir is .
+fp16 activated!
+python   -m torch.distributed.launch --nproc_per_node=2 run_squad.py --init_checkpoint=/data/bert_base/bert_base_uncased.pt --do_train --train_file=/data/squad/v1.1/train-v1.1.json --train_batch_size=360  --do_lower_case  --bert_model=bert-large-uncased  --learning_rate=0.0  --warmup_proportion=0.1 --seed=1  --num_train_epochs=2.0  --max_seq_length=384  --doc_stride=128  --output_dir=.  --vocab_file=/data/bert_base/bert-base-uncased-vocab.txt  --config_file=/data/bert_base/bert_config.json  --max_steps=100   --fp16  |& tee ./logfile.txt
+/opt/conda/lib/python3.8/site-packages/torch/distributed/launch.py:180: FutureWarning: The module torch.distributed.launch is deprecated
+and will be removed in future. Use torchrun.
+Note that --use_env is set by default in torchrun.
+If your script expects `--local_rank` argument to be set, please
+change it to read from `os.environ['LOCAL_RANK']` instead. See 
+https://pytorch.org/docs/stable/distributed.html#launch-utility for 
+further instructions
+
+  warnings.warn(
+WARNING:torch.distributed.run:
+*****************************************
+Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+*****************************************
+11/17/2022 23:39:43 - INFO - torch.distributed.distributed_c10d -   Added key: store_based_barrier_key:1 to store for rank: 1
+11/17/2022 23:39:43 - INFO - torch.distributed.distributed_c10d -   Added key: store_based_barrier_key:1 to store for rank: 0
+11/17/2022 23:39:43 - INFO - torch.distributed.distributed_c10d -   Rank 0: Completed store-based barrier for key:store_based_barrier_key:1 with 2 nodes.
+device: cuda:0 n_gpu: 1, distributed training: True, 16-bits training: True
+DLL 2022-11-17 23:39:43.454625 - PARAMETER Config : ["Namespace(amp=False, bert_model='bert-large-uncased', cache_dir=None, config_file='/data/bert_base/bert_config.json', disable_progress_bar=False, do_eval=False, do_lower_case=True, do_predict=False, do_train=True, doc_stride=128, eval_script='evaluate.py', fp16=True, gradient_accumulation_steps=1, init_checkpoint='/data/bert_base/bert_base_uncased.pt', json_summary='results/dllogger.json', learning_rate=0.0, local_rank=0, log_freq=50, loss_scale=0, max_answer_length=30, max_query_length=64, max_seq_length=384, max_steps=100.0, n_best_size=20, no_cuda=False, null_score_diff_threshold=0.0, num_train_epochs=2.0, output_dir='.', predict_batch_size=8, predict_file=None, seed=1, skip_cache=False, skip_checkpoint=False, train_batch_size=360, train_file='/data/squad/v1.1/train-v1.1.json', use_env=False, verbose_logging=False, version_2_with_negative=False, vocab_file='/data/bert_base/bert-base-uncased-vocab.txt', warmup_proportion=0.1)"] 
+DLL 2022-11-17 23:39:43.454795 - PARAMETER SEED : 1 
+WARNING: Output directory . already exists and is not empty. ['optimization.py', 'README.md', 'images', 'processors', 'scripts', '.dockerignore', 'checkpoints', '.gitmodules', 'data', '__pycache__', 'bind.sh', 'vocab', 'run_pretraining.py', 'run.sub', 'Dockerfile', 'triton', 'modeling.py', 'distillation', 'configurations.yml', 'create_pretraining_data.py', 'requirements.txt', 'bert_configs', 'extract_features.py', 'file_utils.py', 'results', 'run_glue.py', 'run_squad.py', 'tokenization.py', 'run_swag.py', 'schedulers.py', 'inference.py', 'bind_pyt.py', 'tokenization_utils.py', 'pytorch_model.bin', 'LICENSE', '.gitignore', 'config.json', 'train', 'utils.py', 'lamb_amp_opt', 'logfile.txt', 'NOTICE']
+11/17/2022 23:39:43 - INFO - torch.distributed.distributed_c10d -   Rank 1: Completed store-based barrier for key:store_based_barrier_key:1 with 2 nodes.
+device: cuda:1 n_gpu: 1, distributed training: True, 16-bits training: True
+WARNING: Output directory . already exists and is not empty. ['optimization.py', 'README.md', 'images', 'processors', 'scripts', '.dockerignore', 'checkpoints', '.gitmodules', 'data', '__pycache__', 'bind.sh', 'vocab', 'run_pretraining.py', 'run.sub', 'Dockerfile', 'triton', 'modeling.py', 'distillation', 'configurations.yml', 'create_pretraining_data.py', 'requirements.txt', 'bert_configs', 'extract_features.py', 'file_utils.py', 'results', 'run_glue.py', 'run_squad.py', 'tokenization.py', 'run_swag.py', 'schedulers.py', 'inference.py', 'bind_pyt.py', 'tokenization_utils.py', 'pytorch_model.bin', 'LICENSE', '.gitignore', 'config.json', 'train', 'utils.py', 'lamb_amp_opt', 'logfile.txt', 'NOTICE']
+DLL 2022-11-17 23:39:52.196471 - PARAMETER loading_checkpoint : True 
+DLL 2022-11-17 23:39:52.196712 - PARAMETER loaded_checkpoint : True 
+DLL 2022-11-17 23:39:52.642913 - PARAMETER model_weights_num : 109488386 
+Selected optimization level O2:  FP16 training with FP32 batchnorm and FP32 master weights.
+
+Defaults for this optimization level are:
+enabled                : True
+opt_level              : O2
+cast_model_type        : torch.float16
+patch_torch_functions  : False
+keep_batchnorm_fp32    : True
+master_weights         : True
+loss_scale             : dynamic
+Processing user overrides (additional kwargs that are not None)...
+After processing overrides, optimization options are:
+enabled                : True
+opt_level              : O2
+cast_model_type        : torch.float16
+patch_torch_functions  : False
+keep_batchnorm_fp32    : False
+master_weights         : True
+loss_scale             : dynamic
+DLL 2022-11-17 23:40:02.322732 - PARAMETER train_start : True 
+DLL 2022-11-17 23:40:02.322920 - PARAMETER training_samples : 87599 
+DLL 2022-11-17 23:40:02.322952 - PARAMETER training_features : 88641 
+DLL 2022-11-17 23:40:02.322974 - PARAMETER train_batch_size : 360 
+DLL 2022-11-17 23:40:02.323012 - PARAMETER steps : 243.0 
+Iteration:   0%|          | 0/124 [00:00<?, ?it/s]Iteration:   0%|          | 0/124 [00:00<?, ?it/s]
+Traceback (most recent call last):
+  File "run_squad.py", line 1199, in <module>
+    main()
+  File "run_squad.py", line 1071, in main
+    scaled_loss.backward()
+  File "/opt/conda/lib/python3.8/site-packages/torch/_tensor.py", line 484, in backward
+    torch.autograd.backward(
+  File "/opt/conda/lib/python3.8/site-packages/torch/autograd/__init__.py", line 191, in backward
+    Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+RuntimeError: CUDA error: CUBLAS_STATUS_ALLOC_FAILED when calling `cublasCreate(handle)`
+Traceback (most recent call last):
+  File "run_squad.py", line 1199, in <module>
+    main()
+  File "run_squad.py", line 1071, in main
+    scaled_loss.backward()
+  File "/opt/conda/lib/python3.8/site-packages/torch/_tensor.py", line 484, in backward
+    torch.autograd.backward(
+  File "/opt/conda/lib/python3.8/site-packages/torch/autograd/__init__.py", line 191, in backward
+    Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+RuntimeError: CUDA error: CUBLAS_STATUS_ALLOC_FAILED when calling `cublasCreate(handle)`
+ERROR:torch.distributed.elastic.multiprocessing.api:failed (exitcode: 1) local_rank: 0 (pid: 8313) of binary: /opt/conda/bin/python
+Traceback (most recent call last):
+  File "/opt/conda/lib/python3.8/runpy.py", line 194, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "/opt/conda/lib/python3.8/runpy.py", line 87, in _run_code
+    exec(code, run_globals)
+  File "/opt/conda/lib/python3.8/site-packages/torch/distributed/launch.py", line 195, in <module>
+    main()
+  File "/opt/conda/lib/python3.8/site-packages/torch/distributed/launch.py", line 191, in main
+    launch(args)
+  File "/opt/conda/lib/python3.8/site-packages/torch/distributed/launch.py", line 176, in launch
+    run(args)
+  File "/opt/conda/lib/python3.8/site-packages/torch/distributed/run.py", line 753, in run
+    elastic_launch(
+  File "/opt/conda/lib/python3.8/site-packages/torch/distributed/launcher/api.py", line 132, in __call__
+    return launch_agent(self._config, self._entrypoint, list(args))
+  File "/opt/conda/lib/python3.8/site-packages/torch/distributed/launcher/api.py", line 246, in launch_agent
+    raise ChildFailedError(
+torch.distributed.elastic.multiprocessing.errors.ChildFailedError: 
+============================================================
+run_squad.py FAILED
+------------------------------------------------------------
+Failures:
+[1]:
+  time      : 2022-11-17_23:40:11
+  host      : 794d77e2433c
+  rank      : 1 (local_rank: 1)
+  exitcode  : 1 (pid: 8314)
+  error_file: <N/A>
+  traceback : To enable traceback see: https://pytorch.org/docs/stable/elastic/errors.html
+------------------------------------------------------------
+Root Cause (first observed failure):
+[0]:
+  time      : 2022-11-17_23:40:11
+  host      : 794d77e2433c
+  rank      : 0 (local_rank: 0)
+  exitcode  : 1 (pid: 8313)
+  error_file: <N/A>
+  traceback : To enable traceback see: https://pytorch.org/docs/stable/elastic/errors.html
+============================================================
+
+real	0m31.650s
+user	0m48.235s
+sys	0m8.786s

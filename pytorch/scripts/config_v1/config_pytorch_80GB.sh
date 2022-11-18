@@ -4,7 +4,7 @@ NUM_GPU=1
 NUM_EXP=1
 
 PyTorch_SSD_FP32_PARAMS=(
-             "examples/ssd"
+             "benchmark/Detection/SSD"
              args
              --data                   "/data/object_detection"
              --batch-size             "256"
@@ -14,7 +14,7 @@ PyTorch_SSD_FP32_PARAMS=(
            )
 
 PyTorch_SSD_AMP_PARAMS=(
-             "examples/ssd"
+             "benchmark/Detection/SSD"
              args
              --data                   "/data/object_detection"
              --batch-size             "448"
@@ -25,7 +25,7 @@ PyTorch_SSD_AMP_PARAMS=(
            )
 
 PyTorch_resnet50_FP32_PARAMS=(
-             "examples/resnet50v1.5"
+             "benchmark/Classification/ConvNets"
              args
                                       "/data/imagenet"
              --arch                   "resnet50"
@@ -39,7 +39,7 @@ PyTorch_resnet50_FP32_PARAMS=(
            )
 
 PyTorch_resnet50_FP16_PARAMS=(
-             "examples/resnet50v1.5"
+             "benchmark/Classification/ConvNets"
              args
                                       "/data/imagenet"
              --arch                   "resnet50"
@@ -55,7 +55,7 @@ PyTorch_resnet50_FP16_PARAMS=(
            )
 
 PyTorch_resnet50_AMP_PARAMS=(
-             "examples/resnet50v1.5"
+             "benchmark/Classification/ConvNets"
              args
                                       "/data/imagenet"
              --arch                   "resnet50"
@@ -71,7 +71,7 @@ PyTorch_resnet50_AMP_PARAMS=(
            )
 
 PyTorch_maskrcnn_FP32_PARAMS=(
-             "examples/maskrcnn/pytorch"
+             "benchmark/Segmentation/MaskRCNN/pytorch"
              args
              --config-file            "/workspace/patch/e2e_mask_rcnn_R_50_FPN_1x.yaml"
              SOLVER.IMS_PER_BATCH     "48"
@@ -82,10 +82,10 @@ PyTorch_maskrcnn_FP32_PARAMS=(
            )
 
 PyTorch_maskrcnn_FP16_PARAMS=(
-             "examples/maskrcnn/pytorch"
+             "benchmark/Segmentation/MaskRCNN/pytorch"
              args      
              --config-file            "/workspace/patch/e2e_mask_rcnn_R_50_FPN_1x.yaml"
-             SOLVER.IMS_PER_BATCH     "48"
+             SOLVER.IMS_PER_BATCH     "64"
              DTYPE                    "float16"
              SOLVER.MAX_ITER          "400"
              OUTPUT_DIR               "/results"
@@ -93,7 +93,7 @@ PyTorch_maskrcnn_FP16_PARAMS=(
            )
 
 PyTorch_gnmt_FP32_PARAMS=(
-            "examples/gnmt"
+            "benchmark/Translation/GNMT"
             args
             --dataset-dir             "/data/gnmt/wmt16_de_en"
             --train-batch-size        "1024"
@@ -103,7 +103,7 @@ PyTorch_gnmt_FP32_PARAMS=(
            )
 
 PyTorch_gnmt_FP16_PARAMS=(
-            "examples/gnmt"
+            "benchmark/Translation/GNMT"
             args
             --dataset-dir             "/data/gnmt/wmt16_de_en"
             --train-batch-size        "1520"
@@ -113,25 +113,23 @@ PyTorch_gnmt_FP16_PARAMS=(
            )
 
 PyTorch_ncf_FP32_PARAMS=(
-            "examples/ncf"
+            "benchmark/Recommendation/NCF"
             args
             --data                    "/data/ncf/cache/ml-20m"
             --epochs                  "2"
             --batch_size              "8000000"
-            --opt_level               "O0"
            )
 
 PyTorch_ncf_FP16_PARAMS=(
-            "examples/ncf"
+            "benchmark/Recommendation/NCF"
             args
             --data                    "/data/ncf/cache/ml-20m"
             --epochs                  "2"
-            --batch_size              "15000000"
-            --opt_level               "O2"
+            --batch_size              "10000000"
            )
 
 PyTorch_transformerxlbase_FP32_PARAMS=(
-            "examples/transformer-xl/pytorch"
+            "benchmark/LanguageModeling/Transformer-XL/pytorch"
             args
             --data                    "/data/transformer-xl/wikitext-103"
             --max_step                "400"
@@ -158,7 +156,7 @@ PyTorch_transformerxlbase_FP32_PARAMS=(
            )
 
 PyTorch_transformerxlbase_FP16_PARAMS=(
-            "examples/transformer-xl/pytorch"
+            "benchmark/LanguageModeling/Transformer-XL/pytorch"
             args
             --data                    "/data/transformer-xl/wikitext-103"
             --max_step                "400"
@@ -186,7 +184,7 @@ PyTorch_transformerxlbase_FP16_PARAMS=(
            )
 
 PyTorch_transformerxllarge_FP32_PARAMS=(
-            "examples/transformer-xl/pytorch"
+            "benchmark/LanguageModeling/Transformer-XL/pytorch"
             args
             --data                    "/data/transformer-xl/wikitext-103"
             --max_step                "400"
@@ -211,7 +209,7 @@ PyTorch_transformerxllarge_FP32_PARAMS=(
            )
 
 PyTorch_transformerxllarge_FP16_PARAMS=(
-            "examples/transformer-xl/pytorch"
+            "benchmark/LanguageModeling/Transformer-XL/pytorch"
             args
             --data                    "/data/transformer-xl/wikitext-103"
             --max_step                "400"
@@ -236,7 +234,7 @@ PyTorch_transformerxllarge_FP16_PARAMS=(
            )
 
 PyTorch_tacotron2_FP32_PARAMS=(
-            "examples/tacotron2"
+            "benchmark/SpeechSynthesis/Tacotron2"
             args
             -o        "./"
             --model-name              "Tacotron2" 
@@ -252,7 +250,7 @@ PyTorch_tacotron2_FP32_PARAMS=(
            )
 
 PyTorch_tacotron2_FP16_PARAMS=(
-            "examples/tacotron2"
+            "benchmark/SpeechSynthesis/Tacotron2"
             args
             -o        "./"
             --model-name              "Tacotron2"
@@ -270,7 +268,7 @@ PyTorch_tacotron2_FP16_PARAMS=(
 
 
 PyTorch_waveglow_FP32_PARAMS=(
-            "examples/tacotron2"
+            "benchmark/SpeechSynthesis/Tacotron2"
             args      
             -o        "./"
             --model-name              "WaveGlow"
@@ -288,7 +286,7 @@ PyTorch_waveglow_FP32_PARAMS=(
            )
 
 PyTorch_waveglow_FP16_PARAMS=(
-            "examples/tacotron2"
+            "benchmark/SpeechSynthesis/Tacotron2"
             args
             -o        "./"
             --model-name              "WaveGlow"
@@ -307,12 +305,13 @@ PyTorch_waveglow_FP16_PARAMS=(
            )
 
 PyTorch_bert_base_squad_FP32_PARAMS=(
-            "examples/bert"
+            "benchmark/LanguageModeling/BERT"
             args
             "/data/bert_base/bert_base_uncased.pt"
             "2.0"
-            "96"
+            "172"
             "0.0"
+	    "0.1"
             "fp32"
             "${NUM_GPU}"
             "1"
@@ -325,12 +324,13 @@ PyTorch_bert_base_squad_FP32_PARAMS=(
 )
 
 PyTorch_bert_base_squad_FP16_PARAMS=(
-            "examples/bert"
+            "benchmark/LanguageModeling/BERT"
             args      
             "/data/bert_base/bert_base_uncased.pt"
             "2.0"
-            "176"
+            "360"
             "0.0"
+	    "0.1"
             "fp16"
             "${NUM_GPU}"
             "1"
@@ -343,12 +343,13 @@ PyTorch_bert_base_squad_FP16_PARAMS=(
 )
 
 PyTorch_bert_large_squad_FP32_PARAMS=(
-            "examples/bert"
+            "benchmark/LanguageModeling/BERT"
             args      
             "/data/bert_large/bert_large_uncased.pt"
             "2.0"
-            "32"
+            "64"
             "0.0"
+	    "0.1"
             "fp32"
             "${NUM_GPU}"
             "1"
@@ -361,12 +362,13 @@ PyTorch_bert_large_squad_FP32_PARAMS=(
 )
 
 PyTorch_bert_large_squad_FP16_PARAMS=(
-            "examples/bert"
+            "benchmark/LanguageModeling/BERT"
             args      
             "/data/bert_large/bert_large_uncased.pt"
             "2.0"
-            "64"
+            "128"
             "0.0"
+	    "0.1"
             "fp16"
             "${NUM_GPU}"
             "1"

@@ -1,0 +1,51 @@
+Container nvidia build =  44877844
+out dir is .
+fp16 activated!
+python   run_squad.py --init_checkpoint=/data/bert_large/bert_large_uncased.pt --do_train --train_file=/data/squad/v1.1/train-v1.1.json --train_batch_size=128  --do_lower_case  --bert_model=bert-large-uncased  --learning_rate=0.0  --warmup_proportion=0.1 --seed=1  --num_train_epochs=2.0  --max_seq_length=384  --doc_stride=128  --output_dir=.  --vocab_file=/data/bert_large/bert-large-uncased-vocab.txt  --config_file=/data/bert_large/bert_config.json  --max_steps=100   --fp16  |& tee ./logfile.txt
+device: cuda n_gpu: 1, distributed training: False, 16-bits training: True
+DLL 2022-11-17 22:36:53.084833 - PARAMETER Config : ["Namespace(amp=False, bert_model='bert-large-uncased', cache_dir=None, config_file='/data/bert_large/bert_config.json', disable_progress_bar=False, do_eval=False, do_lower_case=True, do_predict=False, do_train=True, doc_stride=128, eval_script='evaluate.py', fp16=True, gradient_accumulation_steps=1, init_checkpoint='/data/bert_large/bert_large_uncased.pt', json_summary='results/dllogger.json', learning_rate=0.0, local_rank=-1, log_freq=50, loss_scale=0, max_answer_length=30, max_query_length=64, max_seq_length=384, max_steps=100.0, n_best_size=20, no_cuda=False, null_score_diff_threshold=0.0, num_train_epochs=2.0, output_dir='.', predict_batch_size=8, predict_file=None, seed=1, skip_cache=False, skip_checkpoint=False, train_batch_size=128, train_file='/data/squad/v1.1/train-v1.1.json', use_env=False, verbose_logging=False, version_2_with_negative=False, vocab_file='/data/bert_large/bert-large-uncased-vocab.txt', warmup_proportion=0.1)"] 
+DLL 2022-11-17 22:36:53.085388 - PARAMETER SEED : 1 
+WARNING: Output directory . already exists and is not empty. ['optimization.py', 'README.md', 'images', 'processors', 'scripts', '.dockerignore', 'checkpoints', '.gitmodules', 'data', '__pycache__', 'bind.sh', 'vocab', 'run_pretraining.py', 'run.sub', 'Dockerfile', 'triton', 'modeling.py', 'distillation', 'configurations.yml', 'create_pretraining_data.py', 'requirements.txt', 'bert_configs', 'extract_features.py', 'file_utils.py', 'results', 'run_glue.py', 'run_squad.py', 'tokenization.py', 'run_swag.py', 'schedulers.py', 'inference.py', 'bind_pyt.py', 'tokenization_utils.py', 'pytorch_model.bin', 'LICENSE', '.gitignore', 'config.json', 'train', 'utils.py', 'lamb_amp_opt', 'logfile.txt', 'NOTICE']
+DLL 2022-11-17 22:37:04.842276 - PARAMETER loading_checkpoint : True 
+DLL 2022-11-17 22:37:04.842626 - PARAMETER loaded_checkpoint : True 
+DLL 2022-11-17 22:37:05.338258 - PARAMETER model_weights_num : 335150082 
+Selected optimization level O2:  FP16 training with FP32 batchnorm and FP32 master weights.
+
+Defaults for this optimization level are:
+enabled                : True
+opt_level              : O2
+cast_model_type        : torch.float16
+patch_torch_functions  : False
+keep_batchnorm_fp32    : True
+master_weights         : True
+loss_scale             : dynamic
+Processing user overrides (additional kwargs that are not None)...
+After processing overrides, optimization options are:
+enabled                : True
+opt_level              : O2
+cast_model_type        : torch.float16
+patch_torch_functions  : False
+keep_batchnorm_fp32    : False
+master_weights         : True
+loss_scale             : dynamic
+DLL 2022-11-17 22:37:14.245423 - PARAMETER train_start : True 
+DLL 2022-11-17 22:37:14.245576 - PARAMETER training_samples : 87599 
+DLL 2022-11-17 22:37:14.245600 - PARAMETER training_features : 88641 
+DLL 2022-11-17 22:37:14.245619 - PARAMETER train_batch_size : 128 
+DLL 2022-11-17 22:37:14.245635 - PARAMETER steps : 1368.0 
+Iteration:   0%|          | 0/693 [00:00<?, ?it/s]Iteration:   0%|          | 1/693 [00:01<12:17,  1.07s/it]Iteration:   0%|          | 2/693 [00:01<09:27,  1.22it/s]Iteration:   0%|          | 2/693 [00:01<11:24,  1.01it/s]
+DLL 2022-11-17 22:37:17.630106 - Training Epoch: 0 Training Iteration: 1  step_loss : 6.031587600708008  learning_rate : 0.0 
+Traceback (most recent call last):
+  File "run_squad.py", line 1199, in <module>
+    main()
+  File "run_squad.py", line 1071, in main
+    scaled_loss.backward()
+  File "/opt/conda/lib/python3.8/site-packages/torch/_tensor.py", line 484, in backward
+    torch.autograd.backward(
+  File "/opt/conda/lib/python3.8/site-packages/torch/autograd/__init__.py", line 191, in backward
+    Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+torch.cuda.OutOfMemoryError: CUDA out of memory. Tried to allocate 384.00 MiB (GPU 0; 79.18 GiB total capacity; 76.75 GiB already allocated; 50.62 MiB free; 78.11 GiB reserved in total by PyTorch) If reserved memory is >> allocated memory try setting max_split_size_mb to avoid fragmentation.  See documentation for Memory Management and PYTORCH_CUDA_ALLOC_CONF
+
+real	0m30.110s
+user	0m31.974s
+sys	0m4.928s
