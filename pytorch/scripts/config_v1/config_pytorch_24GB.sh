@@ -35,7 +35,7 @@ PyTorch_resnet50_FP32_PARAMS=(
              --raport-file            "benchmark.json"
              --print-freq             "1"
              --training-only
-	           --data-backend "synthetic"
+	     --data-backend "synthetic"
            )
 
 PyTorch_resnet50_AMP_PARAMS=(
@@ -51,7 +51,7 @@ PyTorch_resnet50_AMP_PARAMS=(
              --raport-file            "benchmark.json"
              --print-freq             "1"
              --training-only
-	           --data-backend "synthetic"   
+	     --data-backend "synthetic"   
            )
 
 PyTorch_maskrcnn_FP32_PARAMS=(

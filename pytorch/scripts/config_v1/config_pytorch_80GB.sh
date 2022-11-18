@@ -31,28 +31,13 @@ PyTorch_resnet50_FP32_PARAMS=(
              --arch                   "resnet50"
              --epochs                 "2" 
              --prof                   "100" 
-             --batch-size             "720"
+             --batch-size             "640"
              --raport-file            "benchmark.json"
              --print-freq             "1"
              --training-only
-	     --data-backend syntetic
+	     --data-backend "synthetic"
            )
 
-PyTorch_resnet50_FP16_PARAMS=(
-             "benchmark/Classification/ConvNets"
-             args
-                                      "/data/imagenet"
-             --arch                   "resnet50"
-             --fp16
-             --static-loss-scale      "256"
-             --epochs                 "2" 
-             --prof                   "100" 
-             --batch-size             "1536"
-             --raport-file            "benchmark.json"
-             --print-freq             "1"
-             --training-only  
-	     --data-backend syntetic
-           )
 
 PyTorch_resnet50_AMP_PARAMS=(
              "benchmark/Classification/ConvNets"
@@ -63,11 +48,11 @@ PyTorch_resnet50_AMP_PARAMS=(
              --static-loss-scale      "256"
              --epochs                 "2" 
              --prof                   "100" 
-             --batch-size             "1440"
+             --batch-size             "1280"
              --raport-file            "benchmark.json"
              --print-freq             "1"
              --training-only   
-	     --data-backend syntetic
+	     --data-backend "synthetic"
            )
 
 PyTorch_maskrcnn_FP32_PARAMS=(
@@ -328,7 +313,7 @@ PyTorch_bert_base_squad_FP16_PARAMS=(
             args      
             "/data/bert_base/bert_base_uncased.pt"
             "2.0"
-            "360"
+            "320"
             "0.0"
 	    "0.1"
             "fp16"
@@ -366,7 +351,7 @@ PyTorch_bert_large_squad_FP16_PARAMS=(
             args      
             "/data/bert_large/bert_large_uncased.pt"
             "2.0"
-            "128"
+            "112"
             "0.0"
 	    "0.1"
             "fp16"
