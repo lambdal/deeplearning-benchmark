@@ -29,6 +29,9 @@ list_system_multiple = {
     '2xA6000_v1': ([1, 2], '2x RTX A6000', 300, 5785),
     '2x3090_v1': ([1, 2], '2x RTX 3090', 350, 3142),
     '2x4090_v1': ([1, 2], '2x RTX 4090', 450, 1599),
+    '2xH100_80GB_PCIe_v1': ([1, 2], '2x H100 80GB PCIe', 310, 35714),
+    '4xH100_80GB_PCIe_v1': ([1, 4], '4x H100 80GB PCIe', 310, 35714),
+    '8xH100_80GB_PCIe_v1': ([1, 8], '8x H100 80GB PCIe', 310, 35714),
 }
 list_test_fp32 = [
         # version 0: nvcr.io/nvidia/pytorch:20.01-py3 and 20.10-py3
