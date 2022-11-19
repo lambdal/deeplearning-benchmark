@@ -4,7 +4,7 @@ RAW_DATADIR=$2
 function download_20m {
 	echo "Download ml-20m"
 	cd ${RAW_DATADIR}
-	curl -O http://files.grouplens.org/datasets/movielens/ml-20m.zip
+	wget https://lambdalabs-files.s3.us-west-2.amazonaws.com/benchmark/ml-20m.zip
 	cd -
 }
 
