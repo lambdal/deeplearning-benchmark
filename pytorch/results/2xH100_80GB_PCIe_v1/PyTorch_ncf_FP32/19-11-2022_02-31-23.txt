@@ -1,0 +1,50 @@
+/opt/conda/lib/python3.8/site-packages/torch/distributed/launch.py:180: FutureWarning: The module torch.distributed.launch is deprecated
+and will be removed in future. Use torchrun.
+Note that --use_env is set by default in torchrun.
+If your script expects `--local_rank` argument to be set, please
+change it to read from `os.environ['LOCAL_RANK']` instead. See 
+https://pytorch.org/docs/stable/distributed.html#launch-utility for 
+further instructions
+
+  warnings.warn(
+WARNING:torch.distributed.run:
+*****************************************
+Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+*****************************************
+DLL 2022-11-19 02:31:26.675967 - PARAMETER data : /data/ncf/cache/ml-20m  feature_spec_file : feature_spec.yaml  epochs : 2  batch_size : 16000000  valid_batch_size : 1048576  factors : 64  layers : [256, 256, 128, 64]  negative_samples : 4  learning_rate : 0.0045  topk : 10  seed : None  threshold : 1.0  beta1 : 0.25  beta2 : 0.5  eps : 1e-08  dropout : 0.5  checkpoint_dir :   load_checkpoint_path : None  mode : train  grads_accumulated : 1  amp : False  log_path : log.json  world_size : 2  distributed : True  local_rank : 0 
+DistributedDataParallel(
+  (module): NeuMF(
+    (mf_user_embed): Embedding(138493, 64)
+    (mf_item_embed): Embedding(26744, 64)
+    (mlp_user_embed): Embedding(138493, 128)
+    (mlp_item_embed): Embedding(26744, 128)
+    (mlp): ModuleList(
+      (0): Linear(in_features=256, out_features=256, bias=True)
+      (1): Linear(in_features=256, out_features=128, bias=True)
+      (2): Linear(in_features=128, out_features=64, bias=True)
+    )
+    (final): Linear(in_features=128, out_features=1, bias=True)
+  )
+)
+31832577 parameters
+DistributedDataParallel(
+  (module): NeuMF(
+    (mf_user_embed): Embedding(138493, 64)
+    (mf_item_embed): Embedding(26744, 64)
+    (mlp_user_embed): Embedding(138493, 128)
+    (mlp_item_embed): Embedding(26744, 128)
+    (mlp): ModuleList(
+      (0): Linear(in_features=256, out_features=256, bias=True)
+      (1): Linear(in_features=256, out_features=128, bias=True)
+      (2): Linear(in_features=128, out_features=64, bias=True)
+    )
+    (final): Linear(in_features=128, out_features=1, bias=True)
+  )
+)
+31832577 parameters
+DLL 2022-11-19 02:31:32.413627 - (0,) train_throughput : 5.282e+07 samples/s hr@10 : 0.83266 None train_epoch_time : 1.880 s validation_epoch_time : 0.104 s eval_throughput : 1.345e+08 samples/s validation_loss : 0.08924 None train_loss : 0.32010 None
+New best hr!
+DLL 2022-11-19 02:31:34.192301 - (1,) train_throughput : 5.878e+07 samples/s hr@10 : 0.83420 None train_epoch_time : 1.690 s validation_epoch_time : 0.089 s eval_throughput : 1.576e+08 samples/s validation_loss : 0.13227 None train_loss : 0.25004 None
+New best hr!
+DLL 2022-11-19 02:31:34.192599 - () best_train_throughput : 58775815.20622048 samples/s best_eval_throughput : 157618877.3096413 samples/s mean_train_throughput : 55799914.57550484 samples/s mean_eval_throughput : 146046977.82796097 samples/s best_accuracy : 0.8342010065490675 None best_epoch : 1 None time_to_target : 6.494874954223633 s time_to_best_model : 6.49469518661499 s validation_loss : 0.13227 None train_loss : 0.25004 None
+DONE!

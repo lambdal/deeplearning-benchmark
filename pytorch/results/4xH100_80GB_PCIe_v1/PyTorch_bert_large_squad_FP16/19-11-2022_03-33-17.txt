@@ -1,0 +1,77 @@
+Container nvidia build =  46164382
+out dir is .
+fp16 activated!
+python   -m torch.distributed.launch --nproc_per_node=4 run_squad.py --init_checkpoint=/data/bert_large/bert_large_uncased.pt --do_train --train_file=/data/squad/v1.1/train-v1.1.json --train_batch_size=112  --do_lower_case  --bert_model=bert-large-uncased  --learning_rate=0.0  --warmup_proportion=0.1 --seed=1  --num_train_epochs=2.0  --max_seq_length=384  --doc_stride=128  --output_dir=.  --vocab_file=/data/bert_large/bert-large-uncased-vocab.txt  --config_file=/data/bert_large/bert_config.json  --max_steps=100   --fp16  |& tee ./logfile.txt
+/opt/conda/lib/python3.8/site-packages/torch/distributed/launch.py:180: FutureWarning: The module torch.distributed.launch is deprecated
+and will be removed in future. Use torchrun.
+Note that --use_env is set by default in torchrun.
+If your script expects `--local_rank` argument to be set, please
+change it to read from `os.environ['LOCAL_RANK']` instead. See 
+https://pytorch.org/docs/stable/distributed.html#launch-utility for 
+further instructions
+
+  warnings.warn(
+WARNING:torch.distributed.run:
+*****************************************
+Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+*****************************************
+11/19/2022 03:33:24 - INFO - torch.distributed.distributed_c10d -   Added key: store_based_barrier_key:1 to store for rank: 1
+11/19/2022 03:33:24 - INFO - torch.distributed.distributed_c10d -   Added key: store_based_barrier_key:1 to store for rank: 0
+11/19/2022 03:33:24 - INFO - torch.distributed.distributed_c10d -   Added key: store_based_barrier_key:1 to store for rank: 3
+11/19/2022 03:33:24 - INFO - torch.distributed.distributed_c10d -   Added key: store_based_barrier_key:1 to store for rank: 2
+11/19/2022 03:33:24 - INFO - torch.distributed.distributed_c10d -   Rank 2: Completed store-based barrier for key:store_based_barrier_key:1 with 4 nodes.
+device: cuda:2 n_gpu: 1, distributed training: True, 16-bits training: True
+WARNING: Output directory . already exists and is not empty. ['optimization.py', 'README.md', 'images', 'processors', 'scripts', '.dockerignore', 'checkpoints', '.gitmodules', 'data', '__pycache__', 'bind.sh', 'vocab', 'run_pretraining.py', 'run.sub', 'Dockerfile', 'triton', 'modeling.py', 'distillation', 'configurations.yml', 'create_pretraining_data.py', 'requirements.txt', 'bert_configs', 'extract_features.py', 'file_utils.py', 'results', 'run_glue.py', 'run_squad.py', 'tokenization.py', 'run_swag.py', 'schedulers.py', 'inference.py', 'bind_pyt.py', 'tokenization_utils.py', 'pytorch_model.bin', 'LICENSE', '.gitignore', 'config.json', 'train', 'utils.py', 'lamb_amp_opt', 'logfile.txt', 'NOTICE']
+11/19/2022 03:33:24 - INFO - torch.distributed.distributed_c10d -   Rank 3: Completed store-based barrier for key:store_based_barrier_key:1 with 4 nodes.
+device: cuda:3 n_gpu: 1, distributed training: True, 16-bits training: True
+WARNING: Output directory . already exists and is not empty. ['optimization.py', 'README.md', 'images', 'processors', 'scripts', '.dockerignore', 'checkpoints', '.gitmodules', 'data', '__pycache__', 'bind.sh', 'vocab', 'run_pretraining.py', 'run.sub', 'Dockerfile', 'triton', 'modeling.py', 'distillation', 'configurations.yml', 'create_pretraining_data.py', 'requirements.txt', 'bert_configs', 'extract_features.py', 'file_utils.py', 'results', 'run_glue.py', 'run_squad.py', 'tokenization.py', 'run_swag.py', 'schedulers.py', 'inference.py', 'bind_pyt.py', 'tokenization_utils.py', 'pytorch_model.bin', 'LICENSE', '.gitignore', 'config.json', 'train', 'utils.py', 'lamb_amp_opt', 'logfile.txt', 'NOTICE']
+11/19/2022 03:33:24 - INFO - torch.distributed.distributed_c10d -   Rank 1: Completed store-based barrier for key:store_based_barrier_key:1 with 4 nodes.
+device: cuda:1 n_gpu: 1, distributed training: True, 16-bits training: True
+11/19/2022 03:33:24 - INFO - torch.distributed.distributed_c10d -   Rank 0: Completed store-based barrier for key:store_based_barrier_key:1 with 4 nodes.
+WARNING: Output directory . already exists and is not empty. ['optimization.py', 'README.md', 'images', 'processors', 'scripts', '.dockerignore', 'checkpoints', '.gitmodules', 'data', '__pycache__', 'bind.sh', 'vocab', 'run_pretraining.py', 'run.sub', 'Dockerfile', 'triton', 'modeling.py', 'distillation', 'configurations.yml', 'create_pretraining_data.py', 'requirements.txt', 'bert_configs', 'extract_features.py', 'file_utils.py', 'results', 'run_glue.py', 'run_squad.py', 'tokenization.py', 'run_swag.py', 'schedulers.py', 'inference.py', 'bind_pyt.py', 'tokenization_utils.py', 'pytorch_model.bin', 'LICENSE', '.gitignore', 'config.json', 'train', 'utils.py', 'lamb_amp_opt', 'logfile.txt', 'NOTICE']
+device: cuda:0 n_gpu: 1, distributed training: True, 16-bits training: True
+DLL 2022-11-19 03:33:24.626854 - PARAMETER Config : ["Namespace(amp=False, bert_model='bert-large-uncased', cache_dir=None, config_file='/data/bert_large/bert_config.json', disable_progress_bar=False, do_eval=False, do_lower_case=True, do_predict=False, do_train=True, doc_stride=128, eval_script='evaluate.py', fp16=True, gradient_accumulation_steps=1, init_checkpoint='/data/bert_large/bert_large_uncased.pt', json_summary='results/dllogger.json', learning_rate=0.0, local_rank=0, log_freq=50, loss_scale=0, max_answer_length=30, max_query_length=64, max_seq_length=384, max_steps=100.0, n_best_size=20, no_cuda=False, null_score_diff_threshold=0.0, num_train_epochs=2.0, output_dir='.', predict_batch_size=8, predict_file=None, seed=1, skip_cache=False, skip_checkpoint=False, train_batch_size=112, train_file='/data/squad/v1.1/train-v1.1.json', use_env=False, verbose_logging=False, version_2_with_negative=False, vocab_file='/data/bert_large/bert-large-uncased-vocab.txt', warmup_proportion=0.1)"] 
+DLL 2022-11-19 03:33:24.627136 - PARAMETER SEED : 1 
+WARNING: Output directory . already exists and is not empty. ['optimization.py', 'README.md', 'images', 'processors', 'scripts', '.dockerignore', 'checkpoints', '.gitmodules', 'data', '__pycache__', 'bind.sh', 'vocab', 'run_pretraining.py', 'run.sub', 'Dockerfile', 'triton', 'modeling.py', 'distillation', 'configurations.yml', 'create_pretraining_data.py', 'requirements.txt', 'bert_configs', 'extract_features.py', 'file_utils.py', 'results', 'run_glue.py', 'run_squad.py', 'tokenization.py', 'run_swag.py', 'schedulers.py', 'inference.py', 'bind_pyt.py', 'tokenization_utils.py', 'pytorch_model.bin', 'LICENSE', '.gitignore', 'config.json', 'train', 'utils.py', 'lamb_amp_opt', 'logfile.txt', 'NOTICE']
+DLL 2022-11-19 03:33:40.476553 - PARAMETER loading_checkpoint : True 
+DLL 2022-11-19 03:33:40.476773 - PARAMETER loaded_checkpoint : True 
+DLL 2022-11-19 03:33:41.300871 - PARAMETER model_weights_num : 335150082 
+Selected optimization level O2:  FP16 training with FP32 batchnorm and FP32 master weights.
+
+Defaults for this optimization level are:
+enabled                : True
+opt_level              : O2
+cast_model_type        : torch.float16
+patch_torch_functions  : False
+keep_batchnorm_fp32    : True
+master_weights         : True
+loss_scale             : dynamic
+Processing user overrides (additional kwargs that are not None)...
+After processing overrides, optimization options are:
+enabled                : True
+opt_level              : O2
+cast_model_type        : torch.float16
+patch_torch_functions  : False
+keep_batchnorm_fp32    : False
+master_weights         : True
+loss_scale             : dynamic
+DLL 2022-11-19 03:33:51.066580 - PARAMETER train_start : True 
+DLL 2022-11-19 03:33:51.066768 - PARAMETER training_samples : 87599 
+DLL 2022-11-19 03:33:51.066794 - PARAMETER training_features : 88641 
+DLL 2022-11-19 03:33:51.066815 - PARAMETER train_batch_size : 112 
+DLL 2022-11-19 03:33:51.066835 - PARAMETER steps : 391.0 
+Iteration:   0%|          | 0/198 [00:00<?, ?it/s]DLL 2022-11-19 03:33:55.263167 - Training Epoch: 0 Training Iteration: 1  step_loss : 6.059846878051758  learning_rate : 0.0 
+Iteration:   1%|          | 1/198 [00:01<06:00,  1.83s/it]Iteration:   1%|          | 2/198 [00:02<03:44,  1.15s/it]Iteration:   2%|▏         | 3/198 [00:03<03:00,  1.08it/s]Iteration:   2%|▏         | 4/198 [00:03<02:40,  1.21it/s]Iteration:   3%|▎         | 5/198 [00:04<02:28,  1.30it/s]Iteration:   3%|▎         | 6/198 [00:05<02:20,  1.36it/s]Iteration:   4%|▎         | 7/198 [00:05<02:15,  1.41it/s]Iteration:   4%|▍         | 8/198 [00:06<02:12,  1.43it/s]Iteration:   5%|▍         | 9/198 [00:07<02:10,  1.45it/s]Iteration:   5%|▌         | 10/198 [00:07<02:08,  1.47it/s]Iteration:   6%|▌         | 11/198 [00:08<02:06,  1.48it/s]Iteration:   6%|▌         | 12/198 [00:09<02:05,  1.49it/s]Iteration:   7%|▋         | 13/198 [00:09<02:04,  1.49it/s]Iteration:   7%|▋         | 14/198 [00:10<02:03,  1.49it/s]Iteration:   8%|▊         | 15/198 [00:11<02:02,  1.49it/s]Iteration:   8%|▊         | 16/198 [00:11<02:01,  1.50it/s]Iteration:   9%|▊         | 17/198 [00:12<02:00,  1.50it/s]Iteration:   9%|▉         | 18/198 [00:13<02:00,  1.50it/s]Iteration:  10%|▉         | 19/198 [00:13<01:59,  1.50it/s]Iteration:  10%|█         | 20/198 [00:14<01:58,  1.50it/s]Iteration:  11%|█         | 21/198 [00:15<01:58,  1.50it/s]Iteration:  11%|█         | 22/198 [00:15<01:57,  1.50it/s]Iteration:  12%|█▏        | 23/198 [00:16<01:56,  1.50it/s]Iteration:  12%|█▏        | 24/198 [00:17<01:56,  1.50it/s]Iteration:  13%|█▎        | 25/198 [00:17<01:55,  1.50it/s]Iteration:  13%|█▎        | 26/198 [00:18<01:54,  1.50it/s]Iteration:  14%|█▎        | 27/198 [00:19<01:54,  1.50it/s]Iteration:  14%|█▍        | 28/198 [00:19<01:53,  1.50it/s]Iteration:  15%|█▍        | 29/198 [00:20<01:52,  1.50it/s]Iteration:  15%|█▌        | 30/198 [00:21<01:52,  1.50it/s]Iteration:  16%|█▌        | 31/198 [00:21<01:51,  1.50it/s]Iteration:  16%|█▌        | 32/198 [00:22<01:50,  1.50it/s]Iteration:  17%|█▋        | 33/198 [00:23<01:50,  1.50it/s]Iteration:  17%|█▋        | 34/198 [00:23<01:49,  1.50it/s]Iteration:  18%|█▊        | 35/198 [00:24<01:48,  1.50it/s]Iteration:  18%|█▊        | 36/198 [00:25<01:47,  1.50it/s]Iteration:  19%|█▊        | 37/198 [00:25<01:47,  1.50it/s]Iteration:  19%|█▉        | 38/198 [00:26<01:46,  1.50it/s]Iteration:  20%|█▉        | 39/198 [00:27<01:46,  1.50it/s]Iteration:  20%|██        | 40/198 [00:27<01:45,  1.50it/s]Iteration:  21%|██        | 41/198 [00:28<01:44,  1.50it/s]Gradient overflow.  Skipping step, loss scaler 0 reducing loss scale to 32768.0
+Gradient overflow.  Skipping step, loss scaler 0 reducing loss scale to 32768.0
+Gradient overflow.  Skipping step, loss scaler 0 reducing loss scale to 32768.0
+Gradient overflow.  Skipping step, loss scaler 0 reducing loss scale to 32768.0
+Iteration:  21%|██        | 42/198 [00:29<01:43,  1.50it/s]Iteration:  22%|██▏       | 43/198 [00:29<01:43,  1.50it/s]Iteration:  22%|██▏       | 44/198 [00:30<01:42,  1.50it/s]Iteration:  23%|██▎       | 45/198 [00:31<01:42,  1.50it/s]Iteration:  23%|██▎       | 46/198 [00:31<01:41,  1.50it/s]Iteration:  24%|██▎       | 47/198 [00:32<01:40,  1.50it/s]Iteration:  24%|██▍       | 48/198 [00:33<01:40,  1.50it/s]Iteration:  25%|██▍       | 49/198 [00:33<01:39,  1.50it/s]Iteration:  25%|██▌       | 50/198 [00:34<01:38,  1.50it/s]DLL 2022-11-19 03:34:28.621682 - Training Epoch: 0 Training Iteration: 51  step_loss : 6.050622940063477  learning_rate : 0.0 
+Iteration:  26%|██▌       | 51/198 [00:35<01:38,  1.50it/s]Iteration:  26%|██▋       | 52/198 [00:35<01:37,  1.50it/s]Iteration:  27%|██▋       | 53/198 [00:36<01:36,  1.50it/s]Iteration:  27%|██▋       | 54/198 [00:37<01:36,  1.50it/s]Iteration:  28%|██▊       | 55/198 [00:37<01:35,  1.50it/s]Iteration:  28%|██▊       | 56/198 [00:38<01:34,  1.50it/s]Iteration:  29%|██▉       | 57/198 [00:39<01:34,  1.50it/s]Iteration:  29%|██▉       | 58/198 [00:39<01:33,  1.50it/s]Iteration:  30%|██▉       | 59/198 [00:40<01:32,  1.50it/s]Iteration:  30%|███       | 60/198 [00:41<01:32,  1.50it/s]Iteration:  31%|███       | 61/198 [00:41<01:31,  1.50it/s]Iteration:  31%|███▏      | 62/198 [00:42<01:30,  1.50it/s]Iteration:  32%|███▏      | 63/198 [00:43<01:30,  1.50it/s]Iteration:  32%|███▏      | 64/198 [00:43<01:29,  1.50it/s]Iteration:  33%|███▎      | 65/198 [00:44<01:28,  1.50it/s]Iteration:  33%|███▎      | 66/198 [00:45<01:28,  1.50it/s]Iteration:  34%|███▍      | 67/198 [00:45<01:27,  1.50it/s]Iteration:  34%|███▍      | 68/198 [00:46<01:26,  1.50it/s]Iteration:  35%|███▍      | 69/198 [00:47<01:26,  1.50it/s]Iteration:  35%|███▌      | 70/198 [00:47<01:25,  1.50it/s]Iteration:  36%|███▌      | 71/198 [00:48<01:24,  1.50it/s]Iteration:  36%|███▋      | 72/198 [00:49<01:24,  1.50it/s]Iteration:  37%|███▋      | 73/198 [00:49<01:23,  1.50it/s]Iteration:  37%|███▋      | 74/198 [00:50<01:22,  1.50it/s]Iteration:  38%|███▊      | 75/198 [00:51<01:22,  1.50it/s]Iteration:  38%|███▊      | 76/198 [00:51<01:21,  1.49it/s]Iteration:  39%|███▉      | 77/198 [00:52<01:20,  1.49it/s]Iteration:  39%|███▉      | 78/198 [00:53<01:20,  1.49it/s]Iteration:  40%|███▉      | 79/198 [00:53<01:19,  1.50it/s]Iteration:  40%|████      | 80/198 [00:54<01:18,  1.49it/s]Iteration:  41%|████      | 81/198 [00:55<01:18,  1.50it/s]Iteration:  41%|████▏     | 82/198 [00:55<01:17,  1.50it/s]Iteration:  42%|████▏     | 83/198 [00:56<01:16,  1.50it/s]Iteration:  42%|████▏     | 84/198 [00:57<01:16,  1.50it/s]Iteration:  43%|████▎     | 85/198 [00:57<01:15,  1.50it/s]Iteration:  43%|████▎     | 86/198 [00:58<01:14,  1.50it/s]Iteration:  44%|████▍     | 87/198 [00:59<01:14,  1.50it/s]Iteration:  44%|████▍     | 88/198 [00:59<01:13,  1.49it/s]Iteration:  45%|████▍     | 89/198 [01:00<01:12,  1.49it/s]Iteration:  45%|████▌     | 90/198 [01:01<01:12,  1.50it/s]Iteration:  46%|████▌     | 91/198 [01:01<01:11,  1.50it/s]Iteration:  46%|████▋     | 92/198 [01:02<01:10,  1.50it/s]Iteration:  47%|████▋     | 93/198 [01:03<01:10,  1.49it/s]Iteration:  47%|████▋     | 94/198 [01:03<01:09,  1.49it/s]Iteration:  48%|████▊     | 95/198 [01:04<01:08,  1.50it/s]Iteration:  48%|████▊     | 96/198 [01:05<01:08,  1.50it/s]Iteration:  49%|████▉     | 97/198 [01:05<01:07,  1.50it/s]Iteration:  49%|████▉     | 98/198 [01:06<01:06,  1.49it/s]Iteration:  50%|█████     | 99/198 [01:07<01:06,  1.49it/s]Iteration:  51%|█████     | 100/198 [01:07<01:05,  1.49it/s]DLL 2022-11-19 03:35:02.045495 - Training Epoch: 0 Training Iteration: 101  step_loss : 6.072065353393555  learning_rate : 0.0 
+Iteration:  51%|█████     | 101/198 [01:08<01:04,  1.49it/s]Iteration:  51%|█████     | 101/198 [01:08<01:05,  1.47it/s]
+Iteration:   0%|          | 0/198 [00:00<?, ?it/s]Iteration:   0%|          | 0/198 [00:00<?, ?it/s]
+DLL 2022-11-19 03:35:04.192238 -  e2e_train_time : 68.62428545951843  training_sequences_per_second : 652.8301125470747  final_loss : 6.072065353393555 
+
+real	1m51.749s
+user	5m16.085s
+sys	1m32.201s
+DONE!
