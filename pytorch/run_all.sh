@@ -1,36 +1,14 @@
 #!/bin/bash
 
-#docker run \
-#	--rm --shm-size=128g \
-#	--gpus all \
-#	-v ~/DeepLearningExamples/PyTorch:/workspace/benchmark \
-#	-v ~/data:/data \
-#	-v $(pwd)"/scripts":/scripts \
-#	-v $(pwd)"/results":/results \
-#	nvcr.io/nvidia/${NAME_NGC} \
-#	/bin/bash -c "cp -r /scripts/* /workspace; ./run_benchmark.sh H100_80GB_PCIe_v1 resnet50 3000"
-#
-#docker run \
-#	--rm --shm-size=128g \
-#	--gpus all \
-#	-v ~/DeepLearningExamples/PyTorch:/workspace/benchmark \
-#	-v ~/data:/data \
-#	-v $(pwd)"/scripts":/scripts \
-#	-v $(pwd)"/results":/results \
-#	nvcr.io/nvidia/${NAME_NGC} \
-#	/bin/bash -c "cp -r /scripts/* /workspace; ./run_benchmark.sh 2xH100_80GB_PCIe_v1 resnet50 3000"
-#
-
-#docker run \
-#	--rm --shm-size=128g \
-#	--gpus all \
-#	-v ~/DeepLearningExamples/PyTorch:/workspace/benchmark \
-#	-v ~/data:/data \
-#	-v $(pwd)"/scripts":/scripts \
-#	-v $(pwd)"/results":/results \
-#	nvcr.io/nvidia/${NAME_NGC} \
-#	/bin/bash -c "cp -r /scripts/* /workspace; ./run_benchmark.sh 4xH100_80GB_PCIe_v1 tacotron2 3000"
-#
+docker run \
+	--rm --shm-size=128g \
+	--gpus all \
+	-v ~/DeepLearningExamples/PyTorch:/workspace/benchmark \
+	-v ~/data:/data \
+	-v $(pwd)"/scripts":/scripts \
+	-v $(pwd)"/results":/results \
+	nvcr.io/nvidia/${NAME_NGC} \
+	/bin/bash -c "cp -r /scripts/* /workspace; ./run_benchmark.sh A100_40GB_SXM4_v1 all 3000"
 
 docker run \
 	--rm --shm-size=128g \
@@ -40,4 +18,26 @@ docker run \
 	-v $(pwd)"/scripts":/scripts \
 	-v $(pwd)"/results":/results \
 	nvcr.io/nvidia/${NAME_NGC} \
-	/bin/bash -c "cp -r /scripts/* /workspace; ./run_benchmark.sh 8xH100_80GB_PCIe_v1 tacotron2_fp32 3000"
+	/bin/bash -c "cp -r /scripts/* /workspace; ./run_benchmark.sh 2xA100_40GB_SXM4_v1 all 3000"
+
+
+docker run \
+	--rm --shm-size=128g \
+	--gpus all \
+	-v ~/DeepLearningExamples/PyTorch:/workspace/benchmark \
+	-v ~/data:/data \
+	-v $(pwd)"/scripts":/scripts \
+	-v $(pwd)"/results":/results \
+	nvcr.io/nvidia/${NAME_NGC} \
+	/bin/bash -c "cp -r /scripts/* /workspace; ./run_benchmark.sh 4xA100_40GB_SXM4_v1 all 3000"
+
+
+docker run \
+	--rm --shm-size=128g \
+	--gpus all \
+	-v ~/DeepLearningExamples/PyTorch:/workspace/benchmark \
+	-v ~/data:/data \
+	-v $(pwd)"/scripts":/scripts \
+	-v $(pwd)"/results":/results \
+	nvcr.io/nvidia/${NAME_NGC} \
+	/bin/bash -c "cp -r /scripts/* /workspace; ./run_benchmark.sh 8xA100_40GB_SXM4_v1 tacotron2 3000"

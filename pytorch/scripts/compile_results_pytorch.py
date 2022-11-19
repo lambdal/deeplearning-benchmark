@@ -20,6 +20,7 @@ list_system_single = {
     'QuadroRTX8000_v1': ([1, 1], 'Quadro RTX 8000', 260, 6900),
     '3090_v1': ([1, 1], 'RTX 3090', 350, 3142),
     'A100_40GB_PCIe_v1': ([1, 1], 'A100 40GB PCIe', 250, 12785),
+    'A100_40GB_SXM4_v1': ([1, 1], 'A100 40GB SXM4', 250, 14571),
     'A6000_v1': ([1, 1], 'RTX A6000', 300, 5785),
     '4090_v1': ([1, 1], 'RTX 4090', 450, 1599),
     'H100_80GB_PCIe_v1': ([1, 1], 'H100 80GB PCIe', 310, 35714),
@@ -32,6 +33,9 @@ list_system_multiple = {
     '2xH100_80GB_PCIe_v1': ([1, 2], '2x H100 80GB PCIe', 310, 35714),
     '4xH100_80GB_PCIe_v1': ([1, 4], '4x H100 80GB PCIe', 310, 35714),
     '8xH100_80GB_PCIe_v1': ([1, 8], '8x H100 80GB PCIe', 310, 35714),
+    '2xA100_40GB_SXM4_v1': ([1, 2], '2xA100 40GB SXM4', 250, 14571),
+    '4xA100_40GB_SXM4_v1': ([1, 4], '4xA100 40GB SXM4', 250, 14571),
+    '8xA100_40GB_SXM4_v1': ([1, 8], '8xA100 40GB SXM4', 250, 14571),
 }
 list_test_fp32 = [
         # version 0: nvcr.io/nvidia/pytorch:20.01-py3 and 20.10-py3
