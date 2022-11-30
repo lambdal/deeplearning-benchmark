@@ -59,9 +59,9 @@ docker run --gpus all nvidia/cuda:10.0-base nvidia-smi
 
 #### Step 2: Pull images
 
-The latest tested PyTorch NGC is `pytorch:22.09-py3`.
+The latest tested PyTorch NGC is `pytorch:22.10-py3`.
 ```
-export NAME_NGC=pytorch:22.09-py3
+export NAME_NGC=pytorch:22.10-py3
 docker pull nvcr.io/nvidia/${NAME_NGC}
 ```
 
@@ -77,7 +77,7 @@ cd ..
 # Clone this repo for streamlining the benchmark
 git clone https://github.com/lambdal/deeplearning-benchmark.git && \
 cd deeplearning-benchmark/pytorch && \
-git checkout 22.09-py3
+git checkout 22.10-py3
 ```
 
 #### Step 4: Prepare data
