@@ -22,16 +22,20 @@ list_system_single = {
     'A100_40GB_PCIe_v1': ([1, 1], 'A100 40GB PCIe', 250, 12785),
     'A6000_v1': ([1, 1], 'RTX A6000', 300, 5785),
     '4090_v1': ([1, 1], 'RTX 4090', 450, 1599),
-    'H100_80GB_PCIe_v1': ([1, 1], 'H100 80GB PCIe', 310, 35714),
+    'H100_80GB_PCIe_v1': ([1, 1], 'H100 80GB PCIe Gen4', 310, 35714),
+    'H100_80GB_PCIe5_v1': ([1, 1], 'H100 80GB PCIe Gen5', 310, 35714),
     }
 
 list_system_multiple = {
     '2xA6000_v1': ([1, 2], '2x RTX A6000', 300, 5785),
     '2x3090_v1': ([1, 2], '2x RTX 3090', 350, 3142),
     '2x4090_v1': ([1, 2], '2x RTX 4090', 450, 1599),
-    '2xH100_80GB_PCIe_v1': ([1, 2], '2x H100 80GB PCIe', 310, 35714),
-    '4xH100_80GB_PCIe_v1': ([1, 4], '4x H100 80GB PCIe', 310, 35714),
-    '8xH100_80GB_PCIe_v1': ([1, 8], '8x H100 80GB PCIe', 310, 35714),
+    '2xH100_80GB_PCIe_v1': ([1, 2], '2x H100 80GB PCIe Gen4', 310, 35714),
+    '2xH100_80GB_PCIe5_v1': ([1, 2], '2x H100 80GB PCIe Gen5', 310, 35714),
+    '4xH100_80GB_PCIe_v1': ([1, 4], '4x H100 80GB PCIe Gen4', 310, 35714),
+    '4xH100_80GB_PCIe5_v1': ([1, 4], '4x H100 80GB PCIe Gen5', 310, 35714),
+    '8xH100_80GB_PCIe_v1': ([1, 8], '8x H100 80GB PCIe Gen4', 310, 35714),
+    '8xH100_80GB_PCIe5_v1': ([1, 8], '8x H100 80GB PCIe Gen5', 310, 35714),
 }
 list_test_fp32 = [
         # version 0: nvcr.io/nvidia/pytorch:20.01-py3 and 20.10-py3
