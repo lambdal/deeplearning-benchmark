@@ -18,7 +18,7 @@ import pandas as pd
 
 list_system_single = {
     'QuadroRTX8000_v1': ([1, 1], 'Quadro RTX 8000', 260, 6900),
-    'LambdaCloud_V100_16GB': ([1, 1], 'LambdaCloud V100 16GB', 300, 10664),
+    'LambdaCloud_V100_16GB_v1': ([1, 1], 'LambdaCloud V100 16GB', 300, 10664),
     '3090_v1': ([1, 1], 'RTX 3090', 350, 3142),
     'LambdaCloud_A100_40GB_PCIe_v1': ([1, 1], 'Lambda Cloud A100 40GB PCIe', 250, 12785),
     # 'A100_40GB_PCIe_v1': ([1, 1], 'A100 40GB PCIe', 250, 12785),
@@ -32,7 +32,7 @@ list_system_single = {
     }
 
 list_system_multiple = {
-    'LambdaCloud_2xV100_16GB': ([1, 2], 'LambdaCloud 2x V100 16GB', 300, 10664),
+    'LambdaCloud_2xV100_16GB_v1': ([1, 2], 'LambdaCloud 2x V100 16GB', 300, 10664),
     '2xA6000_v1': ([1, 2], '2x RTX A6000', 300, 5785),
     '2x3090_v1': ([1, 2], '2x RTX 3090', 350, 3142),
     '2x4090_v1': ([1, 2], '2x RTX 4090', 450, 1599),
@@ -41,13 +41,13 @@ list_system_multiple = {
     '2xA100_80GB_SXM4_v1': ([1, 2], '2x A100 80GB SXM4', 400, 18571),
     #'2xH100_80GB_PCIe_v1': ([1, 2], '2x H100 80GB PCIe Gen4', 310, 35714),
     '2xH100_80GB_PCIe5_v1': ([1, 2], '2x H100 80GB PCIe Gen5', 310, 35714),
-    'LambdaCloud_4xV100_16GB': ([1, 4], 'LambdaCloud 4xV100 16GB', 300, 10664),
+    'LambdaCloud_4xV100_16GB_v1': ([1, 4], 'LambdaCloud 4xV100 16GB', 300, 10664),
     # '4xA100_40GB_SXM4_v1': ([1, 4], '4xA100 40GB SXM4', 250, 14571),
     #'4xA6000_v1': ([1, 4], '4x RTX A6000', 300, 5785),
     '4xA100_80GB_SXM4_v1': ([1, 4], '4x A100 80GB SXM4', 400, 18571),
     # '4xH100_80GB_PCIe_v1': ([1, 4], '4x H100 80GB PCIe Gen4', 310, 35714),
     '4xH100_80GB_PCIe5_v1': ([1, 4], '4x H100 80GB PCIe Gen5', 310, 35714),
-    'LambdaCloud_8xV100_16GB': ([1, 8], 'LambdaCloud 8xV100 16GB', 300, 10664),
+    'LambdaCloud_8xV100_16GB_v1': ([1, 8], 'LambdaCloud 8xV100 16GB', 300, 10664),
     # '8xA100_40GB_SXM4_v1': ([1, 8], '8xA100 40GB SXM4', 250, 14571),
     '8xA100_80GB_SXM4_v1': ([1, 8], '8x A100 80GB SXM4', 400, 18571),
     # '8xH100_80GB_PCIe_v1': ([1, 8], '8x H100 80GB PCIe Gen4', 310, 35714),

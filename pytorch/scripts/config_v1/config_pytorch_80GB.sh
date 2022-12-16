@@ -136,6 +136,7 @@ PyTorch_transformerxlbase_FP32_PARAMS=(
             --eval_tgt_len            "192"
             --log_interval            "10"
             --eval_interval           "5000"
+	    --no_eval
             --roll
             --cuda
            )
@@ -163,6 +164,7 @@ PyTorch_transformerxlbase_FP16_PARAMS=(
             --eval_tgt_len            "192"
             --log_interval            "10"
             --eval_interval           "5000"
+	    --no_eval
             --roll
             --cuda
             --fp16
@@ -189,6 +191,7 @@ PyTorch_transformerxllarge_FP32_PARAMS=(
             --mem_len                 "256"
             --eval_tgt_len            "128"
             --eval_interval           "5000"
+	    --no_eval
             --roll
             --cuda
            )
@@ -214,6 +217,7 @@ PyTorch_transformerxllarge_FP16_PARAMS=(
             --mem_len                 "256"
             --eval_tgt_len            "128"
             --eval_interval           "5000"
+	    --no_eval
             --cuda
             --fp16
            )
