@@ -19,6 +19,7 @@ import pandas as pd
 list_system_single = {
     'QuadroRTX8000_v1': ([1, 1], 'Quadro RTX 8000', 260, 6900),
     '3090_v1': ([1, 1], 'RTX 3090', 350, 3142),
+    'LambdaCloud_A100_40GB_PCIe_v1': ([1, 1], 'Lambda Cloud A100 40GB PCIe', 250, 12785),
     # 'A100_40GB_PCIe_v1': ([1, 1], 'A100 40GB PCIe', 250, 12785),
     # 'A100_40GB_SXM4_v1': ([1, 1], 'A100 40GB SXM4', 250, 14571),
     'A100_80GB_SXM4_v1': ([1, 1], 'A100 80GB SXM4', 400, 18571),
