@@ -34,7 +34,7 @@ list_system_single = {
 
 list_system_multiple = {
     'LambdaCloud_2xV100_16GB_v1': ([1, 2], 'LambdaCloud 2x V100 16GB', 300, 10664),
-    '2xA6000_v1': ([1, 2], '2x Ada A6000', 300, 4128),
+    '2xAdaA6000_v1': ([1, 2], '2x Ada A6000', 300, 4128),
     '2xA6000_v1': ([1, 2], '2x RTX A6000', 300, 5785),
     '2x3090_v1': ([1, 2], '2x RTX 3090', 350, 3142),
     '2x4090_v1': ([1, 2], '2x RTX 4090', 450, 1599),
