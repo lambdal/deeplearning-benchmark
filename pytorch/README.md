@@ -76,8 +76,7 @@ cd ..
 
 # Clone this repo for streamlining the benchmark
 git clone https://github.com/lambdal/deeplearning-benchmark.git && \
-cd deeplearning-benchmark/pytorch && \
-git checkout 22.10-py3
+cd deeplearning-benchmark/pytorch
 ```
 
 #### Step 4: Prepare data
