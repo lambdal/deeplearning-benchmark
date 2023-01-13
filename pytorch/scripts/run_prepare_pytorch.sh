@@ -6,7 +6,7 @@
 
 pushd .
 
-cd examples/ssd
+cd benchmark/Detection/SSD
 
 ./download_dataset.sh /data/object_detection
 chmod -R a+rwx /data/object_detection
@@ -19,7 +19,8 @@ popd
 
 pushd .
 
-cd examples/gnmt
+cd benchmark/Translation/GNMT
+pip install -r requirements.txt
 mkdir -p /data/gnmt/wmt16_de_en
 bash scripts/wmt16_en_de.sh /data/gnmt/wmt16_de_en
 chmod -R a+rwx /data/gnmt/
@@ -32,7 +33,7 @@ popd
 
 pushd .
 
-cd examples/ncf
+cd benchmark/Recommendation/NCF
 mkdir -p /data/ncf
 ./prepare_dataset.sh ml-20m /data/ncf
 chmod -R a+rwx /data/ncf
@@ -46,7 +47,7 @@ popd
 pushd .
 mkdir -p /data/transformer-xl
 
-cd examples/transformer-xl
+cd benchmark/LanguageModeling/Transformer-XL
 bash getdata.sh
 
 chmod -R a+rwx /data/transformer-xl
@@ -58,7 +59,7 @@ popd
 pushd .
 
 mkdir -p /data/tacotron2/LJSpeech-1.1
-cd examples/tacotron2/scripts
+cd benchmark/SpeechSynthesis/Tacotron2/scripts
 ./prepare_dataset.sh
 chmod -R a+rwx /data/tacotron2/LJSpeech-1.1
 
@@ -70,7 +71,7 @@ popd
 ## ------------------------
 pushd .
 mkdir -p /data/squad
-cd examples/bert/data/squad
+cd benchmark/LanguageModeling/BERT/data/squad
 ./squad_download.sh /data/squad
 popd
 chmod -R a+rwx /data/squad

@@ -8,4 +8,4 @@ declare -A BATCH_SIZE_FIX=(
     [PyTorch_bert_base_squad_FP32]=22
 )
 
-source config_v1/fix_bs.sh
+source config_v1/fix.sh
