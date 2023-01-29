@@ -19,7 +19,14 @@ All the benchmarks here are for single-node (single GPU or multiple GPUs). They 
 
 ### Quick Start
 
-You can follow the following steps to benchmark a Ubuntu machine with NVIDIA GPU(s) and up-to-date NVIDIA driver (you can use [Lambda stack](https://lambdalabs.com/lambda-stack-deep-learning-software) to install the lastest NVIDIA driver).
+You can follow the following steps to benchmark a Ubuntu machine with NVIDIA GPU(s), docker, up-to-date NVIDIA driver and container runtime libraries. You can use [Lambda stack](https://lambdalabs.com/lambda-stack-deep-learning-software) to install the dependencies on a fresh Ubuntu machine.
+
+```
+sudo usermod -aG docker $USER
+newgrp docker
+wget https://raw.githubusercontent.com/lambdal/deeplearning-benchmark/new-guide/pytorch/setup.sh
+./setup.sh
+```
 
 
 ### Explanations

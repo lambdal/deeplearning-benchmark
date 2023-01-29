@@ -2,14 +2,6 @@
 NAME_NGC=pytorch:22.10-py3
 
 echo "---------------------------------------------------"
-echo "Set Up Docker: "
-echo "---------------------------------------------------"
-sudo apt-get install docker.io nvidia-container-toolkit
-sudo groupadd docker
-sudo usermod -aG docker $USER
-newgrp docker
-
-echo "---------------------------------------------------"
 echo "Pull Docker Image: "
 echo "---------------------------------------------------"
 docker pull nvcr.io/nvidia/${NAME_NGC}
