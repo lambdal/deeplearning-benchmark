@@ -17,6 +17,12 @@ All the benchmarks here are for single-node (single GPU or multiple GPUs). They 
 (Update 2022.09) NVIDIA has stopped packaging [Deep Learning Examples](https://github.com/NVIDIA/DeepLearningExamples/tree/master/PyTorch) into their PyTorch NGC images since `pytorch:21.08-py3`. This repo is an effort towards maintaining the support of those examples in more recent PyTorch NGC.
 
 
+### Quick Start
+
+You can follow the following steps to benchmark a Ubuntu machine with NVIDIA GPU(s) and up-to-date NVIDIA driver (you can use [Lambda stack](https://lambdalabs.com/lambda-stack-deep-learning-software) to install the lastest NVIDIA driver).
+
+
+### Explanations
 #### Step 0: Prerequisite
 
 A Ubuntu machine with at least one GPU and up-to-date NVIDIA driver. Access to the internet.
@@ -26,34 +32,26 @@ If you start from a baremetal Ubuntu machine without NVIDIA driver. Install [Lam
 For workstation
 
 ```
-LAMBDA_REPO=$(mktemp) && \
-wget -O${LAMBDA_REPO} https://lambdalabs.com/static/misc/lambda-stack-repo.deb && \
-sudo dpkg -i ${LAMBDA_REPO} && rm -f ${LAMBDA_REPO} && \
-sudo apt-get update && sudo apt-get install -y lambda-stack-cuda
+wget -nv -O- https://lambdalabs.com/install-lambda-stack.sh | sh -
 sudo reboot
 ```
 
 For server
 ```
-LAMBDA_REPO=$(mktemp) && \
-wget -O${LAMBDA_REPO} https://lambdalabs.com/static/misc/lambda-stack-repo.deb && \
-sudo dpkg -i ${LAMBDA_REPO} && rm -f ${LAMBDA_REPO} && \
-sudo apt-get update && sudo apt-get install -y lambda-stack-cuda
+wget -nv -O- https://lambdalabs.com/install-lambda-stack.sh | I_AGREE_TO_THE_CUDNN_LICENSE=1 sh -
 sudo reboot
 ```
 
 
 #### Step 1: Install Docker
 
-Lambda stack ship nvidia-container-toolkit out of the box. However you should also enable using docker without `sudo` (reboot is required):
+The following steps install docker and NVIDIA's runtime libraries that enables GPUs for container. It also enables using docker without `sudo` (reboot is required):
 
 ```
+sudo apt-get install docker.io nvidia-container-toolkit
 sudo groupadd docker
 sudo usermod -aG docker $USER
-sudo reboot
-
-# After reboot, run a quick test to have nvidia-smi listing all the GPUs
-docker run --gpus all nvidia/cuda:10.0-base nvidia-smi
+newgrp docker
 ```
 
 
