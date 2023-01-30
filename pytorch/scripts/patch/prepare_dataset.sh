@@ -14,5 +14,10 @@ if [ ! -f "${DATADIR}/${BZ2ARCHIVE}" ]; then
     wget "$ENDPOINT"
 fi
 
+start=$(date +%s)
 tar jxvf "${DATADIR}/${BZ2ARCHIVE}" --no-same-owner
+end=$(date +%s)
+echo "-----------------------------------------------------"
+echo "Elapsed Time: $(($end-$start)) seconds"
+echo "-----------------------------------------------------"
 

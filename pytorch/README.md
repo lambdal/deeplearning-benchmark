@@ -6,7 +6,7 @@ This project provides a wrapper to run PyTorch benchmarks using NVidia's [Deep L
 Reference numbers can be found on this [GPU benchmark](https://lambdalabs.com/gpu-benchmarks) website.
 
 
-### Instructions
+## Overview
 
 
 The benchmarks are containerized. You need to install NVIDIA driver, docker, and nvidia-container-toolkit, and pull the [PyTroch NGC](https://catalog.ngc.nvidia.com/orgs/nvidia/containers/pytorch) Docker image. 
@@ -17,23 +17,30 @@ All the benchmarks here are for single-node (single GPU or multiple GPUs). They 
 (Update 2022.09) NVIDIA has stopped packaging [Deep Learning Examples](https://github.com/NVIDIA/DeepLearningExamples/tree/master/PyTorch) into their PyTorch NGC images since `pytorch:21.08-py3`. This repo is an effort towards maintaining the support of those examples in more recent PyTorch NGC.
 
 
-### Quick Start
+## Quick Start
 
 You can follow the following steps to benchmark a Ubuntu machine with NVIDIA GPU(s), docker, up-to-date NVIDIA driver and container runtime libraries. You can use [Lambda stack](https://lambdalabs.com/lambda-stack-deep-learning-software) to install the dependencies on a fresh Ubuntu machine.
 
-Prepare data
+### Prepare data
 
 ```
 NAME_NGC=pytorch:22.10-py3
-
+NAME_DATASET=all # Set to all to prepare all datasets. You can also select a particular dataset from the dataset list
 sudo usermod -aG docker $USER
 newgrp docker
 wget https://raw.githubusercontent.com/lambdal/deeplearning-benchmark/new-guide/pytorch/setup.sh
 chmod +x setup.sh
 ./setup.sh $NAME_NGC
+
+docker run --gpus all --rm --shm-size=64g \
+-v ~/DeepLearningExamples/PyTorch:/workspace/benchmark \
+-v ~/data:/data \
+-v $(pwd)"/scripts":/scripts \
+nvcr.io/nvidia/${NAME_NGC} \
+/bin/bash -c "cp -r /scripts/* /workspace;  ./run_prepare.sh $NAME_DATASET
 ```
 
-Run benchmark
+### Run benchmark
 ```
 NAME_NGC=pytorch:22.10-py3
 NAME_CONFIG=8xA100_40GB_SXM4_v1 # Select the configuration from deeplearning-benchmark/scripts/config_v1
@@ -51,7 +58,17 @@ docker run \
 	/bin/bash -c "cp -r /scripts/* /workspace; ./run_benchmark.sh $NAME_CONFIG $NAME_MODEL $TIME_OUT"
 ```
 
-Full config list
+### List of datasets
+```
+object_detection
+gnmt
+ncf
+transformer
+tacotron2
+bert
+```
+
+### List of configurations
 ```
 3090_v1
 4090_v1
@@ -87,7 +104,7 @@ LambdaCloud_4xV100_16GB_v1
 LambdaCloud_8xV100_16GB_v1
 ```
 
-Full model list
+### List of models
 ```
 ssd amp
 ssd_fp32
@@ -111,8 +128,8 @@ waveglow_fp16
 waveglow_fp32
 ```
 
-### Explanations
-#### Step 0: Prerequisite
+## Explanations
+### Step 0: Prerequisite
 
 This benchmark requires an Ubuntu machine with at least one GPU and up-to-date NVIDIA driver. Access to the internet.
 
@@ -131,7 +148,7 @@ wget -nv -O- https://lambdalabs.com/install-lambda-stack.sh | I_AGREE_TO_THE_CUD
 sudo reboot
 ```
 
-#### Step 1: Install Docker
+### Step 1: Install Docker
 
 The following steps install docker and NVIDIA's runtime libraries that enables GPUs for container. It also enables using docker without `sudo` (reboot is required):
 
@@ -143,7 +160,7 @@ newgrp docker
 ```
 
 
-#### Step 2: Pull images
+### Step 2: Pull images
 
 The latest tested PyTorch NGC is `pytorch:22.10-py3`.
 ```
@@ -151,7 +168,7 @@ export NAME_NGC=pytorch:22.10-py3
 docker pull nvcr.io/nvidia/${NAME_NGC}
 ```
 
-#### Step 3: Clone Repo
+### Step 3: Clone Repo
 
 ```
 # Lambda's fork of DeepLearningExamples (a few patches to make sure they work with the recent NGC)
@@ -165,7 +182,7 @@ git clone https://github.com/lambdal/deeplearning-benchmark.git && \
 cd deeplearning-benchmark/pytorch
 ```
 
-#### Step 4: Prepare data
+### Step 4: Prepare data
 
 ```
 docker run --gpus all --rm --shm-size=64g \
@@ -178,7 +195,7 @@ nvcr.io/nvidia/${NAME_NGC} \
 
 This step takes about 25 mins.
 
-#### Step 5: Prepare configuration files
+### Step 5: Prepare configuration files
 
 Benchmark tasks are defined in a configuration file inside of `deeplearning-benchmark/pytorch/scripts/config_v1`. In short words, you need to 
 
@@ -244,7 +261,7 @@ declare -A BERT_GPU_FIX=(
 **Your customized config file should always reference a template that uses the SAME number of GPUs and the SAME GPU memory**. For example, referencing `config_pytorch_48GB.sh` in `config_pytorch_QuadroRTX8000_v1.sh` and `config_pytorch_A6000_v1.sh`, and referencing `config_pytorch_2x24GB.sh` in `config_pytorch_2x3090_v1.sh`.
 
 
-#### Step 6: Run Benchmark
+### Step 6: Run Benchmark
 
 Use `docker run` to execute the `run_benchmark.sh` script with the correct number of GPUs, paths for mounting the data, code and results, the name of the config file, and the task to run. Last but not the least, set a timeout limit to avoid being stuck at a task for too long.
 
@@ -312,7 +329,7 @@ nvcr.io/nvidia/${NAME_NGC} \
 /bin/bash -c "cp -r /scripts/* /workspace; ./run_benchmark.sh QuadroRTX8000_v1 resnet50_fp32 1500"
 ```
 
-#### Step 7: Gather Results
+### Step 7: Gather Results
 
 We provide some simply script to gather the results (everything in the results folder) to [CSV](https://github.com/lambdal/deeplearning-benchmark/blob/master/pytorch-train-throughput-fp32.csv) files for both training throughput and batch size.
 
@@ -339,9 +356,9 @@ To gather your own benchmarks, you need to add your system to the `list_system`.
 See the [script](https://github.com/lambdal/deeplearning-benchmark/blob/master/pytorch/scripts/compile_results_pytorch.py) for details. 
 
 
-### Notes
+## Notes
 
-#### Kill the benchmark 
+### Kill the benchmark 
 
 ```
 ubuntu@ubuntu-desktop:~$ docker container ls
@@ -356,7 +373,7 @@ root                224082              224056              0                   
 ubuntu@ubuntu-desktop:~$ sudo kill -9 224082
 ```
 
-#### Batch size 
+### Batch size 
 Here are some pitfalls about creating benchmarks (more precisely, setting the input arguments for tasks in the config files).
 
 Different models have different way to set batch size -- some of them are set for per-gpu, others are global. For the case of global, one should scale batch size by `num_gpu` for multiple GPU training.
@@ -376,7 +393,7 @@ Different models have different way to set batch size -- some of them are set fo
 | Bert | Per GPU. |
 
 
-#### Real ImageNet data for resnet50
+### Real ImageNet data for resnet50
 You can use synthetic data or real data to benchmark ResNet. To run benchmark with synthetic data, simply add `--data-backend syntetic` to the [config file](https://github.com/lambdal/deeplearning-benchmark/blob/master/pytorch/scripts/config/config_pytorch_2xA100_p4.sh#L38) (right, there is a typo in NVidia's code).
 
 If you want to benchmark ResNet with real data (we don't often do this unless want to stress test system I/O), here are the steps assuming `ILSVRC2012_img_train.tar` and `ILSVRC2012_img_val.tar` have already been downloaded to your home directory.
