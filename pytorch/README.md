@@ -110,7 +110,7 @@ LambdaCloud_8xV100_16GB_v1
 
 ### List of models
 ```
-ssd amp
+ssd_amp
 ssd_fp32
 bert_base_squad_fp16
 bert_base_squad_fp32
