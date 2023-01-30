@@ -1,5 +1,5 @@
 #!/bin/bash
-NAME_NGC=pytorch:22.10-py3
+NAME_NGC=${1:-"pytorch:22.10-py3"}
 
 echo "---------------------------------------------------"
 echo "Pull Docker Image: "

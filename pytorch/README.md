@@ -21,18 +21,100 @@ All the benchmarks here are for single-node (single GPU or multiple GPUs). They 
 
 You can follow the following steps to benchmark a Ubuntu machine with NVIDIA GPU(s), docker, up-to-date NVIDIA driver and container runtime libraries. You can use [Lambda stack](https://lambdalabs.com/lambda-stack-deep-learning-software) to install the dependencies on a fresh Ubuntu machine.
 
+Prepare data
+
 ```
+NAME_NGC=pytorch:22.10-py3
+
 sudo usermod -aG docker $USER
 newgrp docker
 wget https://raw.githubusercontent.com/lambdal/deeplearning-benchmark/new-guide/pytorch/setup.sh
-./setup.sh
+chmod +x setup.sh
+./setup.sh $NAME_NGC
 ```
 
+Run benchmark
+```
+NAME_NGC=pytorch:22.10-py3
+NAME_CONFIG=8xA100_40GB_SXM4_v1 # Select the configuration from deeplearning-benchmark/scripts/config_v1
+NAME_MODEL=all # Set to all for benchmark all the models. You can also select a particular model from the model list
+TIME_OUT=3000
+
+docker run \
+	--rm --shm-size=1024g \
+	--gpus all \
+	-v ~/DeepLearningExamples/PyTorch:/workspace/benchmark \
+	-v ~/data:/data \
+	-v $(pwd)"/scripts":/scripts \
+	-v $(pwd)"/results":/results \
+	nvcr.io/nvidia/${NAME_NGC} \
+	/bin/bash -c "cp -r /scripts/* /workspace; ./run_benchmark.sh $NAME_CONFIG $NAME_MODEL $TIME_OUT"
+```
+
+Full config list
+```
+3090_v1
+4090_v1
+A100_40GB_PCIe_v1
+A100_40GB_SXM4_v1
+A100_80GB_PCIe_v1
+A100_80GB_SXM4_v1
+A6000_v1
+AdaA6000_v1
+H100_80GB_PCIe5_v1
+LambdaCloud_A100_40GB_PCIe_v1
+LambdaCloud_V100_16GB_v1
+QuadroRTX8000_v1
+2x3090_v1
+2x4090_v1
+2xA100_40GB_SXM4_v1
+2xA100_80GB_PCIe_v1
+2xA100_80GB_SXM4_v1
+2xA6000_v1
+2xAdaA6000_v1
+2xH100_80GB_PCIe_v1
+2xH100_80GB_PCIe5_v1
+LambdaCloud_2xV100_16GB_v1
+4xA100_40GB_SXM4_v1
+4xA100_80GB_SXM4_v1
+4xH100_80GB_PCIe_v1
+4xH100_80GB_PCIe5_v1
+LambdaCloud_4xV100_16GB_v1
+8xA100_40GB_SXM4_v1
+8xA100_80GB_SXM4_v1
+8xH100_80GB_PCIe_v1
+8xH100_80GB_PCIe5_v1
+LambdaCloud_8xV100_16GB_v1
+```
+
+Full model list
+```
+ssd amp
+ssd_fp32
+bert_base_squad_fp16
+bert_base_squad_fp32
+bert_large_squad_fp16
+bert_large_squad_fp32
+gnmt_fp16
+gnmt_fp32
+ncf_fp16
+ncf_fp32
+resnet50_amp
+resnet50_fp32
+tacotron2_fp16
+tacotron2_fp32
+transformerxlbase_fp16
+transformerxlbase_fp32
+transformerxllarge_fp16
+transformerxllarge_fp32
+waveglow_fp16
+waveglow_fp32
+```
 
 ### Explanations
 #### Step 0: Prerequisite
 
-A Ubuntu machine with at least one GPU and up-to-date NVIDIA driver. Access to the internet.
+This benchmark requires an Ubuntu machine with at least one GPU and up-to-date NVIDIA driver. Access to the internet.
 
 If you start from a baremetal Ubuntu machine without NVIDIA driver. Install [Lambda stack](https://lambdalabs.com/lambda-stack-deep-learning-software). 
 
@@ -48,7 +130,6 @@ For server
 wget -nv -O- https://lambdalabs.com/install-lambda-stack.sh | I_AGREE_TO_THE_CUDNN_LICENSE=1 sh -
 sudo reboot
 ```
-
 
 #### Step 1: Install Docker
 
