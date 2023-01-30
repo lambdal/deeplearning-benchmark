@@ -1,7 +1,5 @@
 #!/bin/bash
 NAME_NGC=${1:-"pytorch:22.10-py3"}
-NAME_DATASET=${2:-"all"}
-
 
 echo "---------------------------------------------------"
 echo "Pull Docker Image: "
