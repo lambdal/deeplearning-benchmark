@@ -37,7 +37,7 @@ docker run --gpus all --rm --shm-size=64g \
 -v ~/data:/data \
 -v $(pwd)"/scripts":/scripts \
 nvcr.io/nvidia/${NAME_NGC} \
-/bin/bash -c "cp -r /scripts/* /workspace;  ./run_prepare.sh $NAME_DATASET
+/bin/bash -c "cp -r /scripts/* /workspace;  ./run_prepare.sh $NAME_DATASET"
 ```
 
 ### Run benchmark
