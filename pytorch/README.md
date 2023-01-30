@@ -24,8 +24,8 @@ You can follow the following steps to benchmark a Ubuntu machine with NVIDIA GPU
 ### Prepare data
 
 ```
-NAME_NGC=pytorch:22.10-py3
-NAME_DATASET=all # Set to all to prepare all datasets. You can also select a particular dataset from the dataset list
+export NAME_NGC=pytorch:22.10-py3
+export NAME_DATASET=all # Set to all to prepare all datasets. You can also select a particular dataset from the dataset list
 sudo usermod -aG docker $USER
 newgrp docker
 wget https://raw.githubusercontent.com/lambdal/deeplearning-benchmark/new-guide/pytorch/setup.sh
@@ -42,10 +42,10 @@ nvcr.io/nvidia/${NAME_NGC} \
 
 ### Run benchmark
 ```
-NAME_NGC=pytorch:22.10-py3
-NAME_CONFIG=8xA100_40GB_SXM4_v1 # Select the configuration from deeplearning-benchmark/scripts/config_v1
-NAME_MODEL=all # Set to all for benchmark all the models. You can also select a particular model from the model list
-TIME_OUT=3000
+export NAME_NGC=pytorch:22.10-py3
+export NAME_CONFIG=8xA100_40GB_SXM4_v1 # Select the configuration from deeplearning-benchmark/scripts/config_v1
+export NAME_MODEL=all # Set to all for benchmark all the models. You can also select a particular model from the model list
+export TIME_OUT=3000
 
 docker run \
 	--rm --shm-size=1024g \
