@@ -23,7 +23,8 @@ export NAME_NGC=pytorch:22.10-py3
 export NAME_DATASET=all # Set to all to prepare all datasets. You can also select a particular dataset from the dataset list
 
 sudo usermod -aG docker $USER && \
-newgrp docker && \
+newgrp docker
+
 wget https://raw.githubusercontent.com/lambdal/deeplearning-benchmark/master/pytorch/setup.sh && \
 chmod +x setup.sh && \
 ./setup.sh $NAME_NGC
