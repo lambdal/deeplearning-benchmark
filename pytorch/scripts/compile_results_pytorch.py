@@ -20,6 +20,7 @@ list_system_single = {
     'QuadroRTX8000_v1': ([1, 1], 'Quadro RTX 8000', 260, 6037.5),
     'LambdaCloud_V100_16GB_v1': ([1, 1], 'LambdaCloud V100 16GB', 300, 9937.5),
     '3090_v1': ([1, 1], 'RTX 3090', 350, 2750),
+    'LambdaCloud_A10_v1': ([1, 1], 'Lambda Cloud A10', 150, 3125),
     'LambdaCloud_A100_40GB_PCIe_v1': ([1, 1], 'Lambda Cloud A100 40GB PCIe', 250, 10437.50),
     # 'A100_40GB_PCIe_v1': ([1, 1], 'A100 40GB PCIe', 250, 12785),
     # 'A100_40GB_SXM4_v1': ([1, 1], 'A100 40GB SXM4', 250, 14571),

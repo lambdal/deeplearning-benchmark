@@ -21,13 +21,14 @@ You can follow the following steps to benchmark a Ubuntu machine with NVIDIA GPU
 ```
 export NAME_NGC=pytorch:22.10-py3
 export NAME_DATASET=all # Set to all to prepare all datasets. You can also select a particular dataset from the dataset list
-sudo usermod -aG docker $USER
-newgrp docker
-wget https://raw.githubusercontent.com/lambdal/deeplearning-benchmark/master/pytorch/setup.sh
-chmod +x setup.sh
-./setup.sh $NAME_NGC
-cd deeplearning-benchmark/pytorch
 
+sudo usermod -aG docker $USER && \
+newgrp docker && \
+wget https://raw.githubusercontent.com/lambdal/deeplearning-benchmark/master/pytorch/setup.sh && \
+chmod +x setup.sh && \
+./setup.sh $NAME_NGC
+
+cd deeplearning-benchmark/pytorch && \
 docker run --gpus all --rm --shm-size=64g \
 -v ~/DeepLearningExamples/PyTorch:/workspace/benchmark \
 -v ~/data:/data \
@@ -110,7 +111,7 @@ LambdaCloud_8xV100_16GB_v1
 ### List of models
 
 ```
-ssd amp
+ssd_amp
 ssd_fp32
 bert_base_squad_fp16
 bert_base_squad_fp32
