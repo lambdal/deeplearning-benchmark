@@ -29,8 +29,9 @@ list_system_single = {
     'AdaA6000_v1': ([1, 1], 'Ada A6000', 300, 7680),
     'A6000_v1': ([1, 1], 'RTX A6000', 300, 4437.50),
     '4090_v1': ([1, 1], 'RTX 4090', 450, 2125),
-    # 'H100_80GB_PCIe_v1': ([1, 1], 'H100 80GB PCIe Gen4', 310, 35714),
-    'H100_80GB_PCIe5_v1': ([1, 1], 'H100 80GB PCIe Gen5', 310, 30918),
+    # 'H100_80GB_PCIe_v1': ([1, 1], 'H100 80GB PCIe Gen4', 350, 35714),
+    'H100_80GB_PCIe5_v1': ([1, 1], 'H100 80GB PCIe Gen5', 350, 30918),
+    'H100_80GB_SXM5_v1': ([1, 1], 'H100 80GB SXM5', 700, 36718.75),
     }
 
 list_system_multiple = {
@@ -42,19 +43,22 @@ list_system_multiple = {
     # '2xA100_40GB_SXM4_v1': ([1, 2], '2xA100 40GB SXM4', 250, 14571),
     '2xA100_80GB_PCIe_v1': ([1, 2], '2x A100 80GB PCIe', 300, 13287.50),
     '2xA100_80GB_SXM4_v1': ([1, 2], '2x A100 80GB SXM4', 400, 16250),
-    #'2xH100_80GB_PCIe_v1': ([1, 2], '2x H100 80GB PCIe Gen4', 310, 35714),
-    '2xH100_80GB_PCIe5_v1': ([1, 2], '2x H100 80GB PCIe Gen5', 310, 30918),
+    #'2xH100_80GB_PCIe_v1': ([1, 2], '2x H100 80GB PCIe Gen4', 350, 35714),
+    '2xH100_80GB_PCIe5_v1': ([1, 2], '2x H100 80GB PCIe Gen5', 350, 30918),
+    '2xH100_80GB_SXM5_v1': ([1, 2], '2x H100 80GB SXM5', 700, 36718.75),
     'LambdaCloud_4xV100_16GB_v1': ([1, 4], 'LambdaCloud 4xV100 16GB', 300, 9937.5),
     # '4xA100_40GB_SXM4_v1': ([1, 4], '4xA100 40GB SXM4', 250, 14571),
     #'4xA6000_v1': ([1, 4], '4x RTX A6000', 300, 5785),
     '4xA100_80GB_SXM4_v1': ([1, 4], '4x A100 80GB SXM4', 400, 16250),
-    # '4xH100_80GB_PCIe_v1': ([1, 4], '4x H100 80GB PCIe Gen4', 310, 35714),
-    '4xH100_80GB_PCIe5_v1': ([1, 4], '4x H100 80GB PCIe Gen5', 310, 30918),
+    # '4xH100_80GB_PCIe_v1': ([1, 4], '4x H100 80GB PCIe Gen4', 350, 35714),
+    '4xH100_80GB_PCIe5_v1': ([1, 4], '4x H100 80GB PCIe Gen5', 350, 30918),
+    '4xH100_80GB_SXM5_v1': ([1, 4], '4x H100 80GB SXM5', 700, 36718.75),
     'LambdaCloud_8xV100_16GB_v1': ([1, 8], 'LambdaCloud 8xV100 16GB', 300, 9937.5),
     # '8xA100_40GB_SXM4_v1': ([1, 8], '8xA100 40GB SXM4', 250, 14571),
     '8xA100_80GB_SXM4_v1': ([1, 8], '8x A100 80GB SXM4', 400, 16250),
-    # '8xH100_80GB_PCIe_v1': ([1, 8], '8x H100 80GB PCIe Gen4', 310, 35714),
-    '8xH100_80GB_PCIe5_v1': ([1, 8], '8x H100 80GB PCIe Gen5', 310, 30918),
+    # '8xH100_80GB_PCIe_v1': ([1, 8], '8x H100 80GB PCIe Gen4', 350, 35714),
+    '8xH100_80GB_PCIe5_v1': ([1, 8], '8x H100 80GB PCIe Gen5', 350, 30918),
+    '8xH100_80GB_SXM5_v1': ([1, 8], '8x H100 80GB SXM5', 700, 36718.75),
 }
 list_test_fp32 = [
         # version 0: nvcr.io/nvidia/pytorch:20.01-py3 and 20.10-py3
