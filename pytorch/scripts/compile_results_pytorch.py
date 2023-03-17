@@ -20,10 +20,10 @@ list_system_single = {
     "QuadroRTX8000_v1": ([1, 1], "Quadro RTX 8000", 260, 6037.5),
     "LambdaCloud_V100_16GB_v1": ([1, 1], "LambdaCloud V100 16GB", 300, 9937.5),
     "3090_v1": ([1, 1], "RTX 3090", 350, 2750),
-    "LambdaCloud_A10_v1": ([1, 1], "Lambda Cloud A10", 150, 3125),
+    "LambdaCloud_A10_v1": ([1, 1], "LambdaCloud A10", 150, 3125),
     "LambdaCloud_A100_40GB_PCIe_v1": (
         [1, 1],
-        "Lambda Cloud A100 40GB PCIe",
+        "LambdaCloud A100 40GB PCIe",
         250,
         10437.50,
     ),
@@ -36,6 +36,7 @@ list_system_single = {
     "4090_v1": ([1, 1], "RTX 4090", 450, 2125),
     # 'H100_80GB_PCIe_v1': ([1, 1], 'H100 80GB PCIe Gen4', 350, 35714),
     "H100_80GB_PCIe5_v1": ([1, 1], "H100 80GB PCIe Gen5", 350, 30918),
+    "LambdaCloud_H100_80GB_PCIe5_v1": ([1, 1], "LambdaCloud H100 80GB PCIe Gen5", 350, 30918),
     "H100_80GB_SXM5_v1": ([1, 1], "H100 80GB SXM5", 700, 36718.75),
 }
 
