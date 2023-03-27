@@ -42,7 +42,7 @@ nvcr.io/nvidia/${NAME_NGC} \
 
 ```
 export NAME_NGC=pytorch:22.10-py3
-export NAME_CONFIG=8xA100_40GB_SXM4_v1 # Select the configuration from deeplearning-benchmark/scripts/config_v1
+export NAME_CONFIG=8xA100_40GB_SXM4_v1 # Select the configuration from deeplearning-benchmark/pytorch/scripts/config_v1
 export NAME_MODEL=all # Set to all for benchmark all the models. You can also select a particular model from the model list
 export TIME_OUT=3000
 
