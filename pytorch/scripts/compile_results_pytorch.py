@@ -67,6 +67,7 @@ list_system_multiple = {
     # '8xH100_80GB_PCIe_v1': ([1, 8], '8x H100 80GB PCIe Gen4', 350, 35714),
     "8xH100_80GB_PCIe5_v1": ([1, 8], "8x H100 80GB PCIe Gen5", 350, 30918),
     "8xH100_80GB_SXM5_v1": ([1, 8], "8x H100 80GB SXM5", 700, 36718.75),
+    "LambdaCloud_8xH100_80GB_SXM5_v1": ([1, 8], "LambdaCloud 8x H100 80GB SXM5", 700, 36718.75),
 }
 list_test_fp32 = [
     # version 0: nvcr.io/nvidia/pytorch:20.01-py3 and 20.10-py3
