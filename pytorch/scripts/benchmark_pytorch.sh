@@ -139,7 +139,7 @@ benchmark_pytorch_ncf() {
     echo "************************************************************"
 
     # export NCCL_P2P_DISABLE=1
-    torchrun --nproc_per_node=${NUM_GPU} --use_env ncf.py ${command_para} |& tee ${result}
+    torchrun --nproc_per_node=${NUM_GPU} ncf.py ${command_para} |& tee ${result}
 
     if ! grep -E "RuntimeError|OutOfMemoryError" "$result"; then
         echo "DONE!" >> ${result}
