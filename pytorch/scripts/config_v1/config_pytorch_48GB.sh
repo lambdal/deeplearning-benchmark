@@ -11,6 +11,7 @@ PyTorch_SSD_FP32_PARAMS=(
              --benchmark-warmup       "10"
              --benchmark-iterations   "40"
 	           --learning-rate          "0"
+             --num-workers            "64"
            )
 
 PyTorch_SSD_AMP_PARAMS=(
@@ -22,6 +23,7 @@ PyTorch_SSD_AMP_PARAMS=(
              --benchmark-iterations   "40"
              --amp
 	           --learning-rate          "0"
+             --num-workers            "64"
            )
 
 PyTorch_resnet50_FP32_PARAMS=(
@@ -36,6 +38,7 @@ PyTorch_resnet50_FP32_PARAMS=(
              --print-freq             "1"
              --training-only
 	           --data-backend "synthetic"
+             --workers                "64"
            )
 
 PyTorch_resnet50_AMP_PARAMS=(
@@ -52,6 +55,7 @@ PyTorch_resnet50_AMP_PARAMS=(
              --print-freq             "1"
              --training-only   
 	           --data-backend "synthetic"
+             --workers                "64"
            )
 
 PyTorch_maskrcnn_FP32_PARAMS=(
@@ -87,6 +91,7 @@ PyTorch_gnmt_FP32_PARAMS=(
             --epochs                  "1"
             --seed                    "2"                    
             --no-eval
+	          --train-loader-workers    "64"
            )
 
 PyTorch_gnmt_FP16_PARAMS=(
@@ -99,7 +104,8 @@ PyTorch_gnmt_FP16_PARAMS=(
             --math                    "fp16"
             --epochs                  "1"
             --seed                    "2"
-            --no-eval                  
+            --no-eval
+	          --train-loader-workers    "64"                  
            )
 
 PyTorch_ncf_FP32_PARAMS=(
