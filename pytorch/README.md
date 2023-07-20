@@ -14,6 +14,29 @@ All the benchmarks here are for single-node (single GPU or multiple GPUs). They 
 
 ## Quick Start
 
+```
+# Remove sudo for docker
+sudo usermod -aG docker ${USER} && \
+newgrp docker
+
+# Fetch benchmark tool for SSD_AMP
+wget https://raw.githubusercontent.com/lambdal/deeplearning-benchmark/master/pytorch/Makefile
+
+# Set the path to store code and data
+export PATH_STORAGE=/home/ubuntu
+
+# Clone repos and pull docker image
+make install PATH_STORAGE=${PATH_STORAGE}
+
+# Pepare data
+make create_data PATH_STORAGE=${PATH_STORAGE}
+
+# Run benchmark
+make benchmark PATH_STORAGE=${PATH_STORAGE}
+```
+
+## Usage
+
 You can follow the following steps to benchmark a Ubuntu machine with NVIDIA GPU(s), docker, up-to-date NVIDIA driver and container runtime libraries. You can use [Lambda stack](https://lambdalabs.com/lambda-stack-deep-learning-software) to install the dependencies on a fresh Ubuntu machine.
 
 ### Prepare data
