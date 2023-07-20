@@ -11,7 +11,7 @@ PATH_OUTPUT=results/StorageTest_24GB_v1/PyTorch_SSD_AMP
 install:
 	docker pull nvcr.io/nvidia/${NAME_NGC} && \
 	cd ${PATH_STORAGE} && \
-	wget https://raw.githubusercontent.com/lambdal/deeplearning-benchmark/storage/pytorch/setup.sh && \
+	wget https://raw.githubusercontent.com/lambdal/deeplearning-benchmark/master/pytorch/setup.sh && \
 	chmod +x setup.sh && \
 	./setup.sh $NAME_NGC
 
