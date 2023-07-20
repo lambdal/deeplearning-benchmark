@@ -15,4 +15,5 @@ cd DeepLearningExamples && \
 git checkout lambda/benchmark && \
 cd ..
 git clone https://github.com/lambdal/deeplearning-benchmark.git && \
+cd deeplearning-benchmark && \
 git checkout storage
