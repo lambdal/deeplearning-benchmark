@@ -18,7 +18,7 @@ install:
 
 create_data:
 	cd ${PATH_STORAGE}/deeplearning-benchmark/pytorch && \
-	docker run --gpus all --rm -t --shm-size=128g \
+	docker run -u $USER --gpus all --rm -t --shm-size=128g \
 		-v ${PATH_STORAGE}/DeepLearningExamples/PyTorch:/workspace/benchmark \
 		-v ${PATH_STORAGE}/data:/data \
 		-v ${PATH_STORAGE}/deeplearning-benchmark/pytorch/scripts:/scripts \
@@ -29,6 +29,7 @@ create_data:
 benchmark:
 	cd ${PATH_STORAGE}/deeplearning-benchmark/pytorch && \
 	docker run \
+		-u $USER \
 		--rm --shm-size=128g \
 		--gpus all \
 		-v ${PATH_STORAGE}/DeepLearningExamples/PyTorch:/workspace/benchmark \
