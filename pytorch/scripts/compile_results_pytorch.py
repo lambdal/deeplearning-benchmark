@@ -38,7 +38,7 @@ list_system_single = {
     "H100_80GB_PCIe5_v1": ([1, 1], "H100 80GB PCIe Gen5", 350, 30918),
     "LambdaCloud_H100_80GB_PCIe5_v1": ([1, 1], "LambdaCloud H100 80GB PCIe Gen5", 350, 30918),
     "H100_80GB_SXM5_v1": ([1, 1], "H100 80GB SXM5", 700, 36718.75),
-    "Dell_H100_80GB_SXM5_v1": ([1, 1], "H100 80GB SXM5", 700, 36718.75),
+    "Dell_H100_80GB_SXM5_v1": ([1, 1], "Dell H100 80GB SXM5", 700, 36718.75),
 }
 
 list_system_multiple = {
