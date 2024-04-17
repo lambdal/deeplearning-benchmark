@@ -39,6 +39,7 @@ list_system_single = {
     "LambdaCloud_H100_80GB_PCIe5_v1": ([1, 1], "LambdaCloud H100 80GB PCIe Gen5", 350, 30918),
     "H100_80GB_SXM5_v1": ([1, 1], "H100 80GB SXM5", 700, 36718.75),
     "Dell_H100_80GB_SXM5_v1": ([1, 1], "Dell H100 80GB SXM5", 700, 36718.75),
+    "SMC_H100_80GB_SXM5_v1": ([1, 1], "SMC H100 80GB SXM5", 700, 36718.75),
 }
 
 list_system_multiple = {
@@ -54,6 +55,7 @@ list_system_multiple = {
     "2xH100_80GB_PCIe5_v1": ([1, 2], "2x H100 80GB PCIe Gen5", 350, 30918),
     "2xH100_80GB_SXM5_v1": ([1, 2], "2x H100 80GB SXM5", 700, 36718.75),
     "Dell_2xH100_80GB_SXM5_v1": ([1, 2], "Dell 2x H100 80GB SXM5", 700, 36718.75),
+    "SMC_2xH100_80GB_SXM5_v1": ([1, 2], "SMC 2x H100 80GB SXM5", 700, 36718.75),
     "LambdaCloud_4xV100_16GB_v1": ([1, 4], "LambdaCloud 4xV100 16GB", 300, 9937.5),
     # '4xA100_40GB_SXM4_v1': ([1, 4], '4xA100 40GB SXM4', 250, 14571),
     #'4xA6000_v1': ([1, 4], '4x RTX A6000', 300, 5785),
@@ -63,6 +65,7 @@ list_system_multiple = {
     "4xH100_80GB_PCIe5_v1": ([1, 4], "4x H100 80GB PCIe Gen5", 350, 30918),
     "4xH100_80GB_SXM5_v1": ([1, 4], "4x H100 80GB SXM5", 700, 36718.75),
     "Dell_4xH100_80GB_SXM5_v1": ([1, 4], "Dell 4x H100 80GB SXM5", 700, 36718.75),
+    "SMC_4xH100_80GB_SXM5_v1": ([1, 4], "SMC 4x H100 80GB SXM5", 700, 36718.75),
     "LambdaCloud_8xV100_16GB_v1": ([1, 8], "LambdaCloud 8xV100 16GB", 300, 9937.5),
     # '8xA100_40GB_SXM4_v1': ([1, 8], '8xA100 40GB SXM4', 250, 14571),
     "8xAdaA6000_v1": ([1, 8], "8x RTX 6000 Ada", 300, 7680),
@@ -71,6 +74,7 @@ list_system_multiple = {
     "8xH100_80GB_PCIe5_v1": ([1, 8], "8x H100 80GB PCIe Gen5", 350, 30918),
     "8xH100_80GB_SXM5_v1": ([1, 8], "8x H100 80GB SXM5", 700, 36718.75),
     "Dell_8xH100_80GB_SXM5_v1": ([1, 8], "Dell 8x H100 80GB SXM5", 700, 36718.75),
+    "SMC_8xH100_80GB_SXM5_v1": ([1, 8], "SMC 8x H100 80GB SXM5", 700, 36718.75),
     "LambdaCloud_8xH100_80GB_SXM5_v1": ([1, 8], "LambdaCloud 8x H100 80GB SXM5", 700, 36718.75),
 }
 list_test_fp32 = [
