@@ -13,7 +13,7 @@ install:
 	cd ${PATH_STORAGE} && \
 	wget https://raw.githubusercontent.com/lambdal/deeplearning-benchmark/master/pytorch/setup.sh && \
 	chmod +x setup.sh && \
-	./setup.sh $NAME_NGC
+	./setup.sh ${NAME_NGC}
 
 
 create_data:
