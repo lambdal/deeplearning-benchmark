@@ -240,6 +240,8 @@ mkdir -p $RESULTS_PATH
 pushd .
 cd $command_path
 
+rm ${RESULTS_PATH}*.txt
+
 for i in $(seq 1 $NUM_EXP); do
     name=${RESULTS_PATH}$(date +%d-%m-%Y_%H-%M-%S)
     file_result=$name".txt"
