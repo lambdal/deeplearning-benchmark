@@ -3,7 +3,7 @@
 source config_v2/config_pytorch_80GB.sh
 
 NUM_GPU=2
-NUM_EXP=1
+NUM_EXP=3
 
 declare -A BATCH_SIZE_FIX=(
     [PyTorch_maskrcnn_FP32]=96

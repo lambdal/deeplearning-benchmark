@@ -1,7 +1,7 @@
 #!/bin/bash
 
 NUM_GPU=1
-NUM_EXP=1
+NUM_EXP=3
 
 PyTorch_SSD_FP32_PARAMS=(
              "benchmark/Detection/SSD"
