@@ -219,6 +219,11 @@ benchmark_pytorch_bert_squad() {
     echo "************************************************************"
 
     # export NCCL_P2P_DISABLE=1
+    echo '+++++++++++++++++'
+    bash pwd
+    echo '+++++++++++++++++'
+    bash ls
+    echo '+++++++++++++++++'
     bash scripts/run_squad.sh ${command_para} |& tee ${result}
     
 
