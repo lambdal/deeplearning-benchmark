@@ -50,55 +50,55 @@ cmd_clone+="git pull origin v2"
 parallel-ssh -v -P  -t 0 -e /home/ubuntu/pssh-debug -x "-i $SSH_KEY" -h "$NAME_HOSTFILE" -i $cmd_clone
 
 
-# # 4) Prepare dataset
-# echo "Prepare dataset on all nodes"
-# cmd_dataset=""
-# cmd_dataset+="cd deeplearning-benchmark/pytorch && "
-# cmd_dataset+="docker run --gpus all --rm --shm-size=256g "
-# cmd_dataset+="-v ~/DeepLearningExamples/PyTorch:/workspace/benchmark "
-# cmd_dataset+="-v ~/data:/data "
-# cmd_dataset+="-v $(pwd)"/scripts":/scripts "
-# cmd_dataset+="nvcr.io/nvidia/${NAME_NGC} "
-# cmd_dataset+="/bin/bash -c \"cp -r /scripts/* /workspace;  ./run_prepare.sh $NAME_DATASET\""
-# echo $cmd_dataset
-# parallel-ssh -v -P  -t 0 -e /home/ubuntu/pssh-debug -x "-i $SSH_KEY" -h "$NAME_HOSTFILE" -i $cmd_dataset
+# 4) Prepare dataset
+echo "Prepare dataset on all nodes"
+cmd_dataset=""
+cmd_dataset+="cd deeplearning-benchmark/pytorch && "
+cmd_dataset+="docker run --gpus all --rm --shm-size=256g "
+cmd_dataset+="-v ~/DeepLearningExamples/PyTorch:/workspace/benchmark "
+cmd_dataset+="-v ~/data:/data "
+cmd_dataset+="-v $(pwd)"/scripts":/scripts "
+cmd_dataset+="nvcr.io/nvidia/${NAME_NGC} "
+cmd_dataset+="/bin/bash -c \"cp -r /scripts/* /workspace;  ./run_prepare.sh $NAME_DATASET\""
+echo $cmd_dataset
+parallel-ssh -v -P  -t 0 -e /home/ubuntu/pssh-debug -x "-i $SSH_KEY" -h "$NAME_HOSTFILE" -i $cmd_dataset
 
-# 5) Create config
-echo "Create config files on all nodes"
-cmd_config=""
-cmd_config+="cd deeplearning-benchmark/pytorch && "
-cmd_config+="cp scripts/config_v2/config_pytorch_H100_80GB_SXM5_v2.sh scripts/config_v2/config_pytorch_${NAME_TYPE}_H100_80GB_SXM5_\$(hostname)_v2.sh && "
-cmd_config+="cp scripts/config_v2/config_pytorch_2xH100_80GB_SXM5_v2.sh scripts/config_v2/config_pytorch_${NAME_TYPE}_2xH100_80GB_SXM5_\$(hostname)_v2.sh && "
-cmd_config+="cp scripts/config_v2/config_pytorch_4xH100_80GB_SXM5_v2.sh scripts/config_v2/config_pytorch_${NAME_TYPE}_4xH100_80GB_SXM5_\$(hostname)_v2.sh && "
-cmd_config+="cp scripts/config_v2/config_pytorch_8xH100_80GB_SXM5_v2.sh scripts/config_v2/config_pytorch_${NAME_TYPE}_8xH100_80GB_SXM5_\$(hostname)_v2.sh"
-parallel-ssh -v -P  -t 0 -e /home/ubuntu/pssh-debug -x "-i $SSH_KEY" -h "$NAME_HOSTFILE" -i $cmd_config
+# # 5) Create config
+# echo "Create config files on all nodes"
+# cmd_config=""
+# cmd_config+="cd deeplearning-benchmark/pytorch && "
+# cmd_config+="cp scripts/config_v2/config_pytorch_${NAME_GPU}_v2.sh scripts/config_v2/config_pytorch_${NAME_TYPE}_${NAME_GPU}_\$(hostname)_v2.sh && "
+# cmd_config+="cp scripts/config_v2/config_pytorch_2x${NAME_GPU}_v2.sh scripts/config_v2/config_pytorch_${NAME_TYPE}_2x${NAME_GPU}_\$(hostname)_v2.sh && "
+# cmd_config+="cp scripts/config_v2/config_pytorch_4x${NAME_GPU}_v2.sh scripts/config_v2/config_pytorch_${NAME_TYPE}_4x${NAME_GPU}_\$(hostname)_v2.sh && "
+# cmd_config+="cp scripts/config_v2/config_pytorch_8x${NAME_GPU}_v2.sh scripts/config_v2/config_pytorch_${NAME_TYPE}_8x${NAME_GPU}_\$(hostname)_v2.sh"
+# parallel-ssh -v -P  -t 0 -e /home/ubuntu/pssh-debug -x "-i $SSH_KEY" -h "$NAME_HOSTFILE" -i $cmd_config
 
 
-# 5) Run benchmark
-echo "Running benchmark"
+# # 5) Run benchmark
+# echo "Running benchmark"
 
-cmd_benchmark=""
-cmd_benchmark+="cd deeplearning-benchmark/pytorch && "
-cmd_benchmark+="mkdir -p ${NAME_RESULTS} && "
-cmd_benchmark+="docker run --rm --shm-size=1024g "
-cmd_benchmark+="--gpus all "
-cmd_benchmark+="-v ~/DeepLearningExamples/PyTorch:/workspace/benchmark "
-cmd_benchmark+="-v ~/data:/data "
-cmd_benchmark+="-v \$(pwd)\"/scripts\":/scripts "
-cmd_benchmark+="-v \$(pwd)\"/${NAME_RESULTS}\":/results "
-cmd_benchmark+="nvcr.io/nvidia/${NAME_NGC} "
-cmd_benchmark+="/bin/bash -c \"cp -r /scripts/* /workspace; ./run_benchmark.sh ${NAME_TYPE}_H100_80GB_SXM5_\$(hostname)_v2 ${NAME_TASKS} 3000\""
-parallel-ssh -v -P  -t 0 -e /home/ubuntu/pssh-debug -x "-i $SSH_KEY" -h "$NAME_HOSTFILE" -i $cmd_benchmark
+# cmd_benchmark=""
+# cmd_benchmark+="cd deeplearning-benchmark/pytorch && "
+# cmd_benchmark+="mkdir -p ${NAME_RESULTS} && "
+# cmd_benchmark+="docker run --rm --shm-size=1024g "
+# cmd_benchmark+="--gpus all "
+# cmd_benchmark+="-v ~/DeepLearningExamples/PyTorch:/workspace/benchmark "
+# cmd_benchmark+="-v ~/data:/data "
+# cmd_benchmark+="-v \$(pwd)\"/scripts\":/scripts "
+# cmd_benchmark+="-v \$(pwd)\"/${NAME_RESULTS}\":/results "
+# cmd_benchmark+="nvcr.io/nvidia/${NAME_NGC} "
+# cmd_benchmark+="/bin/bash -c \"cp -r /scripts/* /workspace; ./run_benchmark.sh ${NAME_TYPE}_${NAME_GPU}_\$(hostname)_v2 ${NAME_TASKS} 3000\""
+# parallel-ssh -v -P  -t 0 -e /home/ubuntu/pssh-debug -x "-i $SSH_KEY" -h "$NAME_HOSTFILE" -i $cmd_benchmark
 
-cmd_benchmark=""
-cmd_benchmark+="cd deeplearning-benchmark/pytorch && "
-cmd_benchmark+="mkdir -p ${NAME_RESULTS} && "
-cmd_benchmark+="docker run --rm --shm-size=1024g "
-cmd_benchmark+="--gpus all "
-cmd_benchmark+="-v ~/DeepLearningExamples/PyTorch:/workspace/benchmark "
-cmd_benchmark+="-v ~/data:/data "
-cmd_benchmark+="-v \$(pwd)\"/scripts\":/scripts "
-cmd_benchmark+="-v \$(pwd)\"/${NAME_RESULTS}\":/results "
-cmd_benchmark+="nvcr.io/nvidia/${NAME_NGC} "
-cmd_benchmark+="/bin/bash -c \"cp -r /scripts/* /workspace; ./run_benchmark.sh ${NAME_TYPE}_8xH100_80GB_SXM5_\$(hostname)_v2 ${NAME_TASKS} 3000\""
-parallel-ssh -v -P  -t 0 -e /home/ubuntu/pssh-debug -x "-i $SSH_KEY" -h "$NAME_HOSTFILE" -i $cmd_benchmark
+# cmd_benchmark=""
+# cmd_benchmark+="cd deeplearning-benchmark/pytorch && "
+# cmd_benchmark+="mkdir -p ${NAME_RESULTS} && "
+# cmd_benchmark+="docker run --rm --shm-size=1024g "
+# cmd_benchmark+="--gpus all "
+# cmd_benchmark+="-v ~/DeepLearningExamples/PyTorch:/workspace/benchmark "
+# cmd_benchmark+="-v ~/data:/data "
+# cmd_benchmark+="-v \$(pwd)\"/scripts\":/scripts "
+# cmd_benchmark+="-v \$(pwd)\"/${NAME_RESULTS}\":/results "
+# cmd_benchmark+="nvcr.io/nvidia/${NAME_NGC} "
+# cmd_benchmark+="/bin/bash -c \"cp -r /scripts/* /workspace; ./run_benchmark.sh ${NAME_TYPE}_8x${NAME_GPU}_\$(hostname)_v2 ${NAME_TASKS} 3000\""
+# parallel-ssh -v -P  -t 0 -e /home/ubuntu/pssh-debug -x "-i $SSH_KEY" -h "$NAME_HOSTFILE" -i $cmd_benchmark
