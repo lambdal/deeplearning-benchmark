@@ -1,14 +1,18 @@
 # Guide
 
+
+```
+sudo apt install -y pssh
+```
+
 ```
 export NAME_HOSTFILE=hostfile
-export SSH_KEY=/home/ubuntu/.ssh/ml.pem
 export NAME_NGC=pytorch:24.03-py3
 export NAME_DATASET=all
-export NAME_TYPE=LambdaOD_Texas
+export NAME_TYPE=LambdaH200BM
 export NAME_RESULTS=results_v2
 export NAME_TASKS=bert
-export NAME_GPU=H100_80GB_SXM5
+export NAME_GPU=H100_140GB_SXM
 
 bash ./parallel-setup.sh
 
