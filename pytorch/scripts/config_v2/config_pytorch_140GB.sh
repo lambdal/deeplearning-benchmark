@@ -116,7 +116,7 @@ PyTorch_ncf_FP16_PARAMS=(
             args
             --data                    "/data/ncf/cache/ml-20m"
             --epochs                  "2"
-            --batch_size              "24000000"
+            --batch_size              "18000000"
            )
 
 PyTorch_transformerxlbase_FP32_PARAMS=(
