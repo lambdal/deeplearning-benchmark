@@ -108,7 +108,7 @@ PyTorch_ncf_FP32_PARAMS=(
             args
             --data                    "/data/ncf/cache/ml-20m"
             --epochs                  "2"
-            --batch_size              "16000000"
+            --batch_size              "18000000"
            )
 
 PyTorch_ncf_FP16_PARAMS=(
@@ -116,7 +116,7 @@ PyTorch_ncf_FP16_PARAMS=(
             args
             --data                    "/data/ncf/cache/ml-20m"
             --epochs                  "2"
-            --batch_size              "20000000"
+            --batch_size              "24000000"
            )
 
 PyTorch_transformerxlbase_FP32_PARAMS=(
@@ -304,7 +304,7 @@ PyTorch_bert_base_squad_FP32_PARAMS=(
             args
             "/data/bert_base/bert_base_uncased.pt"
             "2.0"
-            "344"
+            "296"
             "0.0"
 	    "0.1"
             "fp32"
@@ -323,7 +323,7 @@ PyTorch_bert_base_squad_FP16_PARAMS=(
             args      
             "/data/bert_base/bert_base_uncased.pt"
             "2.0"
-            "640"
+            "592"
             "0.0"
 	    "0.1"
             "fp16"
@@ -342,7 +342,7 @@ PyTorch_bert_large_squad_FP32_PARAMS=(
             args      
             "/data/bert_large/bert_large_uncased.pt"
             "2.0"
-            "128"
+            "96"
             "0.0"
 	    "0.1"
             "fp32"
@@ -361,7 +361,7 @@ PyTorch_bert_large_squad_FP16_PARAMS=(
             args      
             "/data/bert_large/bert_large_uncased.pt"
             "2.0"
-            "224"
+            "192"
             "0.0"
 	    "0.1"
             "fp16"
