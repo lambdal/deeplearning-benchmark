@@ -14,6 +14,8 @@ declare -A BATCH_SIZE_FIX=(
     [PyTorch_transformerxlbase_FP16]=1664
     [PyTorch_transformerxllarge_FP32]=384
     [PyTorch_transformerxllarge_FP16]=768
+    [PyTorch_tacotron2_FP32]=256
+    [PyTorch_tacotron2_FP16]=256
 )
 
 declare -A SSD_ITER_FIX=(
