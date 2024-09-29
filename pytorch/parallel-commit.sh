@@ -3,7 +3,6 @@
 # Steps: 
 # 1) global config ssh 
 
-
 # Check if CONFIG_PATH is set and if the file exists
 if [ -z "${NAME_HOSTFILE}" ]; then
     echo "NAME_HOSTFILE hasn't been set or found."
@@ -37,7 +36,7 @@ cmd_ssh_commit+="cd deeplearning-benchmark/pytorch && "
 # cmd_ssh_commit+="git config pull.rebase false && "
 cmd_ssh_commit+="git pull origin v2 && "
 cmd_ssh_commit+="git add scripts/config_v2 ; "
-cmd_ssh_commit+="git add results_v2/* ; "
+cmd_ssh_commit+="git add results_v2 ; "
 cmd_ssh_commit+="git commit -m \"Update from \$(hostname) \" ; "
 cmd_ssh_commit+="git remote set-url origin https://$GIT_USERNAME:$GIT_PASSWORD@github.com/lambdal/deeplearning-benchmark.git ; "
 cmd_ssh_commit+="git push origin $BRANCH"

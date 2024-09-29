@@ -1,8 +1,5 @@
 #!/bin/bash
 
-# Steps: 
-# 1) Parallelized remove sudo requirements on all nodes
-
 # Check if CONFIG_PATH is set and if the file exists
 if [ -z "${NAME_HOSTFILE}" ]; then
     echo "NAME_HOSTFILE hasn't been set or found."
@@ -14,7 +11,6 @@ if [ ! -f "${NAME_HOSTFILE}" ]; then
     exit 1
 fi
 
-
 # Read hosts from the hostfile into an array
 readarray -t workers < $NAME_HOSTFILE
 echo "Here are the workers:"
@@ -22,18 +18,18 @@ for worker in "${workers[@]}"; do
     echo $worker    
 done
 
-# # 1) Parallelized remove sudo requirements on all nodes
-# echo "Finalize Docker setup on all nodes ..."
-# cmd_docker_setup=""
-# cmd_docker_setup+="sudo usermod -aG docker $USER && "
-# cmd_docker_setup+="newgrp docker"
-# parallel-ssh -v -P  -t 0 -e /home/$(whoami)/pssh-debug -x "-i $SSH_KEY" -h "$NAME_HOSTFILE" -i "$cmd_docker_setup" 
+# 1) Parallelized remove sudo requirements on all nodes
+echo "Finalize Docker setup on all nodes ..."
+cmd_docker_setup=""
+cmd_docker_setup+="sudo usermod -aG docker $USER && "
+cmd_docker_setup+="newgrp docker"
+parallel-ssh -v -P  -t 0 -e /home/$(whoami)/pssh-debug -x "-i $SSH_KEY" -h "$NAME_HOSTFILE" -i "$cmd_docker_setup" 
 
-# # 2) Parallelized pull docker image on all nodes
-# echo "Pull Docker image on all nodes ..."
-# cmd_docker_pull=""
-# cmd_docker_pull+="docker pull nvcr.io/nvidia/${NAME_NGC} 2>&1"
-# parallel-ssh -v -P  -t 0 -e /home/$(whoami)/pssh-debug -x "-i $SSH_KEY" -h "$NAME_HOSTFILE" -i $cmd_docker_pull
+# 2) Parallelized pull docker image on all nodes
+echo "Pull Docker image on all nodes ..."
+cmd_docker_pull=""
+cmd_docker_pull+="docker pull nvcr.io/nvidia/${NAME_NGC} 2>&1"
+parallel-ssh -v -P  -t 0 -e /home/$(whoami)/pssh-debug -x "-i $SSH_KEY" -h "$NAME_HOSTFILE" -i $cmd_docker_pull
 
 # 3) Parallelized git clone DeepLearningExamples on all nodes
 echo "Clone DeepLearningExamples on all nodes ..."
@@ -63,42 +59,22 @@ cmd_dataset+="/bin/bash -c \"cp -r /scripts/* /workspace;  ./run_prepare.sh $NAM
 echo $cmd_dataset
 parallel-ssh -v -P  -t 0 -e /home/$(whoami)/pssh-debug -x "-i $SSH_KEY" -h "$NAME_HOSTFILE" -i $cmd_dataset
 
-# # 5) Create config
-# echo "Create config files on all nodes"
-# cmd_config=""
-# cmd_config+="cd deeplearning-benchmark/pytorch && "
-# cmd_config+="cp scripts/config_v2/config_pytorch_${NAME_GPU}_v2.sh scripts/config_v2/config_pytorch_${NAME_TYPE}_${NAME_GPU}_\$(hostname)_v2.sh && "
-# cmd_config+="cp scripts/config_v2/config_pytorch_2x${NAME_GPU}_v2.sh scripts/config_v2/config_pytorch_${NAME_TYPE}_2x${NAME_GPU}_\$(hostname)_v2.sh && "
-# cmd_config+="cp scripts/config_v2/config_pytorch_4x${NAME_GPU}_v2.sh scripts/config_v2/config_pytorch_${NAME_TYPE}_4x${NAME_GPU}_\$(hostname)_v2.sh && "
-# cmd_config+="cp scripts/config_v2/config_pytorch_8x${NAME_GPU}_v2.sh scripts/config_v2/config_pytorch_${NAME_TYPE}_8x${NAME_GPU}_\$(hostname)_v2.sh"
-# parallel-ssh -v -P  -t 0 -e /home/$(whoami)/pssh-debug -x "-i $SSH_KEY" -h "$NAME_HOSTFILE" -i $cmd_config
+# 5) Create config
+echo "Create config files on all nodes"
+cmd_config=""
+cmd_config+="cd deeplearning-benchmark/pytorch && "
+if [ "$NUM_GPU" -ge 1 ]; then
+    cmd_config+="cp scripts/config_v2/config_pytorch_${NAME_GPU}_v2.sh scripts/config_v2/config_pytorch_${NAME_TYPE}_${NAME_GPU}_\$(hostname)_v2.sh"
+fi
+if [ "$NUM_GPU" -ge 2 ]; then
+    cmd_config+=" && cp scripts/config_v2/config_pytorch_2x${NAME_GPU}_v2.sh scripts/config_v2/config_pytorch_${NAME_TYPE}_2x${NAME_GPU}_\$(hostname)_v2.sh"
+fi
+if [ "$NUM_GPU" -ge 4 ]; then
+    cmd_config+=" && cp scripts/config_v2/config_pytorch_4x${NAME_GPU}_v2.sh scripts/config_v2/config_pytorch_${NAME_TYPE}_4x${NAME_GPU}_\$(hostname)_v2.sh"
+fi
+if [ "$NUM_GPU" -ge 8 ]; then
+    cmd_config+=" && cp scripts/config_v2/config_pytorch_8x${NAME_GPU}_v2.sh scripts/config_v2/config_pytorch_${NAME_TYPE}_8x${NAME_GPU}_\$(hostname)_v2.sh"
+fi
 
-
-# # 5) Run benchmark
-# echo "Running benchmark"
-
-# cmd_benchmark=""
-# cmd_benchmark+="cd deeplearning-benchmark/pytorch && "
-# cmd_benchmark+="mkdir -p ${NAME_RESULTS} && "
-# cmd_benchmark+="docker run --rm --shm-size=1024g "
-# cmd_benchmark+="--gpus all "
-# cmd_benchmark+="-v ~/DeepLearningExamples/PyTorch:/workspace/benchmark "
-# cmd_benchmark+="-v ~/data:/data "
-# cmd_benchmark+="-v \$(pwd)\"/scripts\":/scripts "
-# cmd_benchmark+="-v \$(pwd)\"/${NAME_RESULTS}\":/results "
-# cmd_benchmark+="nvcr.io/nvidia/${NAME_NGC} "
-# cmd_benchmark+="/bin/bash -c \"cp -r /scripts/* /workspace; ./run_benchmark.sh ${NAME_TYPE}_${NAME_GPU}_\$(hostname)_v2 ${NAME_TASKS} 3000\""
-# parallel-ssh -v -P  -t 0 -e /home/$(whoami)/pssh-debug -x "-i $SSH_KEY" -h "$NAME_HOSTFILE" -i $cmd_benchmark
-
-# cmd_benchmark=""
-# cmd_benchmark+="cd deeplearning-benchmark/pytorch && "
-# cmd_benchmark+="mkdir -p ${NAME_RESULTS} && "
-# cmd_benchmark+="docker run --rm --shm-size=1024g "
-# cmd_benchmark+="--gpus all "
-# cmd_benchmark+="-v ~/DeepLearningExamples/PyTorch:/workspace/benchmark "
-# cmd_benchmark+="-v ~/data:/data "
-# cmd_benchmark+="-v \$(pwd)\"/scripts\":/scripts "
-# cmd_benchmark+="-v \$(pwd)\"/${NAME_RESULTS}\":/results "
-# cmd_benchmark+="nvcr.io/nvidia/${NAME_NGC} "
-# cmd_benchmark+="/bin/bash -c \"cp -r /scripts/* /workspace; ./run_benchmark.sh ${NAME_TYPE}_8x${NAME_GPU}_\$(hostname)_v2 ${NAME_TASKS} 3000\""
-# parallel-ssh -v -P  -t 0 -e /home/$(whoami)/pssh-debug -x "-i $SSH_KEY" -h "$NAME_HOSTFILE" -i $cmd_benchmark
+echo $cmd_config
+parallel-ssh -v -P  -t 0 -e /home/$(whoami)/pssh-debug -x "-i $SSH_KEY" -h "$NAME_HOSTFILE" -i $cmd_config
