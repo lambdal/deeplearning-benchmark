@@ -1,0 +1,201 @@
+[2024-09-30 20:05:31,487] torch.distributed.run: [WARNING] 
+[2024-09-30 20:05:31,487] torch.distributed.run: [WARNING] *****************************************
+[2024-09-30 20:05:31,487] torch.distributed.run: [WARNING] Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+[2024-09-30 20:05:31,487] torch.distributed.run: [WARNING] *****************************************
+3: thread affinity: {6, 7, 14, 15, 22, 23, 30, 31, 38, 39, 46, 47, 54, 55, 62, 63, 70, 71, 78, 79, 86, 87, 94, 95, 102, 103}
+0: thread affinity: {0, 1, 8, 9, 16, 17, 24, 25, 32, 33, 40, 41, 48, 49, 56, 57, 64, 65, 72, 73, 80, 81, 88, 89, 96, 97}
+1: thread affinity: {2, 3, 10, 11, 18, 19, 26, 27, 34, 35, 42, 43, 50, 51, 58, 59, 66, 67, 74, 75, 82, 83, 90, 91, 98, 99}
+2: thread affinity: {4, 5, 12, 13, 20, 21, 28, 29, 36, 37, 44, 45, 52, 53, 60, 61, 68, 69, 76, 77, 84, 85, 92, 93, 100, 101}
+Experiment dir : LM-TFM
+Namespace(work_dir='LM-TFM', append_dataset=False, append_time=False, cuda=True, fp16=True, restart='', debug=False, log_all_ranks=False, dllog_file='train_log.json', txtlog_file='train_log.log', save_all=False, no_env=False, no_eval=True, no_test=False, log_interval=10, target_throughput=None, target_perplexity=None, apex_amp_opt_level='O2', amp='apex', affinity='socket_unique_interleaved', data='/data/transformer-xl/wikitext-103', dataset='wt103', vocab='word', n_layer=18, n_head=16, d_head=64, d_embed=1024, d_model=1024, d_inner=4096, dropout=0.2, dropatt=0.2, pre_lnorm=False, attn_type=0, not_tied=False, clamp_len=-1, adaptive=False, div_val=1, sample_softmax=-1, init='normal', emb_init='normal', init_range=0.1, emb_init_range=0.01, init_std=0.02, proj_init_std=0.01, optim='adam', lr=0.0, mom=0.0, scheduler='cosine', max_step_scheduler=None, warmup_step=16000, decay_rate=0.5, lr_min=0.0, clip=0.25, weight_decay=0.0, clip_nonemb=False, patience=0, eta_min=0.001, max_step=400, batch_size=192, local_batch_size=None, batch_chunk=1, roll=False, tgt_len=256, ext_len=0, mem_len=256, seed=1111, multi_gpu=None, gpu0_bsz=-1, same_length=False, varlen=False, swap_mem=False, eval_tgt_len=128, eval_batch_size=16, eval_max_steps=-1, eval_interval=5000, local_rank=0, tied=True)
+world size: 4
+Collecting environment information...
+[rank3]: Traceback (most recent call last):
+[rank3]:   File "/workspace/benchmark/LanguageModeling/Transformer-XL/pytorch/train.py", line 1134, in <module>
+[rank3]:     main()
+[rank3]:   File "/workspace/benchmark/LanguageModeling/Transformer-XL/pytorch/train.py", line 778, in main
+[rank3]:     corpus = get_lm_corpus(args.data, args.dataset, args.vocab)
+[rank3]:   File "/workspace/benchmark/LanguageModeling/Transformer-XL/pytorch/data_utils.py", line 322, in get_lm_corpus
+[rank3]:     corpus = Corpus(datadir, dataset, vocab, **kwargs)
+[rank3]:   File "/workspace/benchmark/LanguageModeling/Transformer-XL/pytorch/data_utils.py", line 247, in __init__
+[rank3]:     self.vocab.count_file(os.path.join(path, 'train.txt'))
+[rank3]:   File "/workspace/benchmark/LanguageModeling/Transformer-XL/pytorch/utils/vocabulary.py", line 58, in count_file
+[rank3]:     assert os.path.exists(path)
+[rank3]: AssertionError
+[rank2]: Traceback (most recent call last):
+[rank2]:   File "/workspace/benchmark/LanguageModeling/Transformer-XL/pytorch/train.py", line 1134, in <module>
+[rank2]:     main()
+[rank2]:   File "/workspace/benchmark/LanguageModeling/Transformer-XL/pytorch/train.py", line 778, in main
+[rank2]:     corpus = get_lm_corpus(args.data, args.dataset, args.vocab)
+[rank2]:   File "/workspace/benchmark/LanguageModeling/Transformer-XL/pytorch/data_utils.py", line 322, in get_lm_corpus
+[rank2]:     corpus = Corpus(datadir, dataset, vocab, **kwargs)
+[rank2]:   File "/workspace/benchmark/LanguageModeling/Transformer-XL/pytorch/data_utils.py", line 247, in __init__
+[rank2]:     self.vocab.count_file(os.path.join(path, 'train.txt'))
+[rank2]:   File "/workspace/benchmark/LanguageModeling/Transformer-XL/pytorch/utils/vocabulary.py", line 58, in count_file
+[rank2]:     assert os.path.exists(path)
+[rank2]: AssertionError
+PyTorch version: 2.3.0a0+40ec155e58.nv24.03
+Is debug build: False
+CUDA used to build PyTorch: 12.4
+ROCM used to build PyTorch: N/A
+
+OS: Ubuntu 22.04.4 LTS (x86_64)
+GCC version: (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0
+Clang version: Could not collect
+CMake version: version 3.28.3
+Libc version: glibc-2.35
+
+Python version: 3.10.12 (main, Nov 20 2023, 15:14:05) [GCC 11.4.0] (64-bit runtime)
+Python platform: Linux-6.2.0-37-generic-x86_64-with-glibc2.35
+Is CUDA available: True
+CUDA runtime version: 12.4.99
+CUDA_MODULE_LOADING set to: LAZY
+GPU models and configuration: 
+GPU 0: NVIDIA H100 80GB HBM3
+GPU 1: NVIDIA H100 80GB HBM3
+GPU 2: NVIDIA H100 80GB HBM3
+GPU 3: NVIDIA H100 80GB HBM3
+
+Nvidia driver version: 535.129.03
+cuDNN version: Probably one of the following:
+/usr/lib/x86_64-linux-gnu/libcudnn.so.9.0.0
+/usr/lib/x86_64-linux-gnu/libcudnn_adv.so.9.0.0
+/usr/lib/x86_64-linux-gnu/libcudnn_cnn.so.9.0.0
+/usr/lib/x86_64-linux-gnu/libcudnn_engines_precompiled.so.9.0.0
+/usr/lib/x86_64-linux-gnu/libcudnn_engines_runtime_compiled.so.9.0.0
+/usr/lib/x86_64-linux-gnu/libcudnn_graph.so.9.0.0
+/usr/lib/x86_64-linux-gnu/libcudnn_heuristic.so.9.0.0
+/usr/lib/x86_64-linux-gnu/libcudnn_ops.so.9.0.0
+HIP runtime version: N/A
+MIOpen runtime version: N/A
+Is XNNPACK available: True
+
+CPU:
+Architecture:                       x86_64
+CPU op-mode(s):                     32-bit, 64-bit
+Address sizes:                      52 bits physical, 57 bits virtual
+Byte Order:                         Little Endian
+CPU(s):                             104
+On-line CPU(s) list:                0-103
+Vendor ID:                          GenuineIntel
+Model name:                         Intel(R) Xeon(R) Platinum 8480+
+CPU family:                         6
+Model:                              143
+Thread(s) per core:                 2
+Core(s) per socket:                 52
+Socket(s):                          1
+Stepping:                           8
+BogoMIPS:                           4000.00
+Flags:                              fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ss ht syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon rep_good nopl xtopology cpuid tsc_known_freq pni pclmulqdq vmx ssse3 fma cx16 pdcm pcid sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand hypervisor lahf_lm abm 3dnowprefetch cpuid_fault invpcid_single ssbd ibrs ibpb stibp ibrs_enhanced tpr_shadow vnmi flexpriority ept vpid ept_ad fsgsbase tsc_adjust bmi1 avx2 smep bmi2 erms invpcid avx512f avx512dq rdseed adx smap avx512ifma clflushopt clwb avx512cd sha_ni avx512bw avx512vl xsaveopt xsavec xgetbv1 xsaves avx_vnni avx512_bf16 wbnoinvd arat avx512vbmi umip pku ospke waitpkg avx512_vbmi2 gfni vaes vpclmulqdq avx512_vnni avx512_bitalg avx512_vpopcntdq la57 rdpid bus_lock_detect cldemote movdiri movdir64b fsrm md_clear serialize tsxldtrk avx512_fp16 arch_capabilities
+Virtualization:                     VT-x
+Hypervisor vendor:                  KVM
+Virtualization type:                full
+L1d cache:                          3.3 MiB (104 instances)
+L1i cache:                          3.3 MiB (104 instances)
+L2 cache:                           208 MiB (52 instances)
+L3 cache:                           16 MiB (1 instance)
+NUMA node(s):                       1
+NUMA node0 CPU(s):                  0-103
+Vulnerability Gather data sampling: Not affected
+Vulnerability Itlb multihit:        Not affected
+Vulnerability L1tf:                 Not affected
+Vulnerability Mds:                  Not affected
+Vulnerability Meltdown:             Not affected
+Vulnerability Mmio stale data:      Unknown: No mitigations
+Vulnerability Retbleed:             Not affected
+Vulnerability Spec rstack overflow: Not affected
+Vulnerability Spec store bypass:    Mitigation; Speculative Store Bypass disabled via prctl
+Vulnerability Spectre v1:           Mitigation; usercopy/swapgs barriers and __user pointer sanitization
+Vulnerability Spectre v2:           Mitigation; Enhanced IBRS, IBPB conditional, RSB filling, PBRSB-eIBRS SW sequence
+Vulnerability Srbds:                Not affected
+Vulnerability Tsx async abort:      Mitigation; TSX disabled
+
+Versions of relevant libraries:
+[pip3] numpy==1.24.4
+[pip3] onnx==1.15.0rc2
+[pip3] optree==0.10.0
+[pip3] pytorch-quantization==2.1.2
+[pip3] pytorch-transformers==1.1.0
+[pip3] pytorch-triton==2.2.0+e28a256d7
+[pip3] torch==2.3.0a0+40ec155e58.nv24.3
+[pip3] torch-tensorrt==2.3.0a0
+[pip3] torchdata==0.7.1a0
+[pip3] torchtext==0.17.0a0
+[pip3] torchvision==0.18.0a0
+[conda] Could not collect
+Producing dataset wt103...
+[rank1]: Traceback (most recent call last):
+[rank1]:   File "/workspace/benchmark/LanguageModeling/Transformer-XL/pytorch/train.py", line 1134, in <module>
+[rank1]:     main()
+[rank1]:   File "/workspace/benchmark/LanguageModeling/Transformer-XL/pytorch/train.py", line 778, in main
+[rank1]:     corpus = get_lm_corpus(args.data, args.dataset, args.vocab)
+[rank1]:   File "/workspace/benchmark/LanguageModeling/Transformer-XL/pytorch/data_utils.py", line 322, in get_lm_corpus
+[rank1]:     corpus = Corpus(datadir, dataset, vocab, **kwargs)
+[rank1]:   File "/workspace/benchmark/LanguageModeling/Transformer-XL/pytorch/data_utils.py", line 247, in __init__
+[rank1]:     self.vocab.count_file(os.path.join(path, 'train.txt'))
+[rank1]:   File "/workspace/benchmark/LanguageModeling/Transformer-XL/pytorch/utils/vocabulary.py", line 58, in count_file
+[rank1]:     assert os.path.exists(path)
+[rank1]: AssertionError
+[rank0]: Traceback (most recent call last):
+[rank0]:   File "/workspace/benchmark/LanguageModeling/Transformer-XL/pytorch/train.py", line 1134, in <module>
+[rank0]:     main()
+[rank0]:   File "/workspace/benchmark/LanguageModeling/Transformer-XL/pytorch/train.py", line 778, in main
+[rank0]:     corpus = get_lm_corpus(args.data, args.dataset, args.vocab)
+[rank0]:   File "/workspace/benchmark/LanguageModeling/Transformer-XL/pytorch/data_utils.py", line 322, in get_lm_corpus
+[rank0]:     corpus = Corpus(datadir, dataset, vocab, **kwargs)
+[rank0]:   File "/workspace/benchmark/LanguageModeling/Transformer-XL/pytorch/data_utils.py", line 247, in __init__
+[rank0]:     self.vocab.count_file(os.path.join(path, 'train.txt'))
+[rank0]:   File "/workspace/benchmark/LanguageModeling/Transformer-XL/pytorch/utils/vocabulary.py", line 58, in count_file
+[rank0]:     assert os.path.exists(path)
+[rank0]: AssertionError
+[2024-09-30 20:05:41,503] torch.distributed.elastic.multiprocessing.api: [ERROR] failed (exitcode: 1) local_rank: 0 (pid: 4577) of binary: /usr/bin/python
+Traceback (most recent call last):
+  File "/usr/local/bin/torchrun", line 8, in <module>
+    sys.exit(main())
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/elastic/multiprocessing/errors/__init__.py", line 347, in wrapper
+    return f(*args, **kwargs)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/run.py", line 834, in main
+    run(args)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/run.py", line 825, in run
+    elastic_launch(
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/launcher/api.py", line 137, in __call__
+    return launch_agent(self._config, self._entrypoint, list(args))
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/launcher/api.py", line 271, in launch_agent
+    raise ChildFailedError(
+torch.distributed.elastic.multiprocessing.errors.ChildFailedError: 
+============================================================
+train.py FAILED
+------------------------------------------------------------
+Failures:
+[1]:
+  time      : 2024-09-30_20:05:41
+  host      : d3bc5197b12c
+  rank      : 1 (local_rank: 1)
+  exitcode  : 1 (pid: 4578)
+  error_file: <N/A>
+  traceback : To enable traceback see: https://pytorch.org/docs/stable/elastic/errors.html
+[2]:
+  time      : 2024-09-30_20:05:41
+  host      : d3bc5197b12c
+  rank      : 2 (local_rank: 2)
+  exitcode  : 1 (pid: 4579)
+  error_file: <N/A>
+  traceback : To enable traceback see: https://pytorch.org/docs/stable/elastic/errors.html
+[3]:
+  time      : 2024-09-30_20:05:41
+  host      : d3bc5197b12c
+  rank      : 3 (local_rank: 3)
+  exitcode  : 1 (pid: 4580)
+  error_file: <N/A>
+  traceback : To enable traceback see: https://pytorch.org/docs/stable/elastic/errors.html
+------------------------------------------------------------
+Root Cause (first observed failure):
+[0]:
+  time      : 2024-09-30_20:05:41
+  host      : d3bc5197b12c
+  rank      : 0 (local_rank: 0)
+  exitcode  : 1 (pid: 4577)
+  error_file: <N/A>
+  traceback : To enable traceback see: https://pytorch.org/docs/stable/elastic/errors.html
+============================================================
+DONE!
