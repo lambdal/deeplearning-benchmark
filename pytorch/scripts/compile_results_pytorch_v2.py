@@ -11,16 +11,16 @@ list_test_fp32 = {
         "PyTorch_resnet50_FP32": ("resnet50", "^.*Summary: train.loss.*$", 11),
         "PyTorch_gnmt_FP32": ("gnmt", "^.*Training:.*$", 4),
         "PyTorch_ncf_FP32": ("ncf", "^.*best_train_throughput.*$", 7),
-        "PyTorch_transformerxlbase_FP32": (
-            "transformerxlbase",
-            "^.*Training throughput:.*$",
-            -2,
-        ),
-        "PyTorch_transformerxllarge_FP32": (
-            "transformerxllarge",
-            "^.*Training throughput:.*$",
-            -2,
-        ),
+        # "PyTorch_transformerxlbase_FP32": (
+        #     "transformerxlbase",
+        #     "^.*Training throughput:.*$",
+        #     -2,
+        # ),
+        # "PyTorch_transformerxllarge_FP32": (
+        #     "transformerxllarge",
+        #     "^.*Training throughput:.*$",
+        #     -2,
+        # ),
         "PyTorch_tacotron2_FP32": ("tacotron2", "^.*train_items_per_sec :.*$", -2),
         "PyTorch_waveglow_FP32": ("waveglow", "^.*train_items_per_sec :.*$", -2),
         "PyTorch_bert_large_squad_FP32": (
@@ -40,16 +40,16 @@ list_test_fp16 = {
         "PyTorch_resnet50_AMP": ("resnet50", "^.*Summary: train.loss.*$", 11),
         "PyTorch_gnmt_FP16": ("gnmt", "^.*Training:.*$", 4),
         "PyTorch_ncf_FP16": ("ncf", "^.*best_train_throughput.*$", 7),
-        "PyTorch_transformerxlbase_FP16": (
-            "transformerxlbase",
-            "^.*Training throughput:.*$",
-            -2,
-        ),
-        "PyTorch_transformerxllarge_FP16": (
-            "transformerxllarge",
-            "^.*Training throughput:.*$",
-            -2,
-        ),
+        # "PyTorch_transformerxlbase_FP16": (
+        #     "transformerxlbase",
+        #     "^.*Training throughput:.*$",
+        #     -2,
+        # ),
+        # "PyTorch_transformerxllarge_FP16": (
+        #     "transformerxllarge",
+        #     "^.*Training throughput:.*$",
+        #     -2,
+        # ),
         "PyTorch_tacotron2_FP16": ("tacotron2", "^.*train_items_per_sec :.*$", -2),
         "PyTorch_waveglow_FP16": ("waveglow", "^.*train_items_per_sec :.*$", -2),
         "PyTorch_bert_large_squad_FP16": (
@@ -90,7 +90,8 @@ def gather_throughput(
                 # Sift through all lines and only keep the last occurrence
                 for i, line in enumerate(open(os.path.join(path, filename))):
                     for match in re.finditer(pattern, line):
-                        if "02-08-2024_10-20-36" in filename:
+                        # if "29-09-2024" in filename:
+                        if True:
                             print(match.group().split(' ')) # for debug
                         try:
                             throughput = float(match.group().split(" ")[pos])
