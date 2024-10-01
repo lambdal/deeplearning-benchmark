@@ -15,6 +15,7 @@ def plot_performance_charts(csv_path, output_dir="charts"):
 
     # Define the order for y-axis items
     y_axis_order = [
+        "LambdaOD_1x_Texas_H100_80GB_PCIe",
         "LambdaOD_1x_Texas_H100_80GB_SXM5",
         "LambdaOD_2x_Texas_H100_80GB_SXM5",
         "LambdaOD_4x_Texas_H100_80GB_SXM5",
@@ -40,7 +41,10 @@ def plot_performance_charts(csv_path, output_dir="charts"):
         for config in y_axis_order:
             config_data = df[df['full_config'] == config][model]
             means.append(config_data.mean())
-            stds.append(config_data.std())
+            if len(config_data) > 1:
+                stds.append(config_data.std())
+            else:
+                stds.append(0.0)
 
         # Plot the horizontal bar chart
         plt.barh(y_axis_order, means, xerr=stds, capsize=5)
