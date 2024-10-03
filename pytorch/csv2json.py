@@ -4,7 +4,7 @@ import pandas
 import glob
 import json
 
-DATA_PATH = ''
+DATA_PATH = './csv_v1_v2'
 DATA_FORMAT = '.csv'
 SKIPROWS = None
 
