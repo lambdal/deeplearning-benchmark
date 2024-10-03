@@ -1,0 +1,47 @@
+[2024-09-29 06:56:14,823] torch.distributed.run: [WARNING] 
+[2024-09-29 06:56:14,823] torch.distributed.run: [WARNING] *****************************************
+[2024-09-29 06:56:14,823] torch.distributed.run: [WARNING] Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+[2024-09-29 06:56:14,823] torch.distributed.run: [WARNING] *****************************************
+DLL 2024-09-29 06:56:16.436102 - PARAMETER data : /data/ncf/cache/ml-20m  feature_spec_file : feature_spec.yaml  epochs : 2  batch_size : 16000000  valid_batch_size : 1048576  factors : 64  layers : [256, 256, 128, 64]  negative_samples : 4  learning_rate : 0.0045  topk : 10  seed : None  threshold : 1.0  beta1 : 0.25  beta2 : 0.5  eps : 1e-08  dropout : 0.5  checkpoint_dir :   load_checkpoint_path : None  mode : train  grads_accumulated : 1  amp : False  log_path : log.json  world_size : 2  distributed : True  local_rank : 0 
+/usr/local/lib/python3.10/dist-packages/apex/__init__.py:68: DeprecatedFeatureWarning: apex.parallel.DistributedDataParallel is deprecated and will be removed by the end of February 2023.
+  warnings.warn(msg, DeprecatedFeatureWarning)
+/usr/local/lib/python3.10/dist-packages/apex/parallel/distributed.py:253: UserWarning: The torch.cuda.*DtypeTensor constructors are no longer recommended. It's best to use methods such as torch.tensor(data, dtype=*, device='cuda') to create tensors. (Triggered internally at /opt/pytorch/pytorch/torch/csrc/tensor/python_tensor.cpp:79.)
+  self._overflow_buf = torch.cuda.IntTensor([0])
+/usr/local/lib/python3.10/dist-packages/apex/parallel/distributed.py:253: UserWarning: The torch.cuda.*DtypeTensor constructors are no longer recommended. It's best to use methods such as torch.tensor(data, dtype=*, device='cuda') to create tensors. (Triggered internally at /opt/pytorch/pytorch/torch/csrc/tensor/python_tensor.cpp:79.)
+  self._overflow_buf = torch.cuda.IntTensor([0])
+DistributedDataParallel(
+  (module): NeuMF(
+    (mf_user_embed): Embedding(138493, 64)
+    (mf_item_embed): Embedding(26744, 64)
+    (mlp_user_embed): Embedding(138493, 128)
+    (mlp_item_embed): Embedding(26744, 128)
+    (mlp): ModuleList(
+      (0): Linear(in_features=256, out_features=256, bias=True)
+      (1): Linear(in_features=256, out_features=128, bias=True)
+      (2): Linear(in_features=128, out_features=64, bias=True)
+    )
+    (final): Linear(in_features=128, out_features=1, bias=True)
+  )
+)
+31832577 parameters
+DistributedDataParallel(
+  (module): NeuMF(
+    (mf_user_embed): Embedding(138493, 64)
+    (mf_item_embed): Embedding(26744, 64)
+    (mlp_user_embed): Embedding(138493, 128)
+    (mlp_item_embed): Embedding(26744, 128)
+    (mlp): ModuleList(
+      (0): Linear(in_features=256, out_features=256, bias=True)
+      (1): Linear(in_features=256, out_features=128, bias=True)
+      (2): Linear(in_features=128, out_features=64, bias=True)
+    )
+    (final): Linear(in_features=128, out_features=1, bias=True)
+  )
+)
+31832577 parameters
+DLL 2024-09-29 06:56:21.980146 - (0,) train_throughput : 1.601e+08 samples/s hr@10 : 0.83221 None train_epoch_time : 0.620 s validation_epoch_time : 0.561 s eval_throughput : 2.493e+07 samples/s validation_loss : 0.08855 None train_loss : 0.30587 None
+New best hr!
+DLL 2024-09-29 06:56:23.029382 - (1,) train_throughput : 1.973e+08 samples/s hr@10 : 0.83358 None train_epoch_time : 0.503 s validation_epoch_time : 0.546 s eval_throughput : 2.563e+07 samples/s validation_loss : 0.07974 None train_loss : 0.24172 None
+New best hr!
+DLL 2024-09-29 06:56:23.029643 - () best_train_throughput : 197301698.03537425 samples/s best_eval_throughput : 25634585.763890613 samples/s mean_train_throughput : 178704013.90366274 samples/s mean_eval_throughput : 25280707.40922059 samples/s best_accuracy : 0.8335800365361427 None best_epoch : 1 None time_to_target : 4.398261308670044 s time_to_best_model : 4.398142337799072 s validation_loss : 0.07974 None train_loss : 0.24172 None
+DONE!

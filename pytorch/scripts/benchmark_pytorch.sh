@@ -4,7 +4,7 @@ SYSTEM=${1:-"2080Ti"}
 func=${2:-"benchmark_pytorch_ncf"}
 task=${3:-"PyTorch_ncf_FP32"}
 
-source config_v1/config_pytorch_${SYSTEM}.sh
+source config_v2/config_pytorch_${SYSTEM}.sh
 
 benchmark_pytorch_ssd() {
     
@@ -218,7 +218,6 @@ benchmark_pytorch_bert_squad() {
     echo "GPU ${NUM_GPU}" >> ${RESULTS_PATH}benchmark.para    
     echo "************************************************************"
 
-    # export NCCL_P2P_DISABLE=1
     bash scripts/run_squad.sh ${command_para} |& tee ${result}
     
 
@@ -240,6 +239,8 @@ mkdir -p $RESULTS_PATH
 
 pushd .
 cd $command_path
+
+rm ${RESULTS_PATH}*.txt
 
 for i in $(seq 1 $NUM_EXP); do
     name=${RESULTS_PATH}$(date +%d-%m-%Y_%H-%M-%S)
