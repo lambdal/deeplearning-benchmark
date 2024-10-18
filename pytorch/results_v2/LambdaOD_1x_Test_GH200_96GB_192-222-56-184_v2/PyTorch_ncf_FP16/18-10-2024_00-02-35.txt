@@ -1,0 +1,51 @@
+DLL 2024-10-18 00:02:37.384319 - PARAMETER data : /data/ncf/cache/ml-20m  feature_spec_file : feature_spec.yaml  epochs : 2  batch_size : 10000000  valid_batch_size : 1048576  factors : 64  layers : [256, 256, 128, 64]  negative_samples : 4  learning_rate : 0.0045  topk : 10  seed : None  threshold : 1.0  beta1 : 0.25  beta2 : 0.5  eps : 1e-08  dropout : 0.5  checkpoint_dir :   load_checkpoint_path : None  mode : train  grads_accumulated : 1  amp : False  log_path : log.json  world_size : 1  distributed : False  local_rank : 0 
+NeuMF(
+  (mf_user_embed): Embedding(138493, 64)
+  (mf_item_embed): Embedding(26744, 64)
+  (mlp_user_embed): Embedding(138493, 128)
+  (mlp_item_embed): Embedding(26744, 128)
+  (mlp): ModuleList(
+    (0): Linear(in_features=256, out_features=256, bias=True)
+    (1): Linear(in_features=256, out_features=128, bias=True)
+    (2): Linear(in_features=128, out_features=64, bias=True)
+  )
+  (final): Linear(in_features=128, out_features=1, bias=True)
+)
+31832577 parameters
+DLL 2024-10-18 00:02:47.025409 - (0,) train_throughput : 1.299e+07 samples/s hr@10 : 0.83265 None train_epoch_time : 7.648 s validation_epoch_time : 0.508 s eval_throughput : 2.755e+07 samples/s validation_loss : 0.09433 None train_loss : 0.26506 None
+New best hr!
+DLL 2024-10-18 00:02:48.794509 - (1,) train_throughput : 7.834e+07 samples/s hr@10 : 0.83314 None train_epoch_time : 1.268 s validation_epoch_time : 0.501 s eval_throughput : 2.791e+07 samples/s validation_loss : 0.09665 None train_loss : 0.21714 None
+New best hr!
+DLL 2024-10-18 00:02:48.794781 - () best_train_throughput : 78336169.105762 samples/s best_eval_throughput : 27909098.755687993 samples/s mean_train_throughput : 45660826.85188488 samples/s mean_eval_throughput : 27731550.48741225 samples/s best_accuracy : 0.8331395810618587 None best_epoch : 1 None time_to_target : 10.988636493682861 s time_to_best_model : 10.988506078720093 s validation_loss : 0.09665 None train_loss : 0.21714 None
+free(): invalid pointer
+[2024-10-18 00:02:51,475] torch.distributed.elastic.multiprocessing.api: [ERROR] failed (exitcode: -6) local_rank: 0 (pid: 57830) of binary: /usr/bin/python
+Traceback (most recent call last):
+  File "/usr/local/bin/torchrun", line 8, in <module>
+    sys.exit(main())
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/elastic/multiprocessing/errors/__init__.py", line 347, in wrapper
+    return f(*args, **kwargs)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/run.py", line 834, in main
+    run(args)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/run.py", line 825, in run
+    elastic_launch(
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/launcher/api.py", line 137, in __call__
+    return launch_agent(self._config, self._entrypoint, list(args))
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/launcher/api.py", line 271, in launch_agent
+    raise ChildFailedError(
+torch.distributed.elastic.multiprocessing.errors.ChildFailedError: 
+======================================================
+ncf.py FAILED
+------------------------------------------------------
+Failures:
+  <NO_OTHER_FAILURES>
+------------------------------------------------------
+Root Cause (first observed failure):
+[0]:
+  time      : 2024-10-18_00:02:51
+  host      : 44fa3d1a0ac5
+  rank      : 0 (local_rank: 0)
+  exitcode  : -6 (pid: 57830)
+  error_file: <N/A>
+  traceback : Signal 6 (SIGABRT) received by PID 57830
+======================================================
+DONE!

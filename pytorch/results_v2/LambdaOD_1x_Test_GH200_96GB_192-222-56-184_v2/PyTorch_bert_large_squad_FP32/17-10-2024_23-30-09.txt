@@ -1,0 +1,66 @@
+Container nvidia build =  85286409
+out dir is .
+torchrun --nproc_per_node=1 run_squad.py --init_checkpoint=/data/bert_large/bert_large_uncased.pt --do_train --train_file=/data/squad/v1.1/train-v1.1.json --train_batch_size=64  --do_lower_case  --bert_model=bert-large-uncased  --learning_rate=0.0  --warmup_proportion=0.1 --seed=1  --num_train_epochs=2.0  --max_seq_length=384  --doc_stride=128  --output_dir=.  --vocab_file=/data/bert_large/bert-large-uncased-vocab.txt  --config_file=/data/bert_large/bert_config.json  --max_steps=100   |& tee ./logfile.txt
+device: cuda:0 n_gpu: 1, distributed training: True, 16-bits training: False
+DLL 2024-10-17 23:30:13.749462 - PARAMETER Config : ["Namespace(bert_model='bert-large-uncased', output_dir='.', init_checkpoint='/data/bert_large/bert_large_uncased.pt', train_file='/data/squad/v1.1/train-v1.1.json', predict_file=None, max_seq_length=384, doc_stride=128, max_query_length=64, do_train=True, do_predict=False, train_batch_size=64, predict_batch_size=8, learning_rate=0.0, num_train_epochs=2.0, max_steps=100.0, warmup_proportion=0.1, n_best_size=20, max_answer_length=30, verbose_logging=False, no_cuda=False, seed=1, gradient_accumulation_steps=1, do_lower_case=True, local_rank=0, fp16=False, amp=False, loss_scale=0, version_2_with_negative=False, null_score_diff_threshold=0.0, vocab_file='/data/bert_large/bert-large-uncased-vocab.txt', config_file='/data/bert_large/bert_config.json', log_freq=50, json_summary='results/dllogger.json', eval_script='evaluate.py', do_eval=False, use_env=False, skip_checkpoint=False, disable_progress_bar=False, skip_cache=False, cache_dir=None)"] 
+DLL 2024-10-17 23:30:13.749599 - PARAMETER SEED : 1 
+WARNING: Output directory . already exists and is not empty. ['vocab', 'LICENSE', 'data', 'scripts', 'extract_features.py', 'bind_pyt.py', 'run_glue.py', 'run_pretraining.py', 'triton', 'requirements.txt', 'utils.py', 'Dockerfile', 'run.sub', 'schedulers.py', 'tokenization_utils.py', 'configurations.yml', 'run_swag.py', 'distillation', '.dockerignore', 'results', 'core.3580', 'file_utils.py', 'logfile.txt', 'images', 'modeling.py', 'inference.py', 'run_squad.py', 'bert_configs', 'NOTICE', '.gitignore', 'core.4154', 'bind.sh', 'checkpoints', 'tokenization.py', 'core.3867', '.gitmodules', 'processors', 'core.4462', 'create_pretraining_data.py', 'README.md', 'config.json', 'optimization.py', '__pycache__', 'lamb_amp_opt', 'pytorch_model.bin']
+DLL 2024-10-17 23:30:21.182855 - PARAMETER loading_checkpoint : True 
+DLL 2024-10-17 23:30:21.182990 - PARAMETER loaded_checkpoint : True 
+DLL 2024-10-17 23:30:21.635944 - PARAMETER model_weights_num : 335150082 
+/usr/local/lib/python3.10/dist-packages/apex/__init__.py:68: DeprecatedFeatureWarning: apex.parallel.DistributedDataParallel is deprecated and will be removed by the end of February 2023.
+  warnings.warn(msg, DeprecatedFeatureWarning)
+/usr/local/lib/python3.10/dist-packages/apex/parallel/distributed.py:253: UserWarning: The torch.cuda.*DtypeTensor constructors are no longer recommended. It's best to use methods such as torch.tensor(data, dtype=*, device='cuda') to create tensors. (Triggered internally at /opt/pytorch/pytorch/torch/csrc/tensor/python_tensor.cpp:79.)
+  self._overflow_buf = torch.cuda.IntTensor([0])
+DLL 2024-10-17 23:30:27.213232 - PARAMETER train_start : True 
+DLL 2024-10-17 23:30:27.213391 - PARAMETER training_samples : 87599 
+DLL 2024-10-17 23:30:27.213418 - PARAMETER training_features : 88641 
+DLL 2024-10-17 23:30:27.213435 - PARAMETER train_batch_size : 64 
+DLL 2024-10-17 23:30:27.213448 - PARAMETER steps : 2736.0 
+Iteration:   0%|          | 0/1386 [00:00<?, ?it/s]/workspace/benchmark/LanguageModeling/BERT/optimization.py:150: UserWarning: This overload of add_ is deprecated:
+	add_(Number alpha, Tensor other)
+Consider using one of the following signatures instead:
+	add_(Tensor other, *, Number alpha) (Triggered internally at /opt/pytorch/pytorch/torch/csrc/utils/python_arg_parser.cpp:1578.)
+  next_m.mul_(beta1).add_(1 - beta1, grad)
+DLL 2024-10-17 23:30:38.048602 - Training Epoch: 0 Training Iteration: 1  step_loss : 6.041912078857422  learning_rate : 0.0 
+Iteration:   0%|          | 1/1386 [00:06<2:33:19,  6.64s/it]Iteration:   0%|          | 2/1386 [00:07<1:10:18,  3.05s/it]Iteration:   0%|          | 3/1386 [00:07<42:39,  1.85s/it]  Iteration:   0%|          | 4/1386 [00:08<29:38,  1.29s/it]Iteration:   0%|          | 5/1386 [00:08<22:26,  1.03it/s]Iteration:   0%|          | 6/1386 [00:08<18:08,  1.27it/s]Iteration:   1%|          | 7/1386 [00:09<15:24,  1.49it/s]Iteration:   1%|          | 8/1386 [00:09<13:37,  1.69it/s]Iteration:   1%|          | 9/1386 [00:10<12:25,  1.85it/s]Iteration:   1%|          | 10/1386 [00:10<11:36,  1.97it/s]Iteration:   1%|          | 11/1386 [00:11<11:03,  2.07it/s]Iteration:   1%|          | 12/1386 [00:11<10:40,  2.14it/s]Iteration:   1%|          | 13/1386 [00:11<10:25,  2.20it/s]Iteration:   1%|          | 14/1386 [00:12<10:13,  2.24it/s]Iteration:   1%|          | 15/1386 [00:12<10:03,  2.27it/s]Iteration:   1%|          | 16/1386 [00:13<09:57,  2.29it/s]Iteration:   1%|          | 17/1386 [00:13<09:51,  2.31it/s]Iteration:   1%|▏         | 18/1386 [00:14<09:50,  2.32it/s]Iteration:   1%|▏         | 19/1386 [00:14<09:49,  2.32it/s]Iteration:   1%|▏         | 20/1386 [00:14<09:48,  2.32it/s]Iteration:   2%|▏         | 21/1386 [00:15<09:48,  2.32it/s]Iteration:   2%|▏         | 22/1386 [00:15<09:45,  2.33it/s]Iteration:   2%|▏         | 23/1386 [00:16<09:45,  2.33it/s]Iteration:   2%|▏         | 24/1386 [00:16<09:42,  2.34it/s]Iteration:   2%|▏         | 25/1386 [00:17<09:43,  2.33it/s]Iteration:   2%|▏         | 26/1386 [00:17<09:44,  2.33it/s]Iteration:   2%|▏         | 27/1386 [00:17<09:44,  2.32it/s]Iteration:   2%|▏         | 28/1386 [00:18<09:42,  2.33it/s]Iteration:   2%|▏         | 29/1386 [00:18<09:42,  2.33it/s]Iteration:   2%|▏         | 30/1386 [00:19<09:41,  2.33it/s]Iteration:   2%|▏         | 31/1386 [00:19<09:37,  2.34it/s]Iteration:   2%|▏         | 32/1386 [00:20<09:38,  2.34it/s]Iteration:   2%|▏         | 33/1386 [00:20<09:38,  2.34it/s]Iteration:   2%|▏         | 34/1386 [00:20<09:37,  2.34it/s]Iteration:   3%|▎         | 35/1386 [00:21<09:38,  2.34it/s]Iteration:   3%|▎         | 36/1386 [00:21<09:37,  2.34it/s]Iteration:   3%|▎         | 37/1386 [00:22<09:38,  2.33it/s]Iteration:   3%|▎         | 38/1386 [00:22<09:36,  2.34it/s]Iteration:   3%|▎         | 39/1386 [00:22<09:34,  2.34it/s]Iteration:   3%|▎         | 40/1386 [00:23<09:33,  2.35it/s]Iteration:   3%|▎         | 41/1386 [00:23<09:35,  2.34it/s]Iteration:   3%|▎         | 42/1386 [00:24<09:36,  2.33it/s]Iteration:   3%|▎         | 43/1386 [00:24<09:34,  2.34it/s]Iteration:   3%|▎         | 44/1386 [00:25<09:34,  2.33it/s]Iteration:   3%|▎         | 45/1386 [00:25<09:32,  2.34it/s]Iteration:   3%|▎         | 46/1386 [00:25<09:34,  2.33it/s]Iteration:   3%|▎         | 47/1386 [00:26<09:35,  2.33it/s]Iteration:   3%|▎         | 48/1386 [00:26<09:35,  2.32it/s]Iteration:   4%|▎         | 49/1386 [00:27<09:36,  2.32it/s]Iteration:   4%|▎         | 50/1386 [00:27<09:33,  2.33it/s]DLL 2024-10-17 23:30:59.545506 - Training Epoch: 0 Training Iteration: 51  step_loss : 6.0725603103637695  learning_rate : 0.0 
+Iteration:   4%|▎         | 51/1386 [00:28<09:31,  2.33it/s]Iteration:   4%|▍         | 52/1386 [00:28<09:30,  2.34it/s]Iteration:   4%|▍         | 53/1386 [00:28<09:31,  2.33it/s]Iteration:   4%|▍         | 54/1386 [00:29<09:31,  2.33it/s]Iteration:   4%|▍         | 55/1386 [00:29<09:31,  2.33it/s]Iteration:   4%|▍         | 56/1386 [00:30<09:32,  2.32it/s]Iteration:   4%|▍         | 57/1386 [00:30<09:30,  2.33it/s]Iteration:   4%|▍         | 58/1386 [00:31<09:31,  2.32it/s]Iteration:   4%|▍         | 59/1386 [00:31<09:29,  2.33it/s]Iteration:   4%|▍         | 60/1386 [00:32<09:29,  2.33it/s]Iteration:   4%|▍         | 61/1386 [00:32<09:29,  2.33it/s]Iteration:   4%|▍         | 62/1386 [00:32<09:29,  2.32it/s]Iteration:   5%|▍         | 63/1386 [00:33<09:30,  2.32it/s]Iteration:   5%|▍         | 64/1386 [00:33<09:28,  2.33it/s]Iteration:   5%|▍         | 65/1386 [00:34<09:27,  2.33it/s]Iteration:   5%|▍         | 66/1386 [00:34<09:24,  2.34it/s]Iteration:   5%|▍         | 67/1386 [00:35<09:23,  2.34it/s]Iteration:   5%|▍         | 68/1386 [00:35<09:23,  2.34it/s]Iteration:   5%|▍         | 69/1386 [00:35<09:24,  2.33it/s]Iteration:   5%|▌         | 70/1386 [00:36<09:25,  2.33it/s]Iteration:   5%|▌         | 71/1386 [00:36<09:24,  2.33it/s]Iteration:   5%|▌         | 72/1386 [00:37<09:22,  2.34it/s]Iteration:   5%|▌         | 73/1386 [00:37<09:20,  2.34it/s]Iteration:   5%|▌         | 74/1386 [00:37<09:18,  2.35it/s]Iteration:   5%|▌         | 75/1386 [00:38<09:19,  2.35it/s]Iteration:   5%|▌         | 76/1386 [00:38<09:21,  2.33it/s]Iteration:   6%|▌         | 77/1386 [00:39<09:22,  2.33it/s]Iteration:   6%|▌         | 78/1386 [00:39<09:21,  2.33it/s]Iteration:   6%|▌         | 79/1386 [00:40<09:21,  2.33it/s]Iteration:   6%|▌         | 80/1386 [00:40<09:19,  2.33it/s]Iteration:   6%|▌         | 81/1386 [00:41<09:21,  2.33it/s]Iteration:   6%|▌         | 82/1386 [00:41<09:21,  2.32it/s]Iteration:   6%|▌         | 83/1386 [00:41<09:21,  2.32it/s]Iteration:   6%|▌         | 84/1386 [00:42<09:22,  2.32it/s]Iteration:   6%|▌         | 85/1386 [00:42<09:18,  2.33it/s]Iteration:   6%|▌         | 86/1386 [00:43<09:18,  2.33it/s]Iteration:   6%|▋         | 87/1386 [00:43<09:16,  2.34it/s]Iteration:   6%|▋         | 88/1386 [00:44<09:14,  2.34it/s]Iteration:   6%|▋         | 89/1386 [00:44<09:12,  2.35it/s]Iteration:   6%|▋         | 90/1386 [00:44<09:13,  2.34it/s]Iteration:   7%|▋         | 91/1386 [00:45<09:15,  2.33it/s]Iteration:   7%|▋         | 92/1386 [00:45<09:15,  2.33it/s]Iteration:   7%|▋         | 93/1386 [00:46<09:15,  2.33it/s]Iteration:   7%|▋         | 94/1386 [00:46<09:15,  2.33it/s]Iteration:   7%|▋         | 95/1386 [00:47<09:15,  2.33it/s]Iteration:   7%|▋         | 96/1386 [00:47<09:14,  2.33it/s]Iteration:   7%|▋         | 97/1386 [00:47<09:13,  2.33it/s]Iteration:   7%|▋         | 98/1386 [00:48<09:12,  2.33it/s]Iteration:   7%|▋         | 99/1386 [00:48<09:13,  2.33it/s]Iteration:   7%|▋         | 100/1386 [00:49<09:12,  2.33it/s]DLL 2024-10-17 23:31:20.996880 - Training Epoch: 0 Training Iteration: 101  step_loss : 6.052624702453613  learning_rate : 0.0 
+Iteration:   7%|▋         | 101/1386 [00:49<09:10,  2.33it/s]Iteration:   7%|▋         | 101/1386 [00:49<10:30,  2.04it/s]
+Iteration:   0%|          | 0/1386 [00:00<?, ?it/s]Iteration:   0%|          | 0/1386 [00:00<?, ?it/s]
+DLL 2024-10-17 23:31:22.811317 -  e2e_train_time : 49.59641885757446  training_sequences_per_second : 129.04157492456895  final_loss : 6.052624702453613 
+free(): invalid pointer
+[2024-10-17 23:31:27,682] torch.distributed.elastic.multiprocessing.api: [ERROR] failed (exitcode: -6) local_rank: 0 (pid: 4749) of binary: /usr/bin/python
+Traceback (most recent call last):
+  File "/usr/local/bin/torchrun", line 8, in <module>
+    sys.exit(main())
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/elastic/multiprocessing/errors/__init__.py", line 347, in wrapper
+    return f(*args, **kwargs)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/run.py", line 834, in main
+    run(args)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/run.py", line 825, in run
+    elastic_launch(
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/launcher/api.py", line 137, in __call__
+    return launch_agent(self._config, self._entrypoint, list(args))
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/launcher/api.py", line 271, in launch_agent
+    raise ChildFailedError(
+torch.distributed.elastic.multiprocessing.errors.ChildFailedError: 
+=====================================================
+run_squad.py FAILED
+-----------------------------------------------------
+Failures:
+  <NO_OTHER_FAILURES>
+-----------------------------------------------------
+Root Cause (first observed failure):
+[0]:
+  time      : 2024-10-17_23:31:27
+  host      : 44fa3d1a0ac5
+  rank      : 0 (local_rank: 0)
+  exitcode  : -6 (pid: 4749)
+  error_file: <N/A>
+  traceback : Signal 6 (SIGABRT) received by PID 4749
+=====================================================
+
+real	1m15.971s
+user	1m5.052s
+sys	0m16.057s
+DONE!
