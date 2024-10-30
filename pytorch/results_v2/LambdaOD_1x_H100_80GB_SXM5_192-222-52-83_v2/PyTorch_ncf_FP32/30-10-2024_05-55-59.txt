@@ -1,0 +1,22 @@
+DLL 2024-10-30 05:56:01.925621 - PARAMETER data : /data/ncf/cache/ml-20m  feature_spec_file : feature_spec.yaml  epochs : 2  batch_size : 8000000  valid_batch_size : 1048576  factors : 64  layers : [256, 256, 128, 64]  negative_samples : 4  learning_rate : 0.0045  topk : 10  seed : None  threshold : 1.0  beta1 : 0.25  beta2 : 0.5  eps : 1e-08  dropout : 0.5  checkpoint_dir :   load_checkpoint_path : None  mode : train  grads_accumulated : 1  amp : False  log_path : log.json  world_size : 1  distributed : False  local_rank : 0 
+/workspace/benchmark/Recommendation/NCF/dataloading.py:56: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  chunk_data = torch.load(path_to_load, map_location=torch.device('cuda:{}'.format(self.local_rank)))
+NeuMF(
+  (mf_user_embed): Embedding(138493, 64)
+  (mf_item_embed): Embedding(26744, 64)
+  (mlp_user_embed): Embedding(138493, 128)
+  (mlp_item_embed): Embedding(26744, 128)
+  (mlp): ModuleList(
+    (0): Linear(in_features=256, out_features=256, bias=True)
+    (1): Linear(in_features=256, out_features=128, bias=True)
+    (2): Linear(in_features=128, out_features=64, bias=True)
+  )
+  (final): Linear(in_features=128, out_features=1, bias=True)
+)
+31832577 parameters
+DLL 2024-10-30 05:56:06.238915 - (0,) train_throughput : 7.008e+07 samples/s hr@10 : 0.83357 None train_epoch_time : 1.417 s validation_epoch_time : 0.632 s eval_throughput : 2.214e+07 samples/s validation_loss : 0.08571 None train_loss : 0.23984 None
+New best hr!
+DLL 2024-10-30 05:56:08.156282 - (1,) train_throughput : 7.654e+07 samples/s hr@10 : 0.83559 None train_epoch_time : 1.297 s validation_epoch_time : 0.620 s eval_throughput : 2.257e+07 samples/s validation_loss : 0.13661 None train_loss : 0.21756 None
+New best hr!
+DLL 2024-10-30 05:56:08.156635 - () best_train_throughput : 76543429.1454228 samples/s best_eval_throughput : 22571098.42306467 samples/s mean_train_throughput : 73312347.42600614 samples/s mean_eval_throughput : 22354271.884737335 samples/s best_accuracy : 0.8355873582058299 None best_epoch : 1 None time_to_target : 5.8518500328063965 s time_to_best_model : 5.8517005443573 s validation_loss : 0.13661 None train_loss : 0.21756 None
+DONE!
