@@ -8,7 +8,7 @@ This repo hosts benchmark scripts to benchmark GPUs using NVIDIA GPU-Accelerated
 
 |    **Framework**   |    **Link**    |
 |:------------------:|:--------------:|
-|      PyTorch       |     [Running benchmark locally](./pytorch/README_local.md)     |
+|      PyTorch       |     [Running benchmark locally](./pytorch/README.md)     |
 |      PyTorch       |     [Running benchmark remotely](./pytorch/README_parallel.md)     |
 
 <p align="center">
