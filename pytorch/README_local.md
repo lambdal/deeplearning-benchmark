@@ -1,11 +1,13 @@
 # Guide
 
+This is the guide to run benchmark on a Lambda Cloud On-demand instance.
 
 ```
-# 1xH100_80GB_SXM5 on Lambda Cloud On-demand
+# 1xGH200_96GB on Lambda Cloud On-demand
+# The benchmark log files will be saved to deeplearning-benchmark/pytorch/results_v2/LambdaOD_test_1xGH200_96GB_$(hostname)_v2
 export NAME_NGC=pytorch:24.10-py3
-export NAME_TYPE=LambdaOD_1x
-export NAME_GPU=H100_80GB_SXM5
+export NAME_TYPE=LambdaOD_test
+export NAME_GPU=GH200_96GB
 export NUM_GPU=1
 export NAME_RESULTS=results_v2
 export NAME_DATASET=all
