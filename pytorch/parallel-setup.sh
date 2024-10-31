@@ -64,7 +64,7 @@ echo "Create config files on all nodes"
 cmd_config=""
 cmd_config+="cd deeplearning-benchmark/pytorch && "
 if [ "$NUM_GPU" -ge 1 ]; then
-    cmd_config+="cp scripts/config_v2/config_pytorch_${NAME_GPU}_v2.sh scripts/config_v2/config_pytorch_${NAME_TYPE}_${NAME_GPU}_\$(hostname)_v2.sh"
+    cmd_config+="cp scripts/config_v2/config_pytorch_1x${NAME_GPU}_v2.sh scripts/config_v2/config_pytorch_${NAME_TYPE}_1x${NAME_GPU}_\$(hostname)_v2.sh"
 fi
 if [ "$NUM_GPU" -ge 2 ]; then
     cmd_config+=" && cp scripts/config_v2/config_pytorch_2x${NAME_GPU}_v2.sh scripts/config_v2/config_pytorch_${NAME_TYPE}_2x${NAME_GPU}_\$(hostname)_v2.sh"

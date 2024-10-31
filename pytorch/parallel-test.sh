@@ -43,7 +43,7 @@ if [ "$NUM_GPU" -ge 1 ]; then
     cmd_benchmark+="-v \$(pwd)\"/scripts\":/scripts "
     cmd_benchmark+="-v \$(pwd)\"/${NAME_RESULTS}\":/results "
     cmd_benchmark+="nvcr.io/nvidia/${NAME_NGC} "
-    cmd_benchmark+="/bin/bash -c \"cp -r /scripts/* /workspace; ./run_benchmark.sh ${NAME_TYPE}_${NAME_GPU}_\$(hostname)_v2 ${NAME_TASKS} 3000\""
+    cmd_benchmark+="/bin/bash -c \"cp -r /scripts/* /workspace; ./run_benchmark.sh ${NAME_TYPE}_1x${NAME_GPU}_\$(hostname)_v2 ${NAME_TASKS} 3000\""
     echo $cmd_benchmark
     parallel-ssh -v -P  -t 0 -e /home/$(whoami)/pssh-debug -x "-i $SSH_KEY" -h "$NAME_HOSTFILE" -i $cmd_benchmark
 fi

@@ -90,7 +90,6 @@ def gather_throughput(
                 # Sift through all lines and only keep the last occurrence
                 for i, line in enumerate(open(os.path.join(path, filename))):
                     for match in re.finditer(pattern, line):
-                        # if "29-09-2024" in filename:
                         if True:
                             print(match.group().split(' ')) # for debug
                         try:
