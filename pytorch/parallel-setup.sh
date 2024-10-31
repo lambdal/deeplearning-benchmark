@@ -41,8 +41,8 @@ cmd_clone+="git pull origin lambda/benchmark && "
 cmd_clone+="cd .. && "
 cmd_clone+="[ ! -d \"deeplearning-benchmark\" ] && git clone https://github.com/lambdal/deeplearning-benchmark.git deeplearning-benchmark || echo \"Directory already exists. Skipping clone.\" && "
 cmd_clone+="cd deeplearning-benchmark && "
-cmd_clone+="git checkout v2 && "
-cmd_clone+="git pull origin v2"
+cmd_clone+="git checkout ${BRANCH} && "
+cmd_clone+="git pull origin ${BRANCH}"
 parallel-ssh -v -P  -t 0 -e /home/$(whoami)/pssh-debug -x "-i $SSH_KEY" -h "$NAME_HOSTFILE" -i $cmd_clone
 
 

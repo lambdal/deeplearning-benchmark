@@ -1,0 +1,65 @@
+DLL 2024-10-18 00:02:58.312828 - PARAMETER data : /data/ncf/cache/ml-20m  feature_spec_file : feature_spec.yaml  epochs : 2  batch_size : 10000000  valid_batch_size : 1048576  factors : 64  layers : [256, 256, 128, 64]  negative_samples : 4  learning_rate : 0.0045  topk : 10  seed : None  threshold : 1.0  beta1 : 0.25  beta2 : 0.5  eps : 1e-08  dropout : 0.5  checkpoint_dir :   load_checkpoint_path : None  mode : train  grads_accumulated : 1  amp : False  log_path : log.json  world_size : 1  distributed : False  local_rank : 0 
+NeuMF(
+  (mf_user_embed): Embedding(138493, 64)
+  (mf_item_embed): Embedding(26744, 64)
+  (mlp_user_embed): Embedding(138493, 128)
+  (mlp_item_embed): Embedding(26744, 128)
+  (mlp): ModuleList(
+    (0): Linear(in_features=256, out_features=256, bias=True)
+    (1): Linear(in_features=256, out_features=128, bias=True)
+    (2): Linear(in_features=128, out_features=64, bias=True)
+  )
+  (final): Linear(in_features=128, out_features=1, bias=True)
+)
+31832577 parameters
+DLL 2024-10-18 00:03:07.936514 - (0,) train_throughput : 1.299e+07 samples/s hr@10 : 0.83331 None train_epoch_time : 7.643 s validation_epoch_time : 0.507 s eval_throughput : 2.761e+07 samples/s validation_loss : 0.09745 None train_loss : 0.26247 None
+New best hr!
+DLL 2024-10-18 00:03:09.704942 - (1,) train_throughput : 7.832e+07 samples/s hr@10 : 0.83487 None train_epoch_time : 1.268 s validation_epoch_time : 0.500 s eval_throughput : 2.796e+07 samples/s validation_loss : 0.17558 None train_loss : 0.22110 None
+New best hr!
+DLL 2024-10-18 00:03:09.705259 - () best_train_throughput : 78323398.10029827 samples/s best_eval_throughput : 27959014.45203215 samples/s mean_train_throughput : 45658773.0422531 samples/s mean_eval_throughput : 27784445.77247925 samples/s best_accuracy : 0.8348725206328118 None best_epoch : 1 None time_to_target : 10.975123167037964 s time_to_best_model : 10.97498869895935 s validation_loss : 0.17558 None train_loss : 0.22110 None
+[44fa3d1a0ac5:58036:0:58036] Caught signal 11 (Segmentation fault: address not mapped to object at address 0x190000b42386e1)
+==== backtrace (tid:  58036) ====
+ 0 0x000000000008dbf4 free()  ???:0
+ 1 0x000000000018d358 OPENSSL_LH_strhash()  ???:0
+ 2 0x000000000018de4c OPENSSL_LH_doall()  ???:0
+ 3 0x0000000000195bfc CRYPTO_new_ex_data()  ???:0
+ 4 0x000000000019abd8 CRYPTO_free_ex_data()  ???:0
+ 5 0x0000000000195edc OpenSSL_version()  ???:0
+ 6 0x000000000019e30c OPENSSL_cleanup()  ???:0
+ 7 0x000000000003cde8 secure_getenv()  ???:0
+ 8 0x000000000003cf0c exit()  ???:0
+ 9 0x0000000000027400 __libc_init_first()  ???:0
+10 0x00000000000274cc __libc_start_main()  ???:0
+11 0x00000000001da630 _start()  ???:0
+=================================
+[2024-10-18 00:03:12,388] torch.distributed.elastic.multiprocessing.api: [ERROR] failed (exitcode: -11) local_rank: 0 (pid: 58036) of binary: /usr/bin/python
+Traceback (most recent call last):
+  File "/usr/local/bin/torchrun", line 8, in <module>
+    sys.exit(main())
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/elastic/multiprocessing/errors/__init__.py", line 347, in wrapper
+    return f(*args, **kwargs)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/run.py", line 834, in main
+    run(args)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/run.py", line 825, in run
+    elastic_launch(
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/launcher/api.py", line 137, in __call__
+    return launch_agent(self._config, self._entrypoint, list(args))
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/launcher/api.py", line 271, in launch_agent
+    raise ChildFailedError(
+torch.distributed.elastic.multiprocessing.errors.ChildFailedError: 
+=======================================================
+ncf.py FAILED
+-------------------------------------------------------
+Failures:
+  <NO_OTHER_FAILURES>
+-------------------------------------------------------
+Root Cause (first observed failure):
+[0]:
+  time      : 2024-10-18_00:03:12
+  host      : 44fa3d1a0ac5
+  rank      : 0 (local_rank: 0)
+  exitcode  : -11 (pid: 58036)
+  error_file: <N/A>
+  traceback : Signal 11 (SIGSEGV) received by PID 58036
+=======================================================
+DONE!
