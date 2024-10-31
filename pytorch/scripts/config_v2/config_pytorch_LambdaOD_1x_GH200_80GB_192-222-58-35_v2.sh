@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source config_v2/config_pytorch_96GB.sh
+source config_v2/config_pytorch_80GB.sh
 
 declare -A BATCH_SIZE_FIX=(
 )
