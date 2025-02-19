@@ -39,7 +39,7 @@ nvcr.io/nvidia/${NAME_NGC} \
 /bin/bash -c "cp -r /scripts/* /workspace;  ./run_prepare.sh $NAME_DATASET"
 
 # Create benchmark config file
-cp scripts/config_v2/config_pytorch_{NUM_GPU}x${NAME_GPU}_v2.sh scripts/config_v2/config_pytorch_${NAME_TYPE}_{NUM_GPU}x${NAME_GPU}_$(hostname)_v2.sh
+cp scripts/config_v2/config_pytorch_${NUM_GPU}x${NAME_GPU}_v2.sh scripts/config_v2/config_pytorch_${NAME_TYPE}_${NUM_GPU}x${NAME_GPU}_$(hostname)_v2.sh
 
 # Run benchmark
 mkdir -p ${NAME_RESULTS} && \
