@@ -50,5 +50,5 @@ docker run --rm --shm-size=1024g \
 -v $(pwd)"/scripts":/scripts \
 -v $(pwd)/${NAME_RESULTS}:/results \
 nvcr.io/nvidia/${NAME_NGC} \
-/bin/bash -c "cp -r /scripts/* /workspace; ./run_benchmark.sh ${NAME_TYPE}_{NUM_GPU}x${NAME_GPU}_$(hostname)_v2 ${NAME_TASKS} 3000"
+/bin/bash -c "cp -r /scripts/* /workspace; ./run_benchmark.sh ${NAME_TYPE}_${NUM_GPU}x${NAME_GPU}_$(hostname)_v2 ${NAME_TASKS} 3000"
 ```
